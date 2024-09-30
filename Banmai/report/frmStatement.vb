@@ -50,7 +50,7 @@ Public Class frmStatement
     End Sub
 
 
-    ' ฟังก์ชันสำหรับโหลดรายงานและส่งค่า Parameter ชื่อบัญชีและช่วงวันที่
+    ' ฟังก์ชันสำหรับโหลดรายงานและส่งค่า Parameter ชื่อบัญชีและช่วงวันที่ 1/10/2024
     Private Sub LoadProfitLossReport()
         Try
             ' เปิดการเชื่อมต่อฐานข้อมูล
