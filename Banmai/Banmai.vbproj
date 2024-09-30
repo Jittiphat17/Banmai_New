@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3FF8C4FB-669C-47AD-858F-6AAEE9562510}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Banmai.My.MyApplication</StartupObject>
+    <RootNamespace>Banmai</RootNamespace>
+    <AssemblyName>Banmai</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Banmai.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Banmai.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.6\lib\net48\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="PCSC, Version=7.0.0.0, Culture=neutral, PublicKeyToken=13b76e54a2ee80a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCSC.7.0.0\lib\netstandard2.0\PCSC.dll</HintPath>
+    </Reference>
+    <Reference Include="pcsc-sharp, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThaiNationalIDCard.2.0.0\lib\net40\pcsc-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PCSC.Iso7816, Version=7.0.0.0, Culture=neutral, PublicKeyToken=13b76e54a2ee80a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\PCSC.Iso7816.7.0.0\lib\netstandard2.0\PCSC.Iso7816.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.8.0.0\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="ThaiNationalIDCard, Version=2.0.0.6261, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThaiNationalIDCard.2.0.0\lib\net40\ThaiNationalIDCard.dll</HintPath>
+    </Reference>
+    <Reference Include="ThaiNationalIDCard.NET, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ThaiNationalIDCard.NET.1.1.0\lib\netstandard2.0\ThaiNationalIDCard.NET.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="db_banmai1DataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>db_banmai1DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module1.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Other\frmBackup.Designer.vb">
+      <DependentUpon>frmBackup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other\frmBackup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\frmCard.Designer.vb">
+      <DependentUpon>frmCard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other\frmCard.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\frmFundManagement.Designer.vb">
+      <DependentUpon>frmFundManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other\frmFundManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\frmImport.Designer.vb">
+      <DependentUpon>frmImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other\frmImport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\frmManageMembers.Designer.vb">
+      <DependentUpon>frmManageMembers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other\frmManageMembers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\frmManageUser.Designer.vb">
+      <DependentUpon>frmManageUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other\frmManageUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\frmMemberResign.Designer.vb">
+      <DependentUpon>frmMemberResign.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other\frmMemberResign.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Other\frmViewMember.Designer.vb">
+      <DependentUpon>frmViewMember.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Other\frmViewMember.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Page1\frmBrrow.Designer.vb">
+      <DependentUpon>frmBrrow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Page1\frmBrrow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Page1\frmCon.Designer.vb">
+      <DependentUpon>frmCon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Page1\frmCon.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Page1\frmEditContract.Designer.vb">
+      <DependentUpon>frmEditContract.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Page1\frmEditContract.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Page1\frmEditExpense.Designer.vb">
+      <DependentUpon>frmEditExpense.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Page1\frmEditExpense.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Page1\frmExpense.Designer.vb">
+      <DependentUpon>frmExpense.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Page1\frmExpense.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Page2\frmEditIncome.Designer.vb">
+      <DependentUpon>frmEditIncome.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Page2\frmEditIncome.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Page2\frmIncome.Designer.vb">
+      <DependentUpon>frmIncome.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Page2\frmIncome.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="report\frmDebtor.Designer.vb">
+      <DependentUpon>frmDebtor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report\frmDebtor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="report\frmSajja.Designer.vb">
+      <DependentUpon>frmSajja.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report\frmSajja.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="report\frmSearch.Designer.vb">
+      <DependentUpon>frmSearch.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report\frmSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="report\frmShare.Designer.vb">
+      <DependentUpon>frmShare.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report\frmShare.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="report\frmStatement.Designer.vb">
+      <DependentUpon>frmStatement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report\frmStatement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\frmBackup.resx">
+      <DependentUpon>frmBackup.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\frmCard.resx">
+      <DependentUpon>frmCard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\frmFundManagement.resx">
+      <DependentUpon>frmFundManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\frmImport.resx">
+      <DependentUpon>frmImport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\frmManageMembers.resx">
+      <DependentUpon>frmManageMembers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\frmManageUser.resx">
+      <DependentUpon>frmManageUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\frmMemberResign.resx">
+      <DependentUpon>frmMemberResign.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Other\frmViewMember.resx">
+      <DependentUpon>frmViewMember.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page1\frmBrrow.resx">
+      <DependentUpon>frmBrrow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page1\frmCon.resx">
+      <DependentUpon>frmCon.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page1\frmEditContract.resx">
+      <DependentUpon>frmEditContract.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page1\frmEditExpense.resx">
+      <DependentUpon>frmEditExpense.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page1\frmExpense.resx">
+      <DependentUpon>frmExpense.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page2\frmEditIncome.resx">
+      <DependentUpon>frmEditIncome.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Page2\frmIncome.resx">
+      <DependentUpon>frmIncome.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\frmDebtor.resx">
+      <DependentUpon>frmDebtor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\frmSajja.resx">
+      <DependentUpon>frmSajja.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\frmSearch.resx">
+      <DependentUpon>frmSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\frmShare.resx">
+      <DependentUpon>frmShare.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\frmStatement.resx">
+      <DependentUpon>frmStatement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\GuarantorReport.rdlc" />
+    <EmbeddedResource Include="report\Individualdebtor.rdlc" />
+    <EmbeddedResource Include="report\LoanReport1.rdlc" />
+    <EmbeddedResource Include="report\SajjaReport.rdlc" />
+    <EmbeddedResource Include="report\shareReport.rdlc" />
+    <EmbeddedResource Include="report\StatementReport.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="db_banmai1DataSet.xsc">
+      <DependentUpon>db_banmai1DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="db_banmai1DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>db_banmai1DataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="db_banmai1DataSet.xss">
+      <DependentUpon>db_banmai1DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="db_banmai1.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\Loader.cs" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>
