@@ -136,7 +136,4 @@ Public Class frmStatement
         End Try
     End Sub
 
-    Private Sub Guna2HtmlLabel2_Click(sender As Object, e As EventArgs) Handles Guna2HtmlLabel2.Click, Guna2HtmlLabel3.Click
-
-    End Sub
 End Class

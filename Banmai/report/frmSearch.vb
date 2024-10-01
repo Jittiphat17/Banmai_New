@@ -40,7 +40,7 @@ Public Class frmSearch
         dgvResults.DefaultCellStyle.BackColor = Color.White
         dgvResults.DefaultCellStyle.ForeColor = Color.Black
 
-        ' ตั้งค่าการจัดข้อความ
+        ' ตั้งค่าการจัดข้อความสำหรับคอลัมน์ตัวเลข
         dgvResults.Columns("con_amount").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dgvResults.Columns("con_interest").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dgvResults.Columns("con_permonth").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -48,8 +48,8 @@ Public Class frmSearch
         ' ตั้งค่าให้ข้อความในเซลล์ตัดบรรทัด (Wrap Text)
         dgvResults.DefaultCellStyle.WrapMode = DataGridViewTriState.True
 
-        ' ปรับขนาดคอลัมน์
-        dgvResults.Columns("con_details").Width = 300
+        ' ปรับขนาดคอลัมน์ที่ไม่ต้องการขยายอัตโนมัติ
+        dgvResults.Columns("con_details").Width = 200
         dgvResults.Columns("con_amount").Width = 100
         dgvResults.Columns("con_interest").Width = 80
         dgvResults.Columns("con_permonth").Width = 80
@@ -57,8 +57,8 @@ Public Class frmSearch
         ' ตั้งค่าการเลื่อน (Scrollbar)
         dgvResults.ScrollBars = ScrollBars.Both ' เปิด scrollbar ทั้งแนวตั้งและแนวนอน
 
-        ' ตั้งค่าการขยายคอลัมน์อัตโนมัติ
-        dgvResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
+        ' ตั้งค่าการขยายคอลัมน์อัตโนมัติสำหรับคอลัมน์ที่เหลือ
+        dgvResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
 
         ' กำหนดชื่อคอลัมน์ให้กับ DataGridView
         dgvResults.Columns("con_id").HeaderText = "รหัสสัญญา"
@@ -68,7 +68,7 @@ Public Class frmSearch
         dgvResults.Columns("con_interest").HeaderText = "ดอกเบี้ย"
         dgvResults.Columns("con_permonth").HeaderText = "จำนวนงวดต่อเดือน"
         dgvResults.Columns("con_date").HeaderText = "วันที่ทำสัญญา"
-        dgvResults.Columns("acc_name").HeaderText = "ชื่อบัญชี"
+        dgvResults.Columns("acc_id").HeaderText = "ชื่อบัญชี"
         dgvResults.Columns("guarantor_names").HeaderText = "ชื่อผู้ค้ำประกัน"
         dgvResults.Columns("con_GuaranteeType").HeaderText = "ประเภทการค้ำประกัน"
     End Sub
@@ -86,19 +86,14 @@ Public Class frmSearch
         Try
             Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
                 conn.Open()
-
-                ' ใช้ SQL JOIN เพื่อดึงชื่อบัญชี (acc_name) จากตาราง Account มาแสดงแทน acc_id
-                Dim query As String = "SELECT c.con_id, c.m_id, c.con_details, c.con_amount, c.con_interest, c.con_permonth, c.con_date, a.acc_name, c.con_GuaranteeType " &
-                                  "FROM Contract c " &
-                                  "LEFT JOIN Account a ON c.acc_id = a.acc_id" ' ทำการ JOIN กับตาราง Account
-
+                Dim query As String = "SELECT con_id, m_id, con_details, con_amount, con_interest, con_permonth, con_date, acc_id, con_GuaranteeType FROM Contract"
                 Dim cmd As New OleDbCommand(query, conn)
                 Dim adapter As New OleDbDataAdapter(cmd)
                 Dim table As New DataTable()
                 adapter.Fill(table)
 
-                ' เพิ่มคอลัมน์สำหรับชื่อผู้ค้ำประกัน
-                table.Columns.Add("guarantor_names", GetType(String))
+                ' Add the guarantor names as before
+                table.Columns.Add("guarantor_names", GetType(String)) ' Add new column for guarantor names
 
                 For Each row As DataRow In table.Rows
                     Dim con_id As Integer = row("con_id")
@@ -109,15 +104,13 @@ Public Class frmSearch
                     Dim guarantorTable As New DataTable()
                     guarantorAdapter.Fill(guarantorTable)
 
-                    ' รวบรวมชื่อผู้ค้ำประกัน
+                    ' Collect guarantor names
                     Dim guarantorNames As String = String.Join(", ", guarantorTable.AsEnumerable().[Select](Function(r) r.Field(Of String)("m_name")).ToArray())
                     row("guarantor_names") = guarantorNames
                 Next
 
-                ' ผูกข้อมูลกับ DataGridView
                 dgvResults.DataSource = table
-
-                ' เรียกใช้ฟังก์ชันเพื่อจัดรูปแบบ DataGridView
+                ' Call the format function to setup DataGridView
                 FormatDataGridView()
             End Using
         Catch ex As Exception
@@ -130,21 +123,15 @@ Public Class frmSearch
         Try
             Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
                 conn.Open()
-
-                ' ใช้ SQL JOIN เพื่อดึงชื่อบัญชี (acc_name) จากตาราง Account มาแสดงแทน acc_id
-                Dim query As String = "SELECT c.con_id, c.m_id, c.con_details, c.con_amount, c.con_interest, c.con_permonth, c.con_date, a.acc_name, c.con_GuaranteeType " &
-                                  "FROM Contract c " &
-                                  "LEFT JOIN Account a ON c.acc_id = a.acc_id " &
-                                  "WHERE c.con_id LIKE @keyword OR c.m_id IN (SELECT m_id FROM Member WHERE m_name LIKE @keyword)"
-
+                Dim query As String = "SELECT con_id, m_id, con_details, con_amount, con_interest, con_permonth, con_date, acc_id, con_GuaranteeType FROM Contract WHERE con_id LIKE @keyword OR m_id IN (SELECT m_id FROM Member WHERE m_name LIKE @keyword)"
                 Dim cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@keyword", "%" & keyword & "%")
                 Dim adapter As New OleDbDataAdapter(cmd)
                 Dim table As New DataTable()
                 adapter.Fill(table)
 
-                ' เพิ่มคอลัมน์สำหรับชื่อผู้ค้ำประกัน
-                table.Columns.Add("guarantor_names", GetType(String))
+                ' Add the guarantor names as before
+                table.Columns.Add("guarantor_names", GetType(String)) ' Add new column for guarantor names
 
                 For Each row As DataRow In table.Rows
                     Dim con_id As Integer = row("con_id")
@@ -155,12 +142,11 @@ Public Class frmSearch
                     Dim guarantorTable As New DataTable()
                     guarantorAdapter.Fill(guarantorTable)
 
-                    ' รวบรวมชื่อผู้ค้ำประกัน
+                    ' Collect guarantor names
                     Dim guarantorNames As String = String.Join(", ", guarantorTable.AsEnumerable().[Select](Function(r) r.Field(Of String)("m_name")).ToArray())
                     row("guarantor_names") = guarantorNames
                 Next
 
-                ' ผูกข้อมูลกับ DataGridView
                 dgvResults.DataSource = table
             End Using
         Catch ex As Exception

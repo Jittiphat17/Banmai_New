@@ -202,7 +202,7 @@ Partial Class frmCard
         '
         Me.txtAccountNum.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAccountNum.Location = New System.Drawing.Point(631, 553)
-        Me.txtAccountNum.Mask = "0-000-0000-0000"
+        Me.txtAccountNum.Mask = "0-000-0000-00000"
         Me.txtAccountNum.Name = "txtAccountNum"
         Me.txtAccountNum.Size = New System.Drawing.Size(201, 26)
         Me.txtAccountNum.TabIndex = 8
