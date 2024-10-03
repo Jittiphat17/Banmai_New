@@ -8,16 +8,22 @@ Public Class frmMain
     Dim Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
 
     Public Sub Loadinfo()
-        ' อัปเดตข้อมูลการใช้งานสำหรับ Admin
-        If User_type = "Admin" Then
+        ' ตรวจสอบประเภทของผู้ใช้
+        If User_type = "Admin" Or User_type = "ประธาน" Then
+            ' เปิดการใช้งานเมนูสำหรับ Admin หรือ ประธาน
             tsm_exp.Enabled = True
             tsm_inc.Enabled = True
             tsm_report.Enabled = True
             tsm_other.Enabled = True
         Else
+            ' ปิดการใช้งานเมนูสำหรับผู้ใช้ที่ไม่ใช่ Admin หรือ ประธาน
+            tsm_exp.Enabled = False
+            tsm_inc.Enabled = False
+            tsm_report.Enabled = False
             tsm_other.Enabled = False
         End If
     End Sub
+
 
     Private Sub UpdateUserInfo()
         ' แสดงผู้ใช้งานปัจจุบันใน Label

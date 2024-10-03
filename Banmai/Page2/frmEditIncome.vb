@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports System.Windows.Controls
 Imports Guna.UI2.WinForms
 
 Public Class frmEditIncome
@@ -276,5 +277,36 @@ Public Class frmEditIncome
 
         ' หากมีการตั้งค่าอื่น ๆ เพิ่มเติมในฟอร์มก็ให้เคลียร์ข้อมูลในส่วนเหล่านั้นด้วย
     End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Try
+            If conn.State = ConnectionState.Closed Then conn.Open()
+
+            ' รับค่าจาก TextBox ที่ผู้ใช้กรอก
+            Dim searchText As String = txtSearch.Text.Trim()
+
+            ' คำสั่ง SQL ที่มีเงื่อนไขการค้นหาในตาราง Income
+            Dim query As String = "SELECT i.inc_id, i.m_id, i.inc_detail, i.inc_description, i.inc_date, i.inc_amount, a.acc_id, a.acc_name " &
+                                  "FROM Income i " &
+                                  "INNER JOIN Account a ON i.acc_id = a.acc_id " &
+                                  "WHERE i.inc_description LIKE @searchText OR i.inc_detail LIKE @searchText OR a.acc_name LIKE @searchText"
+
+            ' สร้างคำสั่ง OleDbCommand
+            Dim cmd As New OleDbCommand(query, conn)
+            cmd.Parameters.AddWithValue("@searchText", "%" & searchText & "%") ' ใช้ LIKE เพื่อค้นหาข้อมูลที่เกี่ยวข้องกับคำที่กรอก
+
+            ' ดึงข้อมูลและแสดงใน DataGridView
+            Dim adapter As New OleDbDataAdapter(cmd)
+            Dim table As New DataTable()
+            adapter.Fill(table)
+            dgvIncome.DataSource = table
+
+        Catch ex As Exception
+            MessageBox.Show("เกิดข้อผิดพลาดในการค้นหา: " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
 
 End Class

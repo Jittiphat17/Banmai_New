@@ -60,6 +60,7 @@ Partial Class frmEditContract
         Me.txtContractID = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtSearch = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Guna2Panel1.SuspendLayout()
         CType(Me.dgvContracts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2GroupBox1.SuspendLayout()
@@ -581,12 +582,23 @@ Partial Class frmEditContract
         Me.Label8.TabIndex = 31
         Me.Label8.Text = "ค้นหาสัญญา :"
         '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("FC Minimal", 26.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(6, 54)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(141, 35)
+        Me.Label9.TabIndex = 39
+        Me.Label9.Text = "แก้ไขสัญญา"
+        '
         'frmEditContract
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(891, 606)
+        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.dgvContracts)
         Me.Controls.Add(Me.btnDelete)
@@ -640,4 +652,5 @@ Partial Class frmEditContract
     Friend WithEvents txtContractID As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents txtSearch As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
 End Class

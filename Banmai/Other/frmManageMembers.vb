@@ -19,7 +19,6 @@ Public Class frmManageMembers
     End Sub
 
     Sub ConfigureDataGridView()
-        ' Configure DataGridView columns
         dgvMembers.Columns.Clear()
         dgvMembers.Columns.Add("m_id", "รหัสสมาชิก")
         dgvMembers.Columns.Add("m_gender", "คำนำหน้า")
@@ -37,6 +36,7 @@ Public Class frmManageMembers
         dgvMembers.Columns.Add("m_beginning", "ยอดยกมา")
         dgvMembers.Columns.Add("m_outstanding", "ลูกหนี้ค้างชำระ")
         dgvMembers.Columns.Add("m_national", "สัญชาติ")
+        dgvMembers.Columns.Add("m_status", "สถานะสมาชิก") ' Add the new column for status
 
         ' Set other DataGridView properties
         dgvMembers.DefaultCellStyle.Font = New Font("Tahoma", 10)
@@ -48,6 +48,7 @@ Public Class frmManageMembers
         dgvMembers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
         dgvMembers.EnableHeadersVisualStyles = False
     End Sub
+
 
     Sub Loadinfo()
         strSQL = "SELECT * FROM Member"
@@ -64,10 +65,11 @@ Public Class frmManageMembers
                 Dim birthDate As String = DateTime.Parse(dr("m_birth").ToString()).ToString("dd/MM/yyyy")
                 Dim age As Integer = dr("m_age") ' Retrieve age from the database
                 dgvMembers.Rows.Add(dr("m_id").ToString, dr("m_gender").ToString, dr("m_name").ToString,
-                                    dr("m_nick").ToString, birthDate, age, dr("m_thaiid").ToString, dr("m_job").ToString,
-                                    dr("m_address").ToString, dr("m_post").ToString, dr("m_tel").ToString,
-                                    dr("m_accountName").ToString, dr("m_accountNum").ToString,
-                                    dr("m_beginning").ToString, dr("m_outstanding").ToString, dr("m_national").ToString)
+                                dr("m_nick").ToString, birthDate, age, dr("m_thaiid").ToString, dr("m_job").ToString,
+                                dr("m_address").ToString, dr("m_post").ToString, dr("m_tel").ToString,
+                                dr("m_accountName").ToString, dr("m_accountNum").ToString,
+                                dr("m_beginning").ToString, dr("m_outstanding").ToString, dr("m_national").ToString,
+                                dr("m_status").ToString) ' Load the status into the DataGridView
             End While
 
             conn.Close()
@@ -92,7 +94,7 @@ Public Class frmManageMembers
         txtAccountname.Clear()
         txtAccountnum.Clear()
 
-
+        ' Clear and reset the gender ComboBox
         cmbGender.Items.Clear()
         cmbGender.Items.Add("เลือกคำนำหน้า")
         cmbGender.Items.Add("ดช.")
@@ -102,13 +104,22 @@ Public Class frmManageMembers
         cmbGender.Items.Add("นางสาว")
         cmbGender.SelectedIndex = 0
 
+        ' Clear and reset the nationality ComboBox
         cmbNational.Items.Clear()
         cmbNational.Items.Add("เลือกสัญชาติ")
         cmbNational.Items.Add("ไทย")
         cmbNational.SelectedIndex = 0
 
+        ' Clear and reset the status ComboBox (m_status)
+        cmbStatus.Items.Clear()
+        cmbStatus.Items.Add("เลือกสถานะ")
+        cmbStatus.Items.Add("สมาชิกคงอยู่")
+        cmbStatus.Items.Add("สมาชิกลาออก")
+        cmbStatus.SelectedIndex = 0 ' Default selection for status
+
         isEditing = False ' Reset editing state
     End Sub
+
 
     Sub Auto_id()
         Dim m_id As Integer
@@ -151,19 +162,20 @@ Public Class frmManageMembers
                     Using reader As OleDbDataReader = checkCmd.ExecuteReader()
                         If reader.Read() Then
                             hasChanges = (reader("m_gender").ToString() <> cmbGender.SelectedItem.ToString()) OrElse
-                                     (reader("m_name").ToString() <> txtName.Text.Trim()) OrElse
-                                     (reader("m_nick").ToString() <> txtnick.Text.Trim()) OrElse
-                                     (CDate(reader("m_birth")).ToString("yyyy-MM-dd") <> dtpBirth.Value.ToString("yyyy-MM-dd")) OrElse
-                                     (reader("m_national").ToString() <> cmbNational.SelectedItem.ToString()) OrElse
-                                     (reader("m_thaiid").ToString() <> txtThaiid.Text.Trim()) OrElse
-                                     (reader("m_job").ToString() <> txtJob.Text.Trim()) OrElse
-                                     (reader("m_address").ToString() <> txtAddress.Text.Trim()) OrElse
-                                     (reader("m_post").ToString() <> txtPost.Text.Trim()) OrElse
-                                     (reader("m_tel").ToString() <> txtTel.Text.Trim()) OrElse
-                                     (reader("m_accountName").ToString() <> txtAccountname.Text.Trim()) OrElse
-                                     (reader("m_accountNum").ToString() <> txtAccountnum.Text.Trim()) OrElse
-                                     (If(reader("m_beginning") IsNot DBNull.Value, CDbl(reader("m_beginning")), 0) <> If(String.IsNullOrEmpty(txtBeginning.Text.Trim()), 0, CDbl(txtBeginning.Text.Trim()))) OrElse
-                                     (If(reader("m_outstanding") IsNot DBNull.Value, CDbl(reader("m_outstanding")), 0) <> If(String.IsNullOrEmpty(txtOutstanding.Text.Trim()), 0, CDbl(txtOutstanding.Text.Trim())))
+                                 (reader("m_name").ToString() <> txtName.Text.Trim()) OrElse
+                                 (reader("m_nick").ToString() <> txtnick.Text.Trim()) OrElse
+                                 (CDate(reader("m_birth")).ToString("yyyy-MM-dd") <> dtpBirth.Value.ToString("yyyy-MM-dd")) OrElse
+                                 (reader("m_national").ToString() <> cmbNational.SelectedItem.ToString()) OrElse
+                                 (reader("m_thaiid").ToString() <> txtThaiid.Text.Trim()) OrElse
+                                 (reader("m_job").ToString() <> txtJob.Text.Trim()) OrElse
+                                 (reader("m_address").ToString() <> txtAddress.Text.Trim()) OrElse
+                                 (reader("m_post").ToString() <> txtPost.Text.Trim()) OrElse
+                                 (reader("m_tel").ToString() <> txtTel.Text.Trim()) OrElse
+                                 (reader("m_accountName").ToString() <> txtAccountname.Text.Trim()) OrElse
+                                 (reader("m_accountNum").ToString() <> txtAccountnum.Text.Trim()) OrElse
+                                 (If(reader("m_beginning") IsNot DBNull.Value, CDbl(reader("m_beginning")), 0) <> If(String.IsNullOrEmpty(txtBeginning.Text.Trim()), 0, CDbl(txtBeginning.Text.Trim()))) OrElse
+                                 (If(reader("m_outstanding") IsNot DBNull.Value, CDbl(reader("m_outstanding")), 0) <> If(String.IsNullOrEmpty(txtOutstanding.Text.Trim()), 0, CDbl(txtOutstanding.Text.Trim()))) OrElse
+                                 (reader("m_status").ToString() <> cmbStatus.SelectedItem.ToString())
                         End If
                     End Using
                 End Using
@@ -173,15 +185,16 @@ Public Class frmManageMembers
                     Return
                 End If
 
+                ' Update SQL query to include m_status
                 strSQL = "UPDATE Member SET m_gender = @m_gender, m_name = @m_name, m_nick = @m_nick, m_birth = @m_birth, m_national = @m_national, " &
-                         "m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, m_post = @m_post, m_tel = @m_tel, m_accountName = @m_accountName, " &
-                         "m_accountNum = @m_accountNum, m_beginning = @m_beginning, m_outstanding = @m_outstanding, m_age = @m_age WHERE m_id = @m_id"
+                     "m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, m_post = @m_post, m_tel = @m_tel, m_accountName = @m_accountName, " &
+                     "m_accountNum = @m_accountNum, m_beginning = @m_beginning, m_outstanding = @m_outstanding, m_age = @m_age, m_status = @m_status WHERE m_id = @m_id"
 
             Else
-                ' Add new member
+                ' Insert SQL query to include m_status
                 strSQL = "INSERT INTO Member (m_id, m_gender, m_name, m_nick, m_birth, m_national, m_thaiid, m_job, m_address, m_post, m_tel, m_accountName, " &
-                     "m_accountNum, m_beginning, m_outstanding, m_age) VALUES (@m_id, @m_gender, @m_name, @m_nick, @m_birth, @m_national, @m_thaiid, " &
-                     "@m_job, @m_address, @m_post, @m_tel, @m_accountName, @m_accountNum, @m_beginning, @m_outstanding, @m_age)"
+                 "m_accountNum, m_beginning, m_outstanding, m_age, m_status) VALUES (@m_id, @m_gender, @m_name, @m_nick, @m_birth, @m_national, @m_thaiid, " &
+                 "@m_job, @m_address, @m_post, @m_tel, @m_accountName, @m_accountNum, @m_beginning, @m_outstanding, @m_age, @m_status)"
             End If
 
             Using cmd As New OleDbCommand(strSQL, conn)
@@ -199,6 +212,7 @@ Public Class frmManageMembers
                 cmd.Parameters.AddWithValue("@m_accountName", txtAccountname.Text.Trim())
                 cmd.Parameters.AddWithValue("@m_accountNum", txtAccountnum.Text.Trim())
 
+                ' Check and add parameters for m_beginning and m_outstanding
                 If String.IsNullOrEmpty(txtBeginning.Text.Trim()) Then
                     cmd.Parameters.AddWithValue("@m_beginning", DBNull.Value)
                 Else
@@ -212,6 +226,7 @@ Public Class frmManageMembers
                 End If
 
                 cmd.Parameters.AddWithValue("@m_age", CalculateAge(dtpBirth.Value.ToString("dd/MM/yyyy")))
+                cmd.Parameters.AddWithValue("@m_status", cmbStatus.SelectedItem.ToString()) ' Add the m_status parameter
 
                 ' Log the SQL query and parameter values
                 Dim logMessage As String = cmd.CommandText & vbNewLine
@@ -244,6 +259,7 @@ Public Class frmManageMembers
             End If
         End Try
     End Sub
+
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         ' ตรวจสอบว่ามีการเลือกข้อมูลหรือไม่
         If String.IsNullOrWhiteSpace(txtID.Text) Then

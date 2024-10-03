@@ -241,6 +241,7 @@ Partial Class frmViewMember
         Me.Controls.Add(Me.dgvConn)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmViewMember"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmViewMember"
         Me.Guna2GroupBox2.ResumeLayout(False)
         Me.Guna2GroupBox1.ResumeLayout(False)

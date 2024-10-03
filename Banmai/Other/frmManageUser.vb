@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports System.Windows.Controls
 
 Public Class frmManageUser
     ' ประกาศ Database connection string เพียงครั้งเดียวที่ระดับคลาส
@@ -18,7 +19,9 @@ Public Class frmManageUser
     ' Method to load user types into the Guna2ComboBox
     Private Sub LoadUserTypes()
         cmbUsertype.Items.Add("Admin")
-        cmbUsertype.Items.Add("User")
+        cmbUsertype.Items.Add("ประธาน")
+        cmbUsertype.Items.Add("เหรัญญิก")
+        cmbUsertype.Items.Add("กรรมการ")
         cmbUsertype.SelectedIndex = 0 ' Default selection
     End Sub
 
@@ -34,7 +37,7 @@ Public Class frmManageUser
         Try
             ' ใช้ Conn ที่ประกาศไว้ระดับคลาส ไม่ต้องประกาศใหม่
             If Conn.State = ConnectionState.Closed Then Conn.Open()
-            SQL = "SELECT * FROM Users"
+            SQL = "SELECT user_id, user_name, user_pass, user_type, user_fname, user_tel FROM Users"
             da = New OleDbDataAdapter(SQL, Conn)
             dt = New DataTable()
             da.Fill(dt)
@@ -45,9 +48,8 @@ Public Class frmManageUser
             gunaDataGridView1.Columns(1).HeaderText = "ชื่อผู้ใช้"
             gunaDataGridView1.Columns(2).HeaderText = "รหัสผ่าน"
             gunaDataGridView1.Columns(3).HeaderText = "ประเภทผู้ใช้"
-            gunaDataGridView1.Columns(4).HeaderText = "ชื่อ"
-            gunaDataGridView1.Columns(5).HeaderText = "นามสกุล"
-            gunaDataGridView1.Columns(6).HeaderText = "เบอร์โทรศัพท์"
+            gunaDataGridView1.Columns(4).HeaderText = "ชื่อ-นามสกุล"
+            gunaDataGridView1.Columns(5).HeaderText = "เบอร์โทรศัพท์" ' ตรวจสอบให้แสดงเพียงคอลัมน์เดียว
         Catch ex As Exception
             MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
@@ -55,6 +57,7 @@ Public Class frmManageUser
             If Conn.State = ConnectionState.Open Then Conn.Close()
         End Try
     End Sub
+
 
     Private Sub gunaDataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles gunaDataGridView1.CellClick
         ' ตรวจสอบว่ามีการเลือกแถวหรือไม่
@@ -211,4 +214,37 @@ Public Class frmManageUser
         txtTel.Clear()
         cmbUsertype.SelectedIndex = 0 ' Reset to default selection
     End Sub
+
+    ' ฟังก์ชันค้นหาเมื่อมีการพิมพ์ใน TextBox
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Try
+            If Conn.State = ConnectionState.Closed Then Conn.Open()
+
+            ' รับค่าจาก TextBox สำหรับการค้นหา
+            Dim searchText As String = txtSearch.Text.Trim()
+
+            ' SQL Query สำหรับค้นหาข้อมูลในตาราง Users โดยใช้ LIKE
+            SQL = "SELECT user_id, user_name, user_pass, user_type, user_fname, user_tel FROM Users " &
+                  "WHERE user_name LIKE @search OR user_type LIKE @search OR user_fname LIKE @search OR user_tel LIKE @search"
+
+            ' ใช้ @search สำหรับค่าที่จะค้นหา
+            cmd = New OleDbCommand(SQL, Conn)
+            cmd.Parameters.AddWithValue("@search", "%" & searchText & "%")
+
+            ' ดึงข้อมูลและแสดงใน DataGridView
+            da = New OleDbDataAdapter(cmd)
+            dt = New DataTable()
+            da.Fill(dt)
+
+            ' อัปเดตข้อมูลใน DataGridView
+            gunaDataGridView1.DataSource = dt
+
+        Catch ex As Exception
+            MessageBox.Show("เกิดข้อผิดพลาดในการค้นหา: " & ex.Message)
+        Finally
+            If Conn.State = ConnectionState.Open Then Conn.Close()
+        End Try
+    End Sub
+
+
 End Class

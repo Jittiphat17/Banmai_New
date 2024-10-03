@@ -128,4 +128,84 @@ Public Class frmSajja
             Debug.WriteLine($"ข้อผิดพลาด: {ex.ToString()}")
         End Try
     End Sub
+
+    Private Sub btnExportExcel_Click(sender As Object, e As EventArgs) Handles btnExportExcel.Click
+        Try
+            ' ดึงข้อมูลจาก ReportViewer ในรูปแบบ Excel (รูปแบบ Excel แบบเก่า .xls)
+            Dim warnings As Warning() = Nothing
+            Dim streamids As String() = Nothing
+            Dim mimeType As String = String.Empty
+            Dim encoding As String = String.Empty
+            Dim extension As String = "xls" ' ใช้ .xls แทน .xlsx
+            Dim deviceInfo As String = "<DeviceInfo>" &
+                                       "  <OutputFormat>Excel</OutputFormat>" &
+                                       "  <PageWidth>8.5in</PageWidth>" &
+                                       "  <PageHeight>11in</PageHeight>" &
+                                       "  <MarginTop>0.5in</MarginTop>" &
+                                       "  <MarginLeft>0.5in</MarginLeft>" &
+                                       "  <MarginRight>0.5in</MarginRight>" &
+                                       "  <MarginBottom>0.5in</MarginBottom>" &
+                                       "</DeviceInfo>"
+
+            ' Render รายงานเป็น Excel (.xls)
+            Dim renderedBytes As Byte() = ReportViewer1.LocalReport.Render("EXCEL", deviceInfo, mimeType, encoding, extension, streamids, warnings)
+
+            ' แสดง Dialog ให้ผู้ใช้เลือกตำแหน่งที่จะบันทึกไฟล์
+            Dim saveFileDialog As New SaveFileDialog()
+            saveFileDialog.Filter = "Excel Files|*.xls"
+            saveFileDialog.Title = "Save Report as Excel"
+            saveFileDialog.FileName = "Sajja_Report.xls" ' ใช้ .xls แทน .xlsx
+
+            If saveFileDialog.ShowDialog() = DialogResult.OK Then
+                ' บันทึกไฟล์ Excel
+                Using fs As New IO.FileStream(saveFileDialog.FileName, IO.FileMode.Create)
+                    fs.Write(renderedBytes, 0, renderedBytes.Length)
+                End Using
+
+                MessageBox.Show("บันทึกไฟล์สำเร็จ!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"เกิดข้อผิดพลาดในการบันทึกไฟล์: {ex.Message}")
+        End Try
+    End Sub
+    Private Sub btnExportPDF_Click(sender As Object, e As EventArgs) Handles btnExportPDF.Click
+        Try
+            ' ดึงข้อมูลจาก ReportViewer ในรูปแบบ PDF
+            Dim warnings As Warning() = Nothing
+            Dim streamids As String() = Nothing
+            Dim mimeType As String = String.Empty
+            Dim encoding As String = String.Empty
+            Dim extension As String = "pdf"
+            Dim deviceInfo As String = "<DeviceInfo>" &
+                                       "  <OutputFormat>PDF</OutputFormat>" &
+                                       "  <PageWidth>8.5in</PageWidth>" &
+                                       "  <PageHeight>11in</PageHeight>" &
+                                       "  <MarginTop>0.5in</MarginTop>" &
+                                       "  <MarginLeft>0.5in</MarginLeft>" &
+                                       "  <MarginRight>0.5in</MarginRight>" &
+                                       "  <MarginBottom>0.5in</MarginBottom>" &
+                                       "</DeviceInfo>"
+
+            ' Render รายงานเป็น PDF
+            Dim renderedBytes As Byte() = ReportViewer1.LocalReport.Render("PDF", deviceInfo, mimeType, encoding, extension, streamids, warnings)
+
+            ' แสดง Dialog ให้ผู้ใช้เลือกตำแหน่งที่จะบันทึกไฟล์
+            Dim saveFileDialog As New SaveFileDialog()
+            saveFileDialog.Filter = "PDF Files|*.pdf"
+            saveFileDialog.Title = "Save Report as PDF"
+            saveFileDialog.FileName = "Sajja_Report.pdf"
+
+            If saveFileDialog.ShowDialog() = DialogResult.OK Then
+                ' บันทึกไฟล์ PDF
+                Using fs As New IO.FileStream(saveFileDialog.FileName, IO.FileMode.Create)
+                    fs.Write(renderedBytes, 0, renderedBytes.Length)
+                End Using
+
+                MessageBox.Show("บันทึกไฟล์สำเร็จ!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+            MessageBox.Show($"เกิดข้อผิดพลาดในการบันทึกไฟล์: {ex.Message}")
+        End Try
+    End Sub
+
 End Class

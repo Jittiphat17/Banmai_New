@@ -796,6 +796,7 @@ Partial Class frmCard
         Me.Controls.Add(Me.Guna2Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmCard"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmCard"
         Me.Guna2Panel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)

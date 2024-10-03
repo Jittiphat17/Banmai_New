@@ -111,6 +111,7 @@ Partial Class frmBackup
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmBackup"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmBackup"
         Me.Guna2Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)

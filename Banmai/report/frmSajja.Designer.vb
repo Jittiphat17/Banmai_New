@@ -32,6 +32,8 @@ Partial Class frmSajja
         Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel2 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.btnExportExcel = New Guna.UI2.WinForms.Guna2Button()
+        Me.btnExportPDF = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -128,12 +130,48 @@ Partial Class frmSajja
         Me.Guna2HtmlLabel3.TabIndex = 24
         Me.Guna2HtmlLabel3.Text = "รายงานดอกเบี้ยสัจจะ"
         '
+        'btnExportExcel
+        '
+        Me.btnExportExcel.Animated = True
+        Me.btnExportExcel.BorderRadius = 5
+        Me.btnExportExcel.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnExportExcel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.btnExportExcel.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnExportExcel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnExportExcel.FillColor = System.Drawing.Color.DarkGreen
+        Me.btnExportExcel.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.btnExportExcel.ForeColor = System.Drawing.Color.White
+        Me.btnExportExcel.Location = New System.Drawing.Point(278, 48)
+        Me.btnExportExcel.Name = "btnExportExcel"
+        Me.btnExportExcel.Size = New System.Drawing.Size(72, 45)
+        Me.btnExportExcel.TabIndex = 25
+        Me.btnExportExcel.Text = "EXCEL"
+        '
+        'btnExportPDF
+        '
+        Me.btnExportPDF.Animated = True
+        Me.btnExportPDF.BorderRadius = 5
+        Me.btnExportPDF.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnExportPDF.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.btnExportPDF.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnExportPDF.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnExportPDF.FillColor = System.Drawing.Color.Red
+        Me.btnExportPDF.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.btnExportPDF.ForeColor = System.Drawing.Color.White
+        Me.btnExportPDF.Location = New System.Drawing.Point(356, 48)
+        Me.btnExportPDF.Name = "btnExportPDF"
+        Me.btnExportPDF.Size = New System.Drawing.Size(72, 45)
+        Me.btnExportPDF.TabIndex = 26
+        Me.btnExportPDF.Text = "PDF"
+        '
         'frmSajja
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1105, 619)
+        Me.Controls.Add(Me.btnExportPDF)
+        Me.Controls.Add(Me.btnExportExcel)
         Me.Controls.Add(Me.Guna2HtmlLabel3)
         Me.Controls.Add(Me.Guna2HtmlLabel2)
         Me.Controls.Add(Me.Guna2HtmlLabel1)
@@ -143,6 +181,7 @@ Partial Class frmSajja
         Me.Controls.Add(Me.ReportViewer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmSajja"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmSajja"
         Me.Guna2Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -159,4 +198,6 @@ Partial Class frmSajja
     Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel2 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel3 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents btnExportExcel As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents btnExportPDF As Guna.UI2.WinForms.Guna2Button
 End Class
