@@ -68,14 +68,15 @@ Public Class frmCon
         End Try
     End Sub
 
+
     ' ฟังก์ชันสำหรับค้นหาข้อมูลการชำระเงิน
     Private Sub SearchPayments(contractNumber As String)
         Try
-            ' SQL query to retrieve payment data
-            Dim strSQL As String = "SELECT p.payment_id, p.con_id, p.payment_date, p.payment_amount, p.payment_prin AS Principal, p.payment_interest AS Interest, s.status_name " &
-                       "FROM Payment p " &
-                       "INNER JOIN Status s ON p.status_id = s.status_id " &
-                       "WHERE p.con_id = @contractNumber"
+            ' SQL query to retrieve payment data, including the payment_period field
+            Dim strSQL As String = "SELECT p.payment_id, p.con_id, p.payment_date, p.payment_amount, p.payment_prin AS Principal, p.payment_interest AS Interest, p.payment_period, s.status_name " &
+                               "FROM Payment p " &
+                               "INNER JOIN Status s ON p.status_id = s.status_id " &
+                               "WHERE p.con_id = @contractNumber"
 
             Dim cmd As New OleDbCommand(strSQL, Conn)
             cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
@@ -117,19 +118,23 @@ Public Class frmCon
             dgvPayments.Columns("payment_amount").HeaderText = "จำนวนเงิน"
             dgvPayments.Columns("Principal").HeaderText = "เงินต้น"
             dgvPayments.Columns("Interest").HeaderText = "ดอกเบี้ย (บาท)"
+            dgvPayments.Columns("payment_period").HeaderText = "งวด"
 
             ' Format to show two decimal places
             dgvPayments.Columns("payment_amount").DefaultCellStyle.Format = "N2"
             dgvPayments.Columns("Principal").DefaultCellStyle.Format = "N2"
             dgvPayments.Columns("Interest").DefaultCellStyle.Format = "N2"
 
+            ' Set the font for DataGridView cells to FC Mini Mal
+            Dim fcMiniMalFont As New Font("FC Minimal", 14) ' Adjust font size as needed
+            dgvPayments.DefaultCellStyle.Font = fcMiniMalFont
+            dgvPayments.ColumnHeadersDefaultCellStyle.Font = fcMiniMalFont
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             Conn.Close()
         End Try
     End Sub
-
 
     ' ฟังก์ชันคำนวณการผ่อนชำระแบบดอกเบี้ยคงที่ (Flat Rate)
     Private Function CalculateFixedPayment(principal As Decimal, monthlyInterestRate As Decimal, totalPayments As Integer) As DataTable

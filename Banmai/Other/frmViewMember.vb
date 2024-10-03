@@ -56,7 +56,7 @@ Public Class frmViewMember
         dgvConn.Columns.Add("acc_name", "ประเภทบัญชี") ' Column for the account type
 
         ' Apply Guna.UI2 styling with FC Minimal font
-        Dim fcMinimalFont As New Font("FC Minimal", 10, FontStyle.Regular)
+        Dim fcMinimalFont As New Font("FC Minimal", 14, FontStyle.Regular)
         Dim fcMinimalBoldFont As New Font("FC Minimal", 12, FontStyle.Bold)
 
         dgvConn.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)

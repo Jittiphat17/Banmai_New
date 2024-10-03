@@ -289,4 +289,16 @@ Public Class frmMain
         AddHandler frm.FormClosed, AddressOf RefreshMainForm
         frm.ShowDialog()
     End Sub
+
+    Private Sub ทดลองรายงานToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ทดลองรายงานToolStripMenuItem.Click
+        Dim frm As New ProfitAndLossReportForm
+        AddHandler frm.FormClosed, AddressOf RefreshMainForm
+        frm.ShowDialog()
+    End Sub
+
+    Private Sub การปดงบToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles การปดงบToolStripMenuItem.Click
+        Dim frm As New frmClose
+        AddHandler frm.FormClosed, AddressOf RefreshMainForm
+        frm.ShowDialog()
+    End Sub
 End Class

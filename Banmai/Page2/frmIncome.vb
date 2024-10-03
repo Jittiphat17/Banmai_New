@@ -128,7 +128,7 @@ Public Class frmIncome
             paymentTypeColumn.Items.Clear() ' ล้างรายการเก่า
 
             ' เพิ่มรายการใหม่
-            paymentTypeColumn.Items.AddRange(New String() {"เงินต้น", "ดอกเบี้ย", "ค่าปรับ"})
+            paymentTypeColumn.Items.AddRange(New String() {"เงินต้น", "ดอกเบี้ย", "ค่าปรับ"}) 'รายได้ คือ ดอกเบี้ยกับค่าปรับ
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการโหลดข้อมูลประเภทค่างวด: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -166,8 +166,8 @@ Public Class frmIncome
                 incomeTypeColumn.Items.Add("เงินฝากสัจจะ")
                 incomeTypeColumn.Items.Add("เงินสำรอง")
                 incomeTypeColumn.Items.Add("เงินหุ้น")
-                incomeTypeColumn.Items.Add("ค่าธรรมเนียม")
-                incomeTypeColumn.Items.Add("เงินบริจาค")
+                incomeTypeColumn.Items.Add("ค่าธรรมเนียม") 'รายได้
+                incomeTypeColumn.Items.Add("เงินบริจาค") ' รายได้
                 incomeTypeColumn.Items.Add("เงินสนับสนุน")
                 incomeTypeColumn.Items.Add("เงินกู้")
                 incomeTypeColumn.Items.Add("ทุนบัญชี1")
@@ -175,10 +175,12 @@ Public Class frmIncome
                 incomeTypeColumn.Items.Add("ทุนบัญชีประชารัฐ")
                 incomeTypeColumn.Items.Add("กำไรสะสม")
                 incomeTypeColumn.Items.Add("เงินสมทบ")
+                incomeTypeColumn.Items.Add("ค่าสัญญา") 'รายได้
+                incomeTypeColumn.Items.Add("ค่าประกัน") ' รายได้
                 incomeTypeColumn.Items.Add("เงินประกันความเสี่ยง")
-                incomeTypeColumn.Items.Add("ดอกเบี้ยเงินฝากธนาคาร")
-                incomeTypeColumn.Items.Add("ค่าธรรมเนียมแรกเข้า")
-                incomeTypeColumn.Items.Add("อื่น ๆ")
+                incomeTypeColumn.Items.Add("ดอกเบี้ยเงินฝากธนาคาร") 'รายได้
+                incomeTypeColumn.Items.Add("ค่าธรรมเนียมแรกเข้า") 'รายได้
+                incomeTypeColumn.Items.Add("อื่น ๆ") 'รายได้
             End Using
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการโหลดข้อมูลประเภทเงินฝาก: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -447,17 +449,19 @@ Public Class frmIncome
                         If Not row.IsNewRow Then
                             Dim incomeType As String = If(row.Cells("IncomeType").Value, "").ToString()
                             Dim amount As Decimal = CDec(If(row.Cells("Amount").Value, 0))
-                            Dim indDate As DateTime = dtpBirth.Value ' ใช้วันที่จาก DateTimePicker
+                            Dim indDate As DateTime = dtpBirth.Value ' Using the date from DateTimePicker
+                            Dim accId As String = cboDepositType.SelectedValue.ToString() ' Retrieve acc_id
 
                             If Not String.IsNullOrEmpty(incomeType) Then
-                                Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, inc_id, m_id, ind_date) VALUES (@ind_accname, @con_id, @ind_amount, @inc_id, @m_id, @ind_date)"
+                                Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, inc_id, m_id, ind_date, acc_id) VALUES (@ind_accname, @con_id, @ind_amount, @inc_id, @m_id, @ind_date, @acc_id)"
                                 Using cmdDetails As New OleDbCommand(queryDetails, Conn)
                                     cmdDetails.Parameters.AddWithValue("@ind_accname", incomeType)
-                                    cmdDetails.Parameters.AddWithValue("@con_id", DBNull.Value) ' ไม่มี con_id ในกรณีนี้
+                                    cmdDetails.Parameters.AddWithValue("@con_id", DBNull.Value) ' No con_id in this case
                                     cmdDetails.Parameters.AddWithValue("@ind_amount", amount)
                                     cmdDetails.Parameters.AddWithValue("@inc_id", incId)
                                     cmdDetails.Parameters.AddWithValue("@m_id", CInt(memberId))
-                                    cmdDetails.Parameters.AddWithValue("@ind_date", indDate) ' เพิ่ม ind_date
+                                    cmdDetails.Parameters.AddWithValue("@ind_date", indDate) ' Add ind_date
+                                    cmdDetails.Parameters.AddWithValue("@acc_id", accId) ' Add acc_id to Income_Details
 
                                     cmdDetails.ExecuteNonQuery()
                                 End Using

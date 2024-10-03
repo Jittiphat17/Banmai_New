@@ -141,9 +141,9 @@ Partial Class Form1
         Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(32, 152)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(236, 50)
+        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(194, 50)
         Me.Guna2HtmlLabel1.TabIndex = 16
-        Me.Guna2HtmlLabel1.Text = "ขอยินดีต้อนรับสู่"
+        Me.Guna2HtmlLabel1.Text = "ยินดีต้อนรับสู่"
         '
         'Guna2ToggleSwitch1
         '

@@ -65,6 +65,33 @@ Public Class frmMemberResign
                 txtTotalSaving.Text = txtBeforeTotalSaving.Text ' แสดงยอดเงินรวม
             End If
 
+            ' ตรวจสอบว่าชื่อสมาชิกที่ค้นหาได้ไปเป็นผู้ค้ำประกันให้กับใครในสัญญาใดบ้าง
+            Dim queryGuarantorForOthers As String = "SELECT c.con_id, c.con_amount, m.m_name FROM (Guarantor g " &
+                                        "INNER JOIN Contract c ON g.con_id = c.con_id) " &
+                                        "INNER JOIN Member m ON c.m_id = m.m_id " &
+                                        "WHERE g.m_id = (SELECT m_id FROM Member WHERE m_name = @memberName)"
+
+            Dim cmdGuarantorForOthers As New OleDbCommand(queryGuarantorForOthers, Conn)
+            cmdGuarantorForOthers.Parameters.AddWithValue("@memberName", memberName)
+            Dim guarantorReader As OleDbDataReader = cmdGuarantorForOthers.ExecuteReader()
+
+            Dim guarantorForOthersList As New List(Of String)
+
+            While guarantorReader.Read()
+                ' ดึงชื่อและรายละเอียดของสมาชิกที่ผู้ค้นหาได้ไปค้ำให้
+                Dim otherMemberName As String = guarantorReader("m_name").ToString()
+                Dim contractAmount As Decimal = Convert.ToDecimal(guarantorReader("con_amount"))
+                guarantorForOthersList.Add($"{otherMemberName} ยอดเงิน {contractAmount.ToString("N2")} บาท")
+            End While
+            guarantorReader.Close()
+
+            ' แสดงภาระการค้ำประกันใน TextBox (txtGuarantor)
+            If guarantorForOthersList.Count > 0 Then
+                txtGuarantor.Text = String.Join(Environment.NewLine, guarantorForOthersList)
+            Else
+                txtGuarantor.Text = "ไม่มีภาระการค้ำประกัน"
+            End If
+
             ' ดึงข้อมูลสัญญาของสมาชิก
             Dim queryContracts As String = "SELECT con_id, acc_id, con_amount FROM Contract WHERE m_id = (SELECT m_id FROM Member WHERE m_name = @memberName)"
             Dim cmdContracts As New OleDbCommand(queryContracts, Conn)
@@ -88,27 +115,6 @@ Public Class frmMemberResign
                 ElseIf accId = "ACC003" Then
                     totalLoanPublic += Convert.ToDecimal(contractReader("con_amount"))
                 End If
-
-                ' ตรวจสอบภาระการค้ำประกันจากตาราง Guarantor
-                Dim queryGuarantee As String = "SELECT g.m_id, m.m_name FROM Guarantor g INNER JOIN Member m ON g.m_id = m.m_id WHERE g.con_id = @contractId"
-                Dim cmdGuarantee As New OleDbCommand(queryGuarantee, Conn)
-                cmdGuarantee.Parameters.AddWithValue("@contractId", contractId)
-                Dim guaranteeReader As OleDbDataReader = cmdGuarantee.ExecuteReader()
-
-                Dim guarantorList As New List(Of String)
-
-                While guaranteeReader.Read()
-                    guarantorList.Add(guaranteeReader("m_name").ToString()) ' แสดงชื่อผู้ค้ำประกัน
-                End While
-                guaranteeReader.Close()
-
-                ' แสดงภาระการค้ำประกันใน TextBox (txtGuarantor) โดยใช้ , คั่นระหว่างชื่อ
-                If guarantorList.Count > 0 Then
-                    txtGuarantor.Text = String.Join(", ", guarantorList)
-                Else
-                    txtGuarantor.Text = "ไม่มีผู้ค้ำประกัน"
-                End If
-
             End While
             contractReader.Close()
 
@@ -127,4 +133,6 @@ Public Class frmMemberResign
             Conn.Close()
         End Try
     End Sub
+
+
 End Class

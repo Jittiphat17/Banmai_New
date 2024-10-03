@@ -84,7 +84,7 @@ Partial Class frmCon
         Me.dgvPayments.Location = New System.Drawing.Point(421, 100)
         Me.dgvPayments.Name = "dgvPayments"
         Me.dgvPayments.RowHeadersVisible = False
-        Me.dgvPayments.Size = New System.Drawing.Size(753, 319)
+        Me.dgvPayments.Size = New System.Drawing.Size(847, 319)
         Me.dgvPayments.TabIndex = 36
         Me.dgvPayments.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvPayments.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -403,7 +403,7 @@ Partial Class frmCon
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(1186, 33)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(1280, 33)
         Me.Guna2Panel1.TabIndex = 37
         '
         'Guna2ControlBox1
@@ -413,7 +413,7 @@ Partial Class frmCon
         Me.Guna2ControlBox1.CustomIconSize = 30.0!
         Me.Guna2ControlBox1.FillColor = System.Drawing.Color.LightGray
         Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1136, 1)
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1230, 1)
         Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
         Me.Guna2ControlBox1.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox1.TabIndex = 5
@@ -422,7 +422,7 @@ Partial Class frmCon
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1186, 431)
+        Me.ClientSize = New System.Drawing.Size(1280, 436)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.dgvPayments)
         Me.Controls.Add(Me.btnSearch)

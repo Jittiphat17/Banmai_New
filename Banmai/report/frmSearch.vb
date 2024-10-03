@@ -3,14 +3,16 @@ Imports System.Text
 Imports Microsoft.Reporting.WinForms
 
 Public Class frmSearch
-    Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+    Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
 
     Private Sub frmSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' เพิ่มตัวเลือกสำหรับประเภทของรายงาน
+        ' เรียกฟังก์ชัน LoadAllContracts ทันทีเมื่อเปิดฟอร์มเพื่อแสดงข้อมูล
+        LoadAllContracts()
+
+        ' ตั้งค่าอื่น ๆ ตามที่ต้องการ
         cbReportType.Items.Add("รายงานสัญญากู้เงิน")
         cbReportType.Items.Add("รายงานสัญญาอื่นๆ")
         cbReportType.SelectedIndex = 0 ' ตั้งค่าเริ่มต้น
-        LoadAllContracts()
 
         ' กำหนดค่าของ ReportViewer1 สำหรับรายงานสัญญากู้ยืม
         Me.ReportViewer1.LocalReport.ReportPath = "D:\Project-2022\Banmai\Banmai\report\LoanReport1.rdlc"
@@ -19,8 +21,8 @@ Public Class frmSearch
         ' กำหนดค่าของ ReportViewer2 สำหรับรายงานผู้ค้ำประกัน
         Me.ReportViewer2.LocalReport.ReportPath = "D:\Project-2022\Banmai\Banmai\report\GuarantorReport.rdlc"
         Me.ReportViewer2.RefreshReport()
-
     End Sub
+
 
     Private Sub FormatDataGridView()
         ' สร้างฟอนต์ FC Minimal Bold ขนาด 12pt
@@ -84,7 +86,7 @@ Public Class frmSearch
 
     Private Sub LoadAllContracts()
         Try
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
                 conn.Open()
                 Dim query As String = "SELECT con_id, m_id, con_details, con_amount, con_interest, con_permonth, con_date, acc_id, con_GuaranteeType FROM Contract"
                 Dim cmd As New OleDbCommand(query, conn)
@@ -109,7 +111,12 @@ Public Class frmSearch
                     row("guarantor_names") = guarantorNames
                 Next
 
+                ' Update DataGridView DataSource
                 dgvResults.DataSource = table
+
+                ' Refresh DataGridView to show new data
+                dgvResults.Refresh()
+
                 ' Call the format function to setup DataGridView
                 FormatDataGridView()
             End Using
@@ -119,9 +126,10 @@ Public Class frmSearch
     End Sub
 
 
+
     Private Sub SearchContracts(keyword As String)
         Try
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
                 conn.Open()
                 Dim query As String = "SELECT con_id, m_id, con_details, con_amount, con_interest, con_permonth, con_date, acc_id, con_GuaranteeType FROM Contract WHERE con_id LIKE @keyword OR m_id IN (SELECT m_id FROM Member WHERE m_name LIKE @keyword)"
                 Dim cmd As New OleDbCommand(query, conn)

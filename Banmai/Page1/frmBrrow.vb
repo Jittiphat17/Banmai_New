@@ -18,8 +18,12 @@ Public Class frmBrrow
         LoadAutoCompleteData()
         LoadAccountData()
         LoadPerMData()
-        LoadGuaranteeTypes() ' โหลดตัวเลือกการค้ำประกัน
+        LoadGuaranteeTypes()
+
+        ' ปิดการใช้งานปุ่ม Save ในตอนเริ่มต้น
+        btnSave.Enabled = False
     End Sub
+
 
     Private Sub txtMoney_TextChanged(sender As Object, e As EventArgs) Handles txtMoney.TextChanged
         ' ตรวจสอบว่าไม่ใช่การลบข้อมูลทั้งหมด
@@ -193,10 +197,11 @@ Public Class frmBrrow
             Using cmd As New OleDbCommand("SELECT MAX(con_id) FROM Contract", Conn)
                 Dim result As Object = cmd.ExecuteScalar()
                 If IsDBNull(result) OrElse result Is Nothing Then
-                    txtCid.Text = "0001"
+                    txtCid.Text = "0001" ' ถ้ายังไม่มีข้อมูล ให้เริ่มจาก 0001
                 Else
+                    ' ตรวจสอบและเพิ่มค่า ID
                     Dim newId As Integer = Convert.ToInt32(result) + 1
-                    txtCid.Text = newId.ToString("D4")
+                    txtCid.Text = newId.ToString("D4") ' แปลงเป็นรูปแบบ D4 เพื่อให้ได้ 4 หลัก
                 End If
             End Using
         Catch ex As Exception
@@ -207,23 +212,30 @@ Public Class frmBrrow
     End Sub
 
     Private Sub ClearAllData()
-        Dim textBoxesToClear As Guna2TextBox() = {txtSearch, txtSearch1, txtSearch2, txtSearch3, txtDetail, txtDetail1, txtDetail2, txtDetail3, txtMoney}
+        ' กำหนด TextBox ที่จะถูกล้างข้อมูล
+        Dim textBoxesToClear As Guna2TextBox() = {txtSearch, txtSearch1, txtSearch2, txtSearch3, txtDetail, txtDetail1, txtDetail2, txtDetail3, txtMoney, txtPercen}
         For Each tb As Guna2TextBox In textBoxesToClear
             tb.Clear()
         Next
 
+        ' รีเซ็ต ComboBox และ DateTimePicker
         If cbAccount.Items.Count > 0 Then cbAccount.SelectedIndex = 0
         LoadPerMData()
         dtpBirth.Value = DateTime.Today
 
+        ' รีเซ็ตการเลือกผู้ค้ำประกัน
         Dim hasGuarantor As Boolean = False
         chkGuarantor.Checked = hasGuarantor
 
+        ' ปิดการใช้งานช่องผู้ค้ำประกัน
         Dim guarantorFields As Guna2TextBox() = {txtSearch1, txtSearch2, txtSearch3, txtDetail1, txtDetail2, txtDetail3}
         For Each field As Guna2TextBox In guarantorFields
             field.Enabled = hasGuarantor
         Next
+
+        ' ไม่ล้าง txtCid เพื่อให้คงค่าปัจจุบันหรือให้ Auto_id กำหนดใหม่หลังจากนี้
     End Sub
+
 
     Private Sub SetupDateTimePicker()
         dtpBirth.Format = DateTimePickerFormat.Custom
@@ -321,6 +333,35 @@ Public Class frmBrrow
             chkGuarantor.Checked = False
         End If
     End Sub
+    ' ฟังก์ชันที่ใช้สำหรับเคลียร์ข้อมูลในฟอร์ม
+    Private Sub ResetForm()
+        ' เคลียร์ TextBox
+        txtSearch.Clear()
+        txtDetail.Clear()
+        txtMoney.Clear()
+        txtPercen.Clear()
+        txtSearch1.Clear()
+        txtSearch2.Clear()
+        txtSearch3.Clear()
+
+        ' รีเซ็ต ComboBox
+        cbAccount.SelectedIndex = 0
+        cbGuaranteeType.SelectedIndex = 0
+        cbPerM.SelectedIndex = 0
+
+        ' รีเซ็ต DateTimePicker
+        dtpBirth.Value = DateTime.Today
+
+        ' เคลียร์ DataGridView
+        guna2DataGridView1.Rows.Clear()
+
+        ' รีเซ็ต txtCid โดยเรียกใช้ Auto_id เพื่อสร้าง ID ใหม่
+        Auto_id()
+
+        ' ปิดการใช้งานปุ่มบันทึก
+        btnSave.Enabled = False
+    End Sub
+
 
     Private Function IsDataComplete() As Boolean
         If String.IsNullOrWhiteSpace(txtSearch.Text) Then
@@ -401,29 +442,48 @@ Public Class frmBrrow
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Try
+            ' ตรวจสอบว่าข้อมูลครบหรือไม่
             If Not IsDataComplete() Then
                 MessageBox.Show("กรุณากรอกข้อมูลให้ครบถ้วน", "ข้อมูลไม่ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
 
+            Dim borrowerName As String = txtSearch.Text ' ชื่อผู้กู้จาก TextBox
+            Dim isDuplicateBorrower As Boolean = False
+            Dim isDuplicateWithGuarantor As Boolean = False
+
+            ' ตรวจสอบชื่อผู้กู้ซ้ำกันใน DataGridView
+            For Each row As DataGridViewRow In guna2DataGridView1.Rows
+                If Not row.IsNewRow Then
+                    If row.Cells("ผู้กู้").Value.ToString() = borrowerName Then
+                        isDuplicateBorrower = True
+                        Exit For
+                    End If
+                End If
+            Next
+
+            ' ถ้าพบชื่อผู้กู้ซ้ำ ให้แสดงข้อความแจ้งเตือนและไม่เพิ่มข้อมูล
+            If isDuplicateBorrower Then
+                MessageBox.Show("มีชื่อผู้กู้นี้อยู่ในรายการแล้ว", "ชื่อซ้ำ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            ' ตรวจสอบว่าชื่อผู้กู้ซ้ำกับชื่อผู้ค้ำหรือไม่
+            If borrowerName = txtSearch1.Text OrElse borrowerName = txtSearch2.Text OrElse borrowerName = txtSearch3.Text Then
+                isDuplicateWithGuarantor = True
+            End If
+
+            ' ถ้าพบชื่อผู้กู้ซ้ำกับชื่อผู้ค้ำ ให้แสดงข้อความแจ้งเตือนและไม่เพิ่มข้อมูล
+            If isDuplicateWithGuarantor Then
+                MessageBox.Show("ชื่อผู้กู้ไม่สามารถเป็นผู้ค้ำประกันได้", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            ' ดำเนินการเพิ่มข้อมูลใหม่ใน DataGridView
             Dim principal As Decimal = Decimal.Parse(txtMoney.Text.Replace(",", ""))
             Dim loanDate As DateTime = dtpBirth.Value
             Dim interestRate As Decimal = Decimal.Parse(txtPercen.Text)
             Dim totalPayments As Integer = Integer.Parse(cbPerM.SelectedItem.ToString().Replace("เดือน", "").Trim())
-
-            If cbGuaranteeType.SelectedItem.ToString() = "เงินในบัญชี" Then
-                Dim borrowerId As Integer = GetMemberIdByName(txtSearch.Text)
-                If borrowerId = -1 Then
-                    MessageBox.Show("ไม่พบข้อมูลผู้กู้", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Return
-                End If
-
-                Dim savingsBalance As Decimal = GetSavingsBalance(borrowerId)
-                If savingsBalance < principal Then
-                    MessageBox.Show("เงินในบัญชีไม่เพียงพอสำหรับการค้ำประกัน", "การค้ำประกัน", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return
-                End If
-            End If
 
             Dim monthlyPayment As Decimal = CalculateMonthlyPayment(principal, interestRate, totalPayments)
 
@@ -445,8 +505,15 @@ Public Class frmBrrow
             monthlyPayment.ToString("N2")
         }
 
+            ' เพิ่มข้อมูลใหม่ลงใน DataGridView
             guna2DataGridView1.Rows.Add(rowData)
 
+            ' ตรวจสอบว่ามีข้อมูลใน DataGridView หรือไม่ หากมีให้เปิดการใช้งานปุ่มบันทึก
+            If guna2DataGridView1.Rows.Count > 0 Then
+                btnSave.Enabled = True
+            End If
+
+            ' ล้างข้อมูลในฟอร์ม
             ClearAllData()
             Auto_id()
 
@@ -454,6 +521,7 @@ Public Class frmBrrow
             MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
@@ -576,21 +644,28 @@ Public Class frmBrrow
                                 cmdExpense.CommandText = "SELECT @@IDENTITY"
                                 Dim ex_id As Integer = Convert.ToInt32(cmdExpense.ExecuteScalar())
 
-                                Dim accountNameFromGrid As String = row.Cells("แหล่งจ่าย").Value.ToString()
-                                strSQL = "INSERT INTO Expense_Details (exd_nameacc, exd_amount, ex_id) VALUES (@exd_nameacc, @exd_amount, @ex_id)"
+                                ' แทนที่การดึงข้อมูลจาก DataGridView ด้วยการใช้คำว่า "เงินกู้"
+                                Dim accountNameFromGrid As String = "เงินกู้"
+
+                                strSQL = "INSERT INTO Expense_Details (exd_nameacc, exd_amount, ex_id, m_id) VALUES (@exd_nameacc, @exd_amount, @ex_id, @m_id)"
                                 Using cmdExpenseDetails As New OleDbCommand(strSQL, conn)
-                                    cmdExpenseDetails.Parameters.AddWithValue("@exd_nameacc", accountNameFromGrid)
+                                    cmdExpenseDetails.Parameters.AddWithValue("@exd_nameacc", accountNameFromGrid) ' ใช้คำว่า "เงินกู้"
                                     cmdExpenseDetails.Parameters.AddWithValue("@exd_amount", loanAmount)
                                     cmdExpenseDetails.Parameters.AddWithValue("@ex_id", ex_id)
+                                    cmdExpenseDetails.Parameters.AddWithValue("@m_id", borrowerId) ' เพิ่ม borrowerId เข้าไปใน Expense_Details
                                     cmdExpenseDetails.ExecuteNonQuery()
                                 End Using
+
                             End Using
                         End Using
                     End If
                 Next
 
                 MessageBox.Show("บันทึกข้อมูลสำเร็จ", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                guna2DataGridView1.Rows.Clear()
+
+                ' เรียกฟังก์ชัน ResetForm เพื่อรีเซ็ตฟอร์ม
+                ResetForm()
+
             End Using
 
         Catch ex As Exception
@@ -627,4 +702,10 @@ Public Class frmBrrow
         Dim monthlyPayment As Decimal = totalAmount / totalPayments
         Return monthlyPayment
     End Function
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        ' เรียกใช้ฟังก์ชัน ResetForm เพื่อเคลียร์ข้อมูลทั้งหมดในฟอร์ม
+        ResetForm()
+    End Sub
+
 End Class

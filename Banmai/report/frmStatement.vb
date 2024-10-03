@@ -17,7 +17,7 @@ Public Class frmStatement
             Conn.Open()
 
             ' ดึงชื่อบัญชีจากตาราง Account
-            Dim query As String = "SELECT acc_name FROM Account"
+            Dim query As String = "SELECT acc_id, acc_name FROM Account"
             Dim cmd As New OleDbCommand(query, Conn)
 
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
@@ -25,7 +25,7 @@ Public Class frmStatement
             ' เติมข้อมูลใน ComboBox
             cmbAccountName.Items.Clear()
             While reader.Read()
-                cmbAccountName.Items.Add(reader("acc_name").ToString())
+                cmbAccountName.Items.Add(New KeyValuePair(Of String, String)(reader("acc_id").ToString(), reader("acc_name").ToString()))
             End While
 
             reader.Close()
@@ -39,18 +39,23 @@ Public Class frmStatement
         End Try
     End Sub
 
-
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         ' ตรวจสอบว่าผู้ใช้ได้เลือกบัญชีแล้วหรือยัง
         If cmbAccountName.SelectedIndex <> -1 Then
-            LoadProfitLossReport() ' ดึงข้อมูลและแสดงรายงาน
+            ' ตรวจสอบว่าช่วงวันที่ถูกต้องหรือไม่
+            If dtpEndDate.Value >= dtpStartDate.Value Then
+                btnGenerateReport.Enabled = False ' Disable the button to avoid multiple clicks
+                LoadProfitLossReport() ' ดึงข้อมูลและแสดงรายงาน
+                btnGenerateReport.Enabled = True ' Re-enable the button when done
+            Else
+                MessageBox.Show("กรุณาเลือกช่วงวันที่ให้ถูกต้อง", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         Else
             MessageBox.Show("กรุณาเลือกบัญชีก่อน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
 
-
-    ' ฟังก์ชันสำหรับโหลดรายงานและส่งค่า Parameter ชื่อบัญชีและช่วงวันที่ 1/10/2024
+    ' ฟังก์ชันสำหรับโหลดรายงานและส่งค่า Parameter ชื่อบัญชีและช่วงวันที่
     Private Sub LoadProfitLossReport()
         Try
             ' เปิดการเชื่อมต่อฐานข้อมูล
@@ -60,7 +65,9 @@ Public Class frmStatement
             Me.ReportViewer1.LocalReport.ReportPath = "D:\Project-2022\Banmai\Banmai\report\StatementReport.rdlc"
 
             ' ดึงชื่อบัญชีที่เลือกจาก ComboBox
-            Dim selectedAccountName As String = cmbAccountName.SelectedItem.ToString()
+            Dim selectedAccount = CType(cmbAccountName.SelectedItem, KeyValuePair(Of String, String))
+            Dim selectedAccountId As String = selectedAccount.Key
+            Dim selectedAccountName As String = selectedAccount.Value
 
             ' ดึงวันที่เริ่มต้นและวันที่สิ้นสุดจาก DateTimePicker
             Dim startDate As Date = dtpStartDate.Value
@@ -69,37 +76,45 @@ Public Class frmStatement
             ' สร้าง DataSet สำหรับรายงาน
             Dim ds As New DataSet("dsProfitLoss")
 
-            ' ดึงข้อมูลรายได้จาก Income_Details โดยกรองตาม ind_accname และช่วงวันที่
+            ' ดึงข้อมูลรายได้จาก Income_Details โดยกรองตาม acc_id และช่วงวันที่
             Dim dtIncome As New DataTable("Income")
-            dtIncome.Columns.Add("description", GetType(String))
-            dtIncome.Columns.Add("amount", GetType(Decimal))
+            dtIncome.Columns.Add("ind_accname", GetType(String))
+            dtIncome.Columns.Add("ind_amount", GetType(Decimal))
 
-            Dim queryIncome As String = "SELECT ind_accname, ind_amount FROM Income_Details WHERE ind_accname = @accountName AND ind_date BETWEEN @startDate AND @endDate"
+            Dim queryIncome As String = "SELECT ind_accname, SUM(ind_amount) AS total_amount 
+                             FROM Income_Details 
+                             WHERE acc_id = @accountId 
+                             AND ind_date BETWEEN @startDate AND @endDate 
+                             GROUP BY ind_accname"
             Dim cmdIncome As New OleDbCommand(queryIncome, Conn)
-            cmdIncome.Parameters.AddWithValue("@accountName", selectedAccountName)
+            cmdIncome.Parameters.AddWithValue("@accountId", selectedAccountId)
             cmdIncome.Parameters.AddWithValue("@startDate", startDate)
             cmdIncome.Parameters.AddWithValue("@endDate", endDate)
 
             Dim readerIncome As OleDbDataReader = cmdIncome.ExecuteReader()
             While readerIncome.Read()
-                dtIncome.Rows.Add(readerIncome("ind_accname"), readerIncome("ind_amount"))
+                dtIncome.Rows.Add(readerIncome("ind_accname"), readerIncome("total_amount"))
             End While
             readerIncome.Close()
 
-            ' ดึงข้อมูลค่าใช้จ่ายจาก Expense_Details โดยกรองตาม exd_nameacc และช่วงวันที่
+            ' ดึงข้อมูลค่าใช้จ่ายจาก Expense_Details โดยกรองตาม acc_id และช่วงวันที่
             Dim dtExpense As New DataTable("Expense")
-            dtExpense.Columns.Add("description", GetType(String))
-            dtExpense.Columns.Add("amount", GetType(Decimal))
+            dtExpense.Columns.Add("exd_nameacc", GetType(String))
+            dtExpense.Columns.Add("exd_amount", GetType(Decimal))
 
-            Dim queryExpense As String = "SELECT exd_nameacc, exd_amount FROM Expense_Details WHERE exd_nameacc = @accountName AND exd_date BETWEEN @startDate AND @endDate"
+            Dim queryExpense As String = "SELECT exd_nameacc, SUM(exd_amount) AS total_amount 
+                              FROM Expense_Details 
+                              WHERE acc_id = @accountId 
+                              AND exd_date BETWEEN @startDate AND @endDate 
+                              GROUP BY exd_nameacc"
             Dim cmdExpense As New OleDbCommand(queryExpense, Conn)
-            cmdExpense.Parameters.AddWithValue("@accountName", selectedAccountName)
+            cmdExpense.Parameters.AddWithValue("@accountId", selectedAccountId)
             cmdExpense.Parameters.AddWithValue("@startDate", startDate)
             cmdExpense.Parameters.AddWithValue("@endDate", endDate)
 
             Dim readerExpense As OleDbDataReader = cmdExpense.ExecuteReader()
             While readerExpense.Read()
-                dtExpense.Rows.Add(readerExpense("exd_nameacc"), readerExpense("exd_amount"))
+                dtExpense.Rows.Add(readerExpense("exd_nameacc"), readerExpense("total_amount"))
             End While
             readerExpense.Close()
 

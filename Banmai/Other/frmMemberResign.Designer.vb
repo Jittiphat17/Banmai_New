@@ -114,6 +114,7 @@ Partial Class frmMemberResign
         '
         'txtTotalSaving
         '
+        Me.txtTotalSaving.BackColor = System.Drawing.Color.White
         Me.txtTotalSaving.BorderRadius = 10
         Me.txtTotalSaving.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtTotalSaving.DefaultText = ""
@@ -136,6 +137,7 @@ Partial Class frmMemberResign
         '
         'txtBeforeTotalSaving
         '
+        Me.txtBeforeTotalSaving.BackColor = System.Drawing.Color.White
         Me.txtBeforeTotalSaving.BorderRadius = 10
         Me.txtBeforeTotalSaving.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtBeforeTotalSaving.DefaultText = ""
@@ -214,6 +216,7 @@ Partial Class frmMemberResign
         '
         'txtGuarantor
         '
+        Me.txtGuarantor.BackColor = System.Drawing.Color.White
         Me.txtGuarantor.BorderRadius = 10
         Me.txtGuarantor.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtGuarantor.DefaultText = ""
@@ -231,7 +234,7 @@ Partial Class frmMemberResign
         Me.txtGuarantor.PlaceholderText = ""
         Me.txtGuarantor.ReadOnly = True
         Me.txtGuarantor.SelectedText = ""
-        Me.txtGuarantor.Size = New System.Drawing.Size(242, 38)
+        Me.txtGuarantor.Size = New System.Drawing.Size(320, 38)
         Me.txtGuarantor.TabIndex = 4
         '
         'Guna2GroupBox2
@@ -262,6 +265,7 @@ Partial Class frmMemberResign
         Me.Label10.AutoSize = True
         Me.Label10.BackColor = System.Drawing.Color.White
         Me.Label10.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.Black
         Me.Label10.Location = New System.Drawing.Point(765, 168)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(37, 21)
@@ -354,6 +358,7 @@ Partial Class frmMemberResign
         '
         'txtTotalLoan
         '
+        Me.txtTotalLoan.BackColor = System.Drawing.Color.White
         Me.txtTotalLoan.BorderRadius = 10
         Me.txtTotalLoan.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtTotalLoan.DefaultText = ""
@@ -376,6 +381,7 @@ Partial Class frmMemberResign
         '
         'txtLoanPublic
         '
+        Me.txtLoanPublic.BackColor = System.Drawing.Color.White
         Me.txtLoanPublic.BorderRadius = 10
         Me.txtLoanPublic.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtLoanPublic.DefaultText = ""
@@ -398,6 +404,7 @@ Partial Class frmMemberResign
         '
         'txtLoanSaving
         '
+        Me.txtLoanSaving.BackColor = System.Drawing.Color.White
         Me.txtLoanSaving.BorderRadius = 10
         Me.txtLoanSaving.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtLoanSaving.DefaultText = ""
@@ -420,6 +427,7 @@ Partial Class frmMemberResign
         '
         'txtLoanAccount1
         '
+        Me.txtLoanAccount1.BackColor = System.Drawing.Color.White
         Me.txtLoanAccount1.BorderRadius = 10
         Me.txtLoanAccount1.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtLoanAccount1.DefaultText = ""

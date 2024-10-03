@@ -33,18 +33,20 @@ Partial Class frmImport
         '
         'btnImport
         '
+        Me.btnImport.Animated = True
         Me.btnImport.DisabledState.BorderColor = System.Drawing.Color.DarkGray
         Me.btnImport.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
         Me.btnImport.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnImport.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btnImport.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.btnImport.FillColor = System.Drawing.Color.ForestGreen
+        Me.btnImport.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold)
         Me.btnImport.ForeColor = System.Drawing.Color.White
         Me.btnImport.Location = New System.Drawing.Point(36, 137)
         Me.btnImport.Name = "btnImport"
         Me.btnImport.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
         Me.btnImport.Size = New System.Drawing.Size(148, 148)
         Me.btnImport.TabIndex = 7
-        Me.btnImport.Text = "Guna2CircleButton1"
+        Me.btnImport.Text = "นำเข้าข้อมูล"
         '
         'Label1
         '

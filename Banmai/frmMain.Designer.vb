@@ -48,6 +48,7 @@ Partial Class frmMain
         Me.หนToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายงานงบกำไรขาดทนToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายงานลกหนรายตวToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ทดลองรายงานToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsm_other = New System.Windows.Forms.ToolStripMenuItem()
         Me.สมาชกToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.จดการสมาชกToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -59,6 +60,7 @@ Partial Class frmMain
         Me.นำเขาขอมลToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.จดการสทธToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.จดการกองทนToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.การปดงบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ออกจากระบบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.lbCount = New System.Windows.Forms.Label()
@@ -221,7 +223,7 @@ Partial Class frmMain
         'tsm_report
         '
         Me.tsm_report.AutoSize = False
-        Me.tsm_report.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายงานสญญาเงนกToolStripMenuItem, Me.รายงานดอกเบยสจจะToolStripMenuItem, Me.หนToolStripMenuItem, Me.รายงานงบกำไรขาดทนToolStripMenuItem, Me.รายงานลกหนรายตวToolStripMenuItem})
+        Me.tsm_report.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายงานสญญาเงนกToolStripMenuItem, Me.รายงานดอกเบยสจจะToolStripMenuItem, Me.หนToolStripMenuItem, Me.รายงานงบกำไรขาดทนToolStripMenuItem, Me.รายงานลกหนรายตวToolStripMenuItem, Me.ทดลองรายงานToolStripMenuItem})
         Me.tsm_report.Name = "tsm_report"
         Me.tsm_report.Size = New System.Drawing.Size(150, 50)
         Me.tsm_report.Text = "รายงาน"
@@ -256,10 +258,16 @@ Partial Class frmMain
         Me.รายงานลกหนรายตวToolStripMenuItem.Size = New System.Drawing.Size(282, 32)
         Me.รายงานลกหนรายตวToolStripMenuItem.Text = "รายงานลูกหนี้รายตัว"
         '
+        'ทดลองรายงานToolStripMenuItem
+        '
+        Me.ทดลองรายงานToolStripMenuItem.Name = "ทดลองรายงานToolStripMenuItem"
+        Me.ทดลองรายงานToolStripMenuItem.Size = New System.Drawing.Size(282, 32)
+        Me.ทดลองรายงานToolStripMenuItem.Text = "ทดลองรายงาน"
+        '
         'tsm_other
         '
         Me.tsm_other.AutoSize = False
-        Me.tsm_other.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.สมาชกToolStripMenuItem, Me.อานบตรToolStripMenuItem, Me.ขอมลToolStripMenuItem, Me.จดการสทธToolStripMenuItem, Me.จดการกองทนToolStripMenuItem})
+        Me.tsm_other.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.สมาชกToolStripMenuItem, Me.อานบตรToolStripMenuItem, Me.ขอมลToolStripMenuItem, Me.จดการสทธToolStripMenuItem, Me.จดการกองทนToolStripMenuItem, Me.การปดงบToolStripMenuItem})
         Me.tsm_other.Name = "tsm_other"
         Me.tsm_other.Size = New System.Drawing.Size(150, 50)
         Me.tsm_other.Text = "อื่นๆ"
@@ -325,6 +333,12 @@ Partial Class frmMain
         Me.จดการกองทนToolStripMenuItem.Name = "จดการกองทนToolStripMenuItem"
         Me.จดการกองทนToolStripMenuItem.Size = New System.Drawing.Size(205, 32)
         Me.จดการกองทนToolStripMenuItem.Text = "จัดการกองทุน"
+        '
+        'การปดงบToolStripMenuItem
+        '
+        Me.การปดงบToolStripMenuItem.Name = "การปดงบToolStripMenuItem"
+        Me.การปดงบToolStripMenuItem.Size = New System.Drawing.Size(205, 32)
+        Me.การปดงบToolStripMenuItem.Text = "การปิดงบ"
         '
         'ออกจากระบบToolStripMenuItem
         '
@@ -457,4 +471,6 @@ Partial Class frmMain
     Friend WithEvents รายงานลกหนรายตวToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Guna2Panel2 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents ทดลองรายงานToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents การปดงบToolStripMenuItem As ToolStripMenuItem
 End Class

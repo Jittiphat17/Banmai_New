@@ -51,7 +51,7 @@ Partial Class frmViewMember
         '
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(460, 71)
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(559, 75)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
         Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(208, 50)
         Me.Guna2HtmlLabel1.TabIndex = 11
@@ -64,7 +64,7 @@ Partial Class frmViewMember
         Me.Guna2GroupBox2.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox2.Location = New System.Drawing.Point(769, 58)
+        Me.Guna2GroupBox2.Location = New System.Drawing.Point(927, 58)
         Me.Guna2GroupBox2.Name = "Guna2GroupBox2"
         Me.Guna2GroupBox2.Size = New System.Drawing.Size(341, 84)
         Me.Guna2GroupBox2.TabIndex = 10
@@ -180,8 +180,9 @@ Partial Class frmViewMember
         Me.dgvConn.Name = "dgvConn"
         Me.dgvConn.ReadOnly = True
         Me.dgvConn.RowHeadersVisible = False
+        Me.dgvConn.RowHeadersWidth = 50
         Me.dgvConn.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
-        Me.dgvConn.Size = New System.Drawing.Size(1098, 290)
+        Me.dgvConn.Size = New System.Drawing.Size(1256, 290)
         Me.dgvConn.TabIndex = 8
         Me.dgvConn.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvConn.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -212,7 +213,7 @@ Partial Class frmViewMember
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(1122, 33)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(1280, 33)
         Me.Guna2Panel1.TabIndex = 12
         '
         'Guna2ControlBox1
@@ -222,7 +223,7 @@ Partial Class frmViewMember
         Me.Guna2ControlBox1.CustomIconSize = 30.0!
         Me.Guna2ControlBox1.FillColor = System.Drawing.Color.LightGray
         Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1072, 1)
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1230, 1)
         Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
         Me.Guna2ControlBox1.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox1.TabIndex = 5
@@ -231,7 +232,7 @@ Partial Class frmViewMember
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1122, 450)
+        Me.ClientSize = New System.Drawing.Size(1280, 450)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.Guna2HtmlLabel1)
         Me.Controls.Add(Me.Guna2GroupBox2)

@@ -48,31 +48,33 @@ Public Class frmEditExpense
     End Sub
 
     Private Sub ConfigureDataGridView()
-        ' ใช้ Guna2DataGridView พร้อมตั้งค่าธีม
-        dgvExpenses.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Dark
 
-        ' ตั้งค่าฟอนต์ FC Minimal และสีของ DataGridView
-        dgvExpenses.DefaultCellStyle.Font = New Font("FC Minimal", 10) ' ใช้ฟอนต์ FC Minimal
+        ' ใช้ Guna2DataGridView สำหรับรายละเอียดรายจ่าย
+        dgvExpenses.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Dark
+        ' ตั้งค่าฟอนต์ FC Minimal และสีของ DataGridView สำหรับรายละเอียดรายจ่าย
+        dgvExpenses.DefaultCellStyle.Font = New Font("FC Minimal", 12) ' ใช้ฟอนต์ FC Minimal
         dgvExpenses.DefaultCellStyle.BackColor = Color.White
         dgvExpenses.DefaultCellStyle.ForeColor = Color.Black
         dgvExpenses.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
-        dgvExpenses.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 10, FontStyle.Bold) ' ใช้ฟอนต์ FC Minimal สำหรับหัวตาราง
+        dgvExpenses.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold) ' ใช้ฟอนต์ FC Minimal สำหรับหัวตาราง
         dgvExpenses.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
         dgvExpenses.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
         dgvExpenses.EnableHeadersVisualStyles = False
-
-        ' เปิดการใช้งาน ScrollBars
-        dgvExpenses.ScrollBars = ScrollBars.Both
-
-        ' ปิดการตั้งค่า AutoSizeColumnMode
-        dgvExpenses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
-
         ' ตั้งชื่อหัวตารางเป็นภาษาไทย
         If dgvExpenses.Columns.Contains("ex_id") Then
             dgvExpenses.Columns("ex_id").HeaderText = "รหัสรายจ่าย"
         End If
         If dgvExpenses.Columns.Contains("ex_name") Then
             dgvExpenses.Columns("ex_name").HeaderText = "ชื่อรายจ่าย"
+        End If
+        If dgvExpenses.Columns.Contains("ex_detail") Then
+            dgvExpenses.Columns("ex_detail").HeaderText = "รายละเอียด"
+        End If
+        If dgvExpenses.Columns.Contains("ex_descript1") Then
+            dgvExpenses.Columns("ex_descript1").HeaderText = "คำอธิบาย"
+        End If
+        If dgvExpenses.Columns.Contains("ex_note") Then
+            dgvExpenses.Columns("ex_note").HeaderText = "หมายเหตุ"
         End If
         If dgvExpenses.Columns.Contains("ex_date") Then
             dgvExpenses.Columns("ex_date").HeaderText = "วันที่จ่าย"
@@ -87,6 +89,7 @@ Public Class frmEditExpense
             dgvExpenses.Columns("acc_id").HeaderText = "บัญชี"
         End If
     End Sub
+
 
 
     Private Sub ConfigureDetailsDataGridView()
@@ -124,7 +127,20 @@ Public Class frmEditExpense
             dgvExpenseDetails.Columns("exd_amount").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             dgvExpenseDetails.Columns("exd_amount").ReadOnly = False
         End If
+        If dgvExpenseDetails.Columns.Contains("m_id") Then
+            dgvExpenseDetails.Columns("m_id").HeaderText = "รหัสสมาชิก"
+        End If
+        If dgvExpenseDetails.Columns.Contains("exd_date") Then
+            dgvExpenseDetails.Columns("exd_date").HeaderText = "วันที่"
+        End If
+        If dgvExpenseDetails.Columns.Contains("ex_id") Then
+            dgvExpenseDetails.Columns("ex_id").HeaderText = "รหัสรายการ"
+        End If
+        If dgvExpenseDetails.Columns.Contains("acc_id") Then
+            dgvExpenseDetails.Columns("acc_id").HeaderText = "รหัสบัญชี"
+        End If
     End Sub
+
 
 
     Private Sub LoadExpenses()

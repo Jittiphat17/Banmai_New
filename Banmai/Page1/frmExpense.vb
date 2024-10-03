@@ -123,8 +123,8 @@ Public Class frmExpense
             expenseTypeColumn.Items.Add("เงินประกันความเสี่ยง")
             expenseTypeColumn.Items.Add("ค่าตอบแทน")
             expenseTypeColumn.Items.Add("ค่าจ้าง")
-            expenseTypeColumn.Items.Add("เงินกู้")
-            expenseTypeColumn.Items.Add("สมาชิกลาออก")
+            expenseTypeColumn.Items.Add("เงินกู้") ' ไม่เอามาคิด
+            expenseTypeColumn.Items.Add("สมาชิกลาออก") ' ไม่เอามาคิด
             expenseTypeColumn.Items.Add("ดอกเบี้ยสัจจะ")
             expenseTypeColumn.Items.Add("ดอกเบี้ยจ่าย")
             expenseTypeColumn.Items.Add("อื่นๆ")
@@ -216,8 +216,12 @@ Public Class frmExpense
                 Return
             End If
 
-            ' ใช้ข้อมูลจาก txtMemberID โดยตรงโดยไม่ตรวจสอบในฐานข้อมูล
-            Dim memberName As String = txtMemberID.Text
+            ' ใช้ข้อมูลจาก txtMemberID โดยตรงในการค้นหา m_id
+            Dim memberId As Integer = GetMemberIdByName(txtMemberID.Text)
+            If memberId = 0 Then
+                MessageBox.Show("ไม่พบข้อมูลสมาชิก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
 
             ' ดำเนินการบันทึกข้อมูลรายจ่าย
             Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
@@ -227,7 +231,7 @@ Public Class frmExpense
                 Dim queryExpense As String = "INSERT INTO Expense (ex_id, ex_name, ex_detail, ex_description, ex_date, ex_amount, acc_id) VALUES (@ex_id, @ex_name, @ex_detail, @ex_description, @ex_date, @ex_amount, @acc_id)"
                 Using cmdExpense As New OleDbCommand(queryExpense, Conn)
                     cmdExpense.Parameters.AddWithValue("@ex_id", Convert.ToInt32(txtExpId.Text))
-                    cmdExpense.Parameters.AddWithValue("@ex_name", memberName) ' ใช้ชื่อผู้รับที่กรอกใน txtMemberID
+                    cmdExpense.Parameters.AddWithValue("@ex_name", txtMemberID.Text) ' ชื่อผู้รับใน txtMemberID
                     cmdExpense.Parameters.AddWithValue("@ex_detail", txtDetails.Text)
                     cmdExpense.Parameters.AddWithValue("@ex_description", txtDescrip.Text)
                     cmdExpense.Parameters.AddWithValue("@ex_date", dtpBirth.Value)
@@ -253,19 +257,20 @@ Public Class frmExpense
 
                             If Not String.IsNullOrEmpty(expenseType) Then
                                 ' Insert into the Expense_Details table
-                                Dim queryDetails As String = "INSERT INTO Expense_Details (exd_nameacc, exd_amount, exd_date, ex_id) VALUES (@exd_nameacc, @exd_amount, @exd_date, @ex_id)"
+                                Dim queryDetails As String = "INSERT INTO Expense_Details (exd_nameacc, exd_amount, exd_date, ex_id, m_id, acc_id) VALUES (@exd_nameacc, @exd_amount, @exd_date, @ex_id, @m_id, @acc_id)"
                                 Using cmdDetails As New OleDbCommand(queryDetails, Conn)
                                     cmdDetails.Parameters.AddWithValue("@exd_nameacc", expenseType)
                                     cmdDetails.Parameters.AddWithValue("@exd_amount", amount)
                                     cmdDetails.Parameters.AddWithValue("@exd_date", expenseDate)
                                     cmdDetails.Parameters.AddWithValue("@ex_id", exId)
+                                    cmdDetails.Parameters.AddWithValue("@m_id", memberId) ' บันทึกค่า m_id
+                                    cmdDetails.Parameters.AddWithValue("@acc_id", cboDepositType.SelectedValue) ' บันทึกค่า acc_id จาก ComboBox
 
                                     cmdDetails.ExecuteNonQuery()
                                 End Using
                             End If
                         End If
                     Next
-
                 End Using
             End Using
 
@@ -278,6 +283,7 @@ Public Class frmExpense
             MessageBox.Show("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
     Private Sub ClearAll()
         ' ล้างข้อมูลในฟอร์ม
@@ -317,6 +323,27 @@ Public Class frmExpense
             End If
         End If
     End Sub
+    Private Function GetMemberIdByName(memberName As String) As Integer
+        Try
+            Conn.Open()
+            Dim query As String = "SELECT m_id FROM Member WHERE m_name = @memberName"
+            Dim cmd As New OleDbCommand(query, Conn)
+            cmd.Parameters.AddWithValue("@memberName", memberName)
+
+            Dim result As Object = cmd.ExecuteScalar()
+            If IsDBNull(result) Then
+                Return 0 ' ถ้าไม่พบข้อมูล ให้คืนค่า 0
+            Else
+                Return Convert.ToInt32(result) ' คืนค่า m_id ที่ค้นพบ
+            End If
+        Catch ex As Exception
+            MessageBox.Show("เกิดข้อผิดพลาดในการค้นหา m_id: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return 0
+        Finally
+            Conn.Close()
+        End Try
+    End Function
+
 
     Private Sub dgvExpenseDetails_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dgvExpenseDetails.RowsAdded
         btnSave.Enabled = True
