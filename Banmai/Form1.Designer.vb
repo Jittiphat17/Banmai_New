@@ -29,10 +29,14 @@ Partial Class Form1
         Me.txtUser = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.Guna2HtmlLabel5 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel2 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2ToggleSwitch1 = New Guna.UI2.WinForms.Guna2ToggleSwitch()
         Me.Guna2HtmlLabel4 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2CircleButton1 = New Guna.UI2.WinForms.Guna2CircleButton()
+        Me.Guna2CircleButton2 = New Guna.UI2.WinForms.Guna2CircleButton()
         Me.Guna2Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -118,12 +122,34 @@ Partial Class Form1
         'Guna2Panel1
         '
         Me.Guna2Panel1.BackColor = System.Drawing.Color.AliceBlue
+        Me.Guna2Panel1.Controls.Add(Me.Guna2ControlBox1)
+        Me.Guna2Panel1.Controls.Add(Me.Guna2HtmlLabel5)
         Me.Guna2Panel1.Controls.Add(Me.Guna2HtmlLabel2)
         Me.Guna2Panel1.Controls.Add(Me.Guna2HtmlLabel1)
-        Me.Guna2Panel1.Location = New System.Drawing.Point(428, -1)
+        Me.Guna2Panel1.Location = New System.Drawing.Point(429, -1)
         Me.Guna2Panel1.Name = "Guna2Panel1"
         Me.Guna2Panel1.Size = New System.Drawing.Size(433, 439)
         Me.Guna2Panel1.TabIndex = 15
+        '
+        'Guna2ControlBox1
+        '
+        Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.AliceBlue
+        Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Red
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(380, 3)
+        Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
+        Me.Guna2ControlBox1.Size = New System.Drawing.Size(45, 29)
+        Me.Guna2ControlBox1.TabIndex = 18
+        '
+        'Guna2HtmlLabel5
+        '
+        Me.Guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel5.Font = New System.Drawing.Font("FC Minimal", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel5.Location = New System.Drawing.Point(290, 410)
+        Me.Guna2HtmlLabel5.Name = "Guna2HtmlLabel5"
+        Me.Guna2HtmlLabel5.Size = New System.Drawing.Size(135, 18)
+        Me.Guna2HtmlLabel5.TabIndex = 18
+        Me.Guna2HtmlLabel5.Text = "Copyright © By Jittiphat"
         '
         'Guna2HtmlLabel2
         '
@@ -171,12 +197,42 @@ Partial Class Form1
         Me.Guna2HtmlLabel4.TabIndex = 17
         Me.Guna2HtmlLabel4.Text = "แสดงรหัสผ่าน"
         '
+        'Guna2CircleButton1
+        '
+        Me.Guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Guna2CircleButton1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2CircleButton1.ForeColor = System.Drawing.Color.White
+        Me.Guna2CircleButton1.Location = New System.Drawing.Point(-72, -70)
+        Me.Guna2CircleButton1.Name = "Guna2CircleButton1"
+        Me.Guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
+        Me.Guna2CircleButton1.Size = New System.Drawing.Size(148, 148)
+        Me.Guna2CircleButton1.TabIndex = 18
+        '
+        'Guna2CircleButton2
+        '
+        Me.Guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2CircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.Guna2CircleButton2.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.Guna2CircleButton2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.Guna2CircleButton2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.Guna2CircleButton2.ForeColor = System.Drawing.Color.White
+        Me.Guna2CircleButton2.Location = New System.Drawing.Point(275, 396)
+        Me.Guna2CircleButton2.Name = "Guna2CircleButton2"
+        Me.Guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
+        Me.Guna2CircleButton2.Size = New System.Drawing.Size(148, 148)
+        Me.Guna2CircleButton2.TabIndex = 19
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(860, 430)
+        Me.Controls.Add(Me.Guna2CircleButton2)
+        Me.Controls.Add(Me.Guna2CircleButton1)
         Me.Controls.Add(Me.Guna2HtmlLabel4)
         Me.Controls.Add(Me.Guna2ToggleSwitch1)
         Me.Controls.Add(Me.Guna2Panel1)
@@ -205,4 +261,8 @@ Partial Class Form1
     Friend WithEvents Guna2HtmlLabel2 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2ToggleSwitch1 As Guna.UI2.WinForms.Guna2ToggleSwitch
     Friend WithEvents Guna2HtmlLabel4 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel5 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents Guna2CircleButton2 As Guna.UI2.WinForms.Guna2CircleButton
+    Friend WithEvents Guna2CircleButton1 As Guna.UI2.WinForms.Guna2CircleButton
 End Class

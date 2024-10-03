@@ -44,6 +44,17 @@ Public Class frmExpense
 
     Private Sub SetupDataGridView()
         ' ตั้งค่า DataGridView
+        ' ใช้ Guna2DataGridView สำหรับรายละเอียดรายจ่าย
+        dgvExpenseDetails.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Dark
+        ' ตั้งค่าฟอนต์ FC Minimal และสีของ DataGridView สำหรับรายละเอียดรายจ่าย
+        dgvExpenseDetails.DefaultCellStyle.Font = New Font("FC Minimal", 12) ' ใช้ฟอนต์ FC Minimal
+        dgvExpenseDetails.DefaultCellStyle.BackColor = Color.White
+        dgvExpenseDetails.DefaultCellStyle.ForeColor = Color.Black
+        dgvExpenseDetails.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
+        dgvExpenseDetails.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold) ' ใช้ฟอนต์ FC Minimal สำหรับหัวตาราง
+        dgvExpenseDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
+        dgvExpenseDetails.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+
         dgvExpenseDetails.DefaultCellStyle.Font = New Font("FC Minimal", 14)
         dgvExpenseDetails.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 12, FontStyle.Bold)
 

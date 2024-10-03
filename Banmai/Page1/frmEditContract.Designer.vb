@@ -98,6 +98,7 @@ Partial Class frmEditContract
         Me.dgvContracts.AllowUserToOrderColumns = True
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
         Me.dgvContracts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvContracts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -584,6 +585,7 @@ Partial Class frmEditContract
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(891, 606)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.dgvContracts)

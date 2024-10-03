@@ -122,6 +122,7 @@ Partial Class frmCard
         '
         'GroupBox1
         '
+        Me.GroupBox1.BackColor = System.Drawing.Color.White
         Me.GroupBox1.Controls.Add(Me.txtTel)
         Me.GroupBox1.Controls.Add(Me.txtAccountNum)
         Me.GroupBox1.Controls.Add(Me.txtIDCard)
@@ -786,6 +787,7 @@ Partial Class frmCard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1083, 707)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnRead)

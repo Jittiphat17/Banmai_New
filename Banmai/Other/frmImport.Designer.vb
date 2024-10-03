@@ -28,6 +28,7 @@ Partial Class frmImport
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.ProgressBar1 = New Guna.UI2.WinForms.Guna2CircleProgressBar()
         Me.Guna2Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -41,7 +42,7 @@ Partial Class frmImport
         Me.btnImport.FillColor = System.Drawing.Color.ForestGreen
         Me.btnImport.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold)
         Me.btnImport.ForeColor = System.Drawing.Color.White
-        Me.btnImport.Location = New System.Drawing.Point(36, 137)
+        Me.btnImport.Location = New System.Drawing.Point(12, 140)
         Me.btnImport.Name = "btnImport"
         Me.btnImport.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
         Me.btnImport.Size = New System.Drawing.Size(148, 148)
@@ -52,7 +53,7 @@ Partial Class frmImport
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("TH SarabunPSK", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(49, 54)
+        Me.Label1.Location = New System.Drawing.Point(126, 55)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(141, 42)
         Me.Label1.TabIndex = 6
@@ -70,7 +71,7 @@ Partial Class frmImport
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(219, 30)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(377, 30)
         Me.Guna2Panel1.TabIndex = 27
         '
         'Guna2ControlBox2
@@ -80,16 +81,31 @@ Partial Class frmImport
         Me.Guna2ControlBox2.CustomIconSize = 30.0!
         Me.Guna2ControlBox2.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox2.Location = New System.Drawing.Point(169, 1)
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(327, 1)
         Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
         Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox2.TabIndex = 15
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.FillColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(223, Byte), Integer))
+        Me.ProgressBar1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.ProgressBar1.ForeColor = System.Drawing.Color.White
+        Me.ProgressBar1.Location = New System.Drawing.Point(217, 140)
+        Me.ProgressBar1.Minimum = 0
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
+        Me.ProgressBar1.Size = New System.Drawing.Size(148, 148)
+        Me.ProgressBar1.TabIndex = 28
+        Me.ProgressBar1.Text = "Guna2CircleProgressBar1"
         '
         'frmImport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(219, 306)
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(377, 300)
+        Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.btnImport)
         Me.Controls.Add(Me.Label1)
@@ -107,4 +123,5 @@ Partial Class frmImport
     Friend WithEvents Guna2Elipse1 As Guna.UI2.WinForms.Guna2Elipse
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents ProgressBar1 As Guna.UI2.WinForms.Guna2CircleProgressBar
 End Class

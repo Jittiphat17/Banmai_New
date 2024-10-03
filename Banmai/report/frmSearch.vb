@@ -9,11 +9,6 @@ Public Class frmSearch
         ' เรียกฟังก์ชัน LoadAllContracts ทันทีเมื่อเปิดฟอร์มเพื่อแสดงข้อมูล
         LoadAllContracts()
 
-        ' ตั้งค่าอื่น ๆ ตามที่ต้องการ
-        cbReportType.Items.Add("รายงานสัญญากู้เงิน")
-        cbReportType.Items.Add("รายงานสัญญาอื่นๆ")
-        cbReportType.SelectedIndex = 0 ' ตั้งค่าเริ่มต้น
-
         ' กำหนดค่าของ ReportViewer1 สำหรับรายงานสัญญากู้ยืม
         Me.ReportViewer1.LocalReport.ReportPath = "D:\Project-2022\Banmai\Banmai\report\LoanReport1.rdlc"
         Me.ReportViewer1.RefreshReport()

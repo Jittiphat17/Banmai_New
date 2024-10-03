@@ -1,11 +1,14 @@
 ﻿Imports System.Data.OleDb
 Imports System.Globalization
+Imports System.Windows.Forms.DataVisualization.Charting
+Imports Microsoft.Reporting
 
 Public Class frmMain
-    ' เพิ่มตัวเชื่อมต่อฐานข้อมูล
+    ' เชื่อมต่อกับฐานข้อมูล
     Dim Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
 
     Public Sub Loadinfo()
+        ' อัปเดตข้อมูลการใช้งานสำหรับ Admin
         If User_type = "Admin" Then
             tsm_exp.Enabled = True
             tsm_inc.Enabled = True
@@ -17,12 +20,12 @@ Public Class frmMain
     End Sub
 
     Private Sub UpdateUserInfo()
-        ' ใช้ตัวแปร User_type จาก Module1 และคำว่า "ผู้ใช้ขณะนี้"
+        ' แสดงผู้ใช้งานปัจจุบันใน Label
         lblUserInfo.Text = $"ผู้ใช้ขณะนี้ : {User_type}"
     End Sub
 
     Private Sub UpdateDateTime()
-        ' อัปเดต Label สำหรับแสดงวันที่และเวลา
+        ' แสดงวันที่และเวลา
         lblDateTime.Text = DateTime.Now.ToString("d MMMM yyyy เวลา HH:mm:ss น.", CultureInfo.CreateSpecificCulture("th-TH"))
     End Sub
 
@@ -34,29 +37,30 @@ Public Class frmMain
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Loadinfo()
 
-        ' เรียกใช้ฟังก์ชันอัปเดตข้อมูลสมาชิกและสัญญา
+        ' อัปเดตข้อมูลสมาชิกและสัญญา
         UpdateMemberCount()
         UpdateContractCount()
 
-        ' เรียกใช้ฟังก์ชันแสดงยอดเงินรวมของแต่ละบัญชี
+        ' อัปเดตยอดเงินในบัญชี
         UpdateAccountBalances()
 
-        ' ตั้งค่าเบื้องต้น
+
+        ' อัปเดตข้อมูลผู้ใช้และเวลา
         UpdateUserInfo()
         UpdateDateTime()
 
-        ' เริ่ม Timer
+        ' เริ่มการทำงานของ Timer
         Timer1.Start()
     End Sub
 
-
+    ' ฟังก์ชันดึงข้อมูลจำนวนสมาชิก
     Private Sub UpdateMemberCount()
         Try
-            ' นิยามคำสั่ง SQL เพื่อดึงจำนวนสมาชิก
+            ' SQL Query เพื่อดึงจำนวนสมาชิก
             Dim strSQL As String = "SELECT COUNT(*) FROM Member"
             Dim cmd As New OleDbCommand(strSQL, Conn)
 
-            ' เปิดการเชื่อมต่อฐานข้อมูลหากยังไม่เปิด
+            ' เปิดการเชื่อมต่อฐานข้อมูล
             If Conn.State = ConnectionState.Open Then Conn.Close()
             Conn.Open()
 
@@ -71,13 +75,14 @@ Public Class frmMain
         End Try
     End Sub
 
+    ' ฟังก์ชันดึงข้อมูลจำนวนสัญญา
     Private Sub UpdateContractCount()
         Try
-            ' นิยามคำสั่ง SQL เพื่อดึงจำนวนสัญญา
+            ' SQL Query เพื่อดึงจำนวนสัญญา
             Dim strSQL As String = "SELECT COUNT(*) FROM Contract"
             Dim cmd As New OleDbCommand(strSQL, Conn)
 
-            ' เปิดการเชื่อมต่อฐานข้อมูลหากยังไม่เปิด
+            ' เปิดการเชื่อมต่อฐานข้อมูล
             If Conn.State = ConnectionState.Open Then Conn.Close()
             Conn.Open()
 
@@ -91,13 +96,15 @@ Public Class frmMain
             Conn.Close()
         End Try
     End Sub
+
+    ' ฟังก์ชันดึงยอดเงินจากบัญชี
     Private Sub UpdateAccountBalances()
         Try
-            ' เปิดการเชื่อมต่อฐานข้อมูลหากยังไม่เปิด
+            ' เปิดการเชื่อมต่อฐานข้อมูล
             If Conn.State = ConnectionState.Open Then Conn.Close()
             Conn.Open()
 
-            ' คิวรีเพื่อดึงยอดเงินรวมจากบัญชีเงินฝาก
+            ' ดึงยอดเงินจากบัญชีเงินฝาก
             Dim querySaving As String = "SELECT SUM(inc_amount) FROM Income WHERE acc_id = 'ACC002'"
             Dim cmdSaving As New OleDbCommand(querySaving, Conn)
             Dim totalSaving As Object = cmdSaving.ExecuteScalar()
@@ -105,7 +112,7 @@ Public Class frmMain
                 totalSaving = 0
             End If
 
-            ' คิวรีเพื่อดึงยอดเงินรวมจากบัญชีกู้เงิน
+            ' ดึงยอดเงินจากบัญชีกู้เงิน
             Dim queryLoan As String = "SELECT SUM(con_amount) FROM Contract WHERE acc_id = 'ACC001'"
             Dim cmdLoan As New OleDbCommand(queryLoan, Conn)
             Dim totalLoan As Object = cmdLoan.ExecuteScalar()
@@ -113,7 +120,7 @@ Public Class frmMain
                 totalLoan = 0
             End If
 
-            ' คิวรีเพื่อดึงยอดเงินรวมจากบัญชีกู้เงินสาธารณะ
+            ' ดึงยอดเงินจากบัญชีกู้เงินสาธารณะ
             Dim queryPublicLoan As String = "SELECT SUM(con_amount) FROM Contract WHERE acc_id = 'ACC003'"
             Dim cmdPublicLoan As New OleDbCommand(queryPublicLoan, Conn)
             Dim totalPublicLoan As Object = cmdPublicLoan.ExecuteScalar()
@@ -128,20 +135,6 @@ Public Class frmMain
             Conn.Close()
         End Try
     End Sub
-
-
-
-
-    Private Sub ออกจากระบบToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-        ' ตรวจสอบว่าผู้ใช้คลิก Yes หรือไม่
-        If result = DialogResult.Yes Then
-            ' ออกจากแอปพลิเคชัน
-            Application.Exit()
-        End If
-    End Sub
-
 
     ' ฟังก์ชันเพื่อรีเฟรชข้อมูลในหน้าหลักเมื่อปิดฟอร์มอื่นๆ
     Private Sub RefreshMainForm(ByVal sender As Object, ByVal e As FormClosedEventArgs)
@@ -190,7 +183,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ดสมาชกToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ดสมาชกToolStripMenuItem.Click
-        Dim frm As New frmViewmember()
+        Dim frm As New frmViewMember()
         AddHandler frm.FormClosed, AddressOf RefreshMainForm
         frm.ShowDialog()
     End Sub
@@ -234,7 +227,7 @@ Public Class frmMain
 
 
 
-    Private Sub ออกจากระบบToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ออกจากระบบToolStripMenuItem.Click
+    Private Sub ออกจากระบบToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ออกจากระบบToolStripMenuItem1.Click
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to log out?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
         ' ตรวจสอบว่าผู้ใช้คลิก Yes หรือไม่
@@ -301,4 +294,5 @@ Public Class frmMain
         AddHandler frm.FormClosed, AddressOf RefreshMainForm
         frm.ShowDialog()
     End Sub
+
 End Class

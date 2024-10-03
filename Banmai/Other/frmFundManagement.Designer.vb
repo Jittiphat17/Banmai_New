@@ -23,9 +23,9 @@ Partial Class frmFundManagement
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.btnClear = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2HtmlLabel7 = New Guna.UI2.WinForms.Guna2HtmlLabel()
@@ -33,6 +33,7 @@ Partial Class frmFundManagement
         Me.btnUpdateFund = New Guna.UI2.WinForms.Guna2Button()
         Me.btnAddFund = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.txtSearchMember = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2HtmlLabel8 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.chkListDirectors = New System.Windows.Forms.CheckedListBox()
@@ -50,7 +51,6 @@ Partial Class frmFundManagement
         Me.dgvFunds = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
-        Me.txtSearchMember = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2GroupBox1.SuspendLayout()
         CType(Me.dgvFunds, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel1.SuspendLayout()
@@ -70,7 +70,7 @@ Partial Class frmFundManagement
         Me.btnClear.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnClear.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold)
         Me.btnClear.ForeColor = System.Drawing.Color.White
-        Me.btnClear.Location = New System.Drawing.Point(586, 508)
+        Me.btnClear.Location = New System.Drawing.Point(575, 509)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(180, 45)
         Me.btnClear.TabIndex = 17
@@ -79,10 +79,10 @@ Partial Class frmFundManagement
         'Guna2HtmlLabel7
         '
         Me.Guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel7.Font = New System.Drawing.Font("FC Minimal", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel7.Location = New System.Drawing.Point(445, 35)
+        Me.Guna2HtmlLabel7.Font = New System.Drawing.Font("FC Minimal", 27.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel7.Location = New System.Drawing.Point(445, 39)
         Me.Guna2HtmlLabel7.Name = "Guna2HtmlLabel7"
-        Me.Guna2HtmlLabel7.Size = New System.Drawing.Size(231, 38)
+        Me.Guna2HtmlLabel7.Size = New System.Drawing.Size(227, 38)
         Me.Guna2HtmlLabel7.TabIndex = 11
         Me.Guna2HtmlLabel7.Text = "จัดการข้อมูลกองทุน"
         '
@@ -97,7 +97,7 @@ Partial Class frmFundManagement
         Me.btnDeleteFund.FillColor = System.Drawing.Color.Red
         Me.btnDeleteFund.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold)
         Me.btnDeleteFund.ForeColor = System.Drawing.Color.White
-        Me.btnDeleteFund.Location = New System.Drawing.Point(772, 508)
+        Me.btnDeleteFund.Location = New System.Drawing.Point(761, 509)
         Me.btnDeleteFund.Name = "btnDeleteFund"
         Me.btnDeleteFund.Size = New System.Drawing.Size(180, 45)
         Me.btnDeleteFund.TabIndex = 14
@@ -114,7 +114,7 @@ Partial Class frmFundManagement
         Me.btnUpdateFund.FillColor = System.Drawing.Color.ForestGreen
         Me.btnUpdateFund.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold)
         Me.btnUpdateFund.ForeColor = System.Drawing.Color.White
-        Me.btnUpdateFund.Location = New System.Drawing.Point(400, 508)
+        Me.btnUpdateFund.Location = New System.Drawing.Point(389, 509)
         Me.btnUpdateFund.Name = "btnUpdateFund"
         Me.btnUpdateFund.Size = New System.Drawing.Size(180, 45)
         Me.btnUpdateFund.TabIndex = 15
@@ -130,7 +130,7 @@ Partial Class frmFundManagement
         Me.btnAddFund.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnAddFund.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold)
         Me.btnAddFund.ForeColor = System.Drawing.Color.White
-        Me.btnAddFund.Location = New System.Drawing.Point(214, 508)
+        Me.btnAddFund.Location = New System.Drawing.Point(203, 509)
         Me.btnAddFund.Name = "btnAddFund"
         Me.btnAddFund.Size = New System.Drawing.Size(180, 45)
         Me.btnAddFund.TabIndex = 16
@@ -162,6 +162,25 @@ Partial Class frmFundManagement
         Me.Guna2GroupBox1.Size = New System.Drawing.Size(1116, 249)
         Me.Guna2GroupBox1.TabIndex = 13
         Me.Guna2GroupBox1.Text = "ข้อมูล"
+        '
+        'txtSearchMember
+        '
+        Me.txtSearchMember.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtSearchMember.DefaultText = ""
+        Me.txtSearchMember.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtSearchMember.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtSearchMember.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtSearchMember.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtSearchMember.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtSearchMember.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txtSearchMember.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtSearchMember.Location = New System.Drawing.Point(1014, 45)
+        Me.txtSearchMember.Name = "txtSearchMember"
+        Me.txtSearchMember.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtSearchMember.PlaceholderText = ""
+        Me.txtSearchMember.SelectedText = ""
+        Me.txtSearchMember.Size = New System.Drawing.Size(99, 36)
+        Me.txtSearchMember.TabIndex = 3
         '
         'Guna2HtmlLabel8
         '
@@ -391,26 +410,27 @@ Partial Class frmFundManagement
         'dgvFunds
         '
         Me.dgvFunds.AllowUserToAddRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        Me.dgvFunds.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvFunds.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        Me.dgvFunds.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvFunds.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvFunds.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvFunds.ColumnHeadersHeight = 50
         Me.dgvFunds.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvFunds.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvFunds.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvFunds.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dgvFunds.Location = New System.Drawing.Point(12, 91)
         Me.dgvFunds.Name = "dgvFunds"
@@ -461,30 +481,12 @@ Partial Class frmFundManagement
         Me.Guna2ControlBox1.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox1.TabIndex = 5
         '
-        'txtSearchMember
-        '
-        Me.txtSearchMember.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtSearchMember.DefaultText = ""
-        Me.txtSearchMember.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.txtSearchMember.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.txtSearchMember.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtSearchMember.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtSearchMember.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearchMember.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.txtSearchMember.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearchMember.Location = New System.Drawing.Point(1014, 45)
-        Me.txtSearchMember.Name = "txtSearchMember"
-        Me.txtSearchMember.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtSearchMember.PlaceholderText = ""
-        Me.txtSearchMember.SelectedText = ""
-        Me.txtSearchMember.Size = New System.Drawing.Size(99, 36)
-        Me.txtSearchMember.TabIndex = 3
-        '
         'frmFundManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1140, 588)
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(1140, 566)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.Guna2HtmlLabel7)

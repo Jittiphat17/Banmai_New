@@ -10,8 +10,7 @@ Public Class frmEditExpense
     Private Sub frmEditExpense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadAccounts() ' โหลดข้อมูลบัญชี
         LoadExpenses() ' โหลดรายการรายจ่าย
-        ConfigureDataGridView() ' ตั้งค่าการแสดงผลของ DataGridView
-        ConfigureDetailsDataGridView() ' ตั้งค่าการแสดงผลของ DataGridView สำหรับรายละเอียดรายจ่าย
+
 
         ' ตั้งค่า TextAlign ของ TextBox ที่แสดงจำนวนเงินให้ชิดขวา
         txtExpenseAmount.TextAlign = HorizontalAlignment.Right
@@ -47,111 +46,52 @@ Public Class frmEditExpense
         End Try
     End Sub
 
-    Private Sub ConfigureDataGridView()
-
-        ' ใช้ Guna2DataGridView สำหรับรายละเอียดรายจ่าย
-        dgvExpenses.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Dark
-        ' ตั้งค่าฟอนต์ FC Minimal และสีของ DataGridView สำหรับรายละเอียดรายจ่าย
-        dgvExpenses.DefaultCellStyle.Font = New Font("FC Minimal", 12) ' ใช้ฟอนต์ FC Minimal
-        dgvExpenses.DefaultCellStyle.BackColor = Color.White
-        dgvExpenses.DefaultCellStyle.ForeColor = Color.Black
-        dgvExpenses.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
-        dgvExpenses.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold) ' ใช้ฟอนต์ FC Minimal สำหรับหัวตาราง
-        dgvExpenses.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
-        dgvExpenses.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
-        dgvExpenses.EnableHeadersVisualStyles = False
-        ' ตั้งชื่อหัวตารางเป็นภาษาไทย
-        If dgvExpenses.Columns.Contains("ex_id") Then
-            dgvExpenses.Columns("ex_id").HeaderText = "รหัสรายจ่าย"
-        End If
-        If dgvExpenses.Columns.Contains("ex_name") Then
-            dgvExpenses.Columns("ex_name").HeaderText = "ชื่อรายจ่าย"
-        End If
-        If dgvExpenses.Columns.Contains("ex_detail") Then
-            dgvExpenses.Columns("ex_detail").HeaderText = "รายละเอียด"
-        End If
-        If dgvExpenses.Columns.Contains("ex_descript1") Then
-            dgvExpenses.Columns("ex_descript1").HeaderText = "คำอธิบาย"
-        End If
-        If dgvExpenses.Columns.Contains("ex_note") Then
-            dgvExpenses.Columns("ex_note").HeaderText = "หมายเหตุ"
-        End If
-        If dgvExpenses.Columns.Contains("ex_date") Then
-            dgvExpenses.Columns("ex_date").HeaderText = "วันที่จ่าย"
-            dgvExpenses.Columns("ex_date").DefaultCellStyle.Format = "dd/MM/yyyy"
-        End If
-        If dgvExpenses.Columns.Contains("ex_amount") Then
-            dgvExpenses.Columns("ex_amount").HeaderText = "จำนวนเงิน"
-            dgvExpenses.Columns("ex_amount").DefaultCellStyle.Format = "N2"
-            dgvExpenses.Columns("ex_amount").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        End If
-        If dgvExpenses.Columns.Contains("acc_id") Then
-            dgvExpenses.Columns("acc_id").HeaderText = "บัญชี"
-        End If
-    End Sub
-
-
-
-    Private Sub ConfigureDetailsDataGridView()
-        ' ใช้ Guna2DataGridView สำหรับรายละเอียดรายจ่าย
-        dgvExpenseDetails.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Dark
-
-        ' ตั้งค่าฟอนต์ FC Minimal และสีของ DataGridView สำหรับรายละเอียดรายจ่าย
-        dgvExpenseDetails.DefaultCellStyle.Font = New Font("FC Minimal", 10) ' ใช้ฟอนต์ FC Minimal
-        dgvExpenseDetails.DefaultCellStyle.BackColor = Color.White
-        dgvExpenseDetails.DefaultCellStyle.ForeColor = Color.Black
-        dgvExpenseDetails.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
-        dgvExpenseDetails.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 10, FontStyle.Bold) ' ใช้ฟอนต์ FC Minimal สำหรับหัวตาราง
-        dgvExpenseDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
-        dgvExpenseDetails.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
-        dgvExpenseDetails.EnableHeadersVisualStyles = False
-
-        ' เปิดการใช้งาน ScrollBars
-        dgvExpenseDetails.ScrollBars = ScrollBars.Both
-
-        ' อนุญาตให้แก้ไขข้อมูลใน DataGridView
-        dgvExpenseDetails.ReadOnly = False
-
-        ' ตั้งชื่อหัวตารางเป็นภาษาไทย
-        If dgvExpenseDetails.Columns.Contains("exd_id") Then
-            dgvExpenseDetails.Columns("exd_id").HeaderText = "รหัสรายละเอียด"
-            dgvExpenseDetails.Columns("exd_id").ReadOnly = True ' ไม่ให้แก้ไขค่า ID
-        End If
-        If dgvExpenseDetails.Columns.Contains("exd_nameacc") Then
-            dgvExpenseDetails.Columns("exd_nameacc").HeaderText = "ชื่อบัญชีรายจ่าย"
-            dgvExpenseDetails.Columns("exd_nameacc").ReadOnly = False
-        End If
-        If dgvExpenseDetails.Columns.Contains("exd_amount") Then
-            dgvExpenseDetails.Columns("exd_amount").HeaderText = "จำนวนเงิน"
-            dgvExpenseDetails.Columns("exd_amount").DefaultCellStyle.Format = "N2"
-            dgvExpenseDetails.Columns("exd_amount").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            dgvExpenseDetails.Columns("exd_amount").ReadOnly = False
-        End If
-        If dgvExpenseDetails.Columns.Contains("m_id") Then
-            dgvExpenseDetails.Columns("m_id").HeaderText = "รหัสสมาชิก"
-        End If
-        If dgvExpenseDetails.Columns.Contains("exd_date") Then
-            dgvExpenseDetails.Columns("exd_date").HeaderText = "วันที่"
-        End If
-        If dgvExpenseDetails.Columns.Contains("ex_id") Then
-            dgvExpenseDetails.Columns("ex_id").HeaderText = "รหัสรายการ"
-        End If
-        If dgvExpenseDetails.Columns.Contains("acc_id") Then
-            dgvExpenseDetails.Columns("acc_id").HeaderText = "รหัสบัญชี"
-        End If
-    End Sub
-
-
 
     Private Sub LoadExpenses()
         Try
             If conn.State = ConnectionState.Closed Then conn.Open()
-            Dim query As String = "SELECT * FROM Expense"
+
+            ' เข้าร่วมตาราง Expense กับ Account เพื่อดึง acc_name แทน acc_id
+            Dim query As String = "SELECT Expense.*, Account.acc_name FROM Expense INNER JOIN Account ON Expense.acc_id = Account.acc_id"
             Dim adapter As New OleDbDataAdapter(query, conn)
             Dim table As New DataTable()
             adapter.Fill(table)
 
             dgvExpenses.DataSource = table
+
+            ' ตั้งค่าฟอนต์สำหรับหัวตารางและเนื้อหา
+            dgvExpenses.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold) ' ฟอนต์หัวตารางขนาด 14
+            dgvExpenses.DefaultCellStyle.Font = New Font("FC Minimal", 12) ' ฟอนต์เนื้อหาตารางขนาด 12
+
+            ' ตั้งชื่อหัวตารางเป็นภาษาไทย
+            If dgvExpenses.Columns.Contains("ex_id") Then
+                dgvExpenses.Columns("ex_id").HeaderText = "รหัสรายจ่าย"
+            End If
+            If dgvExpenses.Columns.Contains("ex_name") Then
+                dgvExpenses.Columns("ex_name").HeaderText = "ชื่อรายจ่าย"
+            End If
+            If dgvExpenses.Columns.Contains("ex_amount") Then
+                dgvExpenses.Columns("ex_amount").HeaderText = "จำนวนเงิน"
+            End If
+            If dgvExpenses.Columns.Contains("ex_date") Then
+                dgvExpenses.Columns("ex_date").HeaderText = "วันที่จ่าย"
+            End If
+            If dgvExpenses.Columns.Contains("ex_detail") Then
+                dgvExpenses.Columns("ex_detail").HeaderText = "รายละเอียด"
+            End If
+            If dgvExpenses.Columns.Contains("ex_description") Then
+                dgvExpenses.Columns("ex_description").HeaderText = "คำอธิบาย"
+            End If
+            If dgvExpenses.Columns.Contains("acc_name") Then
+                dgvExpenses.Columns("acc_name").HeaderText = "ชื่อบัญชี" ' แสดงชื่อบัญชีแทนรหัสบัญชี
+            End If
+            If dgvExpenses.Columns.Contains("acc_id") Then
+                dgvExpenses.Columns("acc_id").Visible = False ' ซ่อนคอลัมน์ acc_id
+            End If
+            If dgvExpenses.Columns.Contains("ex_note") Then
+                dgvExpenses.Columns("ex_note").Visible = False ' ซ่อนคอลัมน์ ex_note
+            End If
+
         Catch ex As Exception
             MessageBox.Show("Error loading expenses: " & ex.Message)
         Finally
@@ -163,16 +103,19 @@ Public Class frmEditExpense
         Try
             If conn.State = ConnectionState.Closed Then conn.Open()
 
-            ' ใช้ SQL เพื่อดึงข้อมูลจากตาราง Expense_Details โดยใช้ ex_id ที่เลือก
-            Dim query As String = "SELECT * FROM Expense_Details WHERE ex_id = @ex_id"
+            ' เข้าร่วมตาราง Expense_Details กับ Account เพื่อดึงชื่อบัญชี
+            Dim query As String = "SELECT Expense_Details.*, Account.acc_name FROM Expense_Details INNER JOIN Account ON Expense_Details.acc_id = Account.acc_id WHERE Expense_Details.ex_id = @ex_id"
             Dim cmd As New OleDbCommand(query, conn)
             cmd.Parameters.AddWithValue("@ex_id", expenseID)
             Dim adapter As New OleDbDataAdapter(cmd)
             Dim table As New DataTable()
             adapter.Fill(table)
 
-            ' เชื่อมโยงข้อมูลกับ DataGridView สำหรับรายละเอียด
             dgvExpenseDetails.DataSource = table
+
+            ' ตั้งค่าฟอนต์สำหรับหัวตารางและเนื้อหา
+            dgvExpenseDetails.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold) ' ฟอนต์หัวตารางขนาด 14
+            dgvExpenseDetails.DefaultCellStyle.Font = New Font("FC Minimal", 12) ' ฟอนต์เนื้อหาตารางขนาด 12
 
             ' ตั้งชื่อหัวตารางเป็นภาษาไทย
             If dgvExpenseDetails.Columns.Contains("exd_id") Then
@@ -186,6 +129,21 @@ Public Class frmEditExpense
                 dgvExpenseDetails.Columns("exd_amount").DefaultCellStyle.Format = "N2"
                 dgvExpenseDetails.Columns("exd_amount").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             End If
+            If dgvExpenseDetails.Columns.Contains("exd_date") Then
+                dgvExpenseDetails.Columns("exd_date").HeaderText = "วันที่"
+            End If
+            If dgvExpenseDetails.Columns.Contains("m_id") Then
+                dgvExpenseDetails.Columns("m_id").HeaderText = "รหัสสมาชิก"
+            End If
+            If dgvExpenseDetails.Columns.Contains("ex_id") Then
+                dgvExpenseDetails.Columns("ex_id").HeaderText = "รหัสการจ่าย"
+            End If
+            If dgvExpenseDetails.Columns.Contains("acc_name") Then
+                dgvExpenseDetails.Columns("acc_name").HeaderText = "ชื่อบัญชี" ' แสดงชื่อบัญชีแทนรหัสบัญชี
+            End If
+            If dgvExpenseDetails.Columns.Contains("acc_id") Then
+                dgvExpenseDetails.Columns("acc_id").Visible = False ' ซ่อนคอลัมน์ acc_id
+            End If
 
         Catch ex As Exception
             MessageBox.Show("Error loading expense details: " & ex.Message)
@@ -193,6 +151,7 @@ Public Class frmEditExpense
             conn.Close()
         End Try
     End Sub
+
 
     Private Sub dgvExpenses_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvExpenses.CellDoubleClick
         If e.RowIndex >= 0 Then

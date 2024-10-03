@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmBrrow
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmBrrow
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -65,6 +65,7 @@ Partial Class frmBrrow
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Guna2HtmlLabel11 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         CType(Me.guna2DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2GroupBox2.SuspendLayout()
         Me.Guna2GroupBox1.SuspendLayout()
@@ -99,7 +100,7 @@ Partial Class frmBrrow
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.guna2DataGridView1.DefaultCellStyle = DataGridViewCellStyle6
         Me.guna2DataGridView1.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.guna2DataGridView1.Location = New System.Drawing.Point(12, 543)
+        Me.guna2DataGridView1.Location = New System.Drawing.Point(13, 577)
         Me.guna2DataGridView1.Name = "guna2DataGridView1"
         Me.guna2DataGridView1.ReadOnly = True
         Me.guna2DataGridView1.RowHeadersVisible = False
@@ -138,7 +139,7 @@ Partial Class frmBrrow
         Me.btnClear.FillColor = System.Drawing.Color.Red
         Me.btnClear.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClear.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.btnClear.Location = New System.Drawing.Point(689, 708)
+        Me.btnClear.Location = New System.Drawing.Point(689, 742)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(180, 45)
         Me.btnClear.TabIndex = 17
@@ -154,7 +155,7 @@ Partial Class frmBrrow
         Me.btnAdd.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnAdd.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.btnAdd.Location = New System.Drawing.Point(503, 708)
+        Me.btnAdd.Location = New System.Drawing.Point(503, 742)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(180, 45)
         Me.btnAdd.TabIndex = 18
@@ -171,7 +172,7 @@ Partial Class frmBrrow
         Me.btnSave.FillColor = System.Drawing.Color.ForestGreen
         Me.btnSave.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.btnSave.Location = New System.Drawing.Point(317, 708)
+        Me.btnSave.Location = New System.Drawing.Point(317, 742)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(180, 45)
         Me.btnSave.TabIndex = 19
@@ -192,7 +193,7 @@ Partial Class frmBrrow
         Me.Guna2GroupBox2.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox2.Location = New System.Drawing.Point(592, 88)
+        Me.Guna2GroupBox2.Location = New System.Drawing.Point(593, 122)
         Me.Guna2GroupBox2.Name = "Guna2GroupBox2"
         Me.Guna2GroupBox2.Size = New System.Drawing.Size(569, 449)
         Me.Guna2GroupBox2.TabIndex = 16
@@ -424,9 +425,9 @@ Partial Class frmBrrow
         Me.Guna2GroupBox1.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox1.Location = New System.Drawing.Point(12, 88)
+        Me.Guna2GroupBox1.Location = New System.Drawing.Point(13, 122)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
-        Me.Guna2GroupBox1.Size = New System.Drawing.Size(574, 449)
+        Me.Guna2GroupBox1.Size = New System.Drawing.Size(574, 418)
         Me.Guna2GroupBox1.TabIndex = 15
         Me.Guna2GroupBox1.Text = "ผู้กู้"
         Me.Guna2GroupBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -712,7 +713,7 @@ Partial Class frmBrrow
         Me.txtCid.Font = New System.Drawing.Font("TH SarabunPSK", 14.25!)
         Me.txtCid.ForeColor = System.Drawing.Color.Black
         Me.txtCid.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtCid.Location = New System.Drawing.Point(1079, 43)
+        Me.txtCid.Location = New System.Drawing.Point(1079, 38)
         Me.txtCid.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.txtCid.Name = "txtCid"
         Me.txtCid.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -751,17 +752,29 @@ Partial Class frmBrrow
         Me.Label5.BackColor = System.Drawing.SystemColors.Control
         Me.Label5.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(987, 49)
+        Me.Label5.Location = New System.Drawing.Point(987, 44)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(86, 24)
         Me.Label5.TabIndex = 22
         Me.Label5.Text = "เลขที่สัญญา :"
         '
+        'Guna2HtmlLabel11
+        '
+        Me.Guna2HtmlLabel11.BackColor = System.Drawing.Color.White
+        Me.Guna2HtmlLabel11.Font = New System.Drawing.Font("FC Minimal", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel11.Location = New System.Drawing.Point(512, 66)
+        Me.Guna2HtmlLabel11.Name = "Guna2HtmlLabel11"
+        Me.Guna2HtmlLabel11.Size = New System.Drawing.Size(146, 50)
+        Me.Guna2HtmlLabel11.TabIndex = 24
+        Me.Guna2HtmlLabel11.Text = "ทำสัญญา"
+        '
         'frmBrrow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1174, 764)
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(1174, 796)
+        Me.Controls.Add(Me.Guna2HtmlLabel11)
         Me.Controls.Add(Me.txtCid)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.Label5)
@@ -825,4 +838,5 @@ Partial Class frmBrrow
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents Label5 As Label
+    Friend WithEvents Guna2HtmlLabel11 As Guna.UI2.WinForms.Guna2HtmlLabel
 End Class

@@ -60,6 +60,7 @@ Partial Class frmEditExpense
         Me.dgvExpenseDetails = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.Guna2HtmlLabel11 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2GroupBox2.SuspendLayout()
         CType(Me.dgvExpenses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2GroupBox1.SuspendLayout()
@@ -276,6 +277,7 @@ Partial Class frmEditExpense
         Me.dgvExpenses.AllowUserToDeleteRows = False
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
         Me.dgvExpenses.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvExpenses.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -295,11 +297,11 @@ Partial Class frmEditExpense
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvExpenses.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvExpenses.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvExpenses.Location = New System.Drawing.Point(12, 69)
+        Me.dgvExpenses.Location = New System.Drawing.Point(12, 113)
         Me.dgvExpenses.Name = "dgvExpenses"
         Me.dgvExpenses.ReadOnly = True
         Me.dgvExpenses.RowHeadersVisible = False
-        Me.dgvExpenses.Size = New System.Drawing.Size(550, 274)
+        Me.dgvExpenses.Size = New System.Drawing.Size(550, 230)
         Me.dgvExpenses.TabIndex = 33
         Me.dgvExpenses.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvExpenses.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -565,6 +567,7 @@ Partial Class frmEditExpense
         Me.dgvExpenseDetails.AllowUserToDeleteRows = False
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
         Me.dgvExpenseDetails.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvExpenseDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -584,11 +587,11 @@ Partial Class frmEditExpense
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvExpenseDetails.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvExpenseDetails.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvExpenseDetails.Location = New System.Drawing.Point(572, 69)
+        Me.dgvExpenseDetails.Location = New System.Drawing.Point(572, 113)
         Me.dgvExpenseDetails.Name = "dgvExpenseDetails"
         Me.dgvExpenseDetails.ReadOnly = True
         Me.dgvExpenseDetails.RowHeadersVisible = False
-        Me.dgvExpenseDetails.Size = New System.Drawing.Size(550, 274)
+        Me.dgvExpenseDetails.Size = New System.Drawing.Size(550, 230)
         Me.dgvExpenseDetails.TabIndex = 34
         Me.dgvExpenseDetails.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvExpenseDetails.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -634,11 +637,23 @@ Partial Class frmEditExpense
         Me.Guna2ControlBox1.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox1.TabIndex = 5
         '
+        'Guna2HtmlLabel11
+        '
+        Me.Guna2HtmlLabel11.BackColor = System.Drawing.Color.White
+        Me.Guna2HtmlLabel11.Font = New System.Drawing.Font("FC Minimal", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel11.Location = New System.Drawing.Point(459, 57)
+        Me.Guna2HtmlLabel11.Name = "Guna2HtmlLabel11"
+        Me.Guna2HtmlLabel11.Size = New System.Drawing.Size(218, 50)
+        Me.Guna2HtmlLabel11.TabIndex = 41
+        Me.Guna2HtmlLabel11.Text = "จัดการรายจ่าย"
+        '
         'frmEditExpense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1134, 749)
+        Me.Controls.Add(Me.Guna2HtmlLabel11)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnDelete)
@@ -649,6 +664,7 @@ Partial Class frmEditExpense
         Me.Controls.Add(Me.dgvExpenseDetails)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmEditExpense"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmEditExpense"
         Me.Guna2GroupBox2.ResumeLayout(False)
         Me.Guna2GroupBox2.PerformLayout()
@@ -658,6 +674,7 @@ Partial Class frmEditExpense
         CType(Me.dgvExpenseDetails, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -692,4 +709,5 @@ Partial Class frmEditExpense
     Friend WithEvents dgvExpenseDetails As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents Guna2HtmlLabel11 As Guna.UI2.WinForms.Guna2HtmlLabel
 End Class

@@ -521,8 +521,6 @@ Public Class frmBrrow
             MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
             Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
@@ -530,6 +528,7 @@ Public Class frmBrrow
 
                 For Each row As DataGridViewRow In guna2DataGridView1.Rows
                     If Not row.IsNewRow Then
+                        ' ดึงข้อมูลจากแต่ละแถวใน DataGridView
                         Dim borrowerName As String = row.Cells("ผู้กู้").Value.ToString()
                         Dim loanAmount As Decimal = Decimal.Parse(row.Cells("จำนวนเงินกู้").Value.ToString().Replace(" บาท", "").Replace(",", ""))
                         Dim accountDict As Dictionary(Of String, String) = CType(cbAccount.Tag, Dictionary(Of String, String))
@@ -543,12 +542,14 @@ Public Class frmBrrow
 
                         Dim period As Integer = Integer.Parse(periodText.Replace("เดือน", ""))
 
+                        ' แปลงวันที่ทำรายการ
                         Dim transactionDate As DateTime
                         If Not DateTime.TryParseExact(transactionDateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, transactionDate) Then
                             MessageBox.Show("รูปแบบวันที่ไม่ถูกต้อง: " & transactionDateStr, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             Return
                         End If
 
+                        ' ดึงข้อมูลผู้กู้
                         Dim borrowerId As Integer = GetMemberIdByName(borrowerName)
                         If borrowerId = -1 Then
                             MessageBox.Show("ไม่พบข้อมูลผู้กู้", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -558,6 +559,7 @@ Public Class frmBrrow
                         ' Get the selected Guarantee Type from the ComboBox
                         Dim guaranteeType As String = cbGuaranteeType.SelectedItem.ToString() ' Ensure the ComboBox has a selected item
 
+                        ' บันทึกข้อมูลสัญญาเงินกู้
                         strSQL = "INSERT INTO Contract (m_id, con_details, con_amount, con_interest, con_permonth, con_date, acc_id, con_GuaranteeType) VALUES (@m_id, @con_details, @con_amount, @con_interest, @con_permonth, @con_date, @acc_id, @con_GuaranteeType)"
                         Using cmd As New OleDbCommand(strSQL, conn)
                             cmd.Parameters.AddWithValue("@m_id", borrowerId)
@@ -567,13 +569,15 @@ Public Class frmBrrow
                             cmd.Parameters.AddWithValue("@con_permonth", period)
                             cmd.Parameters.AddWithValue("@con_date", transactionDate)
                             cmd.Parameters.AddWithValue("@acc_id", acc_id)
-                            cmd.Parameters.AddWithValue("@con_GuaranteeType", guaranteeType) ' Add the Guarantee Type parameter
+                            cmd.Parameters.AddWithValue("@con_GuaranteeType", guaranteeType)
 
                             cmd.ExecuteNonQuery()
 
+                            ' ดึงค่า con_id ที่ถูกสร้างขึ้นมา
                             cmd.CommandText = "SELECT @@IDENTITY"
                             Dim con_id As Integer = Convert.ToInt32(cmd.ExecuteScalar())
 
+                            ' อัปเดตข้อมูลในตาราง Member
                             strSQL = "UPDATE Member SET con_id = @con_id WHERE m_id = @m_id"
                             Using cmdMember As New OleDbCommand(strSQL, conn)
                                 cmdMember.Parameters.AddWithValue("@con_id", con_id)
@@ -581,6 +585,7 @@ Public Class frmBrrow
                                 cmdMember.ExecuteNonQuery()
                             End Using
 
+                            ' บันทึกข้อมูลผู้ค้ำ
                             Dim guarantorNames As String() = {guarantorName1, guarantorName2, guarantorName3}
                             For Each guarantorName As String In guarantorNames
                                 If Not String.IsNullOrEmpty(guarantorName) Then
@@ -596,6 +601,7 @@ Public Class frmBrrow
                                 End If
                             Next
 
+                            ' คำนวณและบันทึกข้อมูลการชำระเงิน
                             Dim monthlyPayment As Decimal = CalculateMonthlyPayment(loanAmount, interest, period)
                             Dim totalInterest As Decimal = loanAmount * (interest / 100) * period
                             Dim monthlyPrincipal As Decimal = Math.Round(loanAmount / period, 2)
@@ -623,6 +629,7 @@ Public Class frmBrrow
                                 End Using
                             Next
 
+                            ' บันทึกข้อมูลในตาราง Account_Details
                             strSQL = "INSERT INTO Account_Details (acc_id, m_id) VALUES (@acc_id, @m_id)"
                             Using accountDetailsCmd As New OleDbCommand(strSQL, conn)
                                 accountDetailsCmd.Parameters.AddWithValue("@acc_id", acc_id)
@@ -630,6 +637,7 @@ Public Class frmBrrow
                                 accountDetailsCmd.ExecuteNonQuery()
                             End Using
 
+                            ' บันทึกข้อมูลในตาราง Expense และ Expense_Details
                             strSQL = "INSERT INTO Expense (ex_name, ex_detail, ex_description, ex_date, ex_amount, acc_id) VALUES (@ex_name, @ex_detail, @ex_description, @ex_date, @ex_amount, @acc_id)"
                             Using cmdExpense As New OleDbCommand(strSQL, conn)
                                 cmdExpense.Parameters.AddWithValue("@ex_name", borrowerName)
@@ -641,21 +649,22 @@ Public Class frmBrrow
 
                                 cmdExpense.ExecuteNonQuery()
 
+                                ' ดึงค่า ex_id ที่ถูกสร้างขึ้นมา
                                 cmdExpense.CommandText = "SELECT @@IDENTITY"
                                 Dim ex_id As Integer = Convert.ToInt32(cmdExpense.ExecuteScalar())
 
-                                ' แทนที่การดึงข้อมูลจาก DataGridView ด้วยการใช้คำว่า "เงินกู้"
+                                ' บันทึกข้อมูลในตาราง Expense_Details
                                 Dim accountNameFromGrid As String = "เงินกู้"
-
-                                strSQL = "INSERT INTO Expense_Details (exd_nameacc, exd_amount, ex_id, m_id) VALUES (@exd_nameacc, @exd_amount, @ex_id, @m_id)"
+                                strSQL = "INSERT INTO Expense_Details (exd_nameacc, exd_amount, ex_id, m_id, exd_date, acc_id) VALUES (@exd_nameacc, @exd_amount, @ex_id, @m_id, @exd_date, @acc_id)"
                                 Using cmdExpenseDetails As New OleDbCommand(strSQL, conn)
-                                    cmdExpenseDetails.Parameters.AddWithValue("@exd_nameacc", accountNameFromGrid) ' ใช้คำว่า "เงินกู้"
+                                    cmdExpenseDetails.Parameters.AddWithValue("@exd_nameacc", accountNameFromGrid)
                                     cmdExpenseDetails.Parameters.AddWithValue("@exd_amount", loanAmount)
                                     cmdExpenseDetails.Parameters.AddWithValue("@ex_id", ex_id)
-                                    cmdExpenseDetails.Parameters.AddWithValue("@m_id", borrowerId) ' เพิ่ม borrowerId เข้าไปใน Expense_Details
+                                    cmdExpenseDetails.Parameters.AddWithValue("@m_id", borrowerId)
+                                    cmdExpenseDetails.Parameters.AddWithValue("@exd_date", transactionDate)
+                                    cmdExpenseDetails.Parameters.AddWithValue("@acc_id", acc_id)
                                     cmdExpenseDetails.ExecuteNonQuery()
                                 End Using
-
                             End Using
                         End Using
                     End If
@@ -666,13 +675,15 @@ Public Class frmBrrow
                 ' เรียกฟังก์ชัน ResetForm เพื่อรีเซ็ตฟอร์ม
                 ResetForm()
 
-            End Using
+                ' ซ่อนฟอร์มปัจจุบันและแสดงฟอร์ม frmSearch
+                Me.Hide()
+                frmSearch.Show()
 
+            End Using
         Catch ex As Exception
             MessageBox.Show(ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
 
     Private Function GetMemberIdByName(name As String) As Integer
         strSQL = "SELECT m_id FROM Member WHERE m_name = @m_name"

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
@@ -40,8 +40,8 @@ Partial Class frmMain
         Me.แกToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ตารางเงนกToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsm_inc = New System.Windows.Forms.ToolStripMenuItem()
-        Me.แกไขรายรบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายรบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.แกไขรายรบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsm_report = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายงานสญญาเงนกToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายงานดอกเบยสจจะToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -61,7 +61,7 @@ Partial Class frmMain
         Me.จดการสทธToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.จดการกองทนToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.การปดงบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ออกจากระบบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ออกจากระบบToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.lbCount = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
@@ -82,7 +82,7 @@ Partial Class frmMain
         '
         Me.lblUserInfo.BackColor = System.Drawing.Color.Transparent
         Me.lblUserInfo.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUserInfo.Location = New System.Drawing.Point(165, 504)
+        Me.lblUserInfo.Location = New System.Drawing.Point(186, 504)
         Me.lblUserInfo.Name = "lblUserInfo"
         Me.lblUserInfo.Size = New System.Drawing.Size(131, 23)
         Me.lblUserInfo.TabIndex = 26
@@ -92,7 +92,7 @@ Partial Class frmMain
         '
         Me.lblDateTime.BackColor = System.Drawing.Color.Transparent
         Me.lblDateTime.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDateTime.Location = New System.Drawing.Point(477, 504)
+        Me.lblDateTime.Location = New System.Drawing.Point(505, 504)
         Me.lblDateTime.Name = "lblDateTime"
         Me.lblDateTime.Size = New System.Drawing.Size(133, 23)
         Me.lblDateTime.TabIndex = 27
@@ -105,7 +105,7 @@ Partial Class frmMain
         Me.Guna2GroupBox2.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox2.Location = New System.Drawing.Point(487, 61)
+        Me.Guna2GroupBox2.Location = New System.Drawing.Point(479, 61)
         Me.Guna2GroupBox2.Name = "Guna2GroupBox2"
         Me.Guna2GroupBox2.Size = New System.Drawing.Size(289, 113)
         Me.Guna2GroupBox2.TabIndex = 30
@@ -140,7 +140,7 @@ Partial Class frmMain
         '
         Me.MenuStrip1.Dock = System.Windows.Forms.DockStyle.Left
         Me.MenuStrip1.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsm_exp, Me.tsm_inc, Me.tsm_report, Me.tsm_other, Me.ออกจากระบบToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsm_exp, Me.tsm_inc, Me.tsm_report, Me.tsm_other, Me.ออกจากระบบToolStripMenuItem1})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -203,22 +203,22 @@ Partial Class frmMain
         'tsm_inc
         '
         Me.tsm_inc.AutoSize = False
-        Me.tsm_inc.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.แกไขรายรบToolStripMenuItem, Me.รายรบToolStripMenuItem})
+        Me.tsm_inc.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายรบToolStripMenuItem, Me.แกไขรายรบToolStripMenuItem})
         Me.tsm_inc.Name = "tsm_inc"
         Me.tsm_inc.Size = New System.Drawing.Size(150, 50)
         Me.tsm_inc.Text = "รายรับ"
         '
-        'แกไขรายรบToolStripMenuItem
-        '
-        Me.แกไขรายรบToolStripMenuItem.Name = "แกไขรายรบToolStripMenuItem"
-        Me.แกไขรายรบToolStripMenuItem.Size = New System.Drawing.Size(182, 32)
-        Me.แกไขรายรบToolStripMenuItem.Text = "แก้ไขรายรับ"
-        '
         'รายรบToolStripMenuItem
         '
         Me.รายรบToolStripMenuItem.Name = "รายรบToolStripMenuItem"
-        Me.รายรบToolStripMenuItem.Size = New System.Drawing.Size(182, 32)
-        Me.รายรบToolStripMenuItem.Text = "รายรับ"
+        Me.รายรบToolStripMenuItem.Size = New System.Drawing.Size(192, 32)
+        Me.รายรบToolStripMenuItem.Text = "บันทึกรายรับ"
+        '
+        'แกไขรายรบToolStripMenuItem
+        '
+        Me.แกไขรายรบToolStripMenuItem.Name = "แกไขรายรบToolStripMenuItem"
+        Me.แกไขรายรบToolStripMenuItem.Size = New System.Drawing.Size(192, 32)
+        Me.แกไขรายรบToolStripMenuItem.Text = "แก้ไขรายรับ"
         '
         'tsm_report
         '
@@ -340,15 +340,15 @@ Partial Class frmMain
         Me.การปดงบToolStripMenuItem.Size = New System.Drawing.Size(205, 32)
         Me.การปดงบToolStripMenuItem.Text = "การปิดงบ"
         '
-        'ออกจากระบบToolStripMenuItem
+        'ออกจากระบบToolStripMenuItem1
         '
-        Me.ออกจากระบบToolStripMenuItem.AutoSize = False
-        Me.ออกจากระบบToolStripMenuItem.BackColor = System.Drawing.Color.IndianRed
-        Me.ออกจากระบบToolStripMenuItem.Margin = New System.Windows.Forms.Padding(5, 0, 0, 0)
-        Me.ออกจากระบบToolStripMenuItem.Name = "ออกจากระบบToolStripMenuItem"
-        Me.ออกจากระบบToolStripMenuItem.Padding = New System.Windows.Forms.Padding(5, 0, 4, 0)
-        Me.ออกจากระบบToolStripMenuItem.Size = New System.Drawing.Size(150, 50)
-        Me.ออกจากระบบToolStripMenuItem.Text = "ออกจากระบบ"
+        Me.ออกจากระบบToolStripMenuItem1.AutoSize = False
+        Me.ออกจากระบบToolStripMenuItem1.BackColor = System.Drawing.Color.IndianRed
+        Me.ออกจากระบบToolStripMenuItem1.Margin = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.ออกจากระบบToolStripMenuItem1.Name = "ออกจากระบบToolStripMenuItem1"
+        Me.ออกจากระบบToolStripMenuItem1.Padding = New System.Windows.Forms.Padding(5, 0, 4, 0)
+        Me.ออกจากระบบToolStripMenuItem1.Size = New System.Drawing.Size(150, 50)
+        Me.ออกจากระบบToolStripMenuItem1.Text = "ออกจากระบบ"
         '
         'Guna2GroupBox1
         '
@@ -356,7 +356,7 @@ Partial Class frmMain
         Me.Guna2GroupBox1.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox1.Location = New System.Drawing.Point(175, 61)
+        Me.Guna2GroupBox1.Location = New System.Drawing.Point(165, 61)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
         Me.Guna2GroupBox1.Size = New System.Drawing.Size(295, 113)
         Me.Guna2GroupBox1.TabIndex = 29
@@ -464,7 +464,7 @@ Partial Class frmMain
     Friend WithEvents นำเขาขอมลToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents จดการสทธToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents จดการกองทนToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ออกจากระบบToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ออกจากระบบToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents Guna2GroupBox1 As Guna.UI2.WinForms.Guna2GroupBox
     Friend WithEvents lbCount As Label
     Friend WithEvents Timer1 As Timer

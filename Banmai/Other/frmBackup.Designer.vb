@@ -63,7 +63,7 @@ Partial Class frmBackup
         Me.ProgressBar1.FillColor = System.Drawing.Color.FromArgb(CType(CType(200, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(218, Byte), Integer), CType(CType(223, Byte), Integer))
         Me.ProgressBar1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
         Me.ProgressBar1.ForeColor = System.Drawing.Color.White
-        Me.ProgressBar1.Location = New System.Drawing.Point(203, 142)
+        Me.ProgressBar1.Location = New System.Drawing.Point(217, 142)
         Me.ProgressBar1.Minimum = 0
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
@@ -81,7 +81,7 @@ Partial Class frmBackup
         Me.btnBackup.FillColor = System.Drawing.Color.ForestGreen
         Me.btnBackup.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold)
         Me.btnBackup.ForeColor = System.Drawing.Color.White
-        Me.btnBackup.Location = New System.Drawing.Point(30, 142)
+        Me.btnBackup.Location = New System.Drawing.Point(12, 142)
         Me.btnBackup.Name = "btnBackup"
         Me.btnBackup.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
         Me.btnBackup.Size = New System.Drawing.Size(148, 148)
@@ -103,6 +103,7 @@ Partial Class frmBackup
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(377, 300)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.ProgressBar1)

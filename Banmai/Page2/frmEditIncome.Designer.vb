@@ -23,18 +23,28 @@ Partial Class frmEditIncome
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.Guna2GroupBox2 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Guna2HtmlLabel9 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel10 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel8 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.txtDetailAmount = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtDetailName = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtDetailID = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.Guna2HtmlLabel7 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Guna2HtmlLabel2 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel5 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel6 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel4 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.txtIncomeID = New Guna.UI2.WinForms.Guna2TextBox()
         Me.cmbAccount = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.dtpIncomeDate = New Guna.UI2.WinForms.Guna2DateTimePicker()
@@ -46,6 +56,9 @@ Partial Class frmEditIncome
         Me.btnSave = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.Guna2HtmlLabel11 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.btnDelete = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2GroupBox2.SuspendLayout()
         Me.Guna2GroupBox1.SuspendLayout()
         CType(Me.dgvIncomeDetails, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -59,19 +72,58 @@ Partial Class frmEditIncome
         '
         'Guna2GroupBox2
         '
+        Me.Guna2GroupBox2.Controls.Add(Me.Guna2HtmlLabel9)
+        Me.Guna2GroupBox2.Controls.Add(Me.Guna2HtmlLabel10)
+        Me.Guna2GroupBox2.Controls.Add(Me.Guna2HtmlLabel8)
         Me.Guna2GroupBox2.Controls.Add(Me.txtDetailAmount)
         Me.Guna2GroupBox2.Controls.Add(Me.txtDetailName)
         Me.Guna2GroupBox2.Controls.Add(Me.txtDetailID)
-        Me.Guna2GroupBox2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2GroupBox2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.Guna2GroupBox2.Location = New System.Drawing.Point(17, 584)
+        Me.Guna2GroupBox2.Controls.Add(Me.Guna2HtmlLabel7)
+        Me.Guna2GroupBox2.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2GroupBox2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2GroupBox2.ForeColor = System.Drawing.Color.White
+        Me.Guna2GroupBox2.Location = New System.Drawing.Point(17, 629)
         Me.Guna2GroupBox2.Name = "Guna2GroupBox2"
-        Me.Guna2GroupBox2.Size = New System.Drawing.Size(866, 164)
+        Me.Guna2GroupBox2.Size = New System.Drawing.Size(1075, 98)
         Me.Guna2GroupBox2.TabIndex = 8
-        Me.Guna2GroupBox2.Text = "Guna2GroupBox2"
+        Me.Guna2GroupBox2.Text = "รายละเอียดรายรับ"
+        '
+        'Guna2HtmlLabel9
+        '
+        Me.Guna2HtmlLabel9.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel9.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel9.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel9.Location = New System.Drawing.Point(570, 52)
+        Me.Guna2HtmlLabel9.Name = "Guna2HtmlLabel9"
+        Me.Guna2HtmlLabel9.Size = New System.Drawing.Size(30, 23)
+        Me.Guna2HtmlLabel9.TabIndex = 6
+        Me.Guna2HtmlLabel9.Text = "บาท"
+        '
+        'Guna2HtmlLabel10
+        '
+        Me.Guna2HtmlLabel10.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel10.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel10.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel10.Location = New System.Drawing.Point(673, 52)
+        Me.Guna2HtmlLabel10.Name = "Guna2HtmlLabel10"
+        Me.Guna2HtmlLabel10.Size = New System.Drawing.Size(74, 23)
+        Me.Guna2HtmlLabel10.TabIndex = 5
+        Me.Guna2HtmlLabel10.Text = "รายการรับ"
+        '
+        'Guna2HtmlLabel8
+        '
+        Me.Guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel8.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel8.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel8.Location = New System.Drawing.Point(314, 52)
+        Me.Guna2HtmlLabel8.Name = "Guna2HtmlLabel8"
+        Me.Guna2HtmlLabel8.Size = New System.Drawing.Size(70, 23)
+        Me.Guna2HtmlLabel8.TabIndex = 6
+        Me.Guna2HtmlLabel8.Text = "จำนวนเงิน"
         '
         'txtDetailAmount
         '
+        Me.txtDetailAmount.BackColor = System.Drawing.Color.White
         Me.txtDetailAmount.BorderRadius = 10
         Me.txtDetailAmount.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtDetailAmount.DefaultText = ""
@@ -81,8 +133,9 @@ Partial Class frmEditIncome
         Me.txtDetailAmount.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtDetailAmount.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtDetailAmount.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDetailAmount.ForeColor = System.Drawing.Color.Black
         Me.txtDetailAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtDetailAmount.Location = New System.Drawing.Point(248, 55)
+        Me.txtDetailAmount.Location = New System.Drawing.Point(391, 44)
         Me.txtDetailAmount.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtDetailAmount.Name = "txtDetailAmount"
         Me.txtDetailAmount.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -93,6 +146,7 @@ Partial Class frmEditIncome
         '
         'txtDetailName
         '
+        Me.txtDetailName.BackColor = System.Drawing.Color.White
         Me.txtDetailName.BorderRadius = 10
         Me.txtDetailName.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtDetailName.DefaultText = ""
@@ -102,8 +156,9 @@ Partial Class frmEditIncome
         Me.txtDetailName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtDetailName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtDetailName.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDetailName.ForeColor = System.Drawing.Color.Black
         Me.txtDetailName.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtDetailName.Location = New System.Drawing.Point(31, 112)
+        Me.txtDetailName.Location = New System.Drawing.Point(754, 44)
         Me.txtDetailName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtDetailName.Name = "txtDetailName"
         Me.txtDetailName.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -114,6 +169,7 @@ Partial Class frmEditIncome
         '
         'txtDetailID
         '
+        Me.txtDetailID.BackColor = System.Drawing.Color.White
         Me.txtDetailID.BorderRadius = 10
         Me.txtDetailID.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtDetailID.DefaultText = ""
@@ -123,8 +179,9 @@ Partial Class frmEditIncome
         Me.txtDetailID.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtDetailID.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtDetailID.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDetailID.ForeColor = System.Drawing.Color.Black
         Me.txtDetailID.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtDetailID.Location = New System.Drawing.Point(31, 55)
+        Me.txtDetailID.Location = New System.Drawing.Point(127, 44)
         Me.txtDetailID.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtDetailID.Name = "txtDetailID"
         Me.txtDetailID.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -133,21 +190,104 @@ Partial Class frmEditIncome
         Me.txtDetailID.Size = New System.Drawing.Size(172, 38)
         Me.txtDetailID.TabIndex = 1
         '
+        'Guna2HtmlLabel7
+        '
+        Me.Guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel7.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel7.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel7.Location = New System.Drawing.Point(10, 52)
+        Me.Guna2HtmlLabel7.Name = "Guna2HtmlLabel7"
+        Me.Guna2HtmlLabel7.Size = New System.Drawing.Size(110, 23)
+        Me.Guna2HtmlLabel7.TabIndex = 5
+        Me.Guna2HtmlLabel7.Text = "เลขที่รายละเอียด"
+        '
         'Guna2GroupBox1
         '
         Me.Guna2GroupBox1.BackColor = System.Drawing.Color.White
+        Me.Guna2GroupBox1.Controls.Add(Me.Guna2HtmlLabel2)
+        Me.Guna2GroupBox1.Controls.Add(Me.Guna2HtmlLabel5)
+        Me.Guna2GroupBox1.Controls.Add(Me.Guna2HtmlLabel6)
+        Me.Guna2GroupBox1.Controls.Add(Me.Guna2HtmlLabel4)
+        Me.Guna2GroupBox1.Controls.Add(Me.Guna2HtmlLabel3)
+        Me.Guna2GroupBox1.Controls.Add(Me.Guna2HtmlLabel1)
         Me.Guna2GroupBox1.Controls.Add(Me.txtIncomeID)
         Me.Guna2GroupBox1.Controls.Add(Me.cmbAccount)
         Me.Guna2GroupBox1.Controls.Add(Me.dtpIncomeDate)
         Me.Guna2GroupBox1.Controls.Add(Me.txtIncomeAmount)
         Me.Guna2GroupBox1.Controls.Add(Me.txtIncomeName)
-        Me.Guna2GroupBox1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.Guna2GroupBox1.Location = New System.Drawing.Point(17, 364)
+        Me.Guna2GroupBox1.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2GroupBox1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
+        Me.Guna2GroupBox1.Location = New System.Drawing.Point(17, 452)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
-        Me.Guna2GroupBox1.Size = New System.Drawing.Size(866, 214)
+        Me.Guna2GroupBox1.Size = New System.Drawing.Size(1075, 171)
         Me.Guna2GroupBox1.TabIndex = 7
-        Me.Guna2GroupBox1.Text = "Guna2GroupBox1"
+        Me.Guna2GroupBox1.Text = "รายรับ"
+        '
+        'Guna2HtmlLabel2
+        '
+        Me.Guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel2.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(557, 54)
+        Me.Guna2HtmlLabel2.Name = "Guna2HtmlLabel2"
+        Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(32, 23)
+        Me.Guna2HtmlLabel2.TabIndex = 5
+        Me.Guna2HtmlLabel2.Text = "วันที่"
+        '
+        'Guna2HtmlLabel5
+        '
+        Me.Guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel5.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel5.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel5.Location = New System.Drawing.Point(32, 117)
+        Me.Guna2HtmlLabel5.Name = "Guna2HtmlLabel5"
+        Me.Guna2HtmlLabel5.Size = New System.Drawing.Size(74, 23)
+        Me.Guna2HtmlLabel5.TabIndex = 5
+        Me.Guna2HtmlLabel5.Text = "รายการรับ"
+        '
+        'Guna2HtmlLabel6
+        '
+        Me.Guna2HtmlLabel6.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel6.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel6.Location = New System.Drawing.Point(1010, 56)
+        Me.Guna2HtmlLabel6.Name = "Guna2HtmlLabel6"
+        Me.Guna2HtmlLabel6.Size = New System.Drawing.Size(22, 15)
+        Me.Guna2HtmlLabel6.TabIndex = 5
+        Me.Guna2HtmlLabel6.Text = "บาท"
+        '
+        'Guna2HtmlLabel4
+        '
+        Me.Guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel4.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel4.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel4.Location = New System.Drawing.Point(754, 55)
+        Me.Guna2HtmlLabel4.Name = "Guna2HtmlLabel4"
+        Me.Guna2HtmlLabel4.Size = New System.Drawing.Size(70, 23)
+        Me.Guna2HtmlLabel4.TabIndex = 5
+        Me.Guna2HtmlLabel4.Text = "จำนวนเงิน"
+        '
+        'Guna2HtmlLabel3
+        '
+        Me.Guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel3.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(25, 55)
+        Me.Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
+        Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(81, 23)
+        Me.Guna2HtmlLabel3.TabIndex = 5
+        Me.Guna2HtmlLabel3.Text = "เลขที่รายรับ"
+        '
+        'Guna2HtmlLabel1
+        '
+        Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel1.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(314, 56)
+        Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
+        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(37, 23)
+        Me.Guna2HtmlLabel1.TabIndex = 5
+        Me.Guna2HtmlLabel1.Text = "บัญชี"
         '
         'txtIncomeID
         '
@@ -160,8 +300,9 @@ Partial Class frmEditIncome
         Me.txtIncomeID.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtIncomeID.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtIncomeID.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIncomeID.ForeColor = System.Drawing.Color.Black
         Me.txtIncomeID.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtIncomeID.Location = New System.Drawing.Point(312, 161)
+        Me.txtIncomeID.Location = New System.Drawing.Point(113, 47)
         Me.txtIncomeID.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtIncomeID.Name = "txtIncomeID"
         Me.txtIncomeID.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -179,26 +320,27 @@ Partial Class frmEditIncome
         Me.cmbAccount.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.cmbAccount.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.cmbAccount.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbAccount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
+        Me.cmbAccount.ForeColor = System.Drawing.Color.Black
         Me.cmbAccount.ItemHeight = 30
-        Me.cmbAccount.Location = New System.Drawing.Point(48, 60)
+        Me.cmbAccount.Location = New System.Drawing.Point(357, 49)
         Me.cmbAccount.Name = "cmbAccount"
         Me.cmbAccount.Size = New System.Drawing.Size(172, 36)
         Me.cmbAccount.TabIndex = 3
         '
         'dtpIncomeDate
         '
+        Me.dtpIncomeDate.Animated = True
         Me.dtpIncomeDate.BorderRadius = 10
         Me.dtpIncomeDate.Checked = True
-        Me.dtpIncomeDate.FillColor = System.Drawing.Color.LightGray
+        Me.dtpIncomeDate.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.dtpIncomeDate.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
-        Me.dtpIncomeDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpIncomeDate.Format = System.Windows.Forms.DateTimePickerFormat.[Long]
-        Me.dtpIncomeDate.Location = New System.Drawing.Point(312, 49)
+        Me.dtpIncomeDate.ForeColor = System.Drawing.Color.White
+        Me.dtpIncomeDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpIncomeDate.Location = New System.Drawing.Point(595, 43)
         Me.dtpIncomeDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpIncomeDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpIncomeDate.Name = "dtpIncomeDate"
-        Me.dtpIncomeDate.Size = New System.Drawing.Size(285, 47)
+        Me.dtpIncomeDate.Size = New System.Drawing.Size(138, 47)
         Me.dtpIncomeDate.TabIndex = 2
         Me.dtpIncomeDate.Value = New Date(2024, 9, 10, 17, 56, 37, 496)
         '
@@ -213,8 +355,9 @@ Partial Class frmEditIncome
         Me.txtIncomeAmount.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtIncomeAmount.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtIncomeAmount.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIncomeAmount.ForeColor = System.Drawing.Color.Black
         Me.txtIncomeAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtIncomeAmount.Location = New System.Drawing.Point(312, 115)
+        Me.txtIncomeAmount.Location = New System.Drawing.Point(831, 47)
         Me.txtIncomeAmount.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtIncomeAmount.Name = "txtIncomeAmount"
         Me.txtIncomeAmount.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -222,6 +365,7 @@ Partial Class frmEditIncome
         Me.txtIncomeAmount.SelectedText = ""
         Me.txtIncomeAmount.Size = New System.Drawing.Size(172, 38)
         Me.txtIncomeAmount.TabIndex = 1
+        Me.txtIncomeAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtIncomeName
         '
@@ -234,8 +378,9 @@ Partial Class frmEditIncome
         Me.txtIncomeName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtIncomeName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtIncomeName.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIncomeName.ForeColor = System.Drawing.Color.Black
         Me.txtIncomeName.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtIncomeName.Location = New System.Drawing.Point(561, 115)
+        Me.txtIncomeName.Location = New System.Drawing.Point(113, 109)
         Me.txtIncomeName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtIncomeName.Name = "txtIncomeName"
         Me.txtIncomeName.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -248,32 +393,32 @@ Partial Class frmEditIncome
         '
         Me.dgvIncomeDetails.AllowUserToAddRows = False
         Me.dgvIncomeDetails.AllowUserToDeleteRows = False
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-        Me.dgvIncomeDetails.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvIncomeDetails.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        Me.dgvIncomeDetails.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvIncomeDetails.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvIncomeDetails.ColumnHeadersHeight = 50
         Me.dgvIncomeDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvIncomeDetails.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvIncomeDetails.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvIncomeDetails.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvIncomeDetails.Location = New System.Drawing.Point(453, 62)
+        Me.dgvIncomeDetails.Location = New System.Drawing.Point(578, 150)
         Me.dgvIncomeDetails.Name = "dgvIncomeDetails"
         Me.dgvIncomeDetails.ReadOnly = True
         Me.dgvIncomeDetails.RowHeadersVisible = False
-        Me.dgvIncomeDetails.Size = New System.Drawing.Size(430, 296)
+        Me.dgvIncomeDetails.Size = New System.Drawing.Size(514, 296)
         Me.dgvIncomeDetails.TabIndex = 5
         Me.dgvIncomeDetails.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvIncomeDetails.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -301,32 +446,32 @@ Partial Class frmEditIncome
         '
         Me.dgvIncome.AllowUserToAddRows = False
         Me.dgvIncome.AllowUserToDeleteRows = False
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-        Me.dgvIncome.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvIncome.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        Me.dgvIncome.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvIncome.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvIncome.ColumnHeadersHeight = 50
         Me.dgvIncome.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvIncome.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvIncome.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvIncome.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvIncome.Location = New System.Drawing.Point(17, 62)
+        Me.dgvIncome.Location = New System.Drawing.Point(17, 150)
         Me.dgvIncome.Name = "dgvIncome"
         Me.dgvIncome.ReadOnly = True
         Me.dgvIncome.RowHeadersVisible = False
-        Me.dgvIncome.Size = New System.Drawing.Size(430, 296)
+        Me.dgvIncome.Size = New System.Drawing.Size(555, 296)
         Me.dgvIncome.TabIndex = 6
         Me.dgvIncome.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvIncome.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -353,30 +498,31 @@ Partial Class frmEditIncome
         'btnCancel
         '
         Me.btnCancel.Animated = True
-        Me.btnCancel.BorderRadius = 10
+        Me.btnCancel.BorderRadius = 5
         Me.btnCancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray
         Me.btnCancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
         Me.btnCancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnCancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btnCancel.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.btnCancel.FillColor = System.Drawing.Color.Gold
+        Me.btnCancel.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.ForeColor = System.Drawing.Color.White
-        Me.btnCancel.Location = New System.Drawing.Point(453, 754)
+        Me.btnCancel.Location = New System.Drawing.Point(486, 734)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(180, 45)
         Me.btnCancel.TabIndex = 9
-        Me.btnCancel.Text = "ยกเลิก"
+        Me.btnCancel.Text = "เคลียร์"
         '
         'btnSave
         '
         Me.btnSave.Animated = True
-        Me.btnSave.BorderRadius = 10
+        Me.btnSave.BorderRadius = 5
         Me.btnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray
         Me.btnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
         Me.btnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btnSave.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.btnSave.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
-        Me.btnSave.Location = New System.Drawing.Point(267, 754)
+        Me.btnSave.Location = New System.Drawing.Point(300, 734)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(180, 45)
         Me.btnSave.TabIndex = 10
@@ -389,7 +535,7 @@ Partial Class frmEditIncome
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(900, 30)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(1104, 30)
         Me.Guna2Panel1.TabIndex = 22
         '
         'Guna2ControlBox2
@@ -399,16 +545,54 @@ Partial Class frmEditIncome
         Me.Guna2ControlBox2.CustomIconSize = 30.0!
         Me.Guna2ControlBox2.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox2.Location = New System.Drawing.Point(850, 1)
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(1054, 1)
         Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
         Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox2.TabIndex = 15
+        '
+        'Guna2HtmlLabel11
+        '
+        Me.Guna2HtmlLabel11.BackColor = System.Drawing.Color.White
+        Me.Guna2HtmlLabel11.Font = New System.Drawing.Font("FC Minimal", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel11.Location = New System.Drawing.Point(467, 72)
+        Me.Guna2HtmlLabel11.Name = "Guna2HtmlLabel11"
+        Me.Guna2HtmlLabel11.Size = New System.Drawing.Size(201, 50)
+        Me.Guna2HtmlLabel11.TabIndex = 23
+        Me.Guna2HtmlLabel11.Text = "จัดการรายรับ"
+        '
+        'Guna2Panel2
+        '
+        Me.Guna2Panel2.BackColor = System.Drawing.Color.White
+        Me.Guna2Panel2.Location = New System.Drawing.Point(0, 44)
+        Me.Guna2Panel2.Name = "Guna2Panel2"
+        Me.Guna2Panel2.Size = New System.Drawing.Size(1104, 100)
+        Me.Guna2Panel2.TabIndex = 24
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Animated = True
+        Me.btnDelete.BorderRadius = 5
+        Me.btnDelete.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnDelete.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.btnDelete.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnDelete.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnDelete.FillColor = System.Drawing.Color.Red
+        Me.btnDelete.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.btnDelete.ForeColor = System.Drawing.Color.White
+        Me.btnDelete.Location = New System.Drawing.Point(672, 734)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(180, 45)
+        Me.btnDelete.TabIndex = 25
+        Me.btnDelete.Text = "ลบ"
         '
         'frmEditIncome
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(900, 811)
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(1104, 791)
+        Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.Guna2HtmlLabel11)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
@@ -416,15 +600,19 @@ Partial Class frmEditIncome
         Me.Controls.Add(Me.Guna2GroupBox1)
         Me.Controls.Add(Me.dgvIncomeDetails)
         Me.Controls.Add(Me.dgvIncome)
+        Me.Controls.Add(Me.Guna2Panel2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmEditIncome"
         Me.Text = "frmEditIncome"
         Me.Guna2GroupBox2.ResumeLayout(False)
+        Me.Guna2GroupBox2.PerformLayout()
         Me.Guna2GroupBox1.ResumeLayout(False)
+        Me.Guna2GroupBox1.PerformLayout()
         CType(Me.dgvIncomeDetails, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvIncome, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -445,4 +633,17 @@ Partial Class frmEditIncome
     Friend WithEvents dgvIncome As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel2 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel3 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel4 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel5 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel6 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel7 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel8 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel9 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel10 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel11 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2Panel2 As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents btnDelete As Guna.UI2.WinForms.Guna2Button
 End Class

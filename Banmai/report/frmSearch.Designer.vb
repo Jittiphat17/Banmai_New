@@ -32,10 +32,10 @@ Partial Class frmSearch
         Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.ReportViewer2 = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.dgvResults = New Guna.UI2.WinForms.Guna2DataGridView()
-        Me.cbReportType = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.txtSearch = New Guna.UI2.WinForms.Guna2TextBox()
         Me.btnReport = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2Panel1.SuspendLayout()
         CType(Me.dgvResults, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -91,6 +91,7 @@ Partial Class frmSearch
         DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
         Me.dgvResults.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle13
         Me.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None
+        Me.dgvResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -139,22 +140,6 @@ Partial Class frmSearch
         Me.dgvResults.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dgvResults.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         '
-        'cbReportType
-        '
-        Me.cbReportType.BackColor = System.Drawing.Color.Transparent
-        Me.cbReportType.BorderRadius = 5
-        Me.cbReportType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cbReportType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbReportType.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cbReportType.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cbReportType.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbReportType.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
-        Me.cbReportType.ItemHeight = 30
-        Me.cbReportType.Location = New System.Drawing.Point(766, 56)
-        Me.cbReportType.Name = "cbReportType"
-        Me.cbReportType.Size = New System.Drawing.Size(295, 36)
-        Me.cbReportType.TabIndex = 44
-        '
         'txtSearch
         '
         Me.txtSearch.BorderRadius = 5
@@ -167,7 +152,7 @@ Partial Class frmSearch
         Me.txtSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtSearch.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearch.Location = New System.Drawing.Point(110, 56)
+        Me.txtSearch.Location = New System.Drawing.Point(733, 56)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtSearch.PlaceholderText = ""
@@ -185,7 +170,7 @@ Partial Class frmSearch
         Me.btnReport.FillColor = System.Drawing.Color.ForestGreen
         Me.btnReport.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Bold)
         Me.btnReport.ForeColor = System.Drawing.Color.White
-        Me.btnReport.Location = New System.Drawing.Point(316, 56)
+        Me.btnReport.Location = New System.Drawing.Point(939, 56)
         Me.btnReport.Name = "btnReport"
         Me.btnReport.Size = New System.Drawing.Size(122, 36)
         Me.btnReport.TabIndex = 46
@@ -195,21 +180,32 @@ Partial Class frmSearch
         '
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(20, 64)
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(643, 64)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
         Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(84, 21)
         Me.Guna2HtmlLabel1.TabIndex = 47
         Me.Guna2HtmlLabel1.Text = "ค้นหารายงาน"
         '
+        'Guna2HtmlLabel3
+        '
+        Me.Guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 26.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(12, 55)
+        Me.Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
+        Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(324, 37)
+        Me.Guna2HtmlLabel3.TabIndex = 48
+        Me.Guna2HtmlLabel3.Text = "รายงานสัญญาเงินกู้/สัญญาค้ำ"
+        '
         'frmSearch
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1073, 791)
+        Me.Controls.Add(Me.Guna2HtmlLabel3)
         Me.Controls.Add(Me.Guna2HtmlLabel1)
         Me.Controls.Add(Me.btnReport)
         Me.Controls.Add(Me.txtSearch)
-        Me.Controls.Add(Me.cbReportType)
         Me.Controls.Add(Me.dgvResults)
         Me.Controls.Add(Me.ReportViewer2)
         Me.Controls.Add(Me.ReportViewer1)
@@ -230,8 +226,8 @@ Partial Class frmSearch
     Friend WithEvents ReportViewer1 As Microsoft.Reporting.WinForms.ReportViewer
     Friend WithEvents ReportViewer2 As Microsoft.Reporting.WinForms.ReportViewer
     Friend WithEvents dgvResults As Guna.UI2.WinForms.Guna2DataGridView
-    Friend WithEvents cbReportType As Guna.UI2.WinForms.Guna2ComboBox
     Friend WithEvents txtSearch As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents btnReport As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel3 As Guna.UI2.WinForms.Guna2HtmlLabel
 End Class

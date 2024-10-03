@@ -232,6 +232,7 @@ Partial Class frmViewMember
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1280, 450)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.Guna2HtmlLabel1)

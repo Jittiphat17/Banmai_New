@@ -23,9 +23,9 @@ Partial Class frmManageMembers
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtPost = New System.Windows.Forms.MaskedTextBox()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -67,6 +67,7 @@ Partial Class frmManageMembers
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.Guna2HtmlLabel11 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvMembers, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel1.SuspendLayout()
@@ -74,6 +75,7 @@ Partial Class frmManageMembers
         '
         'GroupBox1
         '
+        Me.GroupBox1.BackColor = System.Drawing.Color.White
         Me.GroupBox1.Controls.Add(Me.txtPost)
         Me.GroupBox1.Controls.Add(Me.Label16)
         Me.GroupBox1.Controls.Add(Me.Label15)
@@ -109,7 +111,7 @@ Partial Class frmManageMembers
         Me.GroupBox1.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(14, 309)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(899, 359)
+        Me.GroupBox1.Size = New System.Drawing.Size(899, 341)
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "ข้อมูลสมาชิก"
@@ -117,7 +119,7 @@ Partial Class frmManageMembers
         'txtPost
         '
         Me.txtPost.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPost.Location = New System.Drawing.Point(594, 123)
+        Me.txtPost.Location = New System.Drawing.Point(596, 105)
         Me.txtPost.Mask = "00000"
         Me.txtPost.Name = "txtPost"
         Me.txtPost.Size = New System.Drawing.Size(169, 31)
@@ -127,7 +129,7 @@ Partial Class frmManageMembers
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(501, 314)
+        Me.Label16.Location = New System.Drawing.Point(503, 296)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(87, 24)
         Me.Label16.TabIndex = 1
@@ -137,7 +139,7 @@ Partial Class frmManageMembers
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(515, 277)
+        Me.Label15.Location = New System.Drawing.Point(517, 259)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(73, 24)
         Me.Label15.TabIndex = 1
@@ -147,7 +149,7 @@ Partial Class frmManageMembers
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(522, 240)
+        Me.Label14.Location = New System.Drawing.Point(524, 222)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(66, 24)
         Me.Label14.TabIndex = 1
@@ -157,7 +159,7 @@ Partial Class frmManageMembers
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(526, 203)
+        Me.Label7.Location = New System.Drawing.Point(528, 185)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(62, 24)
         Me.Label7.TabIndex = 1
@@ -167,7 +169,7 @@ Partial Class frmManageMembers
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(489, 163)
+        Me.Label13.Location = New System.Drawing.Point(491, 145)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(99, 24)
         Me.Label13.TabIndex = 1
@@ -177,7 +179,7 @@ Partial Class frmManageMembers
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(497, 126)
+        Me.Label10.Location = New System.Drawing.Point(499, 108)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(91, 24)
         Me.Label10.TabIndex = 1
@@ -188,7 +190,7 @@ Partial Class frmManageMembers
         Me.dtpBirth.CustomFormat = "dd/MM/yyyy"
         Me.dtpBirth.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpBirth.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpBirth.Location = New System.Drawing.Point(216, 200)
+        Me.dtpBirth.Location = New System.Drawing.Point(218, 182)
         Me.dtpBirth.Name = "dtpBirth"
         Me.dtpBirth.Size = New System.Drawing.Size(111, 31)
         Me.dtpBirth.TabIndex = 6
@@ -196,7 +198,7 @@ Partial Class frmManageMembers
         'txtAccountnum
         '
         Me.txtAccountnum.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAccountnum.Location = New System.Drawing.Point(594, 237)
+        Me.txtAccountnum.Location = New System.Drawing.Point(596, 219)
         Me.txtAccountnum.Mask = "000-000-000-000"
         Me.txtAccountnum.Name = "txtAccountnum"
         Me.txtAccountnum.Size = New System.Drawing.Size(169, 31)
@@ -205,7 +207,7 @@ Partial Class frmManageMembers
         'txtThaiid
         '
         Me.txtThaiid.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtThaiid.Location = New System.Drawing.Point(216, 274)
+        Me.txtThaiid.Location = New System.Drawing.Point(218, 256)
         Me.txtThaiid.Mask = "000-0000000000"
         Me.txtThaiid.Name = "txtThaiid"
         Me.txtThaiid.Size = New System.Drawing.Size(111, 31)
@@ -214,7 +216,7 @@ Partial Class frmManageMembers
         'txtTel
         '
         Me.txtTel.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTel.Location = New System.Drawing.Point(594, 160)
+        Me.txtTel.Location = New System.Drawing.Point(596, 142)
         Me.txtTel.Mask = "000-0000000"
         Me.txtTel.Name = "txtTel"
         Me.txtTel.Size = New System.Drawing.Size(169, 31)
@@ -225,7 +227,7 @@ Partial Class frmManageMembers
         Me.cmbNational.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbNational.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbNational.FormattingEnabled = True
-        Me.cmbNational.Location = New System.Drawing.Point(216, 237)
+        Me.cmbNational.Location = New System.Drawing.Point(218, 219)
         Me.cmbNational.Name = "cmbNational"
         Me.cmbNational.Size = New System.Drawing.Size(111, 32)
         Me.cmbNational.TabIndex = 2
@@ -235,7 +237,7 @@ Partial Class frmManageMembers
         Me.cmbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbGender.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbGender.FormattingEnabled = True
-        Me.cmbGender.Location = New System.Drawing.Point(216, 88)
+        Me.cmbGender.Location = New System.Drawing.Point(218, 70)
         Me.cmbGender.Name = "cmbGender"
         Me.cmbGender.Size = New System.Drawing.Size(111, 32)
         Me.cmbGender.TabIndex = 2
@@ -244,7 +246,7 @@ Partial Class frmManageMembers
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(90, 202)
+        Me.Label6.Location = New System.Drawing.Point(92, 184)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(104, 24)
         Me.Label6.TabIndex = 1
@@ -254,7 +256,7 @@ Partial Class frmManageMembers
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(70, 274)
+        Me.Label8.Location = New System.Drawing.Point(72, 256)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(121, 24)
         Me.Label8.TabIndex = 1
@@ -264,7 +266,7 @@ Partial Class frmManageMembers
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(151, 311)
+        Me.Label12.Location = New System.Drawing.Point(153, 293)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(50, 24)
         Me.Label12.TabIndex = 1
@@ -274,7 +276,7 @@ Partial Class frmManageMembers
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(138, 237)
+        Me.Label11.Location = New System.Drawing.Point(140, 219)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(60, 24)
         Me.Label11.TabIndex = 1
@@ -284,7 +286,7 @@ Partial Class frmManageMembers
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(145, 163)
+        Me.Label5.Location = New System.Drawing.Point(147, 145)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(55, 24)
         Me.Label5.TabIndex = 1
@@ -294,7 +296,7 @@ Partial Class frmManageMembers
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(108, 126)
+        Me.Label4.Location = New System.Drawing.Point(110, 108)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(87, 24)
         Me.Label4.TabIndex = 1
@@ -304,7 +306,7 @@ Partial Class frmManageMembers
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(125, 88)
+        Me.Label3.Location = New System.Drawing.Point(127, 70)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(74, 24)
         Me.Label3.TabIndex = 1
@@ -314,7 +316,7 @@ Partial Class frmManageMembers
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(769, 274)
+        Me.Label18.Location = New System.Drawing.Point(771, 256)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(35, 24)
         Me.Label18.TabIndex = 1
@@ -324,7 +326,7 @@ Partial Class frmManageMembers
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(769, 311)
+        Me.Label17.Location = New System.Drawing.Point(771, 293)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(35, 24)
         Me.Label17.TabIndex = 1
@@ -334,7 +336,7 @@ Partial Class frmManageMembers
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(545, 51)
+        Me.Label9.Location = New System.Drawing.Point(547, 33)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(43, 24)
         Me.Label9.TabIndex = 1
@@ -344,7 +346,7 @@ Partial Class frmManageMembers
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(114, 51)
+        Me.Label2.Location = New System.Drawing.Point(116, 33)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(81, 24)
         Me.Label2.TabIndex = 1
@@ -353,7 +355,7 @@ Partial Class frmManageMembers
         'txtJob
         '
         Me.txtJob.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtJob.Location = New System.Drawing.Point(216, 311)
+        Me.txtJob.Location = New System.Drawing.Point(218, 293)
         Me.txtJob.Name = "txtJob"
         Me.txtJob.Size = New System.Drawing.Size(111, 31)
         Me.txtJob.TabIndex = 0
@@ -361,7 +363,7 @@ Partial Class frmManageMembers
         'txtnick
         '
         Me.txtnick.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtnick.Location = New System.Drawing.Point(216, 163)
+        Me.txtnick.Location = New System.Drawing.Point(218, 145)
         Me.txtnick.Name = "txtnick"
         Me.txtnick.Size = New System.Drawing.Size(111, 31)
         Me.txtnick.TabIndex = 0
@@ -369,7 +371,7 @@ Partial Class frmManageMembers
         'txtOutstanding
         '
         Me.txtOutstanding.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOutstanding.Location = New System.Drawing.Point(594, 311)
+        Me.txtOutstanding.Location = New System.Drawing.Point(596, 293)
         Me.txtOutstanding.Name = "txtOutstanding"
         Me.txtOutstanding.Size = New System.Drawing.Size(169, 31)
         Me.txtOutstanding.TabIndex = 0
@@ -377,7 +379,7 @@ Partial Class frmManageMembers
         'txtBeginning
         '
         Me.txtBeginning.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBeginning.Location = New System.Drawing.Point(594, 274)
+        Me.txtBeginning.Location = New System.Drawing.Point(596, 256)
         Me.txtBeginning.Name = "txtBeginning"
         Me.txtBeginning.Size = New System.Drawing.Size(169, 31)
         Me.txtBeginning.TabIndex = 0
@@ -385,7 +387,7 @@ Partial Class frmManageMembers
         'txtAccountname
         '
         Me.txtAccountname.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAccountname.Location = New System.Drawing.Point(594, 200)
+        Me.txtAccountname.Location = New System.Drawing.Point(596, 182)
         Me.txtAccountname.Name = "txtAccountname"
         Me.txtAccountname.Size = New System.Drawing.Size(169, 31)
         Me.txtAccountname.TabIndex = 0
@@ -393,7 +395,7 @@ Partial Class frmManageMembers
         'txtName
         '
         Me.txtName.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtName.Location = New System.Drawing.Point(216, 126)
+        Me.txtName.Location = New System.Drawing.Point(218, 108)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(197, 31)
         Me.txtName.TabIndex = 0
@@ -401,7 +403,7 @@ Partial Class frmManageMembers
         'txtAddress
         '
         Me.txtAddress.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAddress.Location = New System.Drawing.Point(594, 48)
+        Me.txtAddress.Location = New System.Drawing.Point(596, 30)
         Me.txtAddress.Multiline = True
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.Size = New System.Drawing.Size(274, 69)
@@ -410,7 +412,7 @@ Partial Class frmManageMembers
         'txtID
         '
         Me.txtID.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtID.Location = New System.Drawing.Point(216, 51)
+        Me.txtID.Location = New System.Drawing.Point(218, 33)
         Me.txtID.Name = "txtID"
         Me.txtID.ReadOnly = True
         Me.txtID.Size = New System.Drawing.Size(71, 31)
@@ -425,7 +427,7 @@ Partial Class frmManageMembers
         Me.btnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnSave.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.ForeColor = System.Drawing.Color.White
-        Me.btnSave.Location = New System.Drawing.Point(120, 684)
+        Me.btnSave.Location = New System.Drawing.Point(100, 656)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(180, 45)
         Me.btnSave.TabIndex = 9
@@ -441,7 +443,7 @@ Partial Class frmManageMembers
         Me.btnClear.FillColor = System.Drawing.Color.Gold
         Me.btnClear.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClear.ForeColor = System.Drawing.Color.White
-        Me.btnClear.Location = New System.Drawing.Point(306, 684)
+        Me.btnClear.Location = New System.Drawing.Point(286, 656)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(180, 45)
         Me.btnClear.TabIndex = 9
@@ -457,7 +459,7 @@ Partial Class frmManageMembers
         Me.btnDelete.FillColor = System.Drawing.Color.Red
         Me.btnDelete.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.Color.White
-        Me.btnDelete.Location = New System.Drawing.Point(492, 684)
+        Me.btnDelete.Location = New System.Drawing.Point(472, 656)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(180, 45)
         Me.btnDelete.TabIndex = 9
@@ -466,31 +468,32 @@ Partial Class frmManageMembers
         'dgvMembers
         '
         Me.dgvMembers.AllowUserToAddRows = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        Me.dgvMembers.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvMembers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        Me.dgvMembers.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvMembers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvMembers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvMembers.ColumnHeadersHeight = 50
         Me.dgvMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvMembers.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvMembers.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvMembers.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgvMembers.Location = New System.Drawing.Point(14, 45)
+        Me.dgvMembers.Location = New System.Drawing.Point(14, 99)
         Me.dgvMembers.Name = "dgvMembers"
         Me.dgvMembers.RowHeadersVisible = False
-        Me.dgvMembers.Size = New System.Drawing.Size(899, 258)
+        Me.dgvMembers.Size = New System.Drawing.Size(899, 204)
         Me.dgvMembers.TabIndex = 10
         Me.dgvMembers.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvMembers.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -524,7 +527,7 @@ Partial Class frmManageMembers
         Me.btnUpdate.FillColor = System.Drawing.Color.ForestGreen
         Me.btnUpdate.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
         Me.btnUpdate.ForeColor = System.Drawing.Color.White
-        Me.btnUpdate.Location = New System.Drawing.Point(678, 684)
+        Me.btnUpdate.Location = New System.Drawing.Point(658, 656)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(180, 45)
         Me.btnUpdate.TabIndex = 11
@@ -556,11 +559,23 @@ Partial Class frmManageMembers
         Me.Guna2ControlBox1.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox1.TabIndex = 5
         '
+        'Guna2HtmlLabel11
+        '
+        Me.Guna2HtmlLabel11.BackColor = System.Drawing.Color.White
+        Me.Guna2HtmlLabel11.Font = New System.Drawing.Font("FC Minimal", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel11.Location = New System.Drawing.Point(364, 43)
+        Me.Guna2HtmlLabel11.Name = "Guna2HtmlLabel11"
+        Me.Guna2HtmlLabel11.Size = New System.Drawing.Size(204, 50)
+        Me.Guna2HtmlLabel11.TabIndex = 39
+        Me.Guna2HtmlLabel11.Text = "จัดการสมาชิก"
+        '
         'frmManageMembers
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(925, 741)
+        Me.BackColor = System.Drawing.Color.White
+        Me.ClientSize = New System.Drawing.Size(925, 706)
+        Me.Controls.Add(Me.Guna2HtmlLabel11)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.dgvMembers)
@@ -576,6 +591,7 @@ Partial Class frmManageMembers
         CType(Me.dgvMembers, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GroupBox1 As GroupBox
@@ -619,4 +635,5 @@ Partial Class frmManageMembers
     Friend WithEvents Guna2Elipse1 As Guna.UI2.WinForms.Guna2Elipse
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents Guna2HtmlLabel11 As Guna.UI2.WinForms.Guna2HtmlLabel
 End Class

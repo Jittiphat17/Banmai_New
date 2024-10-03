@@ -27,22 +27,6 @@ Public Class frmManageUser
         gunaDataGridView1.DefaultCellStyle.Font = New Font("FC Minimal", 12, FontStyle.Regular)
         gunaDataGridView1.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold)
 
-        ' ตั้งค่าขนาดและสไตล์ของ DataGridView อื่น ๆ
-        With gunaDataGridView1
-            .AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(223, 240, 255)
-            .DefaultCellStyle.BackColor = Color.White
-            .DefaultCellStyle.ForeColor = Color.Black
-            .ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(63, 81, 181)
-            .ColumnHeadersDefaultCellStyle.ForeColor = Color.White
-            .EnableHeadersVisualStyles = False
-            .CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
-            .GridColor = Color.FromArgb(214, 234, 247)
-            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
-            .DefaultCellStyle.SelectionBackColor = Color.FromArgb(63, 81, 181)
-            .DefaultCellStyle.SelectionForeColor = Color.White
-            .RowTemplate.Height = 40
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-        End With
     End Sub
 
     ' Method to load users into the Guna2DataGridView
