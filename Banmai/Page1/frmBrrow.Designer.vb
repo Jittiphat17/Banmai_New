@@ -427,7 +427,7 @@ Partial Class frmBrrow
         Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
         Me.Guna2GroupBox1.Location = New System.Drawing.Point(13, 122)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
-        Me.Guna2GroupBox1.Size = New System.Drawing.Size(574, 418)
+        Me.Guna2GroupBox1.Size = New System.Drawing.Size(574, 449)
         Me.Guna2GroupBox1.TabIndex = 15
         Me.Guna2GroupBox1.Text = "ผู้กู้"
         Me.Guna2GroupBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center

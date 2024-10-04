@@ -162,6 +162,11 @@
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="individualDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>individualDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -420,6 +425,17 @@
     </None>
     <None Include="db_banmai1DataSet1.xss">
       <DependentUpon>db_banmai1DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="individualDS.xsc">
+      <DependentUpon>individualDS.xsd</DependentUpon>
+    </None>
+    <None Include="individualDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>individualDS.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="individualDS.xss">
+      <DependentUpon>individualDS.xsd</DependentUpon>
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>

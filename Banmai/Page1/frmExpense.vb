@@ -130,8 +130,6 @@ Public Class frmExpense
 
             ' เพิ่มรายการใหม่
             expenseTypeColumn.Items.Add("ค่าเช่าสำนักงาน")
-            expenseTypeColumn.Items.Add("เงินสมทบ")
-            expenseTypeColumn.Items.Add("เงินประกันความเสี่ยง")
             expenseTypeColumn.Items.Add("ค่าตอบแทน")
             expenseTypeColumn.Items.Add("ค่าจ้าง")
             expenseTypeColumn.Items.Add("เงินกู้") ' ไม่เอามาคิด

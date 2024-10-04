@@ -362,7 +362,6 @@ Public Class frmBrrow
         btnSave.Enabled = False
     End Sub
 
-
     Private Function IsDataComplete() As Boolean
         If String.IsNullOrWhiteSpace(txtSearch.Text) Then
             MessageBox.Show("กรุณากรอกชื่อผู้กู้", "ข้อมูลไม่ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -377,18 +376,21 @@ Public Class frmBrrow
             Return False
         End If
 
+        ' ตรวจสอบการค้ำประกัน
         If cbGuaranteeType.SelectedIndex = 0 Then
             MessageBox.Show("กรุณาเลือกการค้ำประกัน", "ข้อมูลไม่ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             cbGuaranteeType.Focus()
             Return False
         End If
 
+        ' ตรวจสอบจำนวนเดือน
         If cbPerM.SelectedIndex = 0 Then
             MessageBox.Show("กรุณาเลือกจำนวนเดือน", "ข้อมูลไม่ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             cbPerM.Focus()
             Return False
         End If
 
+        ' ตรวจสอบอัตราดอกเบี้ย
         Dim interestRate As Decimal
         If Not Decimal.TryParse(txtPercen.Text, interestRate) OrElse interestRate <= 0 Then
             MessageBox.Show("กรุณากรอกอัตราดอกเบี้ยที่ถูกต้อง", "ข้อมูลไม่ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -396,16 +398,27 @@ Public Class frmBrrow
             Return False
         End If
 
-        If chkGuarantor.Checked Then
-            If String.IsNullOrWhiteSpace(txtSearch1.Text) Then
-                MessageBox.Show("กรุณากรอกชื่อผู้ค้ำประกันอย่างน้อย 1 คน", "ข้อมูลไม่ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtSearch1.Focus()
-                Return False
-            End If
+        ' ตรวจสอบจำนวนผู้ค้ำตามจำนวนเงินกู้
+        Dim guarantorCount As Integer = 0
+        If Not String.IsNullOrWhiteSpace(txtSearch1.Text) Then guarantorCount += 1
+        If Not String.IsNullOrWhiteSpace(txtSearch2.Text) Then guarantorCount += 1
+        If Not String.IsNullOrWhiteSpace(txtSearch3.Text) Then guarantorCount += 1
+
+        ' ตรวจสอบเงื่อนไขจำนวนผู้ค้ำ
+        If loanAmount <= 10000 AndAlso guarantorCount < 1 Then
+            MessageBox.Show("จำนวนเงินกู้ไม่เกิน 10,000 บาท ต้องมีผู้ค้ำประกันอย่างน้อย 1 คน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        ElseIf loanAmount > 10000 AndAlso loanAmount < 100000 AndAlso guarantorCount < 2 Then
+            MessageBox.Show("จำนวนเงินกู้เกิน 10,000 บาท แต่ไม่ถึง 100,000 บาท ต้องมีผู้ค้ำประกันอย่างน้อย 2 คน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        ElseIf loanAmount >= 100000 AndAlso guarantorCount < 3 Then
+            MessageBox.Show("จำนวนเงินกู้เกิน 100,000 บาท ต้องมีผู้ค้ำประกันอย่างน้อย 3 คน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
         End If
 
         Return True
     End Function
+
 
     Private Sub UpdateGuarantorStatus()
         Dim hasGuarantor As Boolean = Not String.IsNullOrWhiteSpace(txtSearch1.Text) OrElse
@@ -718,5 +731,29 @@ Public Class frmBrrow
         ' เรียกใช้ฟังก์ชัน ResetForm เพื่อเคลียร์ข้อมูลทั้งหมดในฟอร์ม
         ResetForm()
     End Sub
+
+    Private Function ValidateGuarantorCount(loanAmount As Decimal) As Boolean
+        Dim guarantorCount As Integer = 0
+
+        ' นับจำนวนผู้ค้ำที่ถูกกรอกข้อมูล
+        If Not String.IsNullOrWhiteSpace(txtSearch1.Text) Then guarantorCount += 1
+        If Not String.IsNullOrWhiteSpace(txtSearch2.Text) Then guarantorCount += 1
+        If Not String.IsNullOrWhiteSpace(txtSearch3.Text) Then guarantorCount += 1
+
+        ' ตรวจสอบจำนวนผู้ค้ำตามจำนวนเงินกู้
+        If loanAmount <= 10000 AndAlso guarantorCount < 1 Then
+            MessageBox.Show("จำนวนเงินกู้ไม่เกิน 10,000 บาท ต้องมีผู้ค้ำประกันอย่างน้อย 1 คน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        ElseIf loanAmount > 10000 AndAlso loanAmount < 100000 AndAlso guarantorCount < 2 Then
+            MessageBox.Show("จำนวนเงินกู้เกิน 10,000 บาท แต่ไม่ถึง 100,000 บาท ต้องมีผู้ค้ำประกันอย่างน้อย 2 คน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        ElseIf loanAmount >= 100000 AndAlso guarantorCount < 3 Then
+            MessageBox.Show("จำนวนเงินกู้เกิน 100,000 บาท ต้องมีผู้ค้ำประกันอย่างน้อย 3 คน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        Return True
+    End Function
+
 
 End Class

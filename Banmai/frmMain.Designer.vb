@@ -74,6 +74,10 @@ Partial Class frmMain
         Me.Guna2Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
+        'Guna2Elipse1
+        '
+        Me.Guna2Elipse1.BorderRadius = 0
+        '
         'Guna2Elipse2
         '
         Me.Guna2Elipse2.TargetControl = Me
@@ -82,7 +86,7 @@ Partial Class frmMain
         '
         Me.lblUserInfo.BackColor = System.Drawing.Color.Transparent
         Me.lblUserInfo.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUserInfo.Location = New System.Drawing.Point(186, 504)
+        Me.lblUserInfo.Location = New System.Drawing.Point(174, 573)
         Me.lblUserInfo.Name = "lblUserInfo"
         Me.lblUserInfo.Size = New System.Drawing.Size(131, 23)
         Me.lblUserInfo.TabIndex = 26
@@ -92,7 +96,7 @@ Partial Class frmMain
         '
         Me.lblDateTime.BackColor = System.Drawing.Color.Transparent
         Me.lblDateTime.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDateTime.Location = New System.Drawing.Point(505, 504)
+        Me.lblDateTime.Location = New System.Drawing.Point(839, 573)
         Me.lblDateTime.Name = "lblDateTime"
         Me.lblDateTime.Size = New System.Drawing.Size(133, 23)
         Me.lblDateTime.TabIndex = 27
@@ -105,9 +109,9 @@ Partial Class frmMain
         Me.Guna2GroupBox2.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox2.Location = New System.Drawing.Point(479, 61)
+        Me.Guna2GroupBox2.Location = New System.Drawing.Point(174, 225)
         Me.Guna2GroupBox2.Name = "Guna2GroupBox2"
-        Me.Guna2GroupBox2.Size = New System.Drawing.Size(289, 113)
+        Me.Guna2GroupBox2.Size = New System.Drawing.Size(830, 113)
         Me.Guna2GroupBox2.TabIndex = 30
         Me.Guna2GroupBox2.Text = "จำนวนการทำสัญญา"
         '
@@ -117,7 +121,7 @@ Partial Class frmMain
         Me.lbContractCount.BackColor = System.Drawing.Color.White
         Me.lbContractCount.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbContractCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lbContractCount.Location = New System.Drawing.Point(43, 62)
+        Me.lbContractCount.Location = New System.Drawing.Point(120, 68)
         Me.lbContractCount.Name = "lbContractCount"
         Me.lbContractCount.Size = New System.Drawing.Size(131, 21)
         Me.lbContractCount.TabIndex = 2
@@ -133,7 +137,7 @@ Partial Class frmMain
         Me.Guna2Panel1.ShadowDecoration.Color = System.Drawing.Color.Gray
         Me.Guna2Panel1.ShadowDecoration.Depth = 20
         Me.Guna2Panel1.ShadowDecoration.Enabled = True
-        Me.Guna2Panel1.Size = New System.Drawing.Size(159, 511)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(159, 598)
         Me.Guna2Panel1.TabIndex = 28
         '
         'MenuStrip1
@@ -144,7 +148,7 @@ Partial Class frmMain
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.MenuStrip1.Size = New System.Drawing.Size(161, 511)
+        Me.MenuStrip1.Size = New System.Drawing.Size(161, 598)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -356,9 +360,9 @@ Partial Class frmMain
         Me.Guna2GroupBox1.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox1.Location = New System.Drawing.Point(165, 61)
+        Me.Guna2GroupBox1.Location = New System.Drawing.Point(174, 63)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
-        Me.Guna2GroupBox1.Size = New System.Drawing.Size(295, 113)
+        Me.Guna2GroupBox1.Size = New System.Drawing.Size(830, 113)
         Me.Guna2GroupBox1.TabIndex = 29
         Me.Guna2GroupBox1.Text = "จำนวนสมาชิก"
         '
@@ -368,7 +372,7 @@ Partial Class frmMain
         Me.lbCount.BackColor = System.Drawing.Color.White
         Me.lbCount.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lbCount.Location = New System.Drawing.Point(26, 62)
+        Me.lbCount.Location = New System.Drawing.Point(120, 65)
         Me.lbCount.Name = "lbCount"
         Me.lbCount.Size = New System.Drawing.Size(130, 21)
         Me.lbCount.TabIndex = 1
@@ -384,7 +388,7 @@ Partial Class frmMain
         Me.Guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel2.Name = "Guna2Panel2"
-        Me.Guna2Panel2.Size = New System.Drawing.Size(780, 30)
+        Me.Guna2Panel2.Size = New System.Drawing.Size(1016, 30)
         Me.Guna2Panel2.TabIndex = 31
         '
         'Guna2ControlBox2
@@ -394,7 +398,7 @@ Partial Class frmMain
         Me.Guna2ControlBox2.CustomIconSize = 30.0!
         Me.Guna2ControlBox2.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox2.Location = New System.Drawing.Point(730, 1)
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(966, 1)
         Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
         Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox2.TabIndex = 15
@@ -404,7 +408,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(780, 538)
+        Me.ClientSize = New System.Drawing.Size(1016, 608)
         Me.Controls.Add(Me.Guna2Panel2)
         Me.Controls.Add(Me.lblUserInfo)
         Me.Controls.Add(Me.lblDateTime)

@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="individualDS" targetNamespace="http://tempuri.org/individualDS.xsd" xmlns:mstns="http://tempuri.org/individualDS.xsd" xmlns="http://tempuri.org/individualDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="db_banmai1ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="db_banmai1ConnectionString (MySettings)" PropertyReference="ApplicationSettings.Banmai.My.MySettings.GlobalReference.Default.db_banmai1ConnectionString" Provider="System.Data.OleDb" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_banmai1ConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT        Member.m_id, Member.m_name, Member.con_id, Account_Details.m_id AS AD_m_id, Account_Details.acc_id AS AD_acc_id, Account.acc_id AS mas_acc_id, Account.acc_name, Payment.payment_id, Payment.payment_date, 
+                         Payment.payment_amount, Payment.payment_prin, Payment.payment_interest, Payment.payment_period, Payment.payment_fine, Contract.m_id AS cont_m_id, Contract.con_id AS cont_con_id, 
+                         Contract.con_amount, Contract.con_date, Contract.acc_id AS cont_acc_id, Contract.con_guarantee, Contract.con_GuaranteeType, Contract.con_details, i.ind_id, i.ind_amount, i.ind_accname, Payment.payment_Principal, 
+                         i.ind_date
+FROM            (((((Member LEFT OUTER JOIN
+                         Contract ON Member.con_id = Contract.con_id) LEFT OUTER JOIN
+                         Payment ON Contract.con_id = Payment.con_id) LEFT OUTER JOIN
+                         Account_Details ON Member.m_id = Account_Details.m_id) LEFT OUTER JOIN
+                         Account ON Account_Details.acc_id = Account.acc_id) LEFT OUTER JOIN
+                         Income_Details i ON Member.m_id = i.m_id AND Member.con_id = i.con_id)
+ORDER BY Member.m_id</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="m_id" DataSetColumn="m_id" />
+              <Mapping SourceColumn="m_name" DataSetColumn="m_name" />
+              <Mapping SourceColumn="con_id" DataSetColumn="con_id" />
+              <Mapping SourceColumn="AD_m_id" DataSetColumn="AD_m_id" />
+              <Mapping SourceColumn="AD_acc_id" DataSetColumn="AD_acc_id" />
+              <Mapping SourceColumn="mas_acc_id" DataSetColumn="mas_acc_id" />
+              <Mapping SourceColumn="acc_name" DataSetColumn="acc_name" />
+              <Mapping SourceColumn="payment_id" DataSetColumn="payment_id" />
+              <Mapping SourceColumn="payment_date" DataSetColumn="payment_date" />
+              <Mapping SourceColumn="payment_amount" DataSetColumn="payment_amount" />
+              <Mapping SourceColumn="payment_prin" DataSetColumn="payment_prin" />
+              <Mapping SourceColumn="payment_interest" DataSetColumn="payment_interest" />
+              <Mapping SourceColumn="payment_period" DataSetColumn="payment_period" />
+              <Mapping SourceColumn="payment_fine" DataSetColumn="payment_fine" />
+              <Mapping SourceColumn="cont_m_id" DataSetColumn="cont_m_id" />
+              <Mapping SourceColumn="cont_con_id" DataSetColumn="cont_con_id" />
+              <Mapping SourceColumn="con_amount" DataSetColumn="con_amount" />
+              <Mapping SourceColumn="con_date" DataSetColumn="con_date" />
+              <Mapping SourceColumn="cont_acc_id" DataSetColumn="cont_acc_id" />
+              <Mapping SourceColumn="con_guarantee" DataSetColumn="con_guarantee" />
+              <Mapping SourceColumn="con_GuaranteeType" DataSetColumn="con_GuaranteeType" />
+              <Mapping SourceColumn="con_details" DataSetColumn="con_details" />
+              <Mapping SourceColumn="ind_id" DataSetColumn="ind_id" />
+              <Mapping SourceColumn="ind_amount" DataSetColumn="ind_amount" />
+              <Mapping SourceColumn="ind_accname" DataSetColumn="ind_accname" />
+              <Mapping SourceColumn="payment_Principal" DataSetColumn="payment_Principal" />
+              <Mapping SourceColumn="ind_date" DataSetColumn="ind_date" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="db_banmai1ConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="filterdate" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="filterdate" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="filterdate">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT        Member.m_id, Member.m_name
+, Member.con_id
+, Account_Details.m_id AS AD_m_id
+, Account_Details.acc_id AS AD_acc_id
+, Account.acc_id AS mas_acc_id
+, Account.acc_name
+, Payment.payment_id
+, Payment.payment_date
+, Payment.payment_amount
+, Payment.payment_prin
+, Payment.payment_interest
+, Payment.payment_period
+, Payment.payment_fine
+, Contract.m_id AS cont_m_id
+, Contract.con_id AS cont_con_id
+, Contract.con_amount
+, Contract.con_date
+, Contract.acc_id AS cont_acc_id
+, Contract.con_guarantee
+, Contract.con_GuaranteeType
+, Contract.con_details
+, i.ind_id
+, i.ind_amount
+, i.ind_accname
+, Payment.payment_Principal
+, i.ind_date
+FROM            (((((Member LEFT OUTER JOIN
+                         Contract ON Member.con_id = Contract.con_id) LEFT OUTER JOIN
+                         Payment ON Contract.con_id = Payment.con_id) LEFT OUTER JOIN
+                         Account_Details ON Member.m_id = Account_Details.m_id) LEFT OUTER JOIN
+                         Account ON Account_Details.acc_id = Account.acc_id) LEFT OUTER JOIN
+                         Income_Details i ON Member.m_id = i.m_id AND Member.con_id = i.con_id)
+WHERE        (Payment.payment_date &gt;= ?) AND (Payment.payment_date &lt;= ?) AND (Account_Details.acc_id = ?)
+ORDER BY Member.m_id</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="payment_date" DataSourceName="" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="payment_date" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="payment_date" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param2" ColumnName="payment_date" DataSourceName="" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="payment_date1" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="payment_date" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Param3" ColumnName="acc_id" DataSourceName="" DataTypeServer="DbType.StringFixedLength(255)" DbType="String" Direction="Input" ParameterName="acc_id" Precision="0" ProviderType="WChar" Scale="0" Size="255" SourceColumn="AD_acc_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="dtContractTableAdapter" GeneratorDataComponentClassName="dtContractTableAdapter" Name="dtContract" UserDataComponentName="dtContractTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="db_banmai1ConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="filterContract" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="filterContract" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="filterContract">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT        Member.m_id, Member.m_name
+, Member.con_id
+, Account_Details.m_id AS AD_m_id
+, Account_Details.acc_id AS AD_acc_id
+, Account.acc_id AS mas_acc_id
+, Account.acc_name
+, 0 as payment_id
+, Contract.con_date as payment_date
+, NULL as payment_amount
+, NULL  as payment_prin
+, NULL  as payment_interest
+, 0 as payment_period
+, NULL  as payment_fine
+, Contract.m_id AS cont_m_id
+, Contract.con_id AS cont_con_id
+, Contract.con_amount
+, Contract.con_date
+, Contract.acc_id AS cont_acc_id
+, Contract.con_guarantee
+, Contract.con_GuaranteeType
+, Contract.con_details
+, i.ind_id
+, i.ind_amount
+, i.ind_accname
+, Contract.con_amount as payment_Principal
+, i.ind_date
+FROM            ((((Member LEFT OUTER JOIN
+                         Contract ON Member.con_id = Contract.con_id) LEFT OUTER JOIN
+                         Account_Details ON Member.m_id = Account_Details.m_id) LEFT OUTER JOIN
+                         Account ON Account_Details.acc_id = Account.acc_id) LEFT OUTER JOIN
+                         Income_Details i ON Member.m_id = i.m_id AND Member.con_id = i.con_id)
+WHERE        (Contract.con_date &gt;= ?) AND (Contract.con_date &lt;= ?) AND (Account_Details.acc_id = ?)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param1" ColumnName="con_date" DataSourceName="" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="con_date" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="payment_date" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="Param2" ColumnName="con_date" DataSourceName="" DataTypeServer="DbType.Date" DbType="Date" Direction="Input" ParameterName="con_date1" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="payment_date" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Param3" ColumnName="acc_id" DataSourceName="" DataTypeServer="DbType.StringFixedLength(255)" DbType="String" Direction="Input" ParameterName="acc_id" Precision="0" ProviderType="WChar" Scale="0" Size="255" SourceColumn="AD_acc_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="m_id" DataSetColumn="m_id" />
+              <Mapping SourceColumn="con_amount" DataSetColumn="con_amount" />
+              <Mapping SourceColumn="con_date" DataSetColumn="con_date" />
+              <Mapping SourceColumn="m_name" DataSetColumn="m_name" />
+              <Mapping SourceColumn="con_id" DataSetColumn="con_id" />
+              <Mapping SourceColumn="AD_m_id" DataSetColumn="AD_m_id" />
+              <Mapping SourceColumn="AD_acc_id" DataSetColumn="AD_acc_id" />
+              <Mapping SourceColumn="mas_acc_id" DataSetColumn="mas_acc_id" />
+              <Mapping SourceColumn="acc_name" DataSetColumn="acc_name" />
+              <Mapping SourceColumn="cont_m_id" DataSetColumn="cont_m_id" />
+              <Mapping SourceColumn="cont_con_id" DataSetColumn="cont_con_id" />
+              <Mapping SourceColumn="cont_acc_id" DataSetColumn="cont_acc_id" />
+              <Mapping SourceColumn="con_guarantee" DataSetColumn="con_guarantee" />
+              <Mapping SourceColumn="con_GuaranteeType" DataSetColumn="con_GuaranteeType" />
+              <Mapping SourceColumn="con_details" DataSetColumn="con_details" />
+              <Mapping SourceColumn="ind_id" DataSetColumn="ind_id" />
+              <Mapping SourceColumn="ind_amount" DataSetColumn="ind_amount" />
+              <Mapping SourceColumn="ind_accname" DataSetColumn="ind_accname" />
+              <Mapping SourceColumn="payment_id" DataSetColumn="payment_id" />
+              <Mapping SourceColumn="payment_date" DataSetColumn="payment_date" />
+              <Mapping SourceColumn="ind_date" DataSetColumn="ind_date" />
+              <Mapping SourceColumn="payment_Principal" DataSetColumn="payment_Principal" />
+              <Mapping SourceColumn="payment_period" DataSetColumn="payment_period" />
+              <Mapping SourceColumn="payment_amount" DataSetColumn="payment_amount1" />
+              <Mapping SourceColumn="payment_prin" DataSetColumn="payment_prin1" />
+              <Mapping SourceColumn="payment_interest" DataSetColumn="payment_interest1" />
+              <Mapping SourceColumn="payment_fine" DataSetColumn="payment_fine1" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="individualDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="individualDS" msprop:Generator_DataSetName="individualDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_UserTableName="DataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="m_id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="m_id" msprop:Generator_ColumnPropNameInTable="m_idColumn" msprop:Generator_ColumnVarNameInTable="columnm_id" msprop:Generator_UserColumnName="m_id" type="xs:int" minOccurs="0" />
+              <xs:element name="m_name" msprop:Generator_ColumnPropNameInRow="m_name" msprop:Generator_ColumnPropNameInTable="m_nameColumn" msprop:Generator_ColumnVarNameInTable="columnm_name" msprop:Generator_UserColumnName="m_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="con_id" msprop:Generator_ColumnPropNameInRow="con_id" msprop:Generator_ColumnPropNameInTable="con_idColumn" msprop:Generator_ColumnVarNameInTable="columncon_id" msprop:Generator_UserColumnName="con_id" type="xs:int" minOccurs="0" />
+              <xs:element name="AD_m_id" msprop:Generator_ColumnPropNameInRow="AD_m_id" msprop:Generator_ColumnPropNameInTable="AD_m_idColumn" msprop:Generator_ColumnVarNameInTable="columnAD_m_id" msprop:Generator_UserColumnName="AD_m_id" type="xs:int" minOccurs="0" />
+              <xs:element name="AD_acc_id" msprop:Generator_ColumnPropNameInRow="AD_acc_id" msprop:Generator_ColumnPropNameInTable="AD_acc_idColumn" msprop:Generator_ColumnVarNameInTable="columnAD_acc_id" msprop:Generator_UserColumnName="AD_acc_id" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="mas_acc_id" msprop:Generator_ColumnPropNameInRow="mas_acc_id" msprop:Generator_ColumnPropNameInTable="mas_acc_idColumn" msprop:Generator_ColumnVarNameInTable="columnmas_acc_id" msprop:Generator_UserColumnName="mas_acc_id" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="acc_name" msprop:Generator_ColumnPropNameInRow="acc_name" msprop:Generator_ColumnPropNameInTable="acc_nameColumn" msprop:Generator_ColumnVarNameInTable="columnacc_name" msprop:Generator_UserColumnName="acc_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="payment_id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="payment_id" msprop:Generator_ColumnPropNameInTable="payment_idColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_id" msprop:Generator_UserColumnName="payment_id" type="xs:int" minOccurs="0" />
+              <xs:element name="payment_date" msprop:Generator_ColumnPropNameInRow="payment_date" msprop:Generator_ColumnPropNameInTable="payment_dateColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_date" msprop:Generator_UserColumnName="payment_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="payment_amount" msprop:Generator_ColumnPropNameInRow="payment_amount" msprop:Generator_ColumnPropNameInTable="payment_amountColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_amount" msprop:Generator_UserColumnName="payment_amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="payment_prin" msprop:Generator_ColumnPropNameInRow="payment_prin" msprop:Generator_ColumnPropNameInTable="payment_prinColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_prin" msprop:Generator_UserColumnName="payment_prin" type="xs:decimal" minOccurs="0" />
+              <xs:element name="payment_interest" msprop:Generator_ColumnPropNameInRow="payment_interest" msprop:Generator_ColumnPropNameInTable="payment_interestColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_interest" msprop:Generator_UserColumnName="payment_interest" type="xs:decimal" minOccurs="0" />
+              <xs:element name="payment_period" msprop:Generator_ColumnPropNameInRow="payment_period" msprop:Generator_ColumnPropNameInTable="payment_periodColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_period" msprop:Generator_UserColumnName="payment_period" type="xs:int" minOccurs="0" />
+              <xs:element name="payment_fine" msprop:Generator_ColumnPropNameInRow="payment_fine" msprop:Generator_ColumnPropNameInTable="payment_fineColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_fine" msprop:Generator_UserColumnName="payment_fine" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cont_m_id" msprop:Generator_ColumnPropNameInRow="cont_m_id" msprop:Generator_ColumnPropNameInTable="cont_m_idColumn" msprop:Generator_ColumnVarNameInTable="columncont_m_id" msprop:Generator_UserColumnName="cont_m_id" type="xs:int" minOccurs="0" />
+              <xs:element name="cont_con_id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="cont_con_id" msprop:Generator_ColumnPropNameInTable="cont_con_idColumn" msprop:Generator_ColumnVarNameInTable="columncont_con_id" msprop:Generator_UserColumnName="cont_con_id" type="xs:int" minOccurs="0" />
+              <xs:element name="con_amount" msprop:Generator_ColumnPropNameInRow="con_amount" msprop:Generator_ColumnPropNameInTable="con_amountColumn" msprop:Generator_ColumnVarNameInTable="columncon_amount" msprop:Generator_UserColumnName="con_amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="con_date" msprop:Generator_ColumnPropNameInRow="con_date" msprop:Generator_ColumnPropNameInTable="con_dateColumn" msprop:Generator_ColumnVarNameInTable="columncon_date" msprop:Generator_UserColumnName="con_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="cont_acc_id" msprop:Generator_ColumnPropNameInRow="cont_acc_id" msprop:Generator_ColumnPropNameInTable="cont_acc_idColumn" msprop:Generator_ColumnVarNameInTable="columncont_acc_id" msprop:Generator_UserColumnName="cont_acc_id" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="con_guarantee" msprop:Generator_ColumnPropNameInRow="con_guarantee" msprop:Generator_ColumnPropNameInTable="con_guaranteeColumn" msprop:Generator_ColumnVarNameInTable="columncon_guarantee" msprop:Generator_UserColumnName="con_guarantee" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="con_GuaranteeType" msprop:Generator_ColumnPropNameInRow="con_GuaranteeType" msprop:Generator_ColumnPropNameInTable="con_GuaranteeTypeColumn" msprop:Generator_ColumnVarNameInTable="columncon_GuaranteeType" msprop:Generator_UserColumnName="con_GuaranteeType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="con_details" msprop:Generator_ColumnPropNameInRow="con_details" msprop:Generator_ColumnPropNameInTable="con_detailsColumn" msprop:Generator_ColumnVarNameInTable="columncon_details" msprop:Generator_UserColumnName="con_details" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="536870910" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ind_id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="ind_id" msprop:Generator_ColumnPropNameInTable="ind_idColumn" msprop:Generator_ColumnVarNameInTable="columnind_id" msprop:Generator_UserColumnName="ind_id" type="xs:int" minOccurs="0" />
+              <xs:element name="ind_amount" msprop:Generator_ColumnPropNameInRow="ind_amount" msprop:Generator_ColumnPropNameInTable="ind_amountColumn" msprop:Generator_ColumnVarNameInTable="columnind_amount" msprop:Generator_UserColumnName="ind_amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ind_accname" msprop:Generator_ColumnPropNameInRow="ind_accname" msprop:Generator_ColumnPropNameInTable="ind_accnameColumn" msprop:Generator_ColumnVarNameInTable="columnind_accname" msprop:Generator_UserColumnName="ind_accname" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="payment_Principal" msprop:Generator_ColumnPropNameInRow="payment_Principal" msprop:Generator_ColumnPropNameInTable="payment_PrincipalColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_Principal" msprop:Generator_UserColumnName="payment_Principal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ind_date" msprop:Generator_ColumnPropNameInRow="ind_date" msprop:Generator_ColumnPropNameInTable="ind_dateColumn" msprop:Generator_ColumnVarNameInTable="columnind_date" msprop:Generator_UserColumnName="ind_date" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="dtContract" msprop:Generator_RowEvHandlerName="dtContractRowChangeEventHandler" msprop:Generator_RowDeletedName="dtContractRowDeleted" msprop:Generator_RowDeletingName="dtContractRowDeleting" msprop:Generator_RowEvArgName="dtContractRowChangeEvent" msprop:Generator_TablePropName="dtContract" msprop:Generator_RowChangedName="dtContractRowChanged" msprop:Generator_RowChangingName="dtContractRowChanging" msprop:Generator_TableClassName="dtContractDataTable" msprop:Generator_RowClassName="dtContractRow" msprop:Generator_TableVarName="tabledtContract" msprop:Generator_UserTableName="dtContract">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="m_id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="m_id" msprop:Generator_ColumnPropNameInTable="m_idColumn" msprop:Generator_ColumnVarNameInTable="columnm_id" msprop:Generator_UserColumnName="m_id" type="xs:int" minOccurs="0" />
+              <xs:element name="con_amount" msprop:Generator_ColumnPropNameInRow="con_amount" msprop:Generator_ColumnPropNameInTable="con_amountColumn" msprop:Generator_ColumnVarNameInTable="columncon_amount" msprop:Generator_UserColumnName="con_amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="con_date" msprop:Generator_ColumnPropNameInRow="con_date" msprop:Generator_ColumnPropNameInTable="con_dateColumn" msprop:Generator_ColumnVarNameInTable="columncon_date" msprop:Generator_UserColumnName="con_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="m_name" msprop:Generator_ColumnPropNameInRow="m_name" msprop:Generator_ColumnPropNameInTable="m_nameColumn" msprop:Generator_ColumnVarNameInTable="columnm_name" msprop:Generator_UserColumnName="m_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="con_id" msprop:Generator_ColumnPropNameInRow="con_id" msprop:Generator_ColumnPropNameInTable="con_idColumn" msprop:Generator_ColumnVarNameInTable="columncon_id" msprop:Generator_UserColumnName="con_id" type="xs:int" minOccurs="0" />
+              <xs:element name="AD_m_id" msprop:Generator_ColumnPropNameInRow="AD_m_id" msprop:Generator_ColumnPropNameInTable="AD_m_idColumn" msprop:Generator_ColumnVarNameInTable="columnAD_m_id" msprop:Generator_UserColumnName="AD_m_id" type="xs:int" minOccurs="0" />
+              <xs:element name="AD_acc_id" msprop:Generator_ColumnPropNameInRow="AD_acc_id" msprop:Generator_ColumnPropNameInTable="AD_acc_idColumn" msprop:Generator_ColumnVarNameInTable="columnAD_acc_id" msprop:Generator_UserColumnName="AD_acc_id" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="mas_acc_id" msprop:Generator_ColumnPropNameInRow="mas_acc_id" msprop:Generator_ColumnPropNameInTable="mas_acc_idColumn" msprop:Generator_ColumnVarNameInTable="columnmas_acc_id" msprop:Generator_UserColumnName="mas_acc_id" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="acc_name" msprop:Generator_ColumnPropNameInRow="acc_name" msprop:Generator_ColumnPropNameInTable="acc_nameColumn" msprop:Generator_ColumnVarNameInTable="columnacc_name" msprop:Generator_UserColumnName="acc_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="payment_date" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="payment_date" msprop:Generator_ColumnPropNameInTable="payment_dateColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_date" msprop:Generator_UserColumnName="payment_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="payment_prin" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="payment_prin" msprop:Generator_ColumnPropNameInTable="payment_prinColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_prin" msprop:Generator_UserColumnName="payment_prin" type="xs:decimal" minOccurs="0" />
+              <xs:element name="payment_interest" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="payment_interest" msprop:Generator_ColumnPropNameInTable="payment_interestColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_interest" msprop:Generator_UserColumnName="payment_interest" type="xs:decimal" minOccurs="0" />
+              <xs:element name="payment_period" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="payment_period" msprop:Generator_ColumnPropNameInTable="payment_periodColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_period" msprop:Generator_UserColumnName="payment_period" type="xs:int" minOccurs="0" />
+              <xs:element name="payment_fine" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="payment_fine" msprop:Generator_ColumnPropNameInTable="payment_fineColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_fine" msprop:Generator_UserColumnName="payment_fine" type="xs:decimal" minOccurs="0" />
+              <xs:element name="cont_m_id" msprop:Generator_ColumnPropNameInRow="cont_m_id" msprop:Generator_ColumnPropNameInTable="cont_m_idColumn" msprop:Generator_ColumnVarNameInTable="columncont_m_id" msprop:Generator_UserColumnName="cont_m_id" type="xs:int" minOccurs="0" />
+              <xs:element name="cont_con_id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="cont_con_id" msprop:Generator_ColumnPropNameInTable="cont_con_idColumn" msprop:Generator_ColumnVarNameInTable="columncont_con_id" msprop:Generator_UserColumnName="cont_con_id" type="xs:int" minOccurs="0" />
+              <xs:element name="cont_acc_id" msprop:Generator_ColumnPropNameInRow="cont_acc_id" msprop:Generator_ColumnPropNameInTable="cont_acc_idColumn" msprop:Generator_ColumnVarNameInTable="columncont_acc_id" msprop:Generator_UserColumnName="cont_acc_id" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="con_guarantee" msprop:Generator_ColumnPropNameInRow="con_guarantee" msprop:Generator_ColumnPropNameInTable="con_guaranteeColumn" msprop:Generator_ColumnVarNameInTable="columncon_guarantee" msprop:Generator_UserColumnName="con_guarantee" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="con_GuaranteeType" msprop:Generator_ColumnPropNameInRow="con_GuaranteeType" msprop:Generator_ColumnPropNameInTable="con_GuaranteeTypeColumn" msprop:Generator_ColumnVarNameInTable="columncon_GuaranteeType" msprop:Generator_UserColumnName="con_GuaranteeType" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="con_details" msprop:Generator_ColumnPropNameInRow="con_details" msprop:Generator_ColumnPropNameInTable="con_detailsColumn" msprop:Generator_ColumnVarNameInTable="columncon_details" msprop:Generator_UserColumnName="con_details" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="536870910" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ind_id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="ind_id" msprop:Generator_ColumnPropNameInTable="ind_idColumn" msprop:Generator_ColumnVarNameInTable="columnind_id" msprop:Generator_UserColumnName="ind_id" type="xs:int" minOccurs="0" />
+              <xs:element name="ind_amount" msprop:Generator_ColumnPropNameInRow="ind_amount" msprop:Generator_ColumnPropNameInTable="ind_amountColumn" msprop:Generator_ColumnVarNameInTable="columnind_amount" msprop:Generator_UserColumnName="ind_amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ind_accname" msprop:Generator_ColumnPropNameInRow="ind_accname" msprop:Generator_ColumnPropNameInTable="ind_accnameColumn" msprop:Generator_ColumnVarNameInTable="columnind_accname" msprop:Generator_UserColumnName="ind_accname" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="payment_Principal" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="payment_Principal" msprop:Generator_ColumnPropNameInTable="payment_PrincipalColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_Principal" msprop:Generator_UserColumnName="payment_Principal" type="xs:decimal" minOccurs="0" />
+              <xs:element name="payment_amount" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="payment_amount" msprop:Generator_ColumnPropNameInTable="payment_amountColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_amount" msprop:Generator_UserColumnName="payment_amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="payment_id" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="payment_id" msprop:Generator_ColumnPropNameInTable="payment_idColumn" msprop:Generator_ColumnVarNameInTable="columnpayment_id" msprop:Generator_UserColumnName="payment_id" type="xs:int" minOccurs="0" />
+              <xs:element name="ind_date" msprop:Generator_ColumnPropNameInRow="ind_date" msprop:Generator_ColumnPropNameInTable="ind_dateColumn" msprop:Generator_ColumnVarNameInTable="columnind_date" msprop:Generator_UserColumnName="ind_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="payment_amount1" msdata:ReadOnly="true" msdata:Caption="payment_amount" msprop:Generator_ColumnPropNameInRow="payment_amount1" msprop:Generator_ColumnPropNameInTable="payment_amount1Column" msprop:Generator_ColumnVarNameInTable="columnpayment_amount1" msprop:Generator_UserColumnName="payment_amount1" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="payment_prin1" msdata:ReadOnly="true" msdata:Caption="payment_prin" msprop:Generator_ColumnPropNameInRow="payment_prin1" msprop:Generator_ColumnPropNameInTable="payment_prin1Column" msprop:Generator_ColumnVarNameInTable="columnpayment_prin1" msprop:Generator_UserColumnName="payment_prin1" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="payment_interest1" msdata:ReadOnly="true" msdata:Caption="payment_interest" msprop:Generator_ColumnPropNameInRow="payment_interest1" msprop:Generator_ColumnPropNameInTable="payment_interest1Column" msprop:Generator_ColumnVarNameInTable="columnpayment_interest1" msprop:Generator_UserColumnName="payment_interest1" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="payment_fine1" msdata:ReadOnly="true" msdata:Caption="payment_fine" msprop:Generator_ColumnPropNameInRow="payment_fine1" msprop:Generator_ColumnPropNameInTable="payment_fine1Column" msprop:Generator_ColumnVarNameInTable="columnpayment_fine1" msprop:Generator_UserColumnName="payment_fine1" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

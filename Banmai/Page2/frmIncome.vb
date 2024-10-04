@@ -171,7 +171,6 @@ Public Class frmIncome
                 incomeTypeColumn.Items.Add("เงินสนับสนุน")
                 incomeTypeColumn.Items.Add("เงินกู้")
                 incomeTypeColumn.Items.Add("ทุนบัญชี1")
-                incomeTypeColumn.Items.Add("ทุนบัญชีสัจจะ")
                 incomeTypeColumn.Items.Add("ทุนบัญชีประชารัฐ")
                 incomeTypeColumn.Items.Add("กำไรสะสม")
                 incomeTypeColumn.Items.Add("เงินสมทบ")
@@ -181,6 +180,9 @@ Public Class frmIncome
                 incomeTypeColumn.Items.Add("ดอกเบี้ยเงินฝากธนาคาร") 'รายได้
                 incomeTypeColumn.Items.Add("ค่าธรรมเนียมแรกเข้า") 'รายได้
                 incomeTypeColumn.Items.Add("อื่น ๆ") 'รายได้
+                incomeTypeColumn.Items.Add("เงินต้น")
+                incomeTypeColumn.Items.Add("ดอกเบี้ย")
+                incomeTypeColumn.Items.Add("ค่าปรับ")
             End Using
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการโหลดข้อมูลประเภทเงินฝาก: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
