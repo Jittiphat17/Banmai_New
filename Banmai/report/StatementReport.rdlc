@@ -2,112 +2,105 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="db_banmai1DataSet">
+    <DataSource Name="DtsIncExpSummary">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>fd9224ed-2c8d-49c7-84e4-24ee55c284e3</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="db_banmai1DataSet1">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>105459ad-41fd-46b2-81a3-807ef43e014f</rd:DataSourceID>
+      <rd:DataSourceID>e9c6375f-35c8-484f-a9b3-db6ffb4c2bd7</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="IncomeDataSet">
+    <DataSet Name="IncExpSumDataSet">
       <Query>
-        <DataSourceName>db_banmai1DataSet1</DataSourceName>
+        <DataSourceName>DtsIncExpSummary</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="ind_id">
-          <DataField>ind_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="ind_accname">
-          <DataField>ind_accname</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="con_id">
-          <DataField>con_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="ind_amount">
-          <DataField>ind_amount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="ind_date">
-          <DataField>ind_date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="inc_id">
-          <DataField>inc_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="m_id">
-          <DataField>m_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
         <Field Name="acc_id">
           <DataField>acc_id</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-      </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>db_banmai1DataSet1</rd:DataSetName>
-        <rd:SchemaPath>D:\Project-2022\Banmai\Banmai\db_banmai1DataSet1.xsd</rd:SchemaPath>
-        <rd:TableName>Income_Details</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>Income_DetailsTableAdapter</rd:TableAdapterName>
-      </rd:DataSetInfo>
-    </DataSet>
-    <DataSet Name="ExpenseDataSet">
-      <Query>
-        <DataSourceName>db_banmai1DataSet1</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="exd_id">
-          <DataField>exd_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="exd_nameacc">
-          <DataField>exd_nameacc</DataField>
+        <Field Name="acc_name">
+          <DataField>acc_name</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="exd_amount">
-          <DataField>exd_amount</DataField>
+        <Field Name="IncAmt1">
+          <DataField>IncAmt1</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="m_id">
-          <DataField>m_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="IncAmt2">
+          <DataField>IncAmt2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="exd_date">
-          <DataField>exd_date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+        <Field Name="IncAmt3">
+          <DataField>IncAmt3</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="ex_id">
-          <DataField>ex_id</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="IncAmt4">
+          <DataField>IncAmt4</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
-        <Field Name="acc_id">
-          <DataField>acc_id</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="IncAmt5">
+          <DataField>IncAmt5</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IncAmt6">
+          <DataField>IncAmt6</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IncAmt7">
+          <DataField>IncAmt7</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="IncAmt8">
+          <DataField>IncAmt8</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExpAmt1">
+          <DataField>ExpAmt1</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExpAmt2">
+          <DataField>ExpAmt2</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExpAmt3">
+          <DataField>ExpAmt3</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExpAmt4">
+          <DataField>ExpAmt4</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExpAmt5">
+          <DataField>ExpAmt5</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExpAmt6">
+          <DataField>ExpAmt6</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExpAmt7">
+          <DataField>ExpAmt7</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExpAmt8">
+          <DataField>ExpAmt8</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExpAmt9">
+          <DataField>ExpAmt9</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>db_banmai1DataSet1</rd:DataSetName>
-        <rd:SchemaPath>D:\Project-2022\Banmai\Banmai\db_banmai1DataSet1.xsd</rd:SchemaPath>
-        <rd:TableName>Expense_Details</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>Expense_DetailsTableAdapter</rd:TableAdapterName>
+        <rd:DataSetName>DtsIncExpSummary</rd:DataSetName>
+        <rd:SchemaPath>D:\Project-2022\Banmai\Banmai\DtsIncExpSummary.xsd</rd:SchemaPath>
+        <rd:TableName>dt_incexpsummary</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -130,7 +123,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Parameters!AccountName.Value</Value>
+                    <Value>=First(Fields!acc_name.Value, "IncExpSumDataSet")</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
                       <FontSize>24pt</FontSize>
@@ -138,12 +131,14 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.12864in</Top>
-            <Left>2.38324in</Left>
+            <Top>0.29138in</Top>
+            <Left>2.3348in</Left>
             <Height>0.5in</Height>
             <Width>3.29393in</Width>
             <Style>
@@ -173,14 +168,16 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>0.67031in</Top>
-            <Left>3.01865in</Left>
+            <Top>0.83305in</Top>
+            <Left>2.3348in</Left>
             <Height>0.36458in</Height>
-            <Width>2.02083in</Width>
+            <Width>3.29393in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -211,8 +208,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>1.50908in</Top>
-            <Left>0.66865in</Left>
+            <Top>1.67182in</Top>
+            <Left>0.62021in</Left>
             <Height>0.36038in</Height>
             <Width>0.50352in</Width>
             <ZIndex>2</ZIndex>
@@ -243,14 +240,16 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
-            <Top>1.58814in</Top>
-            <Left>5.34271in</Left>
+            <Top>1.75088in</Top>
+            <Left>5.11058in</Left>
             <Height>0.28131in</Height>
-            <Width>0.70337in</Width>
+            <Width>1.02293in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -283,10 +282,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>1.94662in</Top>
-            <Left>1.32091in</Left>
+            <Top>2.10936in</Top>
+            <Left>1.27247in</Left>
             <Height>0.31898in</Height>
-            <Width>1in</Width>
+            <Width>3.76042in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -319,10 +318,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>2.33505in</Top>
-            <Left>1.32091in</Left>
+            <Top>2.49779in</Top>
+            <Left>1.27247in</Left>
             <Height>0.34191in</Height>
-            <Width>1.46722in</Width>
+            <Width>3.76042in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -355,10 +354,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Top>2.73252in</Top>
-            <Left>1.32091in</Left>
+            <Top>2.89526in</Top>
+            <Left>1.27247in</Left>
             <Height>0.32659in</Height>
-            <Width>1.13021in</Width>
+            <Width>3.76042in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -391,11 +390,47 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>3.12856in</Top>
-            <Left>1.32091in</Left>
+            <Top>3.2913in</Top>
+            <Left>1.27247in</Left>
             <Height>0.29596in</Height>
-            <Width>0.50214in</Width>
+            <Width>3.76042in</Width>
             <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>ค่าเอกสาร(สัญญากู้,สัญญาค้ำ)</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>3.6567in</Top>
+            <Left>1.27247in</Left>
+            <Height>0.32659in</Height>
+            <Width>3.76042in</Width>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -424,11 +459,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>3.49396in</Top>
-            <Left>1.32091in</Left>
+            <Top>4.05273in</Top>
+            <Left>1.27247in</Left>
             <Height>0.31893in</Height>
-            <Width>1in</Width>
-            <ZIndex>8</ZIndex>
+            <Width>3.76042in</Width>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -457,11 +492,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>3.88234in</Top>
-            <Left>1.32091in</Left>
+            <Top>4.44111in</Top>
+            <Left>1.27247in</Left>
             <Height>0.32659in</Height>
-            <Width>1in</Width>
-            <ZIndex>9</ZIndex>
+            <Width>3.76042in</Width>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -493,11 +528,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>4.27838in</Top>
-            <Left>1.32091in</Left>
+            <Top>4.83715in</Top>
+            <Left>1.27247in</Left>
             <Height>0.29596in</Height>
-            <Width>0.60171in</Width>
-            <ZIndex>10</ZIndex>
+            <Width>3.76042in</Width>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -509,20 +544,8 @@
             </Style>
           </Textbox>
           <Line Name="Line1">
-            <Top>2.65799in</Top>
-            <Left>5.159in</Left>
-            <Height>0in</Height>
-            <Width>1.02298in</Width>
-            <ZIndex>11</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line2">
-            <Top>2.24663in</Top>
-            <Left>5.15899in</Left>
+            <Top>2.82073in</Top>
+            <Left>5.11056in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>12</ZIndex>
@@ -532,9 +555,9 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line3">
-            <Top>3.04014in</Top>
-            <Left>5.159in</Left>
+          <Line Name="Line2">
+            <Top>2.40937in</Top>
+            <Left>5.11055in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>13</ZIndex>
@@ -544,9 +567,9 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line4">
-            <Top>3.42451in</Top>
-            <Left>5.159in</Left>
+          <Line Name="Line3">
+            <Top>3.20288in</Top>
+            <Left>5.11056in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>14</ZIndex>
@@ -556,9 +579,9 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line6">
-            <Top>3.79393in</Top>
-            <Left>5.159in</Left>
+          <Line Name="Line4">
+            <Top>3.58725in</Top>
+            <Left>5.11056in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>15</ZIndex>
@@ -568,9 +591,9 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line7">
-            <Top>4.18996in</Top>
-            <Left>5.159in</Left>
+          <Line Name="Line5">
+            <Top>3.96432in</Top>
+            <Left>5.11055in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>16</ZIndex>
@@ -580,12 +603,36 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line8">
-            <Top>4.55537in</Top>
-            <Left>5.159in</Left>
+          <Line Name="Line6">
+            <Top>4.3527in</Top>
+            <Left>5.11056in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>17</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line7">
+            <Top>4.74873in</Top>
+            <Left>5.11056in</Left>
+            <Height>0in</Height>
+            <Width>1.02298in</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line8">
+            <Top>5.11414in</Top>
+            <Left>5.11056in</Left>
+            <Height>0in</Height>
+            <Width>1.02298in</Width>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -602,7 +649,7 @@
                     <Value>รวมรายได้</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -614,7 +661,7 @@
                     <Value />
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -622,11 +669,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox13</rd:DefaultName>
-            <Top>4.64379in</Top>
-            <Left>1.78813in</Left>
+            <Top>5.20256in</Top>
+            <Left>1.73969in</Left>
             <Height>0.3244in</Height>
-            <Width>1.19424in</Width>
-            <ZIndex>18</ZIndex>
+            <Width>3.2932in</Width>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -656,11 +703,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>5.42621in</Top>
-            <Left>0.56908in</Left>
+            <Top>5.58895in</Top>
+            <Left>0.52064in</Left>
             <Height>0.38278in</Height>
             <Width>0.74018in</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -681,7 +728,7 @@
                     <Value>ค่าเช่าสำนักงาน</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -689,76 +736,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>5.9977in</Top>
-            <Left>1.22134in</Left>
+            <Top>6.16044in</Top>
+            <Left>1.1729in</Left>
             <Height>0.31893in</Height>
-            <Width>1in</Width>
-            <ZIndex>20</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox16">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>เงินสมทบ</Value>
-                    <Style>
-                      <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>6.38607in</Top>
-            <Left>1.22134in</Left>
-            <Height>0.31893in</Height>
-            <Width>0.73857in</Width>
-            <ZIndex>21</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox17">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>เงินประกันความเสี่ยง</Value>
-                    <Style>
-                      <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>6.77445in</Top>
-            <Left>1.22134in</Left>
-            <Height>0.31893in</Height>
-            <Width>1.31157in</Width>
+            <Width>3.85999in</Width>
             <ZIndex>22</ZIndex>
             <Style>
               <Border>
@@ -780,7 +761,7 @@
                     <Value>ค่าตอบแทน</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -788,10 +769,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>7.16282in</Top>
-            <Left>1.22134in</Left>
+            <Top>6.61825in</Top>
+            <Left>1.1729in</Left>
             <Height>0.31893in</Height>
-            <Width>1in</Width>
+            <Width>3.85999in</Width>
             <ZIndex>23</ZIndex>
             <Style>
               <Border>
@@ -813,7 +794,7 @@
                     <Value>ค่าจ้าง</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -821,44 +802,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>7.5512in</Top>
-            <Left>1.22134in</Left>
+            <Top>7.00663in</Top>
+            <Left>1.1729in</Left>
             <Height>0.31893in</Height>
-            <Width>0.50214in</Width>
+            <Width>3.85999in</Width>
             <ZIndex>24</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox20">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>เงินกู้</Value>
-                    <Style>
-                      <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>7.93957in</Top>
-            <Left>1.22134in</Left>
-            <Height>0.31893in</Height>
-            <Width>0.50214in</Width>
-            <ZIndex>25</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -879,7 +827,7 @@
                     <Value>ดอกเบี้ยสัจจะ</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -887,11 +835,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>8.32795in</Top>
-            <Left>1.22134in</Left>
+            <Top>7.35334in</Top>
+            <Left>1.16465in</Left>
             <Height>0.31893in</Height>
-            <Width>1in</Width>
-            <ZIndex>26</ZIndex>
+            <Width>3.85999in</Width>
+            <ZIndex>25</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -912,7 +860,7 @@
                     <Value>ดอกเบี้ยจ่าย</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -920,11 +868,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>8.71632in</Top>
-            <Left>1.22134in</Left>
+            <Top>7.74171in</Top>
+            <Left>1.16465in</Left>
             <Height>0.31893in</Height>
-            <Width>1in</Width>
-            <ZIndex>27</ZIndex>
+            <Width>3.85999in</Width>
+            <ZIndex>26</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -945,7 +893,7 @@
                     <Value>เบ็ดเตล็ด</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -953,11 +901,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>9.10469in</Top>
-            <Left>1.22134in</Left>
+            <Top>8.13008in</Top>
+            <Left>1.16465in</Left>
             <Height>0.31893in</Height>
-            <Width>1in</Width>
-            <ZIndex>28</ZIndex>
+            <Width>3.85999in</Width>
+            <ZIndex>27</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -978,7 +926,7 @@
                     <Value>รวมค่าใช้จ่าย</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -986,11 +934,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>9.49307in</Top>
-            <Left>1.68856in</Left>
+            <Top>8.51846in</Top>
+            <Left>1.63187in</Left>
             <Height>0.31893in</Height>
-            <Width>0.84435in</Width>
-            <ZIndex>29</ZIndex>
+            <Width>3.39277in</Width>
+            <ZIndex>28</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1002,8 +950,20 @@
             </Style>
           </Textbox>
           <Line Name="Line11">
-            <Top>6.31663in</Top>
-            <Left>5.15898in</Left>
+            <Top>6.47937in</Top>
+            <Left>5.11054in</Left>
+            <Height>0in</Height>
+            <Width>1.02298in</Width>
+            <ZIndex>29</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line14">
+            <Top>6.93718in</Top>
+            <Left>5.11055in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>30</ZIndex>
@@ -1013,9 +973,9 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line12">
-            <Top>6.705in</Top>
-            <Left>5.15899in</Left>
+          <Line Name="Line15">
+            <Top>7.32556in</Top>
+            <Left>5.11055in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>31</ZIndex>
@@ -1025,9 +985,9 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line13">
-            <Top>7.09338in</Top>
-            <Left>5.15899in</Left>
+          <Line Name="Line17">
+            <Top>7.67227in</Top>
+            <Left>5.1023in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>32</ZIndex>
@@ -1037,9 +997,9 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line14">
-            <Top>7.48175in</Top>
-            <Left>5.15899in</Left>
+          <Line Name="Line18">
+            <Top>8.06064in</Top>
+            <Left>5.1023in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>33</ZIndex>
@@ -1049,9 +1009,9 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line15">
-            <Top>7.87013in</Top>
-            <Left>5.15899in</Left>
+          <Line Name="Line19">
+            <Top>8.44901in</Top>
+            <Left>5.1023in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>34</ZIndex>
@@ -1061,9 +1021,9 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line16">
-            <Top>8.2585in</Top>
-            <Left>5.15899in</Left>
+          <Line Name="Line20">
+            <Top>8.83739in</Top>
+            <Left>5.1023in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>35</ZIndex>
@@ -1073,60 +1033,12 @@
               </Border>
             </Style>
           </Line>
-          <Line Name="Line17">
-            <Top>8.64688in</Top>
-            <Left>5.15899in</Left>
+          <Line Name="Line21">
+            <Top>8.87906in</Top>
+            <Left>5.10229in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
             <ZIndex>36</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line18">
-            <Top>9.03525in</Top>
-            <Left>5.15899in</Left>
-            <Height>0in</Height>
-            <Width>1.02298in</Width>
-            <ZIndex>37</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line19">
-            <Top>9.42362in</Top>
-            <Left>5.15899in</Left>
-            <Height>0in</Height>
-            <Width>1.02298in</Width>
-            <ZIndex>38</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line20">
-            <Top>9.812in</Top>
-            <Left>5.15899in</Left>
-            <Height>0in</Height>
-            <Width>1.02298in</Width>
-            <ZIndex>39</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line21">
-            <Top>9.85367in</Top>
-            <Left>5.15898in</Left>
-            <Height>0in</Height>
-            <Width>1.02298in</Width>
-            <ZIndex>40</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1144,7 +1056,7 @@
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontSize>16pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <TextDecoration>None</TextDecoration>
                     </Style>
@@ -1154,11 +1066,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox26</rd:DefaultName>
-            <Top>9.88144in</Top>
-            <Left>1.22134in</Left>
+            <Top>8.90683in</Top>
+            <Left>1.16465in</Left>
             <Height>0.38123in</Height>
-            <Width>2.1811in</Width>
-            <ZIndex>41</ZIndex>
+            <Width>3.85999in</Width>
+            <ZIndex>37</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1170,11 +1082,11 @@
             </Style>
           </Textbox>
           <Line Name="Line22">
-            <Top>10.22101in</Top>
-            <Left>5.15898in</Left>
+            <Top>9.31585in</Top>
+            <Left>5.13357in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
-            <ZIndex>42</ZIndex>
+            <ZIndex>38</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1182,11 +1094,11 @@
             </Style>
           </Line>
           <Line Name="Line23">
-            <Top>10.26268in</Top>
-            <Left>5.15897in</Left>
+            <Top>9.35752in</Top>
+            <Left>5.13356in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
-            <ZIndex>43</ZIndex>
+            <ZIndex>39</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1200,35 +1112,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= "ณ วันที่ " &amp; Day(Parameters!StartDate.Value) &amp; " " &amp; 
-Switch(
-   Month(Parameters!StartDate.Value) = 1, "มกราคม",
-   Month(Parameters!StartDate.Value) = 2, "กุมภาพันธ์",
-   Month(Parameters!StartDate.Value) = 3, "มีนาคม",
-   Month(Parameters!StartDate.Value) = 4, "เมษายน",
-   Month(Parameters!StartDate.Value) = 5, "พฤษภาคม",
-   Month(Parameters!StartDate.Value) = 6, "มิถุนายน",
-   Month(Parameters!StartDate.Value) = 7, "กรกฎาคม",
-   Month(Parameters!StartDate.Value) = 8, "สิงหาคม",
-   Month(Parameters!StartDate.Value) = 9, "กันยายน",
-   Month(Parameters!StartDate.Value) = 10, "ตุลาคม",
-   Month(Parameters!StartDate.Value) = 11, "พฤศจิกายน",
-   Month(Parameters!StartDate.Value) = 12, "ธันวาคม"
-) &amp; " " &amp; (Year(Parameters!StartDate.Value) + 543) &amp; " ถึงวันที่ " &amp; Day(Parameters!EndDate.Value) &amp; " " &amp; 
-Switch(
-   Month(Parameters!EndDate.Value) = 1, "มกราคม",
-   Month(Parameters!EndDate.Value) = 2, "กุมภาพันธ์",
-   Month(Parameters!EndDate.Value) = 3, "มีนาคม",
-   Month(Parameters!EndDate.Value) = 4, "เมษายน",
-   Month(Parameters!EndDate.Value) = 5, "พฤษภาคม",
-   Month(Parameters!EndDate.Value) = 6, "มิถุนายน",
-   Month(Parameters!EndDate.Value) = 7, "กรกฎาคม",
-   Month(Parameters!EndDate.Value) = 8, "สิงหาคม",
-   Month(Parameters!EndDate.Value) = 9, "กันยายน",
-   Month(Parameters!EndDate.Value) = 10, "ตุลาคม",
-   Month(Parameters!EndDate.Value) = 11, "พฤศจิกายน",
-   Month(Parameters!EndDate.Value) = 12, "ธันวาคม"
-) &amp; " " &amp; (Year(Parameters!EndDate.Value) + 543)</Value>
+                    <Value>=Parameters!p_titledate.Value</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -1241,11 +1125,11 @@ Switch(
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>StartDate</rd:DefaultName>
-            <Top>1.07655in</Top>
-            <Left>2.38324in</Left>
+            <Top>1.23929in</Top>
+            <Left>2.3348in</Left>
             <Height>0.33591in</Height>
             <Width>3.29393in</Width>
-            <ZIndex>44</ZIndex>
+            <ZIndex>40</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1330,11 +1214,11 @@ Switch(
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox21</rd:DefaultName>
-            <Top>10.43306in</Top>
-            <Left>0.66865in</Left>
+            <Top>9.5279in</Top>
+            <Left>0.64324in</Left>
             <Height>1.02948in</Height>
             <Width>6.48414in</Width>
-            <ZIndex>45</ZIndex>
+            <ZIndex>41</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1346,11 +1230,11 @@ Switch(
             </Style>
           </Textbox>
           <Line Name="Line24">
-            <Top>4.96819in</Top>
-            <Left>5.15902in</Left>
+            <Top>5.52696in</Top>
+            <Left>5.11058in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
-            <ZIndex>46</ZIndex>
+            <ZIndex>42</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -1358,39 +1242,618 @@ Switch(
             </Style>
           </Line>
           <Line Name="Line25">
-            <Top>5.00986in</Top>
-            <Left>5.15901in</Left>
+            <Top>5.56863in</Top>
+            <Left>5.11057in</Left>
             <Height>0in</Height>
             <Width>1.02298in</Width>
-            <ZIndex>47</ZIndex>
+            <ZIndex>43</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
               </Border>
             </Style>
           </Line>
+          <Textbox Name="IncAmt1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!IncAmt1.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>IncAmt1</rd:DefaultName>
+            <Top>2.13159in</Top>
+            <Left>5.13351in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>44</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="IncAmt2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!IncAmt2.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>IncAmt2</rd:DefaultName>
+            <Top>2.52906in</Top>
+            <Left>5.13351in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>45</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="IncAmt3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!IncAmt3.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>IncAmt3</rd:DefaultName>
+            <Top>2.91121in</Top>
+            <Left>5.13351in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>46</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="IncAmt4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!IncAmt4.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>IncAmt4</rd:DefaultName>
+            <Top>3.29558in</Top>
+            <Left>5.13351in</Left>
+            <Height>0.25in</Height>
+            <Width>0.99995in</Width>
+            <ZIndex>47</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="IncAmt5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!IncAmt5.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>IncAmt5</rd:DefaultName>
+            <Top>3.67265in</Top>
+            <Left>5.13351in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>48</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="IncAmt6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!IncAmt6.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>IncAmt6</rd:DefaultName>
+            <Top>4.06103in</Top>
+            <Left>5.13351in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>49</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="IncAmt7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!IncAmt7.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>IncAmt7</rd:DefaultName>
+            <Top>4.44111in</Top>
+            <Left>5.13356in</Left>
+            <Height>0.27103in</Height>
+            <Width>1in</Width>
+            <ZIndex>50</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="IncAmt8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!IncAmt8.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>IncAmt8</rd:DefaultName>
+            <Top>4.81817in</Top>
+            <Left>5.13356in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>51</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ExpAmt1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!ExpAmt1.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ExpAmt1</rd:DefaultName>
+            <Top>6.16044in</Top>
+            <Left>5.13356in</Left>
+            <Height>0.27726in</Height>
+            <Width>1in</Width>
+            <ZIndex>52</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ExpAmt4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!ExpAmt4.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ExpAmt4</rd:DefaultName>
+            <Top>6.61825in</Top>
+            <Left>5.13346in</Left>
+            <Height>0.27726in</Height>
+            <Width>1in</Width>
+            <ZIndex>53</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ExpAmt5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!ExpAmt5.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ExpAmt5</rd:DefaultName>
+            <Top>7.00612in</Top>
+            <Left>5.13356in</Left>
+            <Height>0.27778in</Height>
+            <Width>1in</Width>
+            <ZIndex>54</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ExpAmt7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!ExpAmt7.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ExpAmt7</rd:DefaultName>
+            <Top>7.35334in</Top>
+            <Left>5.12521in</Left>
+            <Height>0.27726in</Height>
+            <Width>1.0001in</Width>
+            <ZIndex>55</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ExpAmt8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!ExpAmt8.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ExpAmt8</rd:DefaultName>
+            <Top>7.74171in</Top>
+            <Left>5.12521in</Left>
+            <Height>0.27726in</Height>
+            <Width>1in</Width>
+            <ZIndex>56</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ExpAmt9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!ExpAmt9.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ExpAmt9</rd:DefaultName>
+            <Top>8.14397in</Top>
+            <Left>5.12531in</Left>
+            <Height>0.27726in</Height>
+            <Width>1in</Width>
+            <ZIndex>57</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="StartDate2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!IncAmt1.Value + Fields!IncAmt2.Value + Fields!IncAmt3.Value + Fields!IncAmt4.Value + Fields!IncAmt5.Value + Fields!IncAmt6.Value + Fields!IncAmt7.Value + Fields!IncAmt8.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>18pt</FontSize>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>StartDate</rd:DefaultName>
+            <Top>5.17478in</Top>
+            <Left>5.13346in</Left>
+            <Height>0.33591in</Height>
+            <Width>1.0001in</Width>
+            <ZIndex>58</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="StartDate3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!ExpAmt1.Value + Fields!ExpAmt2.Value + Fields!ExpAmt3.Value + Fields!ExpAmt4.Value + Fields!ExpAmt5.Value + Fields!ExpAmt6.Value + Fields!ExpAmt7.Value + Fields!ExpAmt8.Value + Fields!ExpAmt9.Value, "IncExpSumDataSet")</Value>
+                    <Style>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>18pt</FontSize>
+                      <Format>#,0.00;(#,0.00);'-'</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>StartDate</rd:DefaultName>
+            <Top>8.50457in</Top>
+            <Left>5.10233in</Left>
+            <Height>0.33591in</Height>
+            <Width>1.02298in</Width>
+            <ZIndex>59</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="StartDate4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=(Sum(Fields!IncAmt1.Value + Fields!IncAmt2.Value + Fields!IncAmt3.Value + Fields!IncAmt4.Value + Fields!IncAmt5.Value + Fields!IncAmt6.Value + Fields!IncAmt7.Value + Fields!IncAmt8.Value, "IncExpSumDataSet")) - (Sum(Fields!ExpAmt1.Value + Fields!ExpAmt2.Value + Fields!ExpAmt3.Value + Fields!ExpAmt4.Value + Fields!ExpAmt5.Value + Fields!ExpAmt6.Value + Fields!ExpAmt7.Value + Fields!ExpAmt8.Value + Fields!ExpAmt9.Value, "IncExpSumDataSet"))</Value>
+                    <Style>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>18pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00;- #,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>StartDate</rd:DefaultName>
+            <Top>8.91049in</Top>
+            <Left>5.09408in</Left>
+            <Height>0.33591in</Height>
+            <Width>1.02298in</Width>
+            <ZIndex>60</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>11.63057in</Height>
+        <Height>11.91667in</Height>
         <Style />
       </Body>
-      <Width>7.47917in</Width>
+      <Width>7.625in</Width>
       <Page>
-        <PageHeight>12in</PageHeight>
-        <PageWidth>8.27in</PageWidth>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="AccountName">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="StartDate">
-      <DataType>String</DataType>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="EndDate">
+    <ReportParameter Name="p_titledate">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
@@ -1403,21 +1866,11 @@ Switch(
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>AccountName</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>StartDate</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>EndDate</ParameterName>
+          <ParameterName>p_titledate</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
-  <rd:ReportID>9e78c34b-411c-42ef-a149-85656ae3668b</rd:ReportID>
+  <rd:ReportID>28a076f1-8f3c-4da9-a231-9560a22cfd7b</rd:ReportID>
 </Report>

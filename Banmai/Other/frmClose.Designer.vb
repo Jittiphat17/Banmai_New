@@ -46,6 +46,7 @@ Partial Class frmClose
         Me.btnShowData = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.Guna2GroupBox2 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.btnSaveData = New Guna.UI2.WinForms.Guna2CircleButton()
         Me.Guna2HtmlLabel6 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel7 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.txtDifference = New Guna.UI2.WinForms.Guna2TextBox()
@@ -58,7 +59,6 @@ Partial Class frmClose
         Me.txtExpenseAmount = New Guna.UI2.WinForms.Guna2TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.btnSaveData = New Guna.UI2.WinForms.Guna2CircleButton()
         CType(Me.Guna2DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Guna2DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel1.SuspendLayout()
@@ -388,6 +388,23 @@ Partial Class frmClose
         Me.Guna2GroupBox2.Size = New System.Drawing.Size(614, 193)
         Me.Guna2GroupBox2.TabIndex = 38
         '
+        'btnSaveData
+        '
+        Me.btnSaveData.Animated = True
+        Me.btnSaveData.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnSaveData.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.btnSaveData.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnSaveData.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnSaveData.FillColor = System.Drawing.Color.Red
+        Me.btnSaveData.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveData.ForeColor = System.Drawing.Color.White
+        Me.btnSaveData.Location = New System.Drawing.Point(507, 43)
+        Me.btnSaveData.Name = "btnSaveData"
+        Me.btnSaveData.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
+        Me.btnSaveData.Size = New System.Drawing.Size(100, 95)
+        Me.btnSaveData.TabIndex = 36
+        Me.btnSaveData.Text = "ปิดงบ"
+        '
         'Guna2HtmlLabel6
         '
         Me.Guna2HtmlLabel6.BackColor = System.Drawing.Color.Transparent
@@ -438,7 +455,7 @@ Partial Class frmClose
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("TH SarabunPSK", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(589, 45)
+        Me.Label1.Location = New System.Drawing.Point(598, 45)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(77, 42)
         Me.Label1.TabIndex = 39
@@ -457,6 +474,7 @@ Partial Class frmClose
         Me.txtIncomeAmount.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtIncomeAmount.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtIncomeAmount.Font = New System.Drawing.Font("FC Minimal", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtIncomeAmount.ForeColor = System.Drawing.Color.Black
         Me.txtIncomeAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtIncomeAmount.Location = New System.Drawing.Point(161, 21)
         Me.txtIncomeAmount.Margin = New System.Windows.Forms.Padding(2)
@@ -478,7 +496,7 @@ Partial Class frmClose
         Me.ComboBoxIncomeName.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ComboBoxIncomeName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ComboBoxIncomeName.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBoxIncomeName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
+        Me.ComboBoxIncomeName.ForeColor = System.Drawing.Color.Black
         Me.ComboBoxIncomeName.ItemHeight = 30
         Me.ComboBoxIncomeName.Location = New System.Drawing.Point(274, 21)
         Me.ComboBoxIncomeName.Name = "ComboBoxIncomeName"
@@ -524,7 +542,7 @@ Partial Class frmClose
         Me.ComboBoxExpenseName.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ComboBoxExpenseName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ComboBoxExpenseName.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBoxExpenseName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
+        Me.ComboBoxExpenseName.ForeColor = System.Drawing.Color.Black
         Me.ComboBoxExpenseName.ItemHeight = 30
         Me.ComboBoxExpenseName.Location = New System.Drawing.Point(11, 21)
         Me.ComboBoxExpenseName.Name = "ComboBoxExpenseName"
@@ -542,7 +560,8 @@ Partial Class frmClose
         Me.txtExpenseAmount.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtExpenseAmount.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtExpenseAmount.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtExpenseAmount.Font = New System.Drawing.Font("FC Minimal", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtExpenseAmount.Font = New System.Drawing.Font("FC Minimal", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.txtExpenseAmount.ForeColor = System.Drawing.Color.Black
         Me.txtExpenseAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtExpenseAmount.Location = New System.Drawing.Point(277, 19)
         Me.txtExpenseAmount.Name = "txtExpenseAmount"
@@ -579,23 +598,6 @@ Partial Class frmClose
         Me.GroupBox2.TabIndex = 49
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "ค่าใช้จ่าย"
-        '
-        'btnSaveData
-        '
-        Me.btnSaveData.Animated = True
-        Me.btnSaveData.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.btnSaveData.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.btnSaveData.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btnSaveData.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btnSaveData.FillColor = System.Drawing.Color.Red
-        Me.btnSaveData.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveData.ForeColor = System.Drawing.Color.White
-        Me.btnSaveData.Location = New System.Drawing.Point(507, 43)
-        Me.btnSaveData.Name = "btnSaveData"
-        Me.btnSaveData.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
-        Me.btnSaveData.Size = New System.Drawing.Size(100, 95)
-        Me.btnSaveData.TabIndex = 36
-        Me.btnSaveData.Text = "ปิดงบ"
         '
         'frmClose
         '

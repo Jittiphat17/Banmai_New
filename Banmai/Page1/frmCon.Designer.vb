@@ -23,9 +23,9 @@ Partial Class frmCon
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.dgvPayments = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.btnSearch = New Guna.UI2.WinForms.Guna2Button()
@@ -49,6 +49,7 @@ Partial Class frmCon
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.btnShowReport = New Guna.UI2.WinForms.Guna2Button()
         CType(Me.dgvPayments, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2GroupBox1.SuspendLayout()
         Me.Guna2Panel1.SuspendLayout()
@@ -61,27 +62,27 @@ Partial Class frmCon
         'dgvPayments
         '
         Me.dgvPayments.AllowUserToAddRows = False
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-        Me.dgvPayments.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        Me.dgvPayments.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvPayments.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPayments.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPayments.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvPayments.ColumnHeadersHeight = 50
         Me.dgvPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvPayments.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvPayments.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvPayments.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dgvPayments.Location = New System.Drawing.Point(421, 100)
         Me.dgvPayments.Name = "dgvPayments"
@@ -121,7 +122,7 @@ Partial Class frmCon
         Me.btnSearch.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.btnSearch.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSearch.ForeColor = System.Drawing.Color.White
-        Me.btnSearch.Location = New System.Drawing.Point(1095, 58)
+        Me.btnSearch.Location = New System.Drawing.Point(1050, 58)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(79, 36)
         Me.btnSearch.TabIndex = 35
@@ -372,7 +373,7 @@ Partial Class frmCon
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(746, 66)
+        Me.Label7.Location = New System.Drawing.Point(701, 66)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(137, 21)
         Me.Label7.TabIndex = 33
@@ -390,7 +391,7 @@ Partial Class frmCon
         Me.txtSearchContractNumber.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtSearchContractNumber.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtSearchContractNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearchContractNumber.Location = New System.Drawing.Point(889, 58)
+        Me.txtSearchContractNumber.Location = New System.Drawing.Point(844, 58)
         Me.txtSearchContractNumber.Name = "txtSearchContractNumber"
         Me.txtSearchContractNumber.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtSearchContractNumber.PlaceholderText = ""
@@ -430,6 +431,23 @@ Partial Class frmCon
         Me.Label10.TabIndex = 38
         Me.Label10.Text = "ตารางเงินกู้"
         '
+        'btnShowReport
+        '
+        Me.btnShowReport.Animated = True
+        Me.btnShowReport.BorderRadius = 10
+        Me.btnShowReport.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.btnShowReport.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.btnShowReport.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.btnShowReport.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.btnShowReport.FillColor = System.Drawing.Color.DarkSlateBlue
+        Me.btnShowReport.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnShowReport.ForeColor = System.Drawing.Color.White
+        Me.btnShowReport.Location = New System.Drawing.Point(1135, 58)
+        Me.btnShowReport.Name = "btnShowReport"
+        Me.btnShowReport.Size = New System.Drawing.Size(79, 36)
+        Me.btnShowReport.TabIndex = 35
+        Me.btnShowReport.Text = "ค้นหา"
+        '
         'frmCon
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -439,6 +457,7 @@ Partial Class frmCon
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.dgvPayments)
+        Me.Controls.Add(Me.btnShowReport)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.Guna2GroupBox1)
         Me.Controls.Add(Me.Label7)
@@ -478,4 +497,5 @@ Partial Class frmCon
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents btnShowReport As Guna.UI2.WinForms.Guna2Button
 End Class

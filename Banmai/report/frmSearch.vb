@@ -243,7 +243,7 @@ Public Class frmSearch
         Dim selectedAccId As String = dgvResults.SelectedRows(0).Cells("acc_id").Value.ToString()
 
         Try
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
                 conn.Open()
 
                 ' ดึงข้อมูลสำหรับ DataSet1 จากตาราง Contract

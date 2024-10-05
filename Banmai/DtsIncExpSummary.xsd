@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DtsIncExpSummary" targetNamespace="http://tempuri.org/DtsIncExpSummary.xsd" xmlns:mstns="http://tempuri.org/DtsIncExpSummary.xsd" xmlns="http://tempuri.org/DtsIncExpSummary.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DtsIncExpSummary" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="DtsIncExpSummary" msprop:Generator_DataSetName="DtsIncExpSummary">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dt_incexpsummary" msprop:Generator_RowEvHandlerName="dt_incexpsummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_incexpsummaryRowDeleted" msprop:Generator_RowDeletingName="dt_incexpsummaryRowDeleting" msprop:Generator_RowEvArgName="dt_incexpsummaryRowChangeEvent" msprop:Generator_TablePropName="dt_incexpsummary" msprop:Generator_RowChangedName="dt_incexpsummaryRowChanged" msprop:Generator_RowChangingName="dt_incexpsummaryRowChanging" msprop:Generator_TableClassName="dt_incexpsummaryDataTable" msprop:Generator_RowClassName="dt_incexpsummaryRow" msprop:Generator_TableVarName="tabledt_incexpsummary" msprop:Generator_UserTableName="dt_incexpsummary">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="acc_id" msprop:Generator_ColumnPropNameInRow="acc_id" msprop:Generator_ColumnPropNameInTable="acc_idColumn" msprop:Generator_ColumnVarNameInTable="columnacc_id" msprop:Generator_UserColumnName="acc_id" type="xs:string" />
+              <xs:element name="acc_name" msprop:Generator_ColumnPropNameInRow="acc_name" msprop:Generator_ColumnPropNameInTable="acc_nameColumn" msprop:Generator_ColumnVarNameInTable="columnacc_name" msprop:Generator_UserColumnName="acc_name" type="xs:string" minOccurs="0" />
+              <xs:element name="IncAmt1" msprop:Generator_ColumnPropNameInRow="IncAmt1" msprop:Generator_ColumnPropNameInTable="IncAmt1Column" msprop:Generator_ColumnVarNameInTable="columnIncAmt1" msprop:Generator_UserColumnName="IncAmt1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IncAmt2" msprop:Generator_ColumnPropNameInRow="IncAmt2" msprop:Generator_ColumnPropNameInTable="IncAmt2Column" msprop:Generator_ColumnVarNameInTable="columnIncAmt2" msprop:Generator_UserColumnName="IncAmt2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IncAmt3" msprop:Generator_ColumnPropNameInRow="IncAmt3" msprop:Generator_ColumnPropNameInTable="IncAmt3Column" msprop:Generator_ColumnVarNameInTable="columnIncAmt3" msprop:Generator_UserColumnName="IncAmt3" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IncAmt4" msprop:Generator_ColumnPropNameInRow="IncAmt4" msprop:Generator_ColumnPropNameInTable="IncAmt4Column" msprop:Generator_ColumnVarNameInTable="columnIncAmt4" msprop:Generator_UserColumnName="IncAmt4" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IncAmt5" msprop:Generator_ColumnPropNameInRow="IncAmt5" msprop:Generator_ColumnPropNameInTable="IncAmt5Column" msprop:Generator_ColumnVarNameInTable="columnIncAmt5" msprop:Generator_UserColumnName="IncAmt5" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IncAmt6" msprop:Generator_ColumnPropNameInRow="IncAmt6" msprop:Generator_ColumnPropNameInTable="IncAmt6Column" msprop:Generator_ColumnVarNameInTable="columnIncAmt6" msprop:Generator_UserColumnName="IncAmt6" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IncAmt7" msprop:Generator_ColumnPropNameInRow="IncAmt7" msprop:Generator_ColumnPropNameInTable="IncAmt7Column" msprop:Generator_ColumnVarNameInTable="columnIncAmt7" msprop:Generator_UserColumnName="IncAmt7" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IncAmt8" msprop:Generator_ColumnPropNameInRow="IncAmt8" msprop:Generator_ColumnPropNameInTable="IncAmt8Column" msprop:Generator_ColumnVarNameInTable="columnIncAmt8" msprop:Generator_UserColumnName="IncAmt8" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpAmt1" msprop:Generator_ColumnPropNameInRow="ExpAmt1" msprop:Generator_ColumnPropNameInTable="ExpAmt1Column" msprop:Generator_ColumnVarNameInTable="columnExpAmt1" msprop:Generator_UserColumnName="ExpAmt1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpAmt2" msprop:Generator_ColumnPropNameInRow="ExpAmt2" msprop:Generator_ColumnPropNameInTable="ExpAmt2Column" msprop:Generator_ColumnVarNameInTable="columnExpAmt2" msprop:Generator_UserColumnName="ExpAmt2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpAmt3" msprop:Generator_ColumnPropNameInRow="ExpAmt3" msprop:Generator_ColumnPropNameInTable="ExpAmt3Column" msprop:Generator_ColumnVarNameInTable="columnExpAmt3" msprop:Generator_UserColumnName="ExpAmt3" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpAmt4" msprop:Generator_ColumnPropNameInRow="ExpAmt4" msprop:Generator_ColumnPropNameInTable="ExpAmt4Column" msprop:Generator_ColumnVarNameInTable="columnExpAmt4" msprop:Generator_UserColumnName="ExpAmt4" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpAmt5" msprop:Generator_ColumnPropNameInRow="ExpAmt5" msprop:Generator_ColumnPropNameInTable="ExpAmt5Column" msprop:Generator_ColumnVarNameInTable="columnExpAmt5" msprop:Generator_UserColumnName="ExpAmt5" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpAmt6" msprop:Generator_ColumnPropNameInRow="ExpAmt6" msprop:Generator_ColumnPropNameInTable="ExpAmt6Column" msprop:Generator_ColumnVarNameInTable="columnExpAmt6" msprop:Generator_UserColumnName="ExpAmt6" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpAmt7" msprop:Generator_ColumnPropNameInRow="ExpAmt7" msprop:Generator_ColumnPropNameInTable="ExpAmt7Column" msprop:Generator_ColumnVarNameInTable="columnExpAmt7" msprop:Generator_UserColumnName="ExpAmt7" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpAmt8" msprop:Generator_ColumnPropNameInRow="ExpAmt8" msprop:Generator_ColumnPropNameInTable="ExpAmt8Column" msprop:Generator_ColumnVarNameInTable="columnExpAmt8" msprop:Generator_UserColumnName="ExpAmt8" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ExpAmt9" msprop:Generator_ColumnPropNameInRow="ExpAmt9" msprop:Generator_ColumnPropNameInTable="ExpAmt9Column" msprop:Generator_ColumnVarNameInTable="columnExpAmt9" msprop:Generator_UserColumnName="ExpAmt9" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:dt_incexpsummary" />
+      <xs:field xpath="mstns:acc_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -1,8 +1,5 @@
 ﻿Imports System.Data.OleDb
-
 Imports System.Globalization
-
-
 
 Public Class frmManageMembers
     Dim conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
@@ -12,10 +9,60 @@ Public Class frmManageMembers
     Dim isEditing As Boolean = False ' State for add/edit mode
 
     Private Sub frmManageMembers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ConfigureDataGridView()
+        ConfigureDataGridView() ' เรียกฟังก์ชันเพื่อกำหนดคอลัมน์ก่อน
         ClearAllData()
-        Loadinfo()
+        Loadinfo() ' โหลดข้อมูลหลังจากกำหนดคอลัมน์
         Auto_id()
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        ' ตรวจสอบว่าช่องค้นหาว่างหรือไม่
+        If String.IsNullOrWhiteSpace(txtSearch.Text) Then
+            ' ถ้าช่องค้นหาว่าง ให้โหลดข้อมูลทั้งหมด
+            Loadinfo()
+        Else
+            ' ถ้าช่องค้นหาไม่ว่าง ให้ทำการค้นหา
+            SearchMember(txtSearch.Text.Trim())
+        End If
+    End Sub
+
+
+    Private Sub SearchMember(searchTerm As String)
+        ' Define a query that will search the Member table by name, ID, or phone number
+        strSQL = "SELECT * FROM Member WHERE m_name LIKE @search OR m_id LIKE @search OR m_tel LIKE @search"
+
+        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+            Using cmd As New OleDbCommand(strSQL, conn)
+                cmd.Parameters.AddWithValue("@search", "%" & searchTerm & "%")
+
+                Try
+                    conn.Open()
+                    dr = cmd.ExecuteReader
+                    dgvMembers.Rows.Clear()
+
+                    If Not dr.HasRows Then
+                        MessageBox.Show("ไม่พบข้อมูลที่ค้นหา", "Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+
+                    While dr.Read
+                        Dim birthDate As String = DateTime.Parse(dr("m_birth").ToString()).ToString("dd/MM/yyyy")
+                        Dim age As Integer = dr("m_age")
+
+                        ' แปลงค่า s_id เป็นสถานะสมาชิก
+                        Dim memberStatus As String = If(dr("s_id") = 0, "สมาชิกลาออก", "สมาชิกคงอยู่")
+
+                        dgvMembers.Rows.Add(dr("m_id").ToString, dr("m_gender").ToString, dr("m_name").ToString,
+                                        dr("m_nick").ToString, birthDate, age, dr("m_thaiid").ToString, dr("m_job").ToString,
+                                        dr("m_address").ToString, dr("m_post").ToString, dr("m_tel").ToString,
+                                        dr("m_accountName").ToString, dr("m_accountNum").ToString,
+                                        dr("m_beginning").ToString, dr("m_outstanding").ToString, dr("m_national").ToString,
+                                        memberStatus)
+                    End While
+                Catch ex As Exception
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End Using
     End Sub
 
     Sub ConfigureDataGridView()
@@ -36,7 +83,7 @@ Public Class frmManageMembers
         dgvMembers.Columns.Add("m_beginning", "ยอดยกมา")
         dgvMembers.Columns.Add("m_outstanding", "ลูกหนี้ค้างชำระ")
         dgvMembers.Columns.Add("m_national", "สัญชาติ")
-        dgvMembers.Columns.Add("m_status", "สถานะสมาชิก") ' Add the new column for status
+        dgvMembers.Columns.Add("s_id", "สถานะสมาชิก") ' Add the new column for s_id
 
         ' Set other DataGridView properties
         dgvMembers.DefaultCellStyle.Font = New Font("Tahoma", 10)
@@ -49,34 +96,35 @@ Public Class frmManageMembers
         dgvMembers.EnableHeadersVisualStyles = False
     End Sub
 
-
     Sub Loadinfo()
         strSQL = "SELECT * FROM Member"
-        cmd = New OleDbCommand(strSQL, conn)
 
-        Try
-            If conn.State = ConnectionState.Open Then conn.Close()
-            conn.Open()
+        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+            Using cmd As New OleDbCommand(strSQL, conn)
+                Try
+                    conn.Open()
+                    dr = cmd.ExecuteReader
+                    dgvMembers.Rows.Clear()
 
-            dr = cmd.ExecuteReader
-            dgvMembers.Rows.Clear()
+                    While dr.Read
+                        Dim birthDate As String = DateTime.Parse(dr("m_birth").ToString()).ToString("dd/MM/yyyy")
+                        Dim age As Integer = dr("m_age") ' Retrieve age from the database
 
-            While dr.Read
-                Dim birthDate As String = DateTime.Parse(dr("m_birth").ToString()).ToString("dd/MM/yyyy")
-                Dim age As Integer = dr("m_age") ' Retrieve age from the database
-                dgvMembers.Rows.Add(dr("m_id").ToString, dr("m_gender").ToString, dr("m_name").ToString,
-                                dr("m_nick").ToString, birthDate, age, dr("m_thaiid").ToString, dr("m_job").ToString,
-                                dr("m_address").ToString, dr("m_post").ToString, dr("m_tel").ToString,
-                                dr("m_accountName").ToString, dr("m_accountNum").ToString,
-                                dr("m_beginning").ToString, dr("m_outstanding").ToString, dr("m_national").ToString,
-                                dr("m_status").ToString) ' Load the status into the DataGridView
-            End While
+                        ' แปลงค่า s_id เป็นสถานะสมาชิก
+                        Dim memberStatus As String = If(dr("s_id") = 0, "สมาชิกลาออก", "สมาชิกคงอยู่")
 
-            conn.Close()
-            cmd.Dispose()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+                        dgvMembers.Rows.Add(dr("m_id").ToString, dr("m_gender").ToString, dr("m_name").ToString,
+                                        dr("m_nick").ToString, birthDate, age, dr("m_thaiid").ToString, dr("m_job").ToString,
+                                        dr("m_address").ToString, dr("m_post").ToString, dr("m_tel").ToString,
+                                        dr("m_accountName").ToString, dr("m_accountNum").ToString,
+                                        dr("m_beginning").ToString, dr("m_outstanding").ToString, dr("m_national").ToString,
+                                        memberStatus) ' แสดงสถานะสมาชิกแทนค่า s_id
+                    End While
+                Catch ex As Exception
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End Using
     End Sub
 
     Sub ClearAllData()
@@ -110,7 +158,7 @@ Public Class frmManageMembers
         cmbNational.Items.Add("ไทย")
         cmbNational.SelectedIndex = 0
 
-        ' Clear and reset the status ComboBox (m_status)
+        ' Clear and reset the status ComboBox (s_id)
         cmbStatus.Items.Clear()
         cmbStatus.Items.Add("เลือกสถานะ")
         cmbStatus.Items.Add("สมาชิกคงอยู่")
@@ -120,23 +168,23 @@ Public Class frmManageMembers
         isEditing = False ' Reset editing state
     End Sub
 
-
     Sub Auto_id()
         Dim m_id As Integer
         Try
             strSQL = "SELECT m_id FROM Member ORDER BY m_id DESC"
-            cmd = New OleDbCommand(strSQL, conn)
 
-            If conn.State = ConnectionState.Open Then conn.Close()
-            conn.Open()
-
-            dr = cmd.ExecuteReader(CommandBehavior.CloseConnection)
-            If dr.Read = True Then
-                m_id = Val(dr(0)) + 1
-            Else
-                m_id = 1
-            End If
-            txtID.Text = m_id.ToString("0000")
+            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+                Using cmd As New OleDbCommand(strSQL, conn)
+                    conn.Open()
+                    dr = cmd.ExecuteReader(CommandBehavior.CloseConnection)
+                    If dr.Read = True Then
+                        m_id = Val(dr(0)) + 1
+                    Else
+                        m_id = 1
+                    End If
+                    txtID.Text = m_id.ToString("0000")
+                End Using
+            End Using
         Catch ex As Exception
             MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -149,201 +197,76 @@ Public Class frmManageMembers
         End If
 
         Try
-            If conn.State = ConnectionState.Closed Then
+            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
                 conn.Open()
-            End If
 
-            Dim hasChanges As Boolean = False
-            If isEditing Then
-                ' Check if there are any changes
-                Dim checkSql As String = "SELECT * FROM Member WHERE m_id = @m_id"
-                Using checkCmd As New OleDbCommand(checkSql, conn)
-                    checkCmd.Parameters.AddWithValue("@m_id", txtID.Text.Trim())
-                    Using reader As OleDbDataReader = checkCmd.ExecuteReader()
-                        If reader.Read() Then
-                            hasChanges = (reader("m_gender").ToString() <> cmbGender.SelectedItem.ToString()) OrElse
-                                 (reader("m_name").ToString() <> txtName.Text.Trim()) OrElse
-                                 (reader("m_nick").ToString() <> txtnick.Text.Trim()) OrElse
-                                 (CDate(reader("m_birth")).ToString("yyyy-MM-dd") <> dtpBirth.Value.ToString("yyyy-MM-dd")) OrElse
-                                 (reader("m_national").ToString() <> cmbNational.SelectedItem.ToString()) OrElse
-                                 (reader("m_thaiid").ToString() <> txtThaiid.Text.Trim()) OrElse
-                                 (reader("m_job").ToString() <> txtJob.Text.Trim()) OrElse
-                                 (reader("m_address").ToString() <> txtAddress.Text.Trim()) OrElse
-                                 (reader("m_post").ToString() <> txtPost.Text.Trim()) OrElse
-                                 (reader("m_tel").ToString() <> txtTel.Text.Trim()) OrElse
-                                 (reader("m_accountName").ToString() <> txtAccountname.Text.Trim()) OrElse
-                                 (reader("m_accountNum").ToString() <> txtAccountnum.Text.Trim()) OrElse
-                                 (If(reader("m_beginning") IsNot DBNull.Value, CDbl(reader("m_beginning")), 0) <> If(String.IsNullOrEmpty(txtBeginning.Text.Trim()), 0, CDbl(txtBeginning.Text.Trim()))) OrElse
-                                 (If(reader("m_outstanding") IsNot DBNull.Value, CDbl(reader("m_outstanding")), 0) <> If(String.IsNullOrEmpty(txtOutstanding.Text.Trim()), 0, CDbl(txtOutstanding.Text.Trim()))) OrElse
-                                 (reader("m_status").ToString() <> cmbStatus.SelectedItem.ToString())
-                        End If
-                    End Using
-                End Using
-
-                If Not hasChanges Then
-                    MessageBox.Show("ไม่มีการเปลี่ยนแปลงข้อมูล", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Return
-                End If
-
-                ' Update SQL query to include m_status
-                strSQL = "UPDATE Member SET m_gender = @m_gender, m_name = @m_name, m_nick = @m_nick, m_birth = @m_birth, m_national = @m_national, " &
-                     "m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, m_post = @m_post, m_tel = @m_tel, m_accountName = @m_accountName, " &
-                     "m_accountNum = @m_accountNum, m_beginning = @m_beginning, m_outstanding = @m_outstanding, m_age = @m_age, m_status = @m_status WHERE m_id = @m_id"
-
-            Else
-                ' Insert SQL query to include m_status
-                strSQL = "INSERT INTO Member (m_id, m_gender, m_name, m_nick, m_birth, m_national, m_thaiid, m_job, m_address, m_post, m_tel, m_accountName, " &
-                 "m_accountNum, m_beginning, m_outstanding, m_age, m_status) VALUES (@m_id, @m_gender, @m_name, @m_nick, @m_birth, @m_national, @m_thaiid, " &
-                 "@m_job, @m_address, @m_post, @m_tel, @m_accountName, @m_accountNum, @m_beginning, @m_outstanding, @m_age, @m_status)"
-            End If
-
-            Using cmd As New OleDbCommand(strSQL, conn)
-                cmd.Parameters.AddWithValue("@m_id", txtID.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_gender", cmbGender.SelectedItem.ToString())
-                cmd.Parameters.AddWithValue("@m_name", txtName.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_nick", txtnick.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_birth", dtpBirth.Value.ToString("yyyy-MM-dd"))
-                cmd.Parameters.AddWithValue("@m_national", cmbNational.SelectedItem.ToString())
-                cmd.Parameters.AddWithValue("@m_thaiid", txtThaiid.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_job", txtJob.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_address", txtAddress.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_post", txtPost.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_tel", txtTel.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_accountName", txtAccountname.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_accountNum", txtAccountnum.Text.Trim())
-
-                ' Check and add parameters for m_beginning and m_outstanding
-                If String.IsNullOrEmpty(txtBeginning.Text.Trim()) Then
-                    cmd.Parameters.AddWithValue("@m_beginning", DBNull.Value)
+                ' ตรวจสอบว่าเป็นการเพิ่มหรือแก้ไข
+                If isEditing Then
+                    ' Update SQL query to include s_id
+                    strSQL = "UPDATE Member SET m_gender = @m_gender, m_name = @m_name, m_nick = @m_nick, m_birth = @m_birth, m_national = @m_national, " &
+                             "m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, m_post = @m_post, m_tel = @m_tel, m_accountName = @m_accountName, " &
+                             "m_accountNum = @m_accountNum, m_beginning = @m_beginning, m_outstanding = @m_outstanding, m_age = @m_age, s_id = @s_id WHERE m_id = @m_id"
                 Else
-                    cmd.Parameters.AddWithValue("@m_beginning", Double.Parse(txtBeginning.Text.Trim()))
+                    ' Insert SQL query to include s_id
+                    strSQL = "INSERT INTO Member (m_id, m_gender, m_name, m_nick, m_birth, m_national, m_thaiid, m_job, m_address, m_post, m_tel, m_accountName, " &
+                             "m_accountNum, m_beginning, m_outstanding, m_age, s_id) VALUES (@m_id, @m_gender, @m_name, @m_nick, @m_birth, @m_national, @m_thaiid, " &
+                             "@m_job, @m_address, @m_post, @m_tel, @m_accountName, @m_accountNum, @m_beginning, @m_outstanding, @m_age, @s_id)"
                 End If
 
-                If String.IsNullOrEmpty(txtOutstanding.Text.Trim()) Then
-                    cmd.Parameters.AddWithValue("@m_outstanding", DBNull.Value)
-                Else
-                    cmd.Parameters.AddWithValue("@m_outstanding", Double.Parse(txtOutstanding.Text.Trim()))
-                End If
+                Using cmd As New OleDbCommand(strSQL, conn)
+                    cmd.Parameters.AddWithValue("@m_id", txtID.Text.Trim())
+                    cmd.Parameters.AddWithValue("@m_gender", cmbGender.SelectedItem.ToString())
+                    cmd.Parameters.AddWithValue("@m_name", txtName.Text.Trim())
+                    cmd.Parameters.AddWithValue("@m_nick", txtnick.Text.Trim())
+                    cmd.Parameters.AddWithValue("@m_birth", dtpBirth.Value.ToString("yyyy-MM-dd"))
+                    cmd.Parameters.AddWithValue("@m_national", cmbNational.SelectedItem.ToString())
+                    cmd.Parameters.AddWithValue("@m_thaiid", txtThaiid.Text.Trim())
+                    cmd.Parameters.AddWithValue("@m_job", txtJob.Text.Trim())
+                    cmd.Parameters.AddWithValue("@m_address", txtAddress.Text.Trim())
+                    cmd.Parameters.AddWithValue("@m_post", txtPost.Text.Trim())
+                    cmd.Parameters.AddWithValue("@m_tel", txtTel.Text.Trim())
+                    cmd.Parameters.AddWithValue("@m_accountName", txtAccountname.Text.Trim())
+                    cmd.Parameters.AddWithValue("@m_accountNum", txtAccountnum.Text.Trim())
 
-                cmd.Parameters.AddWithValue("@m_age", CalculateAge(dtpBirth.Value.ToString("dd/MM/yyyy")))
-                cmd.Parameters.AddWithValue("@m_status", cmbStatus.SelectedItem.ToString()) ' Add the m_status parameter
-
-                ' Log the SQL query and parameter values
-                Dim logMessage As String = cmd.CommandText & vbNewLine
-                For Each p As OleDbParameter In cmd.Parameters
-                    logMessage &= p.ParameterName & " = " & p.Value.ToString() & vbNewLine
-                Next
-                System.Diagnostics.Debug.WriteLine(logMessage)
-
-                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-                If rowsAffected > 0 Then
-                    MessageBox.Show("บันทึกข้อมูลสำเร็จ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Loadinfo()  ' Refresh the data in DataGridView
-                    If Not isEditing Then
-                        ClearAllData()
-                        Auto_id()
+                    ' Check and add parameters for m_beginning and m_outstanding
+                    If String.IsNullOrEmpty(txtBeginning.Text.Trim()) Then
+                        cmd.Parameters.AddWithValue("@m_beginning", DBNull.Value)
+                    Else
+                        cmd.Parameters.AddWithValue("@m_beginning", Double.Parse(txtBeginning.Text.Trim()))
                     End If
-                Else
-                    MessageBox.Show("ไม่มีการเปลี่ยนแปลงข้อมูล", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End If
-            End Using
-        Catch ex As OleDbException
-            MessageBox.Show("เกิดข้อผิดพลาดในการเชื่อมต่อหรือดำเนินการกับฐานข้อมูล: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Catch ex As FormatException
-            MessageBox.Show("เกิดข้อผิดพลาดในการแปลงข้อมูล: " & ex.Message, "Format Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Catch ex As Exception
-            MessageBox.Show("เกิดข้อผิดพลาดที่ไม่คาดคิด: " & ex.Message, "Unexpected Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If conn.State = ConnectionState.Open Then
-                conn.Close()
-            End If
-        End Try
-    End Sub
 
-    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        ' ตรวจสอบว่ามีการเลือกข้อมูลหรือไม่
-        If String.IsNullOrWhiteSpace(txtID.Text) Then
-            MessageBox.Show("กรุณาเลือกสมาชิกก่อนทำการอัปเดต", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
+                    If String.IsNullOrEmpty(txtOutstanding.Text.Trim()) Then
+                        cmd.Parameters.AddWithValue("@m_outstanding", DBNull.Value)
+                    Else
+                        cmd.Parameters.AddWithValue("@m_outstanding", Double.Parse(txtOutstanding.Text.Trim()))
+                    End If
 
-        ' ตรวจสอบว่าฟิลด์ทั้งหมดถูกกรอกแล้ว
-        If Not AllFieldsFilled() Then
-            MessageBox.Show("โปรดกรอกข้อมูลให้ครบถ้วน", "Incomplete Data", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
+                    cmd.Parameters.AddWithValue("@m_age", CalculateAge(dtpBirth.Value.ToString("dd/MM/yyyy")))
+                    cmd.Parameters.AddWithValue("@s_id", If(cmbStatus.SelectedItem.ToString() = "สมาชิกคงอยู่", 1, 0)) ' Add the s_id parameter
 
-        Try
-            If conn.State = ConnectionState.Closed Then
-                conn.Open()
-            End If
-
-            ' คำสั่ง SQL สำหรับอัปเดตข้อมูลสมาชิก
-            strSQL = "UPDATE Member SET m_gender = @m_gender, m_name = @m_name, m_nick = @m_nick, m_birth = @m_birth, " &
-                 "m_national = @m_national, m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, " &
-                 "m_post = @m_post, m_tel = @m_tel, m_accountName = @m_accountName, m_accountNum = @m_accountNum, " &
-                 "m_beginning = @m_beginning, m_outstanding = @m_outstanding, m_age = @m_age WHERE m_id = @m_id"
-
-            ' สร้าง OleDbCommand สำหรับอัปเดตข้อมูล
-            Using cmd As New OleDbCommand(strSQL, conn)
-                ' กำหนดค่าให้กับพารามิเตอร์
-                cmd.Parameters.AddWithValue("@m_gender", cmbGender.SelectedItem.ToString())
-                cmd.Parameters.AddWithValue("@m_name", txtName.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_nick", txtnick.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_birth", dtpBirth.Value.ToString("yyyy-MM-dd"))
-                cmd.Parameters.AddWithValue("@m_national", cmbNational.SelectedItem.ToString())
-                cmd.Parameters.AddWithValue("@m_thaiid", txtThaiid.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_job", txtJob.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_address", txtAddress.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_post", txtPost.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_tel", txtTel.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_accountName", txtAccountname.Text.Trim())
-                cmd.Parameters.AddWithValue("@m_accountNum", txtAccountnum.Text.Trim())
-
-                ' แปลงค่าเริ่มต้นและยอดค้างชำระ
-                If String.IsNullOrEmpty(txtBeginning.Text.Trim()) Then
-                    cmd.Parameters.AddWithValue("@m_beginning", DBNull.Value)
-                Else
-                    cmd.Parameters.AddWithValue("@m_beginning", Double.Parse(txtBeginning.Text.Trim()))
-                End If
-
-                If String.IsNullOrEmpty(txtOutstanding.Text.Trim()) Then
-                    cmd.Parameters.AddWithValue("@m_outstanding", DBNull.Value)
-                Else
-                    cmd.Parameters.AddWithValue("@m_outstanding", Double.Parse(txtOutstanding.Text.Trim()))
-                End If
-
-                ' คำนวณอายุ
-                cmd.Parameters.AddWithValue("@m_age", CalculateAge(dtpBirth.Value.ToString("dd/MM/yyyy")))
-                cmd.Parameters.AddWithValue("@m_id", txtID.Text.Trim())
-
-                ' ดำเนินการอัปเดต
-                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-
-                If rowsAffected > 0 Then
-                    MessageBox.Show("อัปเดตข้อมูลสำเร็จ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Loadinfo() ' โหลดข้อมูลใหม่ใน DataGridView
-                    ClearAllData() ' เคลียร์ข้อมูลทั้งหมดหลังอัปเดต
-                    Auto_id() ' สร้าง ID ใหม่สำหรับรายการถัดไป
-                Else
-                    MessageBox.Show("ไม่มีการเปลี่ยนแปลงข้อมูล", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End If
+                    Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                    If rowsAffected > 0 Then
+                        MessageBox.Show("บันทึกข้อมูลสำเร็จ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Loadinfo()  ' Refresh the data in DataGridView
+                        If Not isEditing Then
+                            ClearAllData()
+                            Auto_id()
+                        End If
+                    Else
+                        MessageBox.Show("ไม่มีการเปลี่ยนแปลงข้อมูล", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End Using
             End Using
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If conn.State = ConnectionState.Open Then
-                conn.Close()
-            End If
         End Try
     End Sub
-
 
     Private Function AllFieldsFilled() As Boolean
         Return Not (String.IsNullOrWhiteSpace(txtName.Text) Or String.IsNullOrWhiteSpace(txtnick.Text) Or String.IsNullOrWhiteSpace(txtThaiid.Text) Or
                     String.IsNullOrWhiteSpace(txtJob.Text) Or String.IsNullOrWhiteSpace(txtAddress.Text) Or String.IsNullOrWhiteSpace(txtPost.Text) Or
                     String.IsNullOrWhiteSpace(txtTel.Text) Or String.IsNullOrWhiteSpace(txtAccountname.Text) Or String.IsNullOrWhiteSpace(txtAccountnum.Text) Or
-                    cmbGender.SelectedIndex = 0 Or cmbNational.SelectedIndex = 0)
+                    cmbGender.SelectedIndex = 0 Or cmbNational.SelectedIndex = 0 Or cmbStatus.SelectedIndex = 0)
     End Function
 
     Private Sub dgvMembers_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMembers.CellClick
@@ -375,25 +298,27 @@ Public Class frmManageMembers
             txtOutstanding.Text = row.Cells("m_outstanding").Value.ToString()
             cmbNational.SelectedItem = row.Cells("m_national").Value.ToString()
 
+            ' แปลงค่า s_id เป็นสถานะสมาชิก
+            cmbStatus.SelectedItem = If(row.Cells("s_id").Value.ToString() = "0", "สมาชิกลาออก", "สมาชิกคงอยู่")
+
             isEditing = True
         End If
     End Sub
 
-
     Private Function CalculateAge(birthDate As String) As Integer
         Dim birthDateObj As Date
         ' ตรวจสอบการแปลงวันที่โดยเพิ่มรูปแบบหลายแบบ
-        Dim formats() As String = {"dd/MM/yyyy", "MM/dd/yyyy", "yyyy-MM-dd"}
+        Dim formats() As String = {"dd/MM/yyyy", "MM/dd/yyyy", "yyyy-MM-dd", "d/M/yyyy"}
 
         If DateTime.TryParseExact(birthDate, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, birthDateObj) Then
             Dim age As Integer = DateTime.Now.Year - birthDateObj.Year
             If DateTime.Now < birthDateObj.AddYears(age) Then age -= 1
             Return age
         Else
-            Return 0 ' หากไม่สามารถแปลงวันเกิดได้ คืนค่า 0
+            MessageBox.Show("รูปแบบวันเกิดไม่ถูกต้อง", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return 0
         End If
     End Function
-
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ClearAllData()
@@ -409,11 +334,14 @@ Public Class frmManageMembers
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this member?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
         If result = DialogResult.Yes Then
             Try
-                If conn.State = ConnectionState.Closed Then conn.Open()
-                Dim deleteQuery As String = "DELETE FROM Member WHERE m_id = @m_id"
-                Using cmdDelete As New OleDbCommand(deleteQuery, conn)
-                    cmdDelete.Parameters.AddWithValue("@m_id", txtID.Text)
-                    cmdDelete.ExecuteNonQuery()
+                Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+                    conn.Open()
+
+                    Dim deleteQuery As String = "DELETE FROM Member WHERE m_id = @m_id"
+                    Using cmdDelete As New OleDbCommand(deleteQuery, conn)
+                        cmdDelete.Parameters.AddWithValue("@m_id", txtID.Text)
+                        cmdDelete.ExecuteNonQuery()
+                    End Using
                 End Using
 
                 MessageBox.Show("Member deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -421,8 +349,6 @@ Public Class frmManageMembers
                 Loadinfo()
             Catch ex As Exception
                 MessageBox.Show("Error deleting member: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Finally
-                conn.Close()
             End Try
         End If
     End Sub

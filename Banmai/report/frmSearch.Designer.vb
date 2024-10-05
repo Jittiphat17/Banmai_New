@@ -86,7 +86,6 @@ Partial Class frmSearch
         '
         'dgvResults
         '
-        Me.dgvResults.AllowUserToAddRows = False
         Me.dgvResults.AllowUserToDeleteRows = False
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
         Me.dgvResults.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
@@ -113,7 +112,6 @@ Partial Class frmSearch
         Me.dgvResults.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dgvResults.Location = New System.Drawing.Point(12, 98)
         Me.dgvResults.Name = "dgvResults"
-        Me.dgvResults.ReadOnly = True
         Me.dgvResults.RowHeadersVisible = False
         Me.dgvResults.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
         Me.dgvResults.Size = New System.Drawing.Size(1049, 199)
@@ -131,7 +129,7 @@ Partial Class frmSearch
         Me.dgvResults.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
         Me.dgvResults.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
         Me.dgvResults.ThemeStyle.HeaderStyle.Height = 50
-        Me.dgvResults.ThemeStyle.ReadOnly = True
+        Me.dgvResults.ThemeStyle.ReadOnly = False
         Me.dgvResults.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvResults.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.dgvResults.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))

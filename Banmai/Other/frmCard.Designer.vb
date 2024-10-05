@@ -36,8 +36,6 @@ Partial Class frmCard
         Me.Guna2HtmlLabel20 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel19 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel15 = New Guna.UI2.WinForms.Guna2HtmlLabel()
-        Me.Guna2HtmlLabel28 = New Guna.UI2.WinForms.Guna2HtmlLabel()
-        Me.Guna2HtmlLabel27 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel25 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel18 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel24 = New Guna.UI2.WinForms.Guna2HtmlLabel()
@@ -67,8 +65,6 @@ Partial Class frmCard
         Me.txtSex = New System.Windows.Forms.TextBox()
         Me.txtPrefixEng = New System.Windows.Forms.TextBox()
         Me.txtPreFixThai = New System.Windows.Forms.TextBox()
-        Me.txtOutstanding = New System.Windows.Forms.TextBox()
-        Me.txtBeginning = New System.Windows.Forms.TextBox()
         Me.txtPost = New System.Windows.Forms.TextBox()
         Me.txtRoad = New System.Windows.Forms.TextBox()
         Me.txtLane = New System.Windows.Forms.TextBox()
@@ -132,8 +128,6 @@ Partial Class frmCard
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel20)
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel19)
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel15)
-        Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel28)
-        Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel27)
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel25)
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel18)
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel24)
@@ -163,8 +157,6 @@ Partial Class frmCard
         Me.GroupBox1.Controls.Add(Me.txtSex)
         Me.GroupBox1.Controls.Add(Me.txtPrefixEng)
         Me.GroupBox1.Controls.Add(Me.txtPreFixThai)
-        Me.GroupBox1.Controls.Add(Me.txtOutstanding)
-        Me.GroupBox1.Controls.Add(Me.txtBeginning)
         Me.GroupBox1.Controls.Add(Me.txtPost)
         Me.GroupBox1.Controls.Add(Me.txtRoad)
         Me.GroupBox1.Controls.Add(Me.txtLane)
@@ -277,26 +269,6 @@ Partial Class frmCard
         Me.Guna2HtmlLabel15.Size = New System.Drawing.Size(30, 21)
         Me.Guna2HtmlLabel15.TabIndex = 4
         Me.Guna2HtmlLabel15.Text = "หมู่ที่"
-        '
-        'Guna2HtmlLabel28
-        '
-        Me.Guna2HtmlLabel28.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel28.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel28.Location = New System.Drawing.Point(869, 558)
-        Me.Guna2HtmlLabel28.Name = "Guna2HtmlLabel28"
-        Me.Guna2HtmlLabel28.Size = New System.Drawing.Size(64, 21)
-        Me.Guna2HtmlLabel28.TabIndex = 4
-        Me.Guna2HtmlLabel28.Text = "ยอดยกมา"
-        '
-        'Guna2HtmlLabel27
-        '
-        Me.Guna2HtmlLabel27.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel27.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel27.Location = New System.Drawing.Point(855, 523)
-        Me.Guna2HtmlLabel27.Name = "Guna2HtmlLabel27"
-        Me.Guna2HtmlLabel27.Size = New System.Drawing.Size(78, 21)
-        Me.Guna2HtmlLabel27.TabIndex = 4
-        Me.Guna2HtmlLabel27.Text = "ลูกหนี้คงค้าง"
         '
         'Guna2HtmlLabel25
         '
@@ -578,24 +550,6 @@ Partial Class frmCard
         Me.txtPreFixThai.Size = New System.Drawing.Size(103, 29)
         Me.txtPreFixThai.TabIndex = 0
         '
-        'txtOutstanding
-        '
-        Me.txtOutstanding.Font = New System.Drawing.Font("TH SarabunPSK", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOutstanding.Location = New System.Drawing.Point(939, 554)
-        Me.txtOutstanding.Name = "txtOutstanding"
-        Me.txtOutstanding.Size = New System.Drawing.Size(103, 29)
-        Me.txtOutstanding.TabIndex = 0
-        Me.txtOutstanding.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtBeginning
-        '
-        Me.txtBeginning.Font = New System.Drawing.Font("TH SarabunPSK", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBeginning.Location = New System.Drawing.Point(939, 519)
-        Me.txtBeginning.Name = "txtBeginning"
-        Me.txtBeginning.Size = New System.Drawing.Size(103, 29)
-        Me.txtBeginning.TabIndex = 0
-        Me.txtBeginning.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'txtPost
         '
         Me.txtPost.Font = New System.Drawing.Font("TH SarabunPSK", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -817,8 +771,6 @@ Partial Class frmCard
     Friend WithEvents Guna2HtmlLabel20 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel19 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel15 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents Guna2HtmlLabel28 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents Guna2HtmlLabel27 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel25 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel18 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel24 As Guna.UI2.WinForms.Guna2HtmlLabel
@@ -848,8 +800,6 @@ Partial Class frmCard
     Friend WithEvents txtSex As TextBox
     Friend WithEvents txtPrefixEng As TextBox
     Friend WithEvents txtPreFixThai As TextBox
-    Friend WithEvents txtOutstanding As TextBox
-    Friend WithEvents txtBeginning As TextBox
     Friend WithEvents txtPost As TextBox
     Friend WithEvents txtRoad As TextBox
     Friend WithEvents txtLane As TextBox

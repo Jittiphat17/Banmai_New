@@ -48,7 +48,7 @@ Partial Class frmMain
         Me.หนToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายงานงบกำไรขาดทนToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายงานลกหนรายตวToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ทดลองรายงานToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.งบแสดงฐานะทางการเงนToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsm_other = New System.Windows.Forms.ToolStripMenuItem()
         Me.สมาชกToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.จดการสมาชกToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -96,7 +96,7 @@ Partial Class frmMain
         '
         Me.lblDateTime.BackColor = System.Drawing.Color.Transparent
         Me.lblDateTime.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDateTime.Location = New System.Drawing.Point(839, 573)
+        Me.lblDateTime.Location = New System.Drawing.Point(758, 573)
         Me.lblDateTime.Name = "lblDateTime"
         Me.lblDateTime.Size = New System.Drawing.Size(133, 23)
         Me.lblDateTime.TabIndex = 27
@@ -227,7 +227,7 @@ Partial Class frmMain
         'tsm_report
         '
         Me.tsm_report.AutoSize = False
-        Me.tsm_report.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายงานสญญาเงนกToolStripMenuItem, Me.รายงานดอกเบยสจจะToolStripMenuItem, Me.หนToolStripMenuItem, Me.รายงานงบกำไรขาดทนToolStripMenuItem, Me.รายงานลกหนรายตวToolStripMenuItem, Me.ทดลองรายงานToolStripMenuItem})
+        Me.tsm_report.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายงานสญญาเงนกToolStripMenuItem, Me.รายงานดอกเบยสจจะToolStripMenuItem, Me.หนToolStripMenuItem, Me.รายงานงบกำไรขาดทนToolStripMenuItem, Me.รายงานลกหนรายตวToolStripMenuItem, Me.งบแสดงฐานะทางการเงนToolStripMenuItem})
         Me.tsm_report.Name = "tsm_report"
         Me.tsm_report.Size = New System.Drawing.Size(150, 50)
         Me.tsm_report.Text = "รายงาน"
@@ -235,38 +235,38 @@ Partial Class frmMain
         'รายงานสญญาเงนกToolStripMenuItem
         '
         Me.รายงานสญญาเงนกToolStripMenuItem.Name = "รายงานสญญาเงนกToolStripMenuItem"
-        Me.รายงานสญญาเงนกToolStripMenuItem.Size = New System.Drawing.Size(282, 32)
+        Me.รายงานสญญาเงนกToolStripMenuItem.Size = New System.Drawing.Size(357, 32)
         Me.รายงานสญญาเงนกToolStripMenuItem.Text = "รายงานสัญญาเงินกู้"
         '
         'รายงานดอกเบยสจจะToolStripMenuItem
         '
         Me.รายงานดอกเบยสจจะToolStripMenuItem.Name = "รายงานดอกเบยสจจะToolStripMenuItem"
-        Me.รายงานดอกเบยสจจะToolStripMenuItem.Size = New System.Drawing.Size(282, 32)
+        Me.รายงานดอกเบยสจจะToolStripMenuItem.Size = New System.Drawing.Size(357, 32)
         Me.รายงานดอกเบยสจจะToolStripMenuItem.Text = "รายงานดอกเบี้ยสัจจะ"
         '
         'หนToolStripMenuItem
         '
         Me.หนToolStripMenuItem.Name = "หนToolStripMenuItem"
-        Me.หนToolStripMenuItem.Size = New System.Drawing.Size(282, 32)
+        Me.หนToolStripMenuItem.Size = New System.Drawing.Size(357, 32)
         Me.หนToolStripMenuItem.Text = "รายงานหุ้น"
         '
         'รายงานงบกำไรขาดทนToolStripMenuItem
         '
         Me.รายงานงบกำไรขาดทนToolStripMenuItem.Name = "รายงานงบกำไรขาดทนToolStripMenuItem"
-        Me.รายงานงบกำไรขาดทนToolStripMenuItem.Size = New System.Drawing.Size(282, 32)
+        Me.รายงานงบกำไรขาดทนToolStripMenuItem.Size = New System.Drawing.Size(357, 32)
         Me.รายงานงบกำไรขาดทนToolStripMenuItem.Text = "รายงานงบกำไร-ขาดทุน"
         '
         'รายงานลกหนรายตวToolStripMenuItem
         '
         Me.รายงานลกหนรายตวToolStripMenuItem.Name = "รายงานลกหนรายตวToolStripMenuItem"
-        Me.รายงานลกหนรายตวToolStripMenuItem.Size = New System.Drawing.Size(282, 32)
+        Me.รายงานลกหนรายตวToolStripMenuItem.Size = New System.Drawing.Size(357, 32)
         Me.รายงานลกหนรายตวToolStripMenuItem.Text = "รายงานลูกหนี้รายตัว"
         '
-        'ทดลองรายงานToolStripMenuItem
+        'งบแสดงฐานะทางการเงนToolStripMenuItem
         '
-        Me.ทดลองรายงานToolStripMenuItem.Name = "ทดลองรายงานToolStripMenuItem"
-        Me.ทดลองรายงานToolStripMenuItem.Size = New System.Drawing.Size(282, 32)
-        Me.ทดลองรายงานToolStripMenuItem.Text = "ทดลองรายงาน"
+        Me.งบแสดงฐานะทางการเงนToolStripMenuItem.Name = "งบแสดงฐานะทางการเงนToolStripMenuItem"
+        Me.งบแสดงฐานะทางการเงนToolStripMenuItem.Size = New System.Drawing.Size(357, 32)
+        Me.งบแสดงฐานะทางการเงนToolStripMenuItem.Text = "รายงานงบแสดงฐานะทางการเงิน"
         '
         'tsm_other
         '
@@ -475,6 +475,6 @@ Partial Class frmMain
     Friend WithEvents รายงานลกหนรายตวToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Guna2Panel2 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
-    Friend WithEvents ทดลองรายงานToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents การปดงบToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents งบแสดงฐานะทางการเงนToolStripMenuItem As ToolStripMenuItem
 End Class

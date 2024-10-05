@@ -149,6 +149,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>db_banmai1DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DtsIncExpSummary.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DtsIncExpSummary.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -285,6 +290,12 @@
     <Compile Include="report\frmDebtor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="report\frmFinancial.Designer.vb">
+      <DependentUpon>frmFinancial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report\frmFinancial.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="report\frmSajja.Designer.vb">
       <DependentUpon>frmSajja.vb</DependentUpon>
     </Compile>
@@ -307,12 +318,6 @@
       <DependentUpon>frmStatement.vb</DependentUpon>
     </Compile>
     <Compile Include="report\frmStatement.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="report\ProfitAndLossReportForm.Designer.vb">
-      <DependentUpon>ProfitAndLossReportForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="report\ProfitAndLossReportForm.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -377,8 +382,12 @@
     <EmbeddedResource Include="Page2\frmIncome.resx">
       <DependentUpon>frmIncome.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="report\Financial.rdlc" />
     <EmbeddedResource Include="report\frmDebtor.resx">
       <DependentUpon>frmDebtor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\frmFinancial.resx">
+      <DependentUpon>frmFinancial.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="report\frmSajja.resx">
       <DependentUpon>frmSajja.vb</DependentUpon>
@@ -395,13 +404,9 @@
     <EmbeddedResource Include="report\GuarantorReport.rdlc" />
     <EmbeddedResource Include="report\Individualdebtor.rdlc" />
     <EmbeddedResource Include="report\LoanReport1.rdlc" />
-    <EmbeddedResource Include="report\ProfitAndLossReportForm.resx">
-      <DependentUpon>ProfitAndLossReportForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="report\SajjaReport.rdlc" />
     <EmbeddedResource Include="report\shareReport.rdlc" />
     <EmbeddedResource Include="report\StatementReport.rdlc" />
-    <EmbeddedResource Include="report\test.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="db_banmai1DataSet.xsc">
@@ -425,6 +430,17 @@
     </None>
     <None Include="db_banmai1DataSet1.xss">
       <DependentUpon>db_banmai1DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DtsIncExpSummary.xsc">
+      <DependentUpon>DtsIncExpSummary.xsd</DependentUpon>
+    </None>
+    <None Include="DtsIncExpSummary.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DtsIncExpSummary.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="DtsIncExpSummary.xss">
+      <DependentUpon>DtsIncExpSummary.xsd</DependentUpon>
     </None>
     <None Include="individualDS.xsc">
       <DependentUpon>individualDS.xsd</DependentUpon>

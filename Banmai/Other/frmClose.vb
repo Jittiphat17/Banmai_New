@@ -329,7 +329,6 @@ Public Class frmClose
     End Sub
 
 
-    ' ฟังก์ชันสำหรับบันทึกข้อมูลจาก DataGridView กลับไปยังฐานข้อมูลโดยเปลี่ยนเป็นค่าลบและบันทึกวันที่
     Private Sub SaveData()
         ' เชื่อมต่อกับฐานข้อมูล
         Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
@@ -344,33 +343,68 @@ Public Class frmClose
                 ' วันที่จาก DateTimePicker1
                 Dim selectedDate As DateTime = DateTimePicker1.Value
 
-                ' เตรียมคำสั่ง SQL สำหรับบันทึกรายได้พร้อมวันที่
+                ' เตรียมคำสั่ง SQL สำหรับบันทึกรายการใน Income_Details
                 Dim incomeCmd As New OleDbCommand("INSERT INTO Income_Details (ind_accname, ind_amount, acc_id, ind_date) VALUES (@ind_accname, @ind_amount, @acc_id, @ind_date)", conn, transaction)
 
-                ' วนลูปบันทึกข้อมูลจาก Guna2DataGridView1 (รายได้) โดยทำเป็นค่าลบและบันทึกวันที่
+                ' เตรียมคำสั่ง SQL สำหรับบันทึกรายการใน Expense_Details
+                Dim expenseCmd As New OleDbCommand("INSERT INTO Expense_Details (exd_nameacc, exd_amount, acc_id, exd_date) VALUES (@exd_nameacc, @exd_amount, @acc_id, @exd_date)", conn, transaction)
+
+                ' ลิสต์รายการที่ต้องตรวจสอบ (ต้องบันทึกใน Income_Details เท่านั้น)
+                Dim specificAccounts As String() = {"กำไรสะสมบัญชี1", "กำไรสะสมบัญชีเงินสัจจะ", "กำไรสะสมบัญชีประชารัฐ",
+                                                "เงินประกันความเสี่ยงบัญชี1", "เงินประกันความเสี่ยงบัญชีเงินสัจจะ", "เงินประกันความเสี่ยงบัญชีประชารัฐ",
+                                                "เงินสมทบบัญชี1", "เงินสมทบบัญชีเงินสัจจะ", "เงินสมทบบัญชีประชารัฐ"}
+
+                ' วนลูปบันทึกข้อมูลจาก Guna2DataGridView1 (รายได้)
                 For Each row As DataGridViewRow In Guna2DataGridView1.Rows
                     If Not row.IsNewRow Then
-                        incomeCmd.Parameters.Clear()
-                        incomeCmd.Parameters.AddWithValue("@ind_accname", row.Cells("ind_accname").Value.ToString())
-                        incomeCmd.Parameters.AddWithValue("@ind_amount", -Convert.ToDecimal(row.Cells("TotalIncome").Value)) ' ทำเป็นค่าลบ
-                        incomeCmd.Parameters.AddWithValue("@acc_id", ComboBox1.SelectedValue.ToString()) ' ใช้ acc_id จาก ComboBox1
-                        incomeCmd.Parameters.AddWithValue("@ind_date", selectedDate.ToString("yyyy-MM-dd")) ' บันทึกวันที่
-                        incomeCmd.ExecuteNonQuery()
+                        Dim accountName As String = row.Cells("ind_accname").Value.ToString()
+                        Dim amount As Decimal = Convert.ToDecimal(row.Cells("TotalIncome").Value)
+
+                        ' ตรวจสอบว่าชื่อบัญชีอยู่ใน specificAccounts หรือไม่
+                        If specificAccounts.Contains(accountName) Then
+                            ' บันทึกใน Income_Details โดยบันทึกเป็นลบ (เพราะมาจากฝั่งรายได้)
+                            incomeCmd.Parameters.Clear()
+                            incomeCmd.Parameters.AddWithValue("@ind_accname", accountName)
+                            incomeCmd.Parameters.AddWithValue("@ind_amount", -amount) ' บันทึกเป็นค่าลบ
+                            incomeCmd.Parameters.AddWithValue("@acc_id", ComboBox1.SelectedValue.ToString())
+                            incomeCmd.Parameters.AddWithValue("@ind_date", selectedDate.ToString("yyyy-MM-dd"))
+                            incomeCmd.ExecuteNonQuery()
+                        Else
+                            ' ถ้าไม่ใช่ specificAccounts บันทึกลงตาราง Income_Details ตามปกติ (ค่าลบเสมอ)
+                            incomeCmd.Parameters.Clear()
+                            incomeCmd.Parameters.AddWithValue("@ind_accname", accountName)
+                            incomeCmd.Parameters.AddWithValue("@ind_amount", -amount) ' บันทึกเป็นค่าลบเสมอ
+                            incomeCmd.Parameters.AddWithValue("@acc_id", ComboBox1.SelectedValue.ToString())
+                            incomeCmd.Parameters.AddWithValue("@ind_date", selectedDate.ToString("yyyy-MM-dd"))
+                            incomeCmd.ExecuteNonQuery()
+                        End If
                     End If
                 Next
 
-                ' เตรียมคำสั่ง SQL สำหรับบันทึกรายจ่ายพร้อมวันที่
-                Dim expenseCmd As New OleDbCommand("INSERT INTO Expense_Details (exd_nameacc, exd_amount, acc_id, exd_date) VALUES (@exd_nameacc, @exd_amount, @acc_id, @exd_date)", conn, transaction)
-
-                ' วนลูปบันทึกข้อมูลจาก Guna2DataGridView2 (รายจ่าย) โดยทำเป็นค่าลบและบันทึกวันที่
+                ' วนลูปบันทึกข้อมูลจาก Guna2DataGridView2 (ค่าใช้จ่าย)
                 For Each row As DataGridViewRow In Guna2DataGridView2.Rows
                     If Not row.IsNewRow Then
-                        expenseCmd.Parameters.Clear()
-                        expenseCmd.Parameters.AddWithValue("@exd_nameacc", row.Cells("exd_nameacc").Value.ToString())
-                        expenseCmd.Parameters.AddWithValue("@exd_amount", -Convert.ToDecimal(row.Cells("TotalExpense").Value)) ' ทำเป็นค่าลบ
-                        expenseCmd.Parameters.AddWithValue("@acc_id", ComboBox1.SelectedValue.ToString()) ' ใช้ acc_id จาก ComboBox1
-                        expenseCmd.Parameters.AddWithValue("@exd_date", selectedDate.ToString("yyyy-MM-dd")) ' บันทึกวันที่
-                        expenseCmd.ExecuteNonQuery()
+                        Dim accountName As String = row.Cells("exd_nameacc").Value.ToString()
+                        Dim amount As Decimal = Convert.ToDecimal(row.Cells("TotalExpense").Value)
+
+                        ' ตรวจสอบว่าชื่อบัญชีอยู่ใน specificAccounts หรือไม่
+                        If specificAccounts.Contains(accountName) Then
+                            ' บันทึกใน Income_Details โดยบันทึกเป็นบวก (เพราะมาจากฝั่งค่าใช้จ่าย)
+                            incomeCmd.Parameters.Clear()
+                            incomeCmd.Parameters.AddWithValue("@ind_accname", accountName)
+                            incomeCmd.Parameters.AddWithValue("@ind_amount", amount) ' บันทึกเป็นค่าบวก
+                            incomeCmd.Parameters.AddWithValue("@acc_id", ComboBox1.SelectedValue.ToString())
+                            incomeCmd.Parameters.AddWithValue("@ind_date", selectedDate.ToString("yyyy-MM-dd"))
+                            incomeCmd.ExecuteNonQuery()
+                        Else
+                            ' ถ้าไม่ใช่ specificAccounts บันทึกใน Expense_Details แต่เป็นลบเสมอ
+                            expenseCmd.Parameters.Clear()
+                            expenseCmd.Parameters.AddWithValue("@exd_nameacc", accountName)
+                            expenseCmd.Parameters.AddWithValue("@exd_amount", -amount) ' บันทึกเป็นค่าลบเสมอ
+                            expenseCmd.Parameters.AddWithValue("@acc_id", ComboBox1.SelectedValue.ToString())
+                            expenseCmd.Parameters.AddWithValue("@exd_date", selectedDate.ToString("yyyy-MM-dd"))
+                            expenseCmd.ExecuteNonQuery()
+                        End If
                     End If
                 Next
 
@@ -378,7 +412,7 @@ Public Class frmClose
                 transaction.Commit()
 
                 ' แสดงข้อความความสำเร็จ
-                MessageBox.Show("ปิดยอดปีสำเร็จ ข้อมูลได้บันทึกเป็นค่าลบพร้อมวันที่แล้ว", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("ข้อมูลได้บันทึกในตาราง Income_Details และ Expense_Details สำเร็จ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' รีเฟรชข้อมูลใน DataGridView
                 LoadIncomeData(ComboBox1.SelectedValue.ToString(), selectedDate) ' รีโหลดข้อมูลรายได้
