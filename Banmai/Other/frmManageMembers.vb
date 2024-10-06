@@ -2,7 +2,7 @@
 Imports System.Globalization
 
 Public Class frmManageMembers
-    Dim conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+    Dim conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
     Dim cmd As OleDbCommand
     Dim dr As OleDbDataReader
     Dim strSQL As String ' SQL Query String
@@ -31,7 +31,7 @@ Public Class frmManageMembers
         ' Define a query that will search the Member table by name, ID, or phone number
         strSQL = "SELECT * FROM Member WHERE m_name LIKE @search OR m_id LIKE @search OR m_tel LIKE @search"
 
-        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
             Using cmd As New OleDbCommand(strSQL, conn)
                 cmd.Parameters.AddWithValue("@search", "%" & searchTerm & "%")
 
@@ -99,7 +99,7 @@ Public Class frmManageMembers
     Sub Loadinfo()
         strSQL = "SELECT * FROM Member"
 
-        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
             Using cmd As New OleDbCommand(strSQL, conn)
                 Try
                     conn.Open()
@@ -173,7 +173,7 @@ Public Class frmManageMembers
         Try
             strSQL = "SELECT m_id FROM Member ORDER BY m_id DESC"
 
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
                 Using cmd As New OleDbCommand(strSQL, conn)
                     conn.Open()
                     dr = cmd.ExecuteReader(CommandBehavior.CloseConnection)
@@ -197,7 +197,7 @@ Public Class frmManageMembers
         End If
 
         Try
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
                 conn.Open()
 
                 ' ตรวจสอบว่าเป็นการเพิ่มหรือแก้ไข
@@ -263,15 +263,64 @@ Public Class frmManageMembers
     End Sub
 
     Private Function AllFieldsFilled() As Boolean
-        Return Not (String.IsNullOrWhiteSpace(txtName.Text) Or String.IsNullOrWhiteSpace(txtnick.Text) Or String.IsNullOrWhiteSpace(txtThaiid.Text) Or
-                    String.IsNullOrWhiteSpace(txtJob.Text) Or String.IsNullOrWhiteSpace(txtAddress.Text) Or String.IsNullOrWhiteSpace(txtPost.Text) Or
-                    String.IsNullOrWhiteSpace(txtTel.Text) Or String.IsNullOrWhiteSpace(txtAccountname.Text) Or String.IsNullOrWhiteSpace(txtAccountnum.Text) Or
-                    cmbGender.SelectedIndex = 0 Or cmbNational.SelectedIndex = 0 Or cmbStatus.SelectedIndex = 0)
+        ' ตรวจสอบว่าฟิลด์ "ชื่อ" มีเฉพาะตัวอักษร
+        If String.IsNullOrWhiteSpace(txtName.Text) OrElse Not IsLettersOnly(txtName.Text) Then
+            MessageBox.Show("โปรดกรอกชื่อที่ถูกต้อง (เฉพาะตัวอักษร)", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        ' ตรวจสอบว่าฟิลด์ "ชื่อเล่น" มีเฉพาะตัวอักษร
+        If String.IsNullOrWhiteSpace(txtnick.Text) OrElse Not IsLettersOnly(txtnick.Text) Then
+            MessageBox.Show("โปรดกรอกชื่อเล่นที่ถูกต้อง (เฉพาะตัวอักษร)", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        ' ตรวจสอบเลขบัตรประชาชนว่ามีความยาว 13 หลักและเป็นตัวเลข
+        If Not IsNumeric(txtThaiid.Text) OrElse txtThaiid.Text.Length <> 13 Then
+            MessageBox.Show("กรุณากรอกเลขประจำตัวประชาชนให้ถูกต้อง (13 หลัก)", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        ' ตรวจสอบรหัสไปรษณีย์ว่ามีความยาว 5 หลักและเป็นตัวเลข
+        If Not IsNumeric(txtPost.Text) OrElse txtPost.Text.Length <> 5 Then
+            MessageBox.Show("กรุณากรอกรหัสไปรษณีย์ให้ถูกต้อง (5 หลัก)", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        ' ตรวจสอบเบอร์โทรศัพท์ว่ามีเฉพาะตัวเลข
+        If Not IsNumeric(txtTel.Text) Then
+            MessageBox.Show("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        ' ตรวจสอบว่าคำนำหน้าได้รับการเลือกแล้ว
+        If cmbGender.SelectedIndex = 0 Then
+            MessageBox.Show("โปรดเลือกคำนำหน้า", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        ' ตรวจสอบว่าฟิลด์สัญชาติได้รับการเลือกแล้ว
+        If cmbNational.SelectedIndex = 0 Then
+            MessageBox.Show("โปรดเลือกสัญชาติ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        ' ตรวจสอบว่าฟิลด์สถานะสมาชิกได้รับการเลือกแล้ว
+        If cmbStatus.SelectedIndex = 0 Then
+            MessageBox.Show("โปรดเลือกสถานะสมาชิก", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        ' หากข้อมูลทั้งหมดถูกต้อง
+        Return True
     End Function
 
     Private Sub dgvMembers_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMembers.CellClick
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvMembers.Rows(e.RowIndex)
+
+            ' ตรวจสอบค่าที่ดึงจาก DataGridView
+            MessageBox.Show("ID ที่เลือก: " & row.Cells("m_id").Value.ToString())
 
             ' Populate your textboxes with the selected row data
             txtID.Text = row.Cells("m_id").Value.ToString()
@@ -279,7 +328,7 @@ Public Class frmManageMembers
             txtName.Text = row.Cells("m_name").Value.ToString()
             txtnick.Text = row.Cells("m_nick").Value.ToString()
 
-            ' Handle birthdate format
+            ' ตรวจสอบรูปแบบวัน/เดือน/ปีเกิด
             If row.Cells("m_birth").Value IsNot Nothing Then
                 dtpBirth.Value = DateTime.ParseExact(row.Cells("m_birth").Value.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture)
             Else
@@ -301,9 +350,11 @@ Public Class frmManageMembers
             ' แปลงค่า s_id เป็นสถานะสมาชิก
             cmbStatus.SelectedItem = If(row.Cells("s_id").Value.ToString() = "0", "สมาชิกลาออก", "สมาชิกคงอยู่")
 
+            ' ตั้งค่าสถานะว่าเป็นการแก้ไข
             isEditing = True
         End If
     End Sub
+
 
     Private Function CalculateAge(birthDate As String) As Integer
         Dim birthDateObj As Date
@@ -334,7 +385,7 @@ Public Class frmManageMembers
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this member?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
         If result = DialogResult.Yes Then
             Try
-                Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & Application.StartupPath & "\db_banmai1.accdb")
+                Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
                     conn.Open()
 
                     Dim deleteQuery As String = "DELETE FROM Member WHERE m_id = @m_id"
@@ -352,5 +403,123 @@ Public Class frmManageMembers
             End Try
         End If
     End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        ' ตรวจสอบว่ามีการเลือกข้อมูลหรือไม่
+        If String.IsNullOrWhiteSpace(txtID.Text) Then
+            MessageBox.Show("กรุณาเลือกสมาชิกก่อนทำการอัปเดต", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        ' ตรวจสอบว่าฟิลด์ทั้งหมดถูกกรอกแล้ว
+        If Not AllFieldsFilled() Then
+            MessageBox.Show("โปรดกรอกข้อมูลให้ครบถ้วน", "Incomplete Data", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Try
+            If conn.State = ConnectionState.Closed Then
+                conn.Open()
+            End If
+
+            ' ค้นหา s_id จากตาราง Memberstatus
+            Dim s_id As Integer = -1
+            Dim statusQuery As String = "SELECT s_id FROM Memberstatus WHERE s_namestatus = @status"
+            Using statusCmd As New OleDbCommand(statusQuery, conn)
+                statusCmd.Parameters.AddWithValue("@status", cmbStatus.SelectedItem.ToString())
+                Dim reader As OleDbDataReader = statusCmd.ExecuteReader()
+
+                If reader.Read() Then
+                    s_id = Convert.ToInt32(reader("s_id"))
+                    MessageBox.Show("s_id ที่ดึงได้: " & s_id.ToString())  ' แสดง s_id ที่ถูกดึงมา
+                End If
+                reader.Close()
+            End Using
+
+            ' ตรวจสอบว่าพบ s_id หรือไม่
+            If s_id = -1 Then
+                MessageBox.Show("ไม่พบสถานะที่เลือก", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return
+            End If
+
+            ' คำสั่ง SQL สำหรับอัปเดตข้อมูลสมาชิก
+            strSQL = "UPDATE Member SET m_gender = @m_gender, m_name = @m_name, m_nick = @m_nick, m_birth = @m_birth, " &
+                     "m_national = @m_national, m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, " &
+                     "m_post = @m_post, m_tel = @m_tel, m_accountName = @m_accountName, m_accountNum = @m_accountNum, " &
+                     "m_beginning = @m_beginning, m_outstanding = @m_outstanding, m_age = @m_age, s_id = @s_id WHERE m_id = @m_id"
+
+            ' แสดง SQL Query ที่จะถูกส่งไปยังฐานข้อมูล
+            Debug.WriteLine("SQL Query: " & strSQL)
+
+            ' สร้าง OleDbCommand สำหรับอัปเดตข้อมูล
+            Using cmd As New OleDbCommand(strSQL, conn)
+                ' กำหนดค่าให้กับพารามิเตอร์
+                cmd.Parameters.AddWithValue("@m_gender", cmbGender.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@m_name", txtName.Text.Trim())
+                cmd.Parameters.AddWithValue("@m_nick", txtnick.Text.Trim())
+                cmd.Parameters.AddWithValue("@m_birth", dtpBirth.Value.ToString("yyyy-MM-dd"))
+                cmd.Parameters.AddWithValue("@m_national", cmbNational.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@m_thaiid", txtThaiid.Text.Trim())
+                cmd.Parameters.AddWithValue("@m_job", txtJob.Text.Trim())
+                cmd.Parameters.AddWithValue("@m_address", txtAddress.Text.Trim())
+                cmd.Parameters.AddWithValue("@m_post", txtPost.Text.Trim())
+                cmd.Parameters.AddWithValue("@m_tel", txtTel.Text.Trim())
+                cmd.Parameters.AddWithValue("@m_accountName", txtAccountname.Text.Trim())
+                cmd.Parameters.AddWithValue("@m_accountNum", txtAccountnum.Text.Trim())
+
+                ' แปลงค่าเริ่มต้นและยอดค้างชำระ
+                If String.IsNullOrEmpty(txtBeginning.Text.Trim()) Then
+                    cmd.Parameters.AddWithValue("@m_beginning", DBNull.Value)
+                Else
+                    cmd.Parameters.AddWithValue("@m_beginning", Double.Parse(txtBeginning.Text.Trim()))
+                End If
+
+                If String.IsNullOrEmpty(txtOutstanding.Text.Trim()) Then
+                    cmd.Parameters.AddWithValue("@m_outstanding", DBNull.Value)
+                Else
+                    cmd.Parameters.AddWithValue("@m_outstanding", Double.Parse(txtOutstanding.Text.Trim()))
+                End If
+
+                ' คำนวณอายุ
+                cmd.Parameters.AddWithValue("@m_age", CalculateAge(dtpBirth.Value.ToString("dd/MM/yyyy")))
+
+                ' เพิ่มค่า s_id ที่ได้จากตาราง Memberstatus
+                cmd.Parameters.AddWithValue("@s_id", s_id)
+
+                ' กำหนดค่า ID
+                cmd.Parameters.AddWithValue("@m_id", txtID.Text.Trim())
+
+                ' ดำเนินการอัปเดต
+                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                If rowsAffected > 0 Then
+                    MessageBox.Show("อัปเดตข้อมูลสำเร็จ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Loadinfo() ' โหลดข้อมูลใหม่ใน DataGridView
+                    ClearAllData() ' เคลียร์ข้อมูลทั้งหมดหลังอัปเดต
+                    Auto_id() ' สร้าง ID ใหม่สำหรับรายการถัดไป
+                Else
+                    MessageBox.Show("ไม่มีการเปลี่ยนแปลงข้อมูล", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
+
+
+    Private Function IsLettersOnly(input As String) As Boolean
+        ' วนลูปผ่านทุกตัวอักษรในสตริงเพื่อตรวจสอบว่าทุกตัวเป็นตัวอักษร
+        For Each c As Char In input
+            If Not Char.IsLetter(c) And Not Char.IsWhiteSpace(c) Then
+                Return False ' ถ้ามีตัวใดตัวหนึ่งไม่ใช่ตัวอักษร ให้คืนค่าเป็น False
+            End If
+        Next
+        Return True ' ถ้าเป็นตัวอักษรทั้งหมด ให้คืนค่าเป็น True
+    End Function
+
 
 End Class

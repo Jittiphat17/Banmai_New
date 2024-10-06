@@ -73,10 +73,11 @@ Public Class frmCon
     Private Sub SearchPayments(contractNumber As String)
         Try
             ' SQL query to retrieve payment data, including the payment_period field
-            Dim strSQL As String = "SELECT p.payment_id, p.con_id, p.payment_date, p.payment_amount, p.payment_prin AS Principal, p.payment_interest AS Interest, p.payment_period, s.status_name " &
-                               "FROM Payment p " &
-                               "INNER JOIN Status s ON p.status_id = s.status_id " &
-                               "WHERE p.con_id = @contractNumber"
+            Dim strSQL As String = "SELECT p.payment_id, p.con_id, p.payment_date, p.payment_amount, p.payment_prin AS Principal, p.payment_interest AS Interest, p.payment_period, p.payment_Principal, p.payment_Mprincipal, s.status_name " &
+                       "FROM Payment p " &
+                       "INNER JOIN Status s ON p.status_id = s.status_id " &
+                       "WHERE p.con_id = @contractNumber"
+
 
             Dim cmd As New OleDbCommand(strSQL, Conn)
             cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
@@ -119,11 +120,15 @@ Public Class frmCon
             dgvPayments.Columns("Principal").HeaderText = "เงินต้น"
             dgvPayments.Columns("Interest").HeaderText = "ดอกเบี้ย (บาท)"
             dgvPayments.Columns("payment_period").HeaderText = "งวด"
+            dgvPayments.Columns("payment_Principal").HeaderText = "เงินต้นต้นเดือน"
+            dgvPayments.Columns("payment_Mprincipal").HeaderText = "เงินต้นปลายเดือน"
 
             ' Format to show two decimal places
             dgvPayments.Columns("payment_amount").DefaultCellStyle.Format = "N2"
             dgvPayments.Columns("Principal").DefaultCellStyle.Format = "N2"
             dgvPayments.Columns("Interest").DefaultCellStyle.Format = "N2"
+            dgvPayments.Columns("payment_Principal").DefaultCellStyle.Format = "N2"
+            dgvPayments.Columns("payment_Mprincipal").DefaultCellStyle.Format = "N2"
 
             ' Set the font for DataGridView cells to FC Mini Mal
             Dim fcMiniMalFont As New Font("FC Minimal", 14) ' Adjust font size as needed

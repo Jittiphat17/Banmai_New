@@ -31,13 +31,13 @@ Partial Class frmDebtor
         Me.drpYear = New System.Windows.Forms.ComboBox()
         Me.drpMonth = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Db_banmai1DataSet = New Banmai.db_banmai1DataSet()
         Me.AccountBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Dbbanmai1DataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.Db_banmai1DataSet = New Banmai.db_banmai1DataSet()
         Me.AccountTableAdapter = New Banmai.db_banmai1DataSetTableAdapters.AccountTableAdapter()
-        CType(Me.Db_banmai1DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AccountBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Dbbanmai1DataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Db_banmai1DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ReportViewer1
@@ -112,11 +112,6 @@ Partial Class frmDebtor
         Me.ComboBox1.TabIndex = 31
         Me.ComboBox1.ValueMember = "acc_id"
         '
-        'Db_banmai1DataSet
-        '
-        Me.Db_banmai1DataSet.DataSetName = "db_banmai1DataSet"
-        Me.Db_banmai1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
         'AccountBindingSource
         '
         Me.AccountBindingSource.DataMember = "Account"
@@ -126,6 +121,11 @@ Partial Class frmDebtor
         '
         Me.Dbbanmai1DataSetBindingSource.DataSource = Me.Db_banmai1DataSet
         Me.Dbbanmai1DataSetBindingSource.Position = 0
+        '
+        'Db_banmai1DataSet
+        '
+        Me.Db_banmai1DataSet.DataSetName = "db_banmai1DataSet"
+        Me.Db_banmai1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'AccountTableAdapter
         '
@@ -146,9 +146,9 @@ Partial Class frmDebtor
         Me.Controls.Add(Me.ReportViewer1)
         Me.Name = "frmDebtor"
         Me.Text = "frmDebtor"
-        CType(Me.Db_banmai1DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AccountBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Dbbanmai1DataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Db_banmai1DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

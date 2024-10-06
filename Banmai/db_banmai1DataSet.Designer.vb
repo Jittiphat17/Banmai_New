@@ -3731,6 +3731,22 @@ Partial Public Class db_banmai1DataSet
         
         Private columnm_id As Global.System.Data.DataColumn
         
+        Private columnind_amount_interest As Global.System.Data.DataColumn
+        
+        Private columnind_amount_fine As Global.System.Data.DataColumn
+        
+        Private columnfirst_amount As Global.System.Data.DataColumn
+        
+        Private columntotal_amount As Global.System.Data.DataColumn
+        
+        Private columnpay_amount As Global.System.Data.DataColumn
+        
+        Private columnind_con_amount As Global.System.Data.DataColumn
+        
+        Private columnind_insure_amount As Global.System.Data.DataColumn
+        
+        Private columnsum_con_amount As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub New()
@@ -3823,6 +3839,70 @@ Partial Public Class db_banmai1DataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property ind_amount_interestColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnind_amount_interest
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property ind_amount_fineColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnind_amount_fine
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property first_amountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnfirst_amount
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property total_amountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columntotal_amount
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property pay_amountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnpay_amount
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property ind_con_amountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnind_con_amount
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property ind_insure_amountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnind_insure_amount
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public ReadOnly Property sum_con_amountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnsum_con_amount
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -3859,9 +3939,9 @@ Partial Public Class db_banmai1DataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
-        Public Overloads Function AddIncome_DetailsRow(ByVal ind_accname As String, ByVal parentContractRowByContractIncome_Details As ContractRow, ByVal ind_amount As Decimal, ByVal ind_date As Date, ByVal parentIncomeRowByIncomeIncome_Details As IncomeRow, ByVal parentMemberRowByMemberIncome_Details As MemberRow) As Income_DetailsRow
+        Public Overloads Function AddIncome_DetailsRow(ByVal ind_accname As String, ByVal parentContractRowByContractIncome_Details As ContractRow, ByVal ind_amount As Decimal, ByVal ind_date As Date, ByVal parentIncomeRowByIncomeIncome_Details As IncomeRow, ByVal parentMemberRowByMemberIncome_Details As MemberRow, ByVal ind_amount_interest As Decimal, ByVal ind_amount_fine As Decimal, ByVal first_amount As Decimal, ByVal total_amount As Decimal, ByVal pay_amount As Decimal, ByVal ind_con_amount As String, ByVal ind_insure_amount As String, ByVal sum_con_amount As Decimal) As Income_DetailsRow
             Dim rowIncome_DetailsRow As Income_DetailsRow = CType(Me.NewRow,Income_DetailsRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, ind_accname, Nothing, ind_amount, ind_date, Nothing, Nothing}
+            Dim columnValuesArray() As Object = New Object() {Nothing, ind_accname, Nothing, ind_amount, ind_date, Nothing, Nothing, ind_amount_interest, ind_amount_fine, first_amount, total_amount, pay_amount, ind_con_amount, ind_insure_amount, sum_con_amount}
             If (Not (parentContractRowByContractIncome_Details) Is Nothing) Then
                 columnValuesArray(2) = parentContractRowByContractIncome_Details(0)
             End If
@@ -3906,6 +3986,14 @@ Partial Public Class db_banmai1DataSet
             Me.columnind_date = MyBase.Columns("ind_date")
             Me.columninc_id = MyBase.Columns("inc_id")
             Me.columnm_id = MyBase.Columns("m_id")
+            Me.columnind_amount_interest = MyBase.Columns("ind_amount_interest")
+            Me.columnind_amount_fine = MyBase.Columns("ind_amount_fine")
+            Me.columnfirst_amount = MyBase.Columns("first_amount")
+            Me.columntotal_amount = MyBase.Columns("total_amount")
+            Me.columnpay_amount = MyBase.Columns("pay_amount")
+            Me.columnind_con_amount = MyBase.Columns("ind_con_amount")
+            Me.columnind_insure_amount = MyBase.Columns("ind_insure_amount")
+            Me.columnsum_con_amount = MyBase.Columns("sum_con_amount")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -3925,6 +4013,22 @@ Partial Public Class db_banmai1DataSet
             MyBase.Columns.Add(Me.columninc_id)
             Me.columnm_id = New Global.System.Data.DataColumn("m_id", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnm_id)
+            Me.columnind_amount_interest = New Global.System.Data.DataColumn("ind_amount_interest", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnind_amount_interest)
+            Me.columnind_amount_fine = New Global.System.Data.DataColumn("ind_amount_fine", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnind_amount_fine)
+            Me.columnfirst_amount = New Global.System.Data.DataColumn("first_amount", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnfirst_amount)
+            Me.columntotal_amount = New Global.System.Data.DataColumn("total_amount", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columntotal_amount)
+            Me.columnpay_amount = New Global.System.Data.DataColumn("pay_amount", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnpay_amount)
+            Me.columnind_con_amount = New Global.System.Data.DataColumn("ind_con_amount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnind_con_amount)
+            Me.columnind_insure_amount = New Global.System.Data.DataColumn("ind_insure_amount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnind_insure_amount)
+            Me.columnsum_con_amount = New Global.System.Data.DataColumn("sum_con_amount", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnsum_con_amount)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnind_id}, true))
             Me.columnind_id.AutoIncrement = true
             Me.columnind_id.AutoIncrementSeed = -1
@@ -7114,6 +7218,126 @@ Partial Public Class db_banmai1DataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property ind_amount_interest() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableIncome_Details.ind_amount_interestColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ind_amount_interest' in table 'Income_Details' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableIncome_Details.ind_amount_interestColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property ind_amount_fine() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableIncome_Details.ind_amount_fineColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ind_amount_fine' in table 'Income_Details' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableIncome_Details.ind_amount_fineColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property first_amount() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableIncome_Details.first_amountColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'first_amount' in table 'Income_Details' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableIncome_Details.first_amountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property total_amount() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableIncome_Details.total_amountColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'total_amount' in table 'Income_Details' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableIncome_Details.total_amountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property pay_amount() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableIncome_Details.pay_amountColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'pay_amount' in table 'Income_Details' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableIncome_Details.pay_amountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property ind_con_amount() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableIncome_Details.ind_con_amountColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ind_con_amount' in table 'Income_Details' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableIncome_Details.ind_con_amountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property ind_insure_amount() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableIncome_Details.ind_insure_amountColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ind_insure_amount' in table 'Income_Details' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableIncome_Details.ind_insure_amountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Property sum_con_amount() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableIncome_Details.sum_con_amountColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'sum_con_amount' in table 'Income_Details' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableIncome_Details.sum_con_amountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Property ContractRow() As ContractRow
             Get
                 Return CType(Me.GetParentRow(Me.Table.ParentRelations("ContractIncome_Details")),ContractRow)
@@ -7215,6 +7439,102 @@ Partial Public Class db_banmai1DataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
         Public Sub Setm_idNull()
             Me(Me.tableIncome_Details.m_idColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function Isind_amount_interestNull() As Boolean
+            Return Me.IsNull(Me.tableIncome_Details.ind_amount_interestColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub Setind_amount_interestNull()
+            Me(Me.tableIncome_Details.ind_amount_interestColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function Isind_amount_fineNull() As Boolean
+            Return Me.IsNull(Me.tableIncome_Details.ind_amount_fineColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub Setind_amount_fineNull()
+            Me(Me.tableIncome_Details.ind_amount_fineColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function Isfirst_amountNull() As Boolean
+            Return Me.IsNull(Me.tableIncome_Details.first_amountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub Setfirst_amountNull()
+            Me(Me.tableIncome_Details.first_amountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function Istotal_amountNull() As Boolean
+            Return Me.IsNull(Me.tableIncome_Details.total_amountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub Settotal_amountNull()
+            Me(Me.tableIncome_Details.total_amountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function Ispay_amountNull() As Boolean
+            Return Me.IsNull(Me.tableIncome_Details.pay_amountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub Setpay_amountNull()
+            Me(Me.tableIncome_Details.pay_amountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function Isind_con_amountNull() As Boolean
+            Return Me.IsNull(Me.tableIncome_Details.ind_con_amountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub Setind_con_amountNull()
+            Me(Me.tableIncome_Details.ind_con_amountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function Isind_insure_amountNull() As Boolean
+            Return Me.IsNull(Me.tableIncome_Details.ind_insure_amountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub Setind_insure_amountNull()
+            Me(Me.tableIncome_Details.ind_insure_amountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Function Issum_con_amountNull() As Boolean
+            Return Me.IsNull(Me.tableIncome_Details.sum_con_amountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")>  _
+        Public Sub Setsum_con_amountNull()
+            Me(Me.tableIncome_Details.sum_con_amountColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

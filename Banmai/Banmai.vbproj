@@ -144,10 +144,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>db_banmai1DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="db_banmai1DataSet.vb">
+      <DependentUpon>db_banmai1DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="db_banmai1DataSet1.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>db_banmai1DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DtsFinancialSummary.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DtsFinancialSummary.xsd</DependentUpon>
     </Compile>
     <Compile Include="DtsIncExpSummary.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -430,6 +438,17 @@
     </None>
     <None Include="db_banmai1DataSet1.xss">
       <DependentUpon>db_banmai1DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DtsFinancialSummary.xsc">
+      <DependentUpon>DtsFinancialSummary.xsd</DependentUpon>
+    </None>
+    <None Include="DtsFinancialSummary.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DtsFinancialSummary.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="DtsFinancialSummary.xss">
+      <DependentUpon>DtsFinancialSummary.xsd</DependentUpon>
     </None>
     <None Include="DtsIncExpSummary.xsc">
       <DependentUpon>DtsIncExpSummary.xsd</DependentUpon>

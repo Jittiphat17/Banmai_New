@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DtsFinancialSummary" targetNamespace="http://tempuri.org/DtsFinancialSummary.xsd" xmlns:mstns="http://tempuri.org/DtsFinancialSummary.xsd" xmlns="http://tempuri.org/DtsFinancialSummary.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DtsFinancialSummary" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DtsFinancialSummary" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DtsFinancialSummary">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dt_financialsummary" msprop:Generator_RowEvHandlerName="dt_financialsummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_financialsummaryRowDeleted" msprop:Generator_RowDeletingName="dt_financialsummaryRowDeleting" msprop:Generator_RowEvArgName="dt_financialsummaryRowChangeEvent" msprop:Generator_TablePropName="dt_financialsummary" msprop:Generator_RowChangedName="dt_financialsummaryRowChanged" msprop:Generator_RowChangingName="dt_financialsummaryRowChanging" msprop:Generator_TableClassName="dt_financialsummaryDataTable" msprop:Generator_RowClassName="dt_financialsummaryRow" msprop:Generator_TableVarName="tabledt_financialsummary" msprop:Generator_UserTableName="dt_financialsummary">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="acc_id" msprop:Generator_ColumnPropNameInRow="acc_id" msprop:Generator_ColumnPropNameInTable="acc_idColumn" msprop:Generator_ColumnVarNameInTable="columnacc_id" msprop:Generator_UserColumnName="acc_id" type="xs:string" />
+              <xs:element name="acc_name" msprop:Generator_ColumnPropNameInRow="acc_name" msprop:Generator_ColumnPropNameInTable="acc_nameColumn" msprop:Generator_ColumnVarNameInTable="columnacc_name" msprop:Generator_UserColumnName="acc_name" type="xs:string" minOccurs="0" />
+              <xs:element name="CshAmt" msprop:Generator_ColumnPropNameInRow="CshAmt" msprop:Generator_ColumnPropNameInTable="CshAmtColumn" msprop:Generator_ColumnVarNameInTable="columnCshAmt" msprop:Generator_UserColumnName="CshAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BnkAmt" msprop:Generator_ColumnPropNameInRow="BnkAmt" msprop:Generator_ColumnPropNameInTable="BnkAmtColumn" msprop:Generator_ColumnVarNameInTable="columnBnkAmt" msprop:Generator_UserColumnName="BnkAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PayAmt" msprop:Generator_ColumnPropNameInRow="PayAmt" msprop:Generator_ColumnPropNameInTable="PayAmtColumn" msprop:Generator_ColumnVarNameInTable="columnPayAmt" msprop:Generator_UserColumnName="PayAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TagAmt" msprop:Generator_ColumnPropNameInRow="TagAmt" msprop:Generator_ColumnPropNameInTable="TagAmtColumn" msprop:Generator_ColumnVarNameInTable="columnTagAmt" msprop:Generator_UserColumnName="TagAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="OtherAmt" msprop:Generator_ColumnPropNameInRow="OtherAmt" msprop:Generator_ColumnPropNameInTable="OtherAmtColumn" msprop:Generator_ColumnVarNameInTable="columnOtherAmt" msprop:Generator_UserColumnName="OtherAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FinTotal1" msprop:Generator_ColumnPropNameInRow="FinTotal1" msprop:Generator_ColumnPropNameInTable="FinTotal1Column" msprop:Generator_ColumnVarNameInTable="columnFinTotal1" msprop:Generator_UserColumnName="FinTotal1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="LoanAmt" msprop:Generator_ColumnPropNameInRow="LoanAmt" msprop:Generator_ColumnPropNameInTable="LoanAmtColumn" msprop:Generator_ColumnVarNameInTable="columnLoanAmt" msprop:Generator_UserColumnName="LoanAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TruSavAmt" msprop:Generator_ColumnPropNameInRow="TruSavAmt" msprop:Generator_ColumnPropNameInTable="TruSavAmtColumn" msprop:Generator_ColumnVarNameInTable="columnTruSavAmt" msprop:Generator_UserColumnName="TruSavAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CostAmt" msprop:Generator_ColumnPropNameInRow="CostAmt" msprop:Generator_ColumnPropNameInTable="CostAmtColumn" msprop:Generator_ColumnVarNameInTable="columnCostAmt" msprop:Generator_UserColumnName="CostAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="RetAmt" msprop:Generator_ColumnPropNameInRow="RetAmt" msprop:Generator_ColumnPropNameInTable="RetAmtColumn" msprop:Generator_ColumnVarNameInTable="columnRetAmt" msprop:Generator_UserColumnName="RetAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="HedAmt" msprop:Generator_ColumnPropNameInRow="HedAmt" msprop:Generator_ColumnPropNameInTable="HedAmtColumn" msprop:Generator_ColumnVarNameInTable="columnHedAmt" msprop:Generator_UserColumnName="HedAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CtbAmt" msprop:Generator_ColumnPropNameInRow="CtbAmt" msprop:Generator_ColumnPropNameInTable="CtbAmtColumn" msprop:Generator_ColumnVarNameInTable="columnCtbAmt" msprop:Generator_UserColumnName="CtbAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IncExpAmt" msprop:Generator_ColumnPropNameInRow="IncExpAmt" msprop:Generator_ColumnPropNameInTable="IncExpAmtColumn" msprop:Generator_ColumnVarNameInTable="columnIncExpAmt" msprop:Generator_UserColumnName="IncExpAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FinTotal2" msprop:Generator_ColumnPropNameInRow="FinTotal2" msprop:Generator_ColumnPropNameInTable="FinTotal2Column" msprop:Generator_ColumnVarNameInTable="columnFinTotal2" msprop:Generator_UserColumnName="FinTotal2" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:dt_financialsummary" />
+      <xs:field xpath="mstns:acc_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
