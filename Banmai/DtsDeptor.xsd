@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DtsDeptor" targetNamespace="http://tempuri.org/DtsDeptor.xsd" xmlns:mstns="http://tempuri.org/DtsDeptor.xsd" xmlns="http://tempuri.org/DtsDeptor.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DtsDeptor" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="DtsDeptor" msprop:Generator_DataSetName="DtsDeptor">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dt_debtor" msprop:Generator_RowEvHandlerName="dt_debtorRowChangeEventHandler" msprop:Generator_RowDeletedName="dt_debtorRowDeleted" msprop:Generator_RowDeletingName="dt_debtorRowDeleting" msprop:Generator_RowEvArgName="dt_debtorRowChangeEvent" msprop:Generator_TablePropName="dt_debtor" msprop:Generator_RowChangedName="dt_debtorRowChanged" msprop:Generator_RowChangingName="dt_debtorRowChanging" msprop:Generator_TableClassName="dt_debtorDataTable" msprop:Generator_RowClassName="dt_debtorRow" msprop:Generator_TableVarName="tabledt_debtor" msprop:Generator_UserTableName="dt_debtor">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="con_id" msprop:Generator_ColumnPropNameInRow="con_id" msprop:Generator_ColumnPropNameInTable="con_idColumn" msprop:Generator_ColumnVarNameInTable="columncon_id" msprop:Generator_UserColumnName="con_id" type="xs:int" />
+              <xs:element name="m_id" msprop:Generator_ColumnPropNameInRow="m_id" msprop:Generator_ColumnPropNameInTable="m_idColumn" msprop:Generator_ColumnVarNameInTable="columnm_id" msprop:Generator_UserColumnName="m_id" type="xs:int" minOccurs="0" />
+              <xs:element name="member_name" msprop:Generator_ColumnPropNameInRow="member_name" msprop:Generator_ColumnPropNameInTable="member_nameColumn" msprop:Generator_ColumnVarNameInTable="columnmember_name" msprop:Generator_UserColumnName="member_name" type="xs:string" minOccurs="0" />
+              <xs:element name="BalAmt" msprop:Generator_ColumnPropNameInRow="BalAmt" msprop:Generator_ColumnPropNameInTable="BalAmtColumn" msprop:Generator_ColumnVarNameInTable="columnBalAmt" msprop:Generator_UserColumnName="BalAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NetAmt" msprop:Generator_ColumnPropNameInRow="NetAmt" msprop:Generator_ColumnPropNameInTable="NetAmtColumn" msprop:Generator_ColumnVarNameInTable="columnNetAmt" msprop:Generator_UserColumnName="NetAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PrinAmt" msprop:Generator_ColumnPropNameInRow="PrinAmt" msprop:Generator_ColumnPropNameInTable="PrinAmtColumn" msprop:Generator_ColumnVarNameInTable="columnPrinAmt" msprop:Generator_UserColumnName="PrinAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="InterAmt" msprop:Generator_ColumnPropNameInRow="InterAmt" msprop:Generator_ColumnPropNameInTable="InterAmtColumn" msprop:Generator_ColumnVarNameInTable="columnInterAmt" msprop:Generator_UserColumnName="InterAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FineAmt" msprop:Generator_ColumnPropNameInRow="FineAmt" msprop:Generator_ColumnPropNameInTable="FineAmtColumn" msprop:Generator_ColumnVarNameInTable="columnFineAmt" msprop:Generator_UserColumnName="FineAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NewAmt" msprop:Generator_ColumnPropNameInRow="NewAmt" msprop:Generator_ColumnPropNameInTable="NewAmtColumn" msprop:Generator_ColumnVarNameInTable="columnNewAmt" msprop:Generator_UserColumnName="NewAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ConfAmt" msprop:Generator_ColumnPropNameInRow="ConfAmt" msprop:Generator_ColumnPropNameInTable="ConfAmtColumn" msprop:Generator_ColumnVarNameInTable="columnConfAmt" msprop:Generator_UserColumnName="ConfAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="InsuAmt" msprop:Generator_ColumnPropNameInRow="InsuAmt" msprop:Generator_ColumnPropNameInTable="InsuAmtColumn" msprop:Generator_ColumnVarNameInTable="columnInsuAmt" msprop:Generator_UserColumnName="InsuAmt" type="xs:decimal" minOccurs="0" />
+              <xs:element name="EndAmt" msprop:Generator_ColumnPropNameInRow="EndAmt" msprop:Generator_ColumnPropNameInTable="EndAmtColumn" msprop:Generator_ColumnVarNameInTable="columnEndAmt" msprop:Generator_UserColumnName="EndAmt" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:dt_debtor" />
+      <xs:field xpath="mstns:con_id" />
+    </xs:unique>
+    <xs:unique name="dt_debtorKey1">
+      <xs:selector xpath=".//mstns:dt_debtor" />
+      <xs:field xpath="mstns:con_id" />
+      <xs:field xpath="mstns:m_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

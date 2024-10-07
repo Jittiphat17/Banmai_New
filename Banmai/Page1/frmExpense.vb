@@ -325,13 +325,22 @@ Public Class frmExpense
 
     Private Sub dgvExpenseDetails_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dgvExpenseDetails.CellValidating
         If dgvExpenseDetails.Columns(e.ColumnIndex).Name = "ExpenseType" Then
+            ' ตรวจสอบว่าผู้ใช้ไม่ปล่อยค่าเป็นค่าว่างก่อน
+            If String.IsNullOrWhiteSpace(e.FormattedValue.ToString()) Then
+                ' หากเป็นค่าว่าง จะไม่ทำการแจ้งเตือน
+                Return
+            End If
+
+            ' ตรวจสอบว่าค่าที่กรอกตรงกับรายการใน ComboBox หรือไม่
             Dim comboBoxColumn As DataGridViewComboBoxColumn = CType(dgvExpenseDetails.Columns("ExpenseType"), DataGridViewComboBoxColumn)
             If Not comboBoxColumn.Items.Contains(e.FormattedValue.ToString()) Then
+                ' แสดงการแจ้งเตือนหากไม่ใช่ค่าที่ถูกต้อง
                 MessageBox.Show("กรุณาเลือกประเภทของรายจ่ายที่ถูกต้อง", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 e.Cancel = True
             End If
         End If
     End Sub
+
     Private Function GetMemberIdByName(memberName As String) As Integer
         Try
             Conn.Open()
@@ -410,5 +419,95 @@ Public Class frmExpense
                 txtAmount.SelectionStart = cursorPosition + (txtAmount.Text.Length - valueWithoutComma.Length)
             End If
         End If
+    End Sub
+
+    Private Sub printDoc_PrintPage(sender As Object, e As PrintPageEventArgs) Handles printDoc.PrintPage
+        Dim font As New Font("Arial", 10)
+        Dim boldFont As New Font("Arial", 12, FontStyle.Bold)
+        Dim headerFont As New Font("Arial", 14, FontStyle.Bold)
+        Dim startX As Integer
+        Dim startY As Integer = 10
+        Dim offset As Integer = 40
+        Dim lineHeight As Integer = 25 ' Standard line height for rows
+
+        ' Get the page width
+        Dim pageWidth As Integer = e.PageBounds.Width
+
+        ' ส่วนหัว (Header Section)
+        Dim headerText As String = "กองทุนหมู่บ้าน บ้านใหม่หลังมอ"
+        startX = (pageWidth - e.Graphics.MeasureString(headerText, headerFont).Width) / 2 ' Center the header text
+        e.Graphics.DrawString(headerText, headerFont, Brushes.Black, startX, startY)
+        offset += 30
+
+        Dim addressLine1 As String = "หมู่ที่ 14 ตำบลสุเทพ อำเภอเมืองเชียงใหม่ จังหวัดเชียงใหม่"
+        startX = (pageWidth - e.Graphics.MeasureString(addressLine1, font).Width) / 2 ' Center the address line
+        e.Graphics.DrawString(addressLine1, font, Brushes.Black, startX, startY + offset)
+        offset += 20
+
+        Dim phoneText As String = "โทรศัพท์: 053-219535"
+        startX = (pageWidth - e.Graphics.MeasureString(phoneText, font).Width) / 2 ' Center the phone number
+        e.Graphics.DrawString(phoneText, font, Brushes.Black, startX, startY + offset)
+        offset += 20
+
+        Dim addressLine2 As String = "รหัสกองทุน 5001000"
+        startX = (pageWidth - e.Graphics.MeasureString(addressLine2, font).Width) / 2 ' Center the second address line
+        e.Graphics.DrawString(addressLine2, font, Brushes.Black, startX, startY + offset)
+
+        ' เว้นระยะระหว่างส่วนหัวและเนื้อหา
+        offset += 40
+
+        ' รายละเอียดการจ่าย (Details Section)
+        Dim detailsTitle As String = "รายละเอียด:"
+        startX = (pageWidth - e.Graphics.MeasureString(detailsTitle, boldFont).Width) / 2 ' Center the details title
+        e.Graphics.DrawString(detailsTitle, boldFont, Brushes.Black, startX, startY + offset)
+        offset += 20
+
+        Dim memberIdText As String = "รหัสสมาชิก: " & txtMemberID.Text
+        startX = (pageWidth - e.Graphics.MeasureString(memberIdText, font).Width) / 2 ' Center the member ID
+        e.Graphics.DrawString(memberIdText, font, Brushes.Black, startX, startY + offset)
+        offset += 20
+
+        ' รายการในตาราง (Table Header)
+        Dim noText As String = "No."
+        Dim itemText As String = "รายการจ่าย"
+        Dim amountText As String = "จำนวนเงิน"
+
+        startX = (pageWidth - 500) / 2 ' Start at the middle of the page minus half the table width (assuming table is 500 units wide)
+        e.Graphics.DrawString(noText, boldFont, Brushes.Black, startX, startY + offset)
+        e.Graphics.DrawString(itemText, boldFont, Brushes.Black, startX + 100, startY + offset)
+        e.Graphics.DrawString(amountText, boldFont, Brushes.Black, startX + 400, startY + offset)
+
+        ' เส้นใต้หัวข้อ (Underline Table Header)
+        offset += lineHeight
+        e.Graphics.DrawLine(Pens.Black, startX, startY + offset, startX + 500, startY + offset)
+
+        ' Loop through DataGridView rows and print them
+        Dim rowIndex As Integer = 1
+        For Each row As DataGridViewRow In dgvExpenseDetails.Rows
+            If Not row.IsNewRow Then
+                offset += 5
+                e.Graphics.DrawString(rowIndex.ToString(), font, Brushes.Black, startX, startY + offset)
+                e.Graphics.DrawString(row.Cells("ExpenseType").Value.ToString(), font, Brushes.Black, startX + 100, startY + offset)
+                e.Graphics.DrawString(Decimal.Parse(row.Cells("Amount").Value.ToString()).ToString("N2") & " บาท", font, Brushes.Black, startX + 400, startY + offset)
+
+                ' Move to next row
+                rowIndex += 1
+                offset += lineHeight
+                e.Graphics.DrawLine(Pens.Black, startX, startY + offset, startX + 500, startY + offset) ' Line under the row
+            End If
+        Next
+
+        ' รวมยอดเงิน (Total Amount Section)
+        offset += 40
+        Dim totalText As String = "รวมเป็นเงิน: " & lblTotalAmount.Text & " บาท"
+        startX = (pageWidth - e.Graphics.MeasureString(totalText, boldFont).Width) / 2 ' Center the total amount text
+        e.Graphics.DrawString(totalText, boldFont, Brushes.Black, startX, startY + offset)
+
+        ' เส้นแบ่งลายเซ็น (Line for signature section)
+        offset += 60
+        Dim signatureText As String = "ผู้รับเงิน"
+        startX = (pageWidth - e.Graphics.MeasureString(signatureText, font).Width) / 2 ' Center the signature line
+        e.Graphics.DrawString(signatureText, font, Brushes.Black, startX, startY + offset)
+        e.Graphics.DrawString("..........................................", font, Brushes.Black, startX + 100, startY + offset)
     End Sub
 End Class

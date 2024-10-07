@@ -670,7 +670,7 @@ Public Class frmBrrow
                                 End If
 
                                 ' บันทึกยอดเงินกู้ทั้งหมดในฟิลด์ payment_Principal
-                                strSQL = "INSERT INTO Payment (con_id, payment_date, payment_amount, payment_prin, payment_interest, status_id, payment_period, payment_Principal) VALUES (@con_id, @payment_date, @payment_amount, @payment_prin, @payment_interest, @status_id, @payment_period, @payment_Principal)"
+                                strSQL = "INSERT INTO Payment (con_id, payment_date, payment_amount, payment_prin, payment_interest, status_id, payment_period, payment_Mprincipal) VALUES (@con_id, @payment_date, @payment_amount, @payment_prin, @payment_interest, @status_id, @payment_period, @payment_Mprincipal)"
                                 Using paymentCmd As New OleDbCommand(strSQL, conn)
                                     paymentCmd.Parameters.AddWithValue("@con_id", con_id)
                                     paymentCmd.Parameters.AddWithValue("@payment_date", paymentDate)
@@ -679,7 +679,7 @@ Public Class frmBrrow
                                     paymentCmd.Parameters.AddWithValue("@payment_interest", monthlyInterest)
                                     paymentCmd.Parameters.AddWithValue("@status_id", 1)
                                     paymentCmd.Parameters.AddWithValue("@payment_period", i)
-                                    paymentCmd.Parameters.AddWithValue("@payment_Principal", loanAmount)
+                                    paymentCmd.Parameters.AddWithValue("@payment_Mprincipal", loanAmount)
                                     paymentCmd.ExecuteNonQuery()
                                 End Using
                             Next
@@ -709,7 +709,7 @@ Public Class frmBrrow
                                 Dim ex_id As Integer = Convert.ToInt32(cmdExpense.ExecuteScalar())
 
                                 ' บันทึกข้อมูลในตาราง Expense_Details
-                                Dim accountNameFromGrid As String = "เงินกู้"
+                                Dim accountNameFromGrid As String = "เงินกู้ " & row.Cells("แหล่งจ่าย").Value.ToString()
                                 strSQL = "INSERT INTO Expense_Details (exd_nameacc, exd_amount, ex_id, m_id, exd_date, acc_id) VALUES (@exd_nameacc, @exd_amount, @ex_id, @m_id, @exd_date, @acc_id)"
                                 Using cmdExpenseDetails As New OleDbCommand(strSQL, conn)
                                     cmdExpenseDetails.Parameters.AddWithValue("@exd_nameacc", accountNameFromGrid)

@@ -67,6 +67,7 @@ Partial Class frmMain
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.VvToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Guna2GroupBox2.SuspendLayout()
         Me.Guna2Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
@@ -207,7 +208,7 @@ Partial Class frmMain
         'tsm_inc
         '
         Me.tsm_inc.AutoSize = False
-        Me.tsm_inc.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายรบToolStripMenuItem, Me.แกไขรายรบToolStripMenuItem})
+        Me.tsm_inc.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายรบToolStripMenuItem, Me.แกไขรายรบToolStripMenuItem, Me.VvToolStripMenuItem})
         Me.tsm_inc.Name = "tsm_inc"
         Me.tsm_inc.Size = New System.Drawing.Size(150, 50)
         Me.tsm_inc.Text = "รายรับ"
@@ -403,6 +404,12 @@ Partial Class frmMain
         Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox2.TabIndex = 15
         '
+        'VvToolStripMenuItem
+        '
+        Me.VvToolStripMenuItem.Name = "VvToolStripMenuItem"
+        Me.VvToolStripMenuItem.Size = New System.Drawing.Size(238, 32)
+        Me.VvToolStripMenuItem.Text = "ออกใบเสร็จรับเงิน"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -477,4 +484,5 @@ Partial Class frmMain
     Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents การปดงบToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents งบแสดงฐานะทางการเงนToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents VvToolStripMenuItem As ToolStripMenuItem
 End Class

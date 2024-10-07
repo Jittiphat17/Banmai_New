@@ -27,6 +27,7 @@ Partial Class frmCard
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cbStaus = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.txtTel = New System.Windows.Forms.MaskedTextBox()
         Me.txtAccountNum = New System.Windows.Forms.MaskedTextBox()
         Me.txtIDCard = New System.Windows.Forms.MaskedTextBox()
@@ -48,6 +49,7 @@ Partial Class frmCard
         Me.Guna2HtmlLabel12 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel10 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel21 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel27 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.scc = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel26 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel9 = New Guna.UI2.WinForms.Guna2HtmlLabel()
@@ -119,6 +121,7 @@ Partial Class frmCard
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.White
+        Me.GroupBox1.Controls.Add(Me.cbStaus)
         Me.GroupBox1.Controls.Add(Me.txtTel)
         Me.GroupBox1.Controls.Add(Me.txtAccountNum)
         Me.GroupBox1.Controls.Add(Me.txtIDCard)
@@ -140,6 +143,7 @@ Partial Class frmCard
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel12)
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel10)
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel21)
+        Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel27)
         Me.GroupBox1.Controls.Add(Me.scc)
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel26)
         Me.GroupBox1.Controls.Add(Me.Guna2HtmlLabel9)
@@ -181,6 +185,22 @@ Partial Class frmCard
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "ข้อมูลบัตรประชาชน"
+        '
+        'cbStaus
+        '
+        Me.cbStaus.BackColor = System.Drawing.Color.Transparent
+        Me.cbStaus.BorderColor = System.Drawing.Color.Black
+        Me.cbStaus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cbStaus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbStaus.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cbStaus.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.cbStaus.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbStaus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
+        Me.cbStaus.ItemHeight = 30
+        Me.cbStaus.Location = New System.Drawing.Point(898, 512)
+        Me.cbStaus.Name = "cbStaus"
+        Me.cbStaus.Size = New System.Drawing.Size(140, 36)
+        Me.cbStaus.TabIndex = 10
         '
         'txtTel
         '
@@ -389,6 +409,16 @@ Partial Class frmCard
         Me.Guna2HtmlLabel21.Size = New System.Drawing.Size(49, 21)
         Me.Guna2HtmlLabel21.TabIndex = 4
         Me.Guna2HtmlLabel21.Text = "สัญชาติ"
+        '
+        'Guna2HtmlLabel27
+        '
+        Me.Guna2HtmlLabel27.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel27.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel27.Location = New System.Drawing.Point(808, 520)
+        Me.Guna2HtmlLabel27.Name = "Guna2HtmlLabel27"
+        Me.Guna2HtmlLabel27.Size = New System.Drawing.Size(84, 21)
+        Me.Guna2HtmlLabel27.TabIndex = 4
+        Me.Guna2HtmlLabel27.Text = "สถานะสมาชิก"
         '
         'scc
         '
@@ -822,4 +852,6 @@ Partial Class frmCard
     Friend WithEvents btnExit As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents btnRead As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents btnSave As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents cbStaus As Guna.UI2.WinForms.Guna2ComboBox
+    Friend WithEvents Guna2HtmlLabel27 As Guna.UI2.WinForms.Guna2HtmlLabel
 End Class

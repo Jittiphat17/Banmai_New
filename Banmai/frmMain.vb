@@ -278,7 +278,7 @@ Public Class frmMain
     End Sub
 
     Private Sub รายงานลกหนรายตวToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles รายงานลกหนรายตวToolStripMenuItem.Click
-        Dim frm As New frmDebtor
+        Dim frm As New frmDebtorV2
         AddHandler frm.FormClosed, AddressOf RefreshMainForm
         frm.ShowDialog()
     End Sub
@@ -296,6 +296,12 @@ Public Class frmMain
 
     Private Sub งบแสดงฐานะทางการเงนToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles งบแสดงฐานะทางการเงนToolStripMenuItem.Click
         Dim frm As New frmFinancial
+        AddHandler frm.FormClosed, AddressOf RefreshMainForm
+        frm.ShowDialog()
+    End Sub
+
+    Private Sub VvToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VvToolStripMenuItem.Click
+        Dim frm As New frmReceipts
         AddHandler frm.FormClosed, AddressOf RefreshMainForm
         frm.ShowDialog()
     End Sub

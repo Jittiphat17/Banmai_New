@@ -112,7 +112,7 @@ Partial Class frmFinancial
         Me.ReportViewer1.Location = New System.Drawing.Point(10, 118)
         Me.ReportViewer1.Name = "ReportViewer1"
         Me.ReportViewer1.ServerReport.BearerToken = Nothing
-        Me.ReportViewer1.Size = New System.Drawing.Size(946, 441)
+        Me.ReportViewer1.Size = New System.Drawing.Size(946, 654)
         Me.ReportViewer1.TabIndex = 49
         '
         'dtpEndDate
@@ -171,7 +171,7 @@ Partial Class frmFinancial
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(968, 571)
+        Me.ClientSize = New System.Drawing.Size(968, 784)
         Me.Controls.Add(Me.dtpEndDate)
         Me.Controls.Add(Me.dtpStartDate)
         Me.Controls.Add(Me.Guna2HtmlLabel3)

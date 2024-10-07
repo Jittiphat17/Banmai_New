@@ -59,15 +59,15 @@ Public Class frmClose
         Dim dtIncome As New DataTable
         Dim formattedDate As String = selectedDate.ToString("yyyy-MM-dd")
 
-        ' Connect to database and retrieve income data filtered by acc_id and specific date
+        ' Connect to database and retrieve income data filtered by acc_id and dates up to the selected date
         Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
             Try
-                ' Filter by acc_id and selected date
+                ' Filter by acc_id and date <= selectedDate
                 Dim query As String = "SELECT ind_accname, SUM(ind_amount) AS TotalIncome " &
-                                          "FROM Income_Details " &
-                                          "WHERE acc_id = @accId AND FORMAT(ind_date, 'yyyy-MM-dd') = @selectedDate " &
-                                          "AND ind_accname IN ('ค่าธรรมเนียม', 'เงินบริจาค', 'ค่าสัญญา', 'ค่าประกัน', 'ดอกเบี้ยเงินฝากธนาคาร', 'ค่าธรรมเนียมแรกเข้า', 'อื่น ๆ', 'ดอกเบี้ย', 'ค่าปรับ') " &
-                                          "GROUP BY ind_accname"
+                                  "FROM Income_Details " &
+                                  "WHERE acc_id = @accId AND FORMAT(ind_date, 'yyyy-MM-dd') <= @selectedDate " &
+                                  "AND ind_accname IN ('ค่าธรรมเนียม', 'เงินบริจาค', 'ค่าสัญญา', 'ค่าประกัน', 'ดอกเบี้ยเงินฝากธนาคาร', 'ค่าธรรมเนียมแรกเข้า', 'อื่น ๆ', 'ดอกเบี้ย', 'ค่าปรับ') " &
+                                  "GROUP BY ind_accname"
                 Dim cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@accId", accId.ToString()) ' Ensure acc_id is treated as string
                 cmd.Parameters.AddWithValue("@selectedDate", formattedDate)
@@ -82,20 +82,21 @@ Public Class frmClose
         Me.Guna2DataGridView1.DataSource = dtIncome
     End Sub
 
+
     ' Method to load expense data into Guna2DataGridView2 พร้อมกรองวันที่เฉพาะ
     Private Sub LoadExpenseData(accId As String, selectedDate As DateTime)
         Dim dtExpense As New DataTable
         Dim formattedDate As String = selectedDate.ToString("yyyy-MM-dd")
 
-        ' Connect to database and retrieve expense data filtered by acc_id and specific date
+        ' Connect to database and retrieve expense data filtered by acc_id and dates up to the selected date
         Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
             Try
-                ' Filter by acc_id and selected date
+                ' Filter by acc_id and date <= selectedDate
                 Dim query As String = "SELECT exd_nameacc, SUM(exd_amount) AS TotalExpense " &
-                                          "FROM Expense_Details " &
-                                          "WHERE acc_id = @accId AND FORMAT(exd_date, 'yyyy-MM-dd') = @selectedDate " &
-                                          "AND exd_nameacc IN ('ค่าเช่าสำนักงาน', 'เงินสมทบ', 'เงินประกันความเสี่ยง', 'ค่าตอบแทน', 'ค่าจ้าง', 'ดอกเบี้ยสัจจะ', 'ดอกเบี้ยจ่าย', 'อื่นๆ') " &
-                                          "GROUP BY exd_nameacc"
+                                  "FROM Expense_Details " &
+                                  "WHERE acc_id = @accId AND FORMAT(exd_date, 'yyyy-MM-dd') <= @selectedDate " &
+                                  "AND exd_nameacc IN ('ค่าเช่าสำนักงาน', 'เงินสมทบ', 'เงินประกันความเสี่ยง', 'ค่าตอบแทน', 'ค่าจ้าง', 'ดอกเบี้ยสัจจะ', 'ดอกเบี้ยจ่าย', 'อื่นๆ') " &
+                                  "GROUP BY exd_nameacc"
                 Dim cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@accId", accId.ToString()) ' Ensure acc_id is treated as string
                 cmd.Parameters.AddWithValue("@selectedDate", formattedDate)
@@ -109,6 +110,7 @@ Public Class frmClose
         ' Bind the data to the DataGridView
         Me.Guna2DataGridView2.DataSource = dtExpense
     End Sub
+
 
     ' Method to customize the DataGridView
     Private Sub CustomizeDataGridView()

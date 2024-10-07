@@ -44,7 +44,7 @@ Partial Class frmStatement
         Me.ReportViewer1.Location = New System.Drawing.Point(12, 101)
         Me.ReportViewer1.Name = "ReportViewer1"
         Me.ReportViewer1.ServerReport.BearerToken = Nothing
-        Me.ReportViewer1.Size = New System.Drawing.Size(944, 458)
+        Me.ReportViewer1.Size = New System.Drawing.Size(944, 671)
         Me.ReportViewer1.TabIndex = 0
         '
         'Guna2Elipse1
@@ -172,7 +172,7 @@ Partial Class frmStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(968, 571)
+        Me.ClientSize = New System.Drawing.Size(968, 784)
         Me.Controls.Add(Me.dtpEndDate)
         Me.Controls.Add(Me.dtpStartDate)
         Me.Controls.Add(Me.btnGenerateReport)

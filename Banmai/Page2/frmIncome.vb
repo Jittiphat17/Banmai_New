@@ -1,6 +1,7 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
 
+
 Public Class frmIncome
     ' เชื่อมต่อกับฐานข้อมูล Access
     Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
@@ -299,9 +300,34 @@ Public Class frmIncome
     End Sub
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
+            ' ตรวจสอบว่ามีการเลือกแถวใน DataGridView หรือไม่
+            If dgvPaymentDetails.CurrentRow IsNot Nothing Then
+                ' ดึงค่าจากคอลัมน์ PaymentContractNumber ใน DataGridView
+                Dim contractNumber As String = dgvPaymentDetails.CurrentRow.Cells("PaymentContractNumber").Value.ToString()
+
+                ' ตรวจสอบว่าค่า contractNumber ไม่ใช่ค่าว่าง
+                If Not String.IsNullOrEmpty(contractNumber) Then
+                    ' สร้างอินสแตนซ์ของฟอร์ม TestGetData
+                    Dim testGetDataForm As New TestGetData()
+
+                    ' ตั้งค่าข้อความใน TextBoxConId ของฟอร์ม TestGetData
+                    testGetDataForm.TextBoxConId.Text = contractNumber
+
+                    ' แสดงฟอร์ม TestGetData
+                    testGetDataForm.ShowDialog()
+                Else
+                    MessageBox.Show("กรุณาเลือกเลขที่สัญญาก่อน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            Else
+                MessageBox.Show("ไม่มีข้อมูลให้เลือก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("เกิดข้อผิดพลาดในการส่งข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        Try
             ' ตรวจสอบว่า lblBalanceAmount.Text มีข้อมูลและเป็นตัวเลข
             Dim balanceAmount As Decimal
-
             If Not Decimal.TryParse(lblBalanceAmount.Text, balanceAmount) Then
                 MessageBox.Show("ยอดคงเหลือต้องเป็นตัวเลข", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
@@ -321,11 +347,11 @@ Public Class frmIncome
 
                 ' ตรวจสอบว่าเซลล์มีค่า และแปลงค่าให้ถูกต้อง
                 If Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentContractNumber").Value.ToString(), conId) AndAlso
-                Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentPeriod").Value.ToString(), paymentPeriod) Then
+                   Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentPeriod").Value.ToString(), paymentPeriod) Then
 
                     ' ตรวจสอบว่าค่า conId และ paymentPeriod มีค่ามากกว่า 0
                     If conId > 0 AndAlso paymentPeriod > 0 Then
-                        ' รับค่า DateTime จาก DateTimePicker1 โดยตรง
+                        ' รับค่า DateTime จาก DateTimePicker โดยตรง
                         Dim paymentDate As DateTime = dtpBirth.Value.Date
 
                         ' สร้างการเชื่อมต่อกับฐานข้อมูล
@@ -352,17 +378,14 @@ Public Class frmIncome
                                     ' สร้างคำสั่งสำหรับการอัพเดทข้อมูล
                                     Using cmdUpdateDatePayment As New OleDbCommand(queryUpdateDatePayment, Conn)
                                         cmdUpdateDatePayment.Parameters.AddWithValue("@date_payment", paymentDate) ' ส่งวันที่ที่แปลงแล้ว
-
-                                        ' ดำเนินการอัพเดทวันที่
                                         cmdUpdateDatePayment.Parameters.AddWithValue("@conId", conId)
                                         cmdUpdateDatePayment.Parameters.AddWithValue("@paymentPeriod", paymentPeriod)
                                         cmdUpdateDatePayment.ExecuteNonQuery()
 
                                         ' เรียกฟังก์ชันอื่นๆ หลังจากอัพเดทข้อมูล
-                                        SavePaymentDetailsToDatabase()
-                                        SaveIncomeDetailsToDatabase()
-                                        MessageBox.Show("บันทึกข้อมูลสำเร็จ", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                        SaveTransactionToDatabase()
 
+                                        ' ล้างข้อมูลในฟอร์มหลังจากบันทึกเสร็จ
                                         cleartext()
                                     End Using
                                 Else
@@ -379,15 +402,12 @@ Public Class frmIncome
             Else
                 ' กรณีที่ไม่มีการเลือกข้อมูลใน DataGridView จะบันทึกเฉพาะข้อมูลรายรับ (IncomeDetails)
                 SaveIncomeDetailsToDatabase()
-                MessageBox.Show("บันทึกข้อมูลเฉพาะรายรับสำเร็จ", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
                 cleartext() ' ล้างข้อมูลในฟอร์ม
             End If
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
 
     Public Sub cleartext()
         ' ล้างแถวทั้งหมดใน DataGridView ก่อนที่จะตั้งค่าคอลัมน์ใหม่
@@ -687,13 +707,22 @@ Public Class frmIncome
     End Sub
     Private Sub dgvIncomeDetails_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dgvIncomeDetails.CellValidating
         If dgvIncomeDetails.Columns(e.ColumnIndex).Name = "IncomeType" Then
+            ' ตรวจสอบว่าผู้ใช้ไม่ปล่อยค่าเป็นค่าว่างก่อน
+            If String.IsNullOrWhiteSpace(e.FormattedValue.ToString()) Then
+                ' หากเป็นค่าว่าง จะไม่ทำการแจ้งเตือน
+                Return
+            End If
+
+            ' ตรวจสอบว่าค่าที่กรอกตรงกับรายการใน ComboBox หรือไม่
             Dim comboBoxColumn As DataGridViewComboBoxColumn = CType(dgvIncomeDetails.Columns("IncomeType"), DataGridViewComboBoxColumn)
             If Not comboBoxColumn.Items.Contains(e.FormattedValue.ToString()) Then
+                ' แสดงการแจ้งเตือนหากไม่ใช่ค่าที่ถูกต้อง
                 MessageBox.Show("กรุณาเลือกประเภทของรายรับที่ถูกต้อง", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 e.Cancel = True
             End If
         End If
     End Sub
+
     Private Sub dgvIncomeDetails_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvIncomeDetails.CellClick
         ' ตรวจสอบว่าเป็นการคลิกปุ่มลบ
         If e.ColumnIndex = dgvIncomeDetails.Columns("DeleteButton").Index AndAlso e.RowIndex >= 0 Then
@@ -840,8 +869,8 @@ Public Class frmIncome
         If dgvPaymentDetails.Columns(e.ColumnIndex).Name = "PaymentType" Then
             Dim comboBoxColumn As DataGridViewComboBoxColumn = CType(dgvPaymentDetails.Columns("PaymentType"), DataGridViewComboBoxColumn)
 
-            ' ตรวจสอบว่าค่าที่ป้อนไม่ว่างเปล่า
-            If Not String.IsNullOrEmpty(e.FormattedValue.ToString()) Then
+            ' ตรวจสอบว่าค่าที่ป้อนไม่เป็นค่าว่างหรือมีแค่ช่องว่าง
+            If Not String.IsNullOrWhiteSpace(e.FormattedValue.ToString()) Then
                 ' ตรวจสอบว่าค่าที่ป้อนอยู่ในรายการของ ComboBox หรือไม่
                 If Not comboBoxColumn.Items.Contains(e.FormattedValue.ToString()) Then
                     e.Cancel = True
@@ -850,6 +879,7 @@ Public Class frmIncome
             End If
         End If
     End Sub
+
     '*********************************************************************************************************************************************************************************************
     Private Sub PopulatePaymentPeriodBasedOnContractNumber(rowIndex As Integer)
         Try
@@ -1086,50 +1116,54 @@ Public Class frmIncome
                         Return
                     End If
 
-                    ' วนลูปผ่านแต่ละแถวใน DataGridView
+                    ' คำนวณจำนวนเงินรวมทั้งหมด
+                    Dim totalAmount As Decimal = 0
                     For Each row As DataGridViewRow In dgvPaymentDetails.Rows
-                        ' ข้ามแถวที่เป็นแถวใหม่
-                        If row.IsNewRow Then
-                            Continue For
+                        If Not row.IsNewRow Then
+                            Dim paymentAmount As Decimal = Convert.ToDecimal(row.Cells("PaymentAmount").Value)
+                            totalAmount += paymentAmount ' รวมจำนวนเงิน
                         End If
-
-                        ' ดึงค่าจากแต่ละเซลล์
-                        Dim paymentType As String = row.Cells("PaymentType").Value.ToString()
-                        Dim paymentAmount As Decimal = Convert.ToDecimal(row.Cells("PaymentAmount").Value)
-                        Dim contractNumber As Integer = Convert.ToInt32(row.Cells("PaymentContractNumber").Value)
-                        Dim indDate As DateTime = dtpBirth.Value ' ใช้วันที่จาก DateTimePicker
-                        Dim accId As String = cboDepositType.SelectedValue.ToString() ' Retrieve acc_id
-
-                        ' สร้างคำสั่ง SQL สำหรับการบันทึกข้อมูลลงใน Income_Details
-                        Dim query As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, m_id, acc_id) VALUES (@paymentType, @contractNumber, @paymentAmount, @ind_date, @m_id, @acc_id)"
-                        Using cmd As New OleDbCommand(query, Conn)
-                            ' กำหนดค่าให้กับพารามิเตอร์
-                            cmd.Parameters.AddWithValue("@paymentType", paymentType)
-                            cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
-                            cmd.Parameters.AddWithValue("@paymentAmount", paymentAmount)
-                            cmd.Parameters.AddWithValue("@ind_date", indDate)
-                            cmd.Parameters.AddWithValue("@m_id", CInt(memberId))
-                            cmd.Parameters.AddWithValue("@acc_id", accId)
-
-                            ' ทำการบันทึกข้อมูลลงในฐานข้อมูล
-                            cmd.ExecuteNonQuery()
-                        End Using
-
-                        ' สร้างคำสั่ง SQL สำหรับการบันทึกข้อมูลลงใน Income
-                        Dim queryIncome As String = "INSERT INTO Income (m_id, inc_detail, inc_description, inc_date, inc_amount, acc_id) VALUES (@m_id, @inc_detail, @inc_description, @inc_date, @inc_amount, @acc_id)"
-                        Using cmdIncome As New OleDbCommand(queryIncome, Conn)
-                            ' กำหนดค่าให้กับพารามิเตอร์
-                            cmdIncome.Parameters.AddWithValue("@m_id", CInt(memberId))
-                            cmdIncome.Parameters.AddWithValue("@inc_detail", paymentType)
-                            cmdIncome.Parameters.AddWithValue("@inc_description", "รายละเอียดการชำระเงิน") ' หรือข้อความที่ต้องการใส่
-                            cmdIncome.Parameters.AddWithValue("@inc_date", indDate)
-                            cmdIncome.Parameters.AddWithValue("@inc_amount", paymentAmount)
-                            cmdIncome.Parameters.AddWithValue("@acc_id", accId)
-
-                            ' ทำการบันทึกข้อมูลลงในฐานข้อมูล Income
-                            cmdIncome.ExecuteNonQuery()
-                        End Using
                     Next
+
+                    ' บันทึกรายการรวมในตาราง Income
+                    Dim indDate As DateTime = dtpBirth.Value ' ใช้วันที่จาก DateTimePicker
+                    Dim accId As String = cboDepositType.SelectedValue.ToString() ' Retrieve acc_id
+                    Dim queryIncome As String = "INSERT INTO Income (m_id, inc_detail, inc_description, inc_date, inc_amount, acc_id) VALUES (@m_id, @inc_detail, @inc_description, @inc_date, @inc_amount, @acc_id)"
+                    Using cmdIncome As New OleDbCommand(queryIncome, Conn)
+                        cmdIncome.Parameters.AddWithValue("@m_id", CInt(memberId))
+                        cmdIncome.Parameters.AddWithValue("@inc_detail", "ชำระเงินรวม")
+                        cmdIncome.Parameters.AddWithValue("@inc_description", "รวมการชำระเงินทั้งหมด")
+                        cmdIncome.Parameters.AddWithValue("@inc_date", indDate)
+                        cmdIncome.Parameters.AddWithValue("@inc_amount", totalAmount)
+                        cmdIncome.Parameters.AddWithValue("@acc_id", accId)
+                        cmdIncome.ExecuteNonQuery()
+
+                        ' รับค่า inc_id ที่ถูกสร้างขึ้นในตาราง Income
+                        Dim queryGetIncId As String = "SELECT @@IDENTITY"
+                        Dim cmdGetIncId As New OleDbCommand(queryGetIncId, Conn)
+                        Dim incId As Integer = Convert.ToInt32(cmdGetIncId.ExecuteScalar())
+
+                        ' วนลูปบันทึกรายละเอียดใน Income_Details
+                        For Each row As DataGridViewRow In dgvPaymentDetails.Rows
+                            If row.IsNewRow Then Continue For
+
+                            Dim paymentType As String = row.Cells("PaymentType").Value.ToString()
+                            Dim paymentAmount As Decimal = Convert.ToDecimal(row.Cells("PaymentAmount").Value)
+                            Dim contractNumber As Integer = Convert.ToInt32(row.Cells("PaymentContractNumber").Value)
+
+                            Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@paymentType, @contractNumber, @paymentAmount, @ind_date, @m_id, @acc_id, @inc_id)"
+                            Using cmdDetails As New OleDbCommand(queryDetails, Conn)
+                                cmdDetails.Parameters.AddWithValue("@paymentType", paymentType)
+                                cmdDetails.Parameters.AddWithValue("@contractNumber", contractNumber)
+                                cmdDetails.Parameters.AddWithValue("@paymentAmount", paymentAmount)
+                                cmdDetails.Parameters.AddWithValue("@ind_date", indDate)
+                                cmdDetails.Parameters.AddWithValue("@m_id", CInt(memberId))
+                                cmdDetails.Parameters.AddWithValue("@acc_id", accId)
+                                cmdDetails.Parameters.AddWithValue("@inc_id", incId) ' ใช้ค่า inc_id ที่เพิ่งบันทึก
+                                cmdDetails.ExecuteNonQuery()
+                            End Using
+                        Next
+                    End Using
 
                     ' แสดงข้อความว่าได้บันทึกข้อมูลสำเร็จ
                     MessageBox.Show("บันทึกข้อมูลสำเร็จ", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -1143,7 +1177,6 @@ Public Class frmIncome
             MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
 
     Private Sub SaveIncomeDetailsToDatabase()
         Try
@@ -1153,58 +1186,63 @@ Public Class frmIncome
                 Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
                     Conn.Open()
 
-                    ' วนลูปผ่านแต่ละแถวใน DataGridView
+                    ' ดึง m_id จากตาราง Member โดยใช้ชื่อสมาชิก
+                    Dim queryGetMemberId As String = "SELECT m_id FROM Member WHERE m_name = @memberName"
+                    Dim cmdGetMemberId As New OleDbCommand(queryGetMemberId, Conn)
+                    cmdGetMemberId.Parameters.AddWithValue("@memberName", txtMemberID.Text)
+                    Dim memberId As Object = cmdGetMemberId.ExecuteScalar()
+
+                    If memberId Is Nothing OrElse DBNull.Value.Equals(memberId) Then
+                        MessageBox.Show("ไม่พบข้อมูลสมาชิก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Return
+                    End If
+
+                    ' คำนวณจำนวนเงินรวมทั้งหมด
+                    Dim totalAmount As Decimal = 0
                     For Each row As DataGridViewRow In dgvIncomeDetails.Rows
-                        ' ข้ามแถวที่เป็นแถวใหม่
-                        If row.IsNewRow Then
-                            Continue For
+                        If Not row.IsNewRow Then
+                            Dim amount As Decimal = Convert.ToDecimal(row.Cells("Amount").Value)
+                            totalAmount += amount ' รวมจำนวนเงิน
                         End If
-
-                        ' ดึง m_id จากตาราง Member โดยใช้ชื่อสมาชิก
-                        Dim queryGetMemberId As String = "SELECT m_id FROM Member WHERE m_name = @memberName"
-                        Dim cmdGetMemberId As New OleDbCommand(queryGetMemberId, Conn)
-                        cmdGetMemberId.Parameters.AddWithValue("@memberName", txtMemberID.Text)
-                        Dim memberId As Object = cmdGetMemberId.ExecuteScalar()
-
-                        If memberId Is Nothing OrElse DBNull.Value.Equals(memberId) Then
-                            MessageBox.Show("ไม่พบข้อมูลสมาชิก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            Return
-                        End If
-
-                        ' ดึงค่าจากแต่ละเซลล์
-                        Dim incomeType As String = row.Cells("IncomeType").Value.ToString()
-                        Dim amount As Decimal = Convert.ToDecimal(row.Cells("Amount").Value)
-                        Dim indDate As DateTime = dtpBirth.Value ' ใช้วันที่จาก DateTimePicker
-                        Dim accId As String = cboDepositType.SelectedValue.ToString() ' Retrieve acc_id
-
-                        ' สร้างคำสั่ง SQL สำหรับการบันทึกข้อมูลลงใน Income_Details
-                        Dim query As String = "INSERT INTO Income_Details (ind_accname, ind_amount, m_id, ind_date, acc_id) VALUES (@incomeType, @amount, @m_id, @ind_date, @acc_id)"
-                        Using cmd As New OleDbCommand(query, Conn)
-                            ' กำหนดค่าให้กับพารามิเตอร์
-                            cmd.Parameters.AddWithValue("@incomeType", incomeType)
-                            cmd.Parameters.AddWithValue("@amount", amount)
-                            cmd.Parameters.AddWithValue("@m_id", memberId)
-                            cmd.Parameters.AddWithValue("@ind_date", indDate)
-                            cmd.Parameters.AddWithValue("@acc_id", accId)
-                            ' ทำการบันทึกข้อมูลลงในฐานข้อมูล Income_Details
-                            cmd.ExecuteNonQuery()
-                        End Using
-
-                        ' สร้างคำสั่ง SQL สำหรับการบันทึกข้อมูลลงใน Income
-                        Dim queryIncome As String = "INSERT INTO Income (m_id, inc_detail, inc_description, inc_date, inc_amount, acc_id) VALUES (@m_id, @inc_detail, @inc_description, @inc_date, @inc_amount, @acc_id)"
-                        Using cmdIncome As New OleDbCommand(queryIncome, Conn)
-                            ' กำหนดค่าให้กับพารามิเตอร์
-                            cmdIncome.Parameters.AddWithValue("@m_id", memberId)
-                            cmdIncome.Parameters.AddWithValue("@inc_detail", incomeType)
-                            cmdIncome.Parameters.AddWithValue("@inc_description", "รายละเอียดรายรับ") ' หรือข้อความที่ต้องการใส่
-                            cmdIncome.Parameters.AddWithValue("@inc_date", indDate)
-                            cmdIncome.Parameters.AddWithValue("@inc_amount", amount)
-                            cmdIncome.Parameters.AddWithValue("@acc_id", accId)
-
-                            ' ทำการบันทึกข้อมูลลงในฐานข้อมูล Income
-                            cmdIncome.ExecuteNonQuery()
-                        End Using
                     Next
+
+                    ' บันทึกรายการรวมในตาราง Income (ทำครั้งเดียว)
+                    Dim indDate As DateTime = dtpBirth.Value ' ใช้วันที่จาก DateTimePicker
+                    Dim accId As String = cboDepositType.SelectedValue.ToString() ' Retrieve acc_id
+                    Dim queryIncome As String = "INSERT INTO Income (m_id, inc_detail, inc_description, inc_date, inc_amount, acc_id) VALUES (@m_id, @inc_detail, @inc_description, @inc_date, @inc_amount, @acc_id)"
+                    Using cmdIncome As New OleDbCommand(queryIncome, Conn)
+                        cmdIncome.Parameters.AddWithValue("@m_id", CInt(memberId))
+                        cmdIncome.Parameters.AddWithValue("@inc_detail", "รายรับรวม")
+                        cmdIncome.Parameters.AddWithValue("@inc_description", "รวมรายรับทั้งหมด")
+                        cmdIncome.Parameters.AddWithValue("@inc_date", indDate)
+                        cmdIncome.Parameters.AddWithValue("@inc_amount", totalAmount)
+                        cmdIncome.Parameters.AddWithValue("@acc_id", accId)
+                        cmdIncome.ExecuteNonQuery()
+
+                        ' รับค่า inc_id ที่ถูกสร้างขึ้นในตาราง Income
+                        Dim queryGetIncId As String = "SELECT @@IDENTITY"
+                        Dim cmdGetIncId As New OleDbCommand(queryGetIncId, Conn)
+                        Dim incId As Integer = Convert.ToInt32(cmdGetIncId.ExecuteScalar())
+
+                        ' วนลูปบันทึกรายละเอียดใน Income_Details (เชื่อมกับ inc_id ที่เพิ่งบันทึก)
+                        For Each row As DataGridViewRow In dgvIncomeDetails.Rows
+                            If row.IsNewRow Then Continue For
+
+                            Dim incomeType As String = row.Cells("IncomeType").Value.ToString()
+                            Dim amount As Decimal = Convert.ToDecimal(row.Cells("Amount").Value)
+
+                            Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@incomeType, @amount, @ind_date, @m_id, @acc_id, @inc_id)"
+                            Using cmdDetails As New OleDbCommand(queryDetails, Conn)
+                                cmdDetails.Parameters.AddWithValue("@incomeType", incomeType)
+                                cmdDetails.Parameters.AddWithValue("@amount", amount)
+                                cmdDetails.Parameters.AddWithValue("@ind_date", indDate)
+                                cmdDetails.Parameters.AddWithValue("@m_id", CInt(memberId))
+                                cmdDetails.Parameters.AddWithValue("@acc_id", accId)
+                                cmdDetails.Parameters.AddWithValue("@inc_id", incId) ' ใช้ค่า inc_id ที่เพิ่งบันทึก
+                                cmdDetails.ExecuteNonQuery()
+                            End Using
+                        Next
+                    End Using
 
                     ' แสดงข้อความว่าได้บันทึกข้อมูลสำเร็จ
                     MessageBox.Show("บันทึกข้อมูลสำเร็จ", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -1218,7 +1256,115 @@ Public Class frmIncome
             MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+    Private Sub SaveTransactionToDatabase()
+        Try
+            ' ตรวจสอบว่ามีข้อมูลใน DataGridView หรือไม่
+            If dgvPaymentDetails.Rows.Count > 0 OrElse dgvIncomeDetails.Rows.Count > 0 Then
+                ' เชื่อมต่อกับฐานข้อมูล
+                Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+                    Conn.Open()
 
+                    ' ดึง m_id จากตาราง Member โดยใช้ชื่อสมาชิก
+                    Dim queryGetMemberId As String = "SELECT m_id FROM Member WHERE m_name = @memberName"
+                    Dim cmdGetMemberId As New OleDbCommand(queryGetMemberId, Conn)
+                    cmdGetMemberId.Parameters.AddWithValue("@memberName", txtMemberID.Text)
+                    Dim memberId As Object = cmdGetMemberId.ExecuteScalar()
+
+                    If memberId Is Nothing OrElse DBNull.Value.Equals(memberId) Then
+                        MessageBox.Show("ไม่พบข้อมูลสมาชิก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Return
+                    End If
+
+                    ' คำนวณจำนวนเงินรวมทั้งหมดจากทั้งการชำระเงินและรายรับ
+                    Dim totalAmount As Decimal = 0
+
+                    ' คำนวณยอดรวมจากการชำระเงิน
+                    For Each row As DataGridViewRow In dgvPaymentDetails.Rows
+                        If Not row.IsNewRow Then
+                            Dim paymentAmount As Decimal = Convert.ToDecimal(row.Cells("PaymentAmount").Value)
+                            totalAmount += paymentAmount ' รวมยอดเงินชำระ
+                        End If
+                    Next
+
+                    ' คำนวณยอดรวมจากรายรับ
+                    For Each row As DataGridViewRow In dgvIncomeDetails.Rows
+                        If Not row.IsNewRow Then
+                            Dim incomeAmount As Decimal = Convert.ToDecimal(row.Cells("Amount").Value)
+                            totalAmount += incomeAmount ' รวมยอดรายรับ
+                        End If
+                    Next
+
+                    ' บันทึกรายการรวมในตาราง Income (ทำครั้งเดียว)
+                    Dim indDate As DateTime = dtpBirth.Value ' ใช้วันที่จาก DateTimePicker
+                    Dim accId As String = cboDepositType.SelectedValue.ToString() ' Retrieve acc_id
+                    Dim queryIncome As String = "INSERT INTO Income (m_id, inc_detail, inc_description, inc_date, inc_amount, acc_id) VALUES (@m_id, @inc_detail, @inc_description, @inc_date, @inc_amount, @acc_id)"
+                    Using cmdIncome As New OleDbCommand(queryIncome, Conn)
+                        cmdIncome.Parameters.AddWithValue("@m_id", CInt(memberId))
+                        cmdIncome.Parameters.AddWithValue("@inc_detail", "รายการรวมชำระเงินและรายรับ")
+                        cmdIncome.Parameters.AddWithValue("@inc_description", "รวมการชำระเงินและรายรับทั้งหมด")
+                        cmdIncome.Parameters.AddWithValue("@inc_date", indDate)
+                        cmdIncome.Parameters.AddWithValue("@inc_amount", totalAmount)
+                        cmdIncome.Parameters.AddWithValue("@acc_id", accId)
+                        cmdIncome.ExecuteNonQuery()
+
+                        ' รับค่า inc_id ที่ถูกสร้างขึ้นในตาราง Income
+                        Dim queryGetIncId As String = "SELECT @@IDENTITY"
+                        Dim cmdGetIncId As New OleDbCommand(queryGetIncId, Conn)
+                        Dim incId As Integer = Convert.ToInt32(cmdGetIncId.ExecuteScalar())
+
+                        ' วนลูปบันทึกรายละเอียดการชำระเงินใน Income_Details
+                        For Each row As DataGridViewRow In dgvPaymentDetails.Rows
+                            If row.IsNewRow Then Continue For
+
+                            Dim paymentType As String = row.Cells("PaymentType").Value.ToString()
+                            Dim paymentAmount As Decimal = Convert.ToDecimal(row.Cells("PaymentAmount").Value)
+                            Dim contractNumber As Integer = Convert.ToInt32(row.Cells("PaymentContractNumber").Value)
+
+                            Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@paymentType, @contractNumber, @paymentAmount, @ind_date, @m_id, @acc_id, @inc_id)"
+                            Using cmdDetails As New OleDbCommand(queryDetails, Conn)
+                                cmdDetails.Parameters.AddWithValue("@paymentType", paymentType)
+                                cmdDetails.Parameters.AddWithValue("@contractNumber", contractNumber)
+                                cmdDetails.Parameters.AddWithValue("@paymentAmount", paymentAmount)
+                                cmdDetails.Parameters.AddWithValue("@ind_date", indDate)
+                                cmdDetails.Parameters.AddWithValue("@m_id", CInt(memberId))
+                                cmdDetails.Parameters.AddWithValue("@acc_id", accId)
+                                cmdDetails.Parameters.AddWithValue("@inc_id", incId) ' ใช้ค่า inc_id ที่เพิ่งบันทึก
+                                cmdDetails.ExecuteNonQuery()
+                            End Using
+                        Next
+
+                        ' วนลูปบันทึกรายละเอียดรายรับใน Income_Details
+                        For Each row As DataGridViewRow In dgvIncomeDetails.Rows
+                            If row.IsNewRow Then Continue For
+
+                            Dim incomeType As String = row.Cells("IncomeType").Value.ToString()
+                            Dim incomeAmount As Decimal = Convert.ToDecimal(row.Cells("Amount").Value)
+
+                            Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@incomeType, @incomeAmount, @ind_date, @m_id, @acc_id, @inc_id)"
+                            Using cmdDetails As New OleDbCommand(queryDetails, Conn)
+                                cmdDetails.Parameters.AddWithValue("@incomeType", incomeType)
+                                cmdDetails.Parameters.AddWithValue("@incomeAmount", incomeAmount)
+                                cmdDetails.Parameters.AddWithValue("@ind_date", indDate)
+                                cmdDetails.Parameters.AddWithValue("@m_id", CInt(memberId))
+                                cmdDetails.Parameters.AddWithValue("@acc_id", accId)
+                                cmdDetails.Parameters.AddWithValue("@inc_id", incId) ' ใช้ค่า inc_id ที่เพิ่งบันทึก
+                                cmdDetails.ExecuteNonQuery()
+                            End Using
+                        Next
+                    End Using
+
+                    ' แสดงข้อความว่าได้บันทึกข้อมูลสำเร็จ
+                    MessageBox.Show("บันทึกข้อมูลสำเร็จ", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End Using
+            Else
+                ' แจ้งเตือนหากไม่มีข้อมูลใน DataGridView
+                MessageBox.Show("ไม่มีข้อมูลที่จะบันทึก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        Catch ex As Exception
+            ' จัดการข้อผิดพลาด
+            MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
     Private Sub txtAmount_TextChanged(sender As Object, e As EventArgs) Handles txtAmount.TextChanged
         ' ตรวจสอบและจัดการกรณีที่ txtAmount หรือ lblTotalAmount ไม่มีค่า
@@ -1239,6 +1385,8 @@ Public Class frmIncome
         Dim balanceAmount As Decimal = enteredAmount - totalAmount
         lblBalanceAmount.Text = balanceAmount.ToString("N2")
     End Sub
+
+
 
 
 End Class

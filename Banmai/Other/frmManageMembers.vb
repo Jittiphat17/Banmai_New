@@ -263,35 +263,6 @@ Public Class frmManageMembers
     End Sub
 
     Private Function AllFieldsFilled() As Boolean
-        ' ตรวจสอบว่าฟิลด์ "ชื่อ" มีเฉพาะตัวอักษร
-        If String.IsNullOrWhiteSpace(txtName.Text) OrElse Not IsLettersOnly(txtName.Text) Then
-            MessageBox.Show("โปรดกรอกชื่อที่ถูกต้อง (เฉพาะตัวอักษร)", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return False
-        End If
-
-        ' ตรวจสอบว่าฟิลด์ "ชื่อเล่น" มีเฉพาะตัวอักษร
-        If String.IsNullOrWhiteSpace(txtnick.Text) OrElse Not IsLettersOnly(txtnick.Text) Then
-            MessageBox.Show("โปรดกรอกชื่อเล่นที่ถูกต้อง (เฉพาะตัวอักษร)", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return False
-        End If
-
-        ' ตรวจสอบเลขบัตรประชาชนว่ามีความยาว 13 หลักและเป็นตัวเลข
-        If Not IsNumeric(txtThaiid.Text) OrElse txtThaiid.Text.Length <> 13 Then
-            MessageBox.Show("กรุณากรอกเลขประจำตัวประชาชนให้ถูกต้อง (13 หลัก)", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return False
-        End If
-
-        ' ตรวจสอบรหัสไปรษณีย์ว่ามีความยาว 5 หลักและเป็นตัวเลข
-        If Not IsNumeric(txtPost.Text) OrElse txtPost.Text.Length <> 5 Then
-            MessageBox.Show("กรุณากรอกรหัสไปรษณีย์ให้ถูกต้อง (5 หลัก)", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return False
-        End If
-
-        ' ตรวจสอบเบอร์โทรศัพท์ว่ามีเฉพาะตัวเลข
-        If Not IsNumeric(txtTel.Text) Then
-            MessageBox.Show("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return False
-        End If
 
         ' ตรวจสอบว่าคำนำหน้าได้รับการเลือกแล้ว
         If cmbGender.SelectedIndex = 0 Then

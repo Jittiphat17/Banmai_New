@@ -13,6 +13,7 @@ Public Class frmCard
 
     ' ฟังก์ชันที่รันเมื่อเปิดฟอร์ม
     Private Sub frmSmartCard_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        LoadMemberStatus()
 
         AddHandler txtFirstNameThai.KeyPress, AddressOf ThaiOnlyTextBox_KeyPress
         AddHandler txtLastNameThai.KeyPress, AddressOf ThaiOnlyTextBox_KeyPress
@@ -250,17 +251,27 @@ Public Class frmCard
 
     ' ฟังก์ชันตรวจสอบความถูกต้องของข้อมูลก่อนบันทึก
     Private Function ValidateData() As Boolean
+        ' ตรวจสอบว่าได้กรอกเลขบัตรประชาชนหรือไม่
         If String.IsNullOrWhiteSpace(txtIDCard.Text) Then
             MessageBox.Show("กรุณากรอกเลขบัตรประชาชน", "ข้อมูลไม่ครบถ้วน", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
 
+        ' ตรวจสอบว่ากรอกชื่อและนามสกุลหรือไม่
         If String.IsNullOrWhiteSpace(txtFirstNameThai.Text) OrElse String.IsNullOrWhiteSpace(txtLastNameThai.Text) Then
             MessageBox.Show("กรุณากรอกชื่อและนามสกุล", "ข้อมูลไม่ครบถ้วน", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
+
+        ' ตรวจสอบว่ากรอกวันเกิดหรือไม่
         If String.IsNullOrWhiteSpace(txtBirthDate.Text) Then
             MessageBox.Show("กรุณากรอกวันเกิด", "ข้อมูลไม่ครบถ้วน", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
+        ' ตรวจสอบว่ามีการเลือกสถานะใน ComboBox หรือไม่
+        If cbStaus.SelectedItem Is Nothing Then
+            MessageBox.Show("กรุณาเลือกสถานะ", "ข้อมูลไม่ครบถ้วน", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
 
@@ -268,6 +279,7 @@ Public Class frmCard
 
         Return True
     End Function
+
 
     ' ฟังก์ชันล้างข้อมูลทั้งหมดในฟอร์ม
     Private Sub ClearAllFields()
@@ -299,6 +311,7 @@ Public Class frmCard
 
     ' ฟังก์ชันบันทึกข้อมูลลงฐานข้อมูล
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        ' ตรวจสอบข้อมูลเบื้องต้นก่อนทำการบันทึก
         If Not ValidateData() Then Return
 
         ' ตรวจสอบว่าเลขบัตรประชาชนมีอยู่แล้วหรือไม่
@@ -308,6 +321,16 @@ Public Class frmCard
         End If
 
         Try
+            ' ตรวจสอบว่า ComboBox สถานะถูกเลือกหรือไม่
+            If cbStaus.SelectedItem Is Nothing Then
+                MessageBox.Show("กรุณาเลือกสถานะ", "ข้อมูลไม่ครบถ้วน", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            ' ดึงค่า s_id จาก ComboBox
+            Dim selectedStatus As KeyValuePair(Of Integer, String) = DirectCast(cbStaus.SelectedItem, KeyValuePair(Of Integer, String))
+            Dim statusID As Integer = selectedStatus.Key ' ดึงค่า s_id จาก ComboBox
+
             ' ใช้ connectionString ที่ประกาศไว้ด้านบน
             Using connection As New OleDbConnection(connectionString)
                 connection.Open()
@@ -315,9 +338,9 @@ Public Class frmCard
                 ' รวมข้อมูลที่อยู่จากหลายฟิลด์
                 Dim fullAddress As String = $" {txtHouseNo.Text}  {txtVillageNo.Text} ตรอก/ซอย {txtLane.Text} ถนน {txtRoad.Text}  {txtTambol.Text}  {txtAmphur.Text}  {txtProvince.Text}"
 
-                ' คำสั่ง SQL สำหรับบันทึกข้อมูลลงในตาราง Member
-                Dim query As String = "INSERT INTO Member (m_gender, m_name, m_nick, m_job, m_tel, m_post, m_birth, m_national, m_thaiid, m_address, m_age) " &
-                      "VALUES (@Gender, @Name, @Nick, @Jobs, @Tel, @Post, @Birth, @National, @ThaiID, @Address, @Age)"
+                ' คำสั่ง SQL สำหรับบันทึกข้อมูลลงในตาราง Member รวม s_id
+                Dim query As String = "INSERT INTO Member (m_gender, m_name, m_nick, m_job, m_tel, m_post, m_birth, m_national, m_thaiid, m_address, m_age, s_id) " &
+              "VALUES (@Gender, @Name, @Nick, @Jobs, @Tel, @Post, @Birth, @National, @ThaiID, @Address, @Age, @StatusID)"
 
                 Using command As New OleDbCommand(query, connection)
                     ' เพิ่มพารามิเตอร์ข้อมูล
@@ -348,7 +371,10 @@ Public Class frmCard
                         Throw New FormatException("Invalid age format")
                     End If
 
-                    ' บันทึกข้อมูล
+                    ' เพิ่ม s_id ลงในพารามิเตอร์
+                    command.Parameters.AddWithValue("@StatusID", statusID)
+
+                    ' บันทึกข้อมูลลงฐานข้อมูล
                     command.ExecuteNonQuery()
 
                     MessageBox.Show("Data saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -366,8 +392,11 @@ Public Class frmCard
         End Try
     End Sub
 
+
+
     ' ฟังก์ชันล้างข้อมูลในฟอร์ม
     Private Sub ClearAndRefreshForm()
+        ' ล้างข้อมูลใน TextBox ทั้งหมดในฟอร์ม
         For Each ctrl As Control In Me.Controls
             If TypeOf ctrl Is TextBox Then
                 DirectCast(ctrl, TextBox).Clear()
@@ -385,6 +414,9 @@ Public Class frmCard
             Next
         Next
 
+        ' ล้างข้อมูลใน txtIDCard โดยตรง
+        txtIDCard.Clear()
+
         ' รีเซ็ต ProgressBar ถ้ามี
         If ProgressBar1 IsNot Nothing Then
             ProgressBar1.Value = 0
@@ -393,8 +425,11 @@ Public Class frmCard
 
         ' เปิดใช้งานปุ่มอ่านบัตรอีกครั้ง
         btnRead.Enabled = True
+
+        ' ตั้งค่าหน้าจอใหม่ (ถ้ามีฟังก์ชัน SetupScreen)
         SetupScreen()
     End Sub
+
 
     ' ฟังก์ชันตรวจสอบเลขบัตรประชาชน
     Private Function IsThaiIDExist(thaiID As String) As Boolean
@@ -409,4 +444,54 @@ Public Class frmCard
             End Using
         End Using
     End Function
+
+    Private Sub LoadMemberStatus()
+        Try
+            ' ใช้ connectionString ที่ประกาศไว้
+            Using connection As New OleDbConnection(connectionString)
+                connection.Open()
+
+                ' ดึงข้อมูลจากตาราง Memberstatus
+                Dim query As String = "SELECT s_id, s_namestatus FROM Memberstatus"
+                Using command As New OleDbCommand(query, connection)
+                    Using reader As OleDbDataReader = command.ExecuteReader()
+                        ' เคลียร์ข้อมูลเดิมใน ComboBox
+                        cbStaus.Items.Clear()
+
+                        ' เพิ่มข้อมูลใหม่ใน ComboBox โดยใช้ KeyValuePair
+                        While reader.Read()
+                            Dim statusName As String = reader("s_namestatus").ToString()
+                            Dim statusID As Integer = CInt(reader("s_id"))
+                            ' เพิ่ม KeyValuePair ที่เก็บ s_id เป็น Value และ s_namestatus เป็น Text
+                            cbStaus.Items.Add(New KeyValuePair(Of Integer, String)(statusID, statusName))
+                        End While
+
+                        ' ตั้งค่าให้ ComboBox แสดงค่า s_namestatus
+                        cbStaus.DisplayMember = "Value"
+                        cbStaus.ValueMember = "Key"
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading Memberstatus: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            LogError(ex) ' บันทึกข้อผิดพลาดลงใน log ถ้ามีฟังก์ชันนี้
+        End Try
+    End Sub
+
+
+
+    Private Sub cbStaus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbStaus.SelectedIndexChanged
+        If cbStaus.SelectedItem IsNot Nothing Then
+            ' ตรวจสอบว่า cbStaus.SelectedItem เป็น KeyValuePair ที่ถูกต้อง
+            Dim selectedStatus As KeyValuePair(Of Integer, String) = DirectCast(cbStaus.SelectedItem, KeyValuePair(Of Integer, String))
+            Dim statusName As String = selectedStatus.Value ' ชื่อสถานะ (s_namestatus)
+            Dim statusID As Integer = selectedStatus.Key ' รหัสสถานะ (s_id)
+
+            ' คุณสามารถใช้ statusID และ statusName ในการดำเนินการเพิ่มเติมได้ที่นี่
+        End If
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+
+    End Sub
 End Class
