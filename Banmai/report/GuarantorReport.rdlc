@@ -455,22 +455,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>สัญญานี้ทำขึ้นระหว่าง  </Value>
+                    <Value>สัญญานี้ทำขึ้นระหว่าง</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
-                      <FontWeight>Normal</FontWeight>
-                      <TextDecoration>None</TextDecoration>
-                      <Color>#000000</Color>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!GuarantorDetails.Value</Value>
-                    <Style>
-                      <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -482,18 +471,47 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>ซึ่งต่อไปนี้ในสัญญานี้รวมเรียกว่า "ผู้ค้ำประกัน" ฝ่ายหนึ่ง กับกองทุนหมู่บ้าน บ้านใหม่หลังมอ มีที่ทำการ</Value>
+                    <Value xml:space="preserve">  </Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!GuarantorDetails.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>ซึ่งต่อไปนี้ในสัญญานี้รวมเรียกว่า "ผู้ค้ำประกัน" ฝ่ายหนึ่ง กับกองทุนหมู่บ้าน บ้านใหม่หลังมอ มีที่ทำการ</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -505,15 +523,14 @@
                     <Value>ตั้งอยู่เลขที่  66/2 หมู่ที่ 14 ตำบลสุเทพ อำเภอเมืองเชียงใหม่ จังหวักเชียงใหม่ ทะเบียนนิติบุคคลเลขที่ 1170 โดยมี</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -525,15 +542,14 @@
                     <Value>1.) นายดำรงค์  สงแก้ว และ 2.) นางยุพา  สงแก้ว เป็นผู้แทนกองทุนหมู่บ้านฯในการทำสัญญาค้ำประกันครั้งนี้ ซึ่งต่อ</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -545,15 +561,14 @@
                     <Value>ไปนี้ในสัญญาจะเรียกว่า "ผู้ให้กู้" ฝ่ายหนึ่ง โดยทั้งสองฝ่ายได้ตกลงกัน มีข้อความดังจะกล่าวต่อไปนี้ คือ</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -562,11 +577,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>              ข้อ 1.) ตามที่ </Value>
+                    <Value>ข้อ 1.) ตามที่  </Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -576,8 +591,8 @@
                     <Value>=First(Fields!m_gender.Value, "DataSet2")</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -587,8 +602,8 @@
                     <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -598,8 +613,8 @@
                     <Value>=First(Fields!m_name.Value,"DataSet2")</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -609,8 +624,8 @@
                     <Value> ซึ่งต่อไปนี้ในสัญญาเรียกว่า "ผู้กู้" ได้กู้เงินจากผู้ให้กู้ไปเป็นจำนวน </Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -620,8 +635,8 @@
                     <Value>=Parameters!AmountWithCommas.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -631,8 +646,8 @@
                     <Value> บาท (</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -642,19 +657,19 @@
                     <Value>=Parameters!AmountText.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>) ตามสัญญากู้เงินฉบับลงวันที่  </Value>
+                    <Value>) ตามสัญญากู้เงินฉบับลงวันที่     </Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -664,8 +679,8 @@
                     <Value>=Parameters!conDate1.Value</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
@@ -675,15 +690,15 @@
                     <Value>นั้น ผู้ค้ำประกันยอมเข้าค้ำประกันการชำระหนี้เงินกู้ดังกล่าว โดยถ้าผู้กู้ไม่ยอมชำระเงินกู้ตามสัญญาดังกล่าวให้แก่ผู้ให้กู้ ผู้ค้ำประกันยอม</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
+                <HangingIndent>0.5in</HangingIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -695,15 +710,14 @@
                     <Value>ชำระเงินกู้ดังกล่าวพร้อมดอกเบี้ย ค่าเสียหายในการผิดนัดชำระหนี้ ค่าภาระติดพันต่างๆตลอดจนค่าธรรมเนียมในการ</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -715,15 +729,14 @@
                     <Value>ฟ้องร้องบังคับคดีให้แก่ผู้ให้กู้จนครบถ้วน โดยผู้ค้ำประกันได้ทราบข้อผูกพันของผู้กู้ที่มีต่อผู้ให้กู้ทุกประการดีแล้ว</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -735,16 +748,15 @@
                     <Value>ข้อ 2.) ถ้าผู้ให้กู้ยอมผ่อนเวลาการชำระหนี้หรือต่ออายุสัญญาให้แก่ผู้กู้หรือมีการทำหนังสือรับสภาพหนี้</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
-                <ListLevel>1</ListLevel>
+                <HangingIndent>0.5in</HangingIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -756,15 +768,14 @@
                     <Value>หรือตกลงกันลดหนี้ หรือเปลี่ยนแปลงหนี้ใหม่ หรือเปลี่ยนแปลงข้อตกลง หรือเปลี่ยนแปลงหลักประกัน หรือเปลี่ยน</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -776,15 +787,14 @@
                     <Value>แปลงอัตราดอกเบี้ย ถ้าผู้ค้ำประกันยินยอมตกลงด้วยกับการกระทำนั้นๆผู้ค้ำประกันยังมีความรับผิดต่อผู้ให้กู้</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -796,16 +806,15 @@
                     <Value>ข้อ 3.) เมื่อผู้กู้ผิดนัด ผู้ให้กู้ต้องมีหนังสือบอกกล่าวไปยังผู้ค้ำประกันภายใน 60 วันนับแต่วันที่ผู้กู้ผิด</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
-                <ListLevel>1</ListLevel>
+                <HangingIndent>0.5in</HangingIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -817,15 +826,14 @@
                     <Value>นัดและไม่ว่ากรณีจะเป็นประการใด ผู้ให้กู้จะเรียกให้ผู้ค้ำประกันชำระหนี้ก่อนที่หนังสือบอกกล่าวจะไปถึงผู้ค้ำประกัน</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -837,15 +845,14 @@
                     <Value>มิได้ แต่ไม่ตัดสิทธิผู้ค้ำประกันที่จะชำระหนี้เมื่อหนี้ถึงกำหนดชำระ และในกรณีที่ผู้ให้กู้มิได้มีหนังสือบอกกล่าวไป</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -857,15 +864,14 @@
                     <Value>ยังผู้ค้ำประกันภายใน 60 วันนับแต่วันที่ผู้กู้ผิดนัดให้ผู้ค้ำประกันหลุดพ้นจากความรับผิดในดอกเบี้ยและค่าสินไหม</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -877,15 +883,14 @@
                     <Value>ทดแทนตลอดจนค่าภาระติดพันอันเป็นอุปกรณ์แห่งหนี้รายนั้นบรรดาที่เกิดขึ้นภายหลังจากพ้นกำหนดเวลา 60 วัน</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -897,15 +902,14 @@
                     <Value>นับแต่วันที่ผู้กู้ผิดนัด</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -917,16 +921,15 @@
                     <Value>ข้อ 4.) ในกรณีที่ผู้ให้กู้กระทำการใดๆอันมีผลเป็นการลดจำนวนหนี้ที่มีการค้ำประกัน รวมทั้งดอกเบี้ยค่า</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
-                <ListLevel>1</ListLevel>
+                <HangingIndent>0.5in</HangingIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -938,15 +941,14 @@
                     <Value>สินไหมทดแทน หรือค่าภาระติดพันอันเป็นอุปกรณ์แห่งหนี้รายนั้น ถ้าผู้กู้ได้ชำระหนี้ตามที่ได้ลดแล้วก็ดี หรือผู้กู้ชำระ</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -958,15 +960,14 @@
                     <Value>หนี้ตามที่ได้ลดดังกล่าวไม่ครบถ้วน แต่ผู้ค้ำประกันได้ชำระหนี้ส่วนที่เหลือนั้นแล้วก็ดี หรือผู้กู้ไม่ชำระหนี้ตามที่ได้ลด</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -978,15 +979,14 @@
                     <Value>ดังกล่าวแต่ผู้ค้ำประกันได้ชำระหนี้ตามที่ได้ลดนั้นแล้วก็ดี ทั้งหนี้ไม่ว่าจะล่วงเลยกำหนดเวลาชำระหนี้ตามที่ไดลดดัง</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -998,15 +998,14 @@
                     <Value>กล่าวแล้วหรือไม่ก็ตาม ให้ผู้ค้ำประกันเป็นอันหลุดพ้นจากการค้ำประกัน</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1018,16 +1017,15 @@
                     <Value>ข้อ 5.) ผู้ค้ำประกันยอมรับว่าอายุความสะดุดหยุดลงเป็นโทษแก่ผู้กู้ ย่อมเป็นโทษแก่ผู้ค้ำประกันด้วย</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
-                <ListLevel>1</ListLevel>
+                <HangingIndent>0.5in</HangingIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1039,16 +1037,15 @@
                     <Value>ข้อ 6.) ในกรณีที่ผู้กู้ถึงแก่ความตาย ผู้ค้ำประกันยินยอมรับผิดชดใช้หนี้ในจำนวนที่ผู้กู้ยังคงค้างชำระอยู่กับผู้ให้กู้ต่อไปจนครบถ้วน</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
-                <ListLevel>1</ListLevel>
+                <HangingIndent>0.5in</HangingIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1060,16 +1057,15 @@
                     <Value>ข้อ 7.) ในกรณีที่ผู้ค้ำประกันได้เปลี่ยนแปลงชื่อตัว ชื่อสกุล หรือเปลี่ยนแปลงที่อยู่ หรือย้ายทะเบียนบ้าน</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
-                <ListLevel>1</ListLevel>
+                <HangingIndent>0.5in</HangingIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1081,15 +1077,14 @@
                     <Value>ผู้ค้ำประกันจะต้องแจ้งให้ผู้ให้กู้หรือคณะกรรมการกองทุนหมู่บ้าน ทราบโดยเร็ว</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1101,16 +1096,15 @@
                     <Value>ข้อ 8.) บรรดาหนังสือติดต่อทวงถาม บอกกล่าว หรือหนังสืออื่นใดที่จะส่งให้แก่ผู้ค้ำประกันนั้น ไม่ว่าจะ</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
-                <ListLevel>1</ListLevel>
+                <HangingIndent>0.5in</HangingIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1122,15 +1116,14 @@
                     <Value>ส่งทางไปรษณีย์ลงทะเบียนหรือไม่ลงทะเบียน หรือให้คนไปส่งเองก็ดี ถ้าหากได้ส่งไปยังสถานที่ที่ผู้ค้ำประกันระบุ</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1142,15 +1135,14 @@
                     <Value>ไว้ข้างต้นของสัญญาแล้ว ให้ถือว่าได้ส่งให้แก่ผู้ค้ำประกันโดยชอบแล้ว ทั้งนี้โดยไม่ต้องคำนึงว่าจะมีผู้รับไว้หรือไม่</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1162,15 +1154,14 @@
                     <Value>และแม้หากว่าส่งให้ไม่ได้เพราะสถานที่ดังกล่าวได้เปลี่ยนแปลงไป หรือถูกรื้อถอนไป โดยผู้ค้ำประกันไม่ได้แจ้งการ</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1182,15 +1173,14 @@
                     <Value>เปลี่ยนแปลงหรือรื้อถอนนั้นเป็นหนังสือต่อผู้ให้กู้ หรือส่งไม่ได้เพราะหาไม่พบสถานที่ที่ระบุไว้ข้างต้นนั้นก็ดี ให้ถือ</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1202,15 +1192,14 @@
                     <Value>ว่าผู้ค้ำประกันได้ทราบหนังสือติดต่อ ทวงถาม บอกกล่าว หรือหนังสืออื่นใดของผู้ให้กู้โดยชอบแล้ว</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1222,15 +1211,14 @@
                     <Value>ผู้ค้ำประกันและคู่สัญญาผู้ที่เกี่ยวข้องทุกฝ่ายได้อ่านข้อความในสัญญากู้ฉบับนี้โดยตลอดแล้ว เห็นว่าถูก</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1242,15 +1230,33 @@
                     <Value>ต้องครบถ้วนตามความประสงค์ จึงได้ลงลายมือชี่อไว้เป็นหลักฐาน ณ วัน เดือน ปี  ที่ระบุข้างต้น</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
-                      <FontFamily>angsana New</FontFamily>
-                      <FontSize>14pt</FontSize>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
                       <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <LeftIndent>0.5in</LeftIndent>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
                 <Style>
                   <TextAlign>Left</TextAlign>
                   <LineHeight>12pt</LineHeight>
@@ -1258,10 +1264,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>2.12919in</Top>
-            <Left>0.36458in</Left>
-            <Height>10.13542in</Height>
-            <Width>7.35302in</Width>
+            <Top>2.14308in</Top>
+            <Left>0.98096in</Left>
+            <Height>8.44792in</Height>
+            <Width>7.19124in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -1335,7 +1341,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>)                                                                          (</Value>
+                    <Value>)                                                                   (</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Angsana New</FontFamily>
@@ -1389,7 +1395,47 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>                                (นายดำรงค์ สงแก้ว)                                                                                (นางยุพา สงแก้ว)</Value>
+                    <Value>                                (</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!DirectorName1.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>)                                                                                (</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!DirectorName2.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>)</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Angsana New</FontFamily>
@@ -1405,7 +1451,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
-            <Top>12.33405in</Top>
+            <Top>10.64655in</Top>
             <Left>0.36458in</Left>
             <Height>1.66666in</Height>
             <Width>7.35302in</Width>
@@ -1464,11 +1510,19 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="DirectorName1">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DirectorName2">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
+      <NumberOfRows>3</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1504,6 +1558,16 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>1</RowIndex>
           <ParameterName>GuarantorName2</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>DirectorName1</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>DirectorName2</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

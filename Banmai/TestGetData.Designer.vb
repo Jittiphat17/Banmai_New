@@ -205,7 +205,6 @@ Partial Class TestGetData
         Me.TextBoxConId.Name = "TextBoxConId"
         Me.TextBoxConId.Size = New System.Drawing.Size(100, 20)
         Me.TextBoxConId.TabIndex = 44
-        Me.TextBoxConId.Text = "66"
         '
         'Label6
         '

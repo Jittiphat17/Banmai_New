@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Imports System.Drawing.Printing
+Imports System.Windows.Controls
 
 Public Class frmEditExpense
     Dim conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
@@ -47,21 +48,34 @@ Public Class frmEditExpense
     End Sub
 
 
-    Private Sub LoadExpenses()
+    Private Sub LoadExpenses(Optional searchFilter As String = "")
         Try
             If conn.State = ConnectionState.Closed Then conn.Open()
 
-            ' เข้าร่วมตาราง Expense กับ Account เพื่อดึง acc_name แทน acc_id
+            ' คิวรีที่สามารถกรองตามเงื่อนไขการค้นหา
             Dim query As String = "SELECT Expense.*, Account.acc_name FROM Expense INNER JOIN Account ON Expense.acc_id = Account.acc_id"
-            Dim adapter As New OleDbDataAdapter(query, conn)
+
+            ' ถ้ามีเงื่อนไขการค้นหา ให้เพิ่ม WHERE เข้าไปในคิวรี
+            If Not String.IsNullOrEmpty(searchFilter) Then
+                query &= " WHERE ex_name LIKE @searchFilter OR ex_id LIKE @searchFilter"
+            End If
+
+            Dim cmd As New OleDbCommand(query, conn)
+
+            ' ถ้ามีเงื่อนไขการค้นหา ให้เพิ่มพารามิเตอร์
+            If Not String.IsNullOrEmpty(searchFilter) Then
+                cmd.Parameters.AddWithValue("@searchFilter", "%" & searchFilter & "%")
+            End If
+
+            Dim adapter As New OleDbDataAdapter(cmd)
             Dim table As New DataTable()
             adapter.Fill(table)
 
             dgvExpenses.DataSource = table
 
             ' ตั้งค่าฟอนต์สำหรับหัวตารางและเนื้อหา
-            dgvExpenses.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold) ' ฟอนต์หัวตารางขนาด 14
-            dgvExpenses.DefaultCellStyle.Font = New Font("FC Minimal", 12) ' ฟอนต์เนื้อหาตารางขนาด 12
+            dgvExpenses.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold)
+            dgvExpenses.DefaultCellStyle.Font = New Font("FC Minimal", 12)
 
             ' ตั้งชื่อหัวตารางเป็นภาษาไทย
             If dgvExpenses.Columns.Contains("ex_id") Then
@@ -83,13 +97,13 @@ Public Class frmEditExpense
                 dgvExpenses.Columns("ex_description").HeaderText = "คำอธิบาย"
             End If
             If dgvExpenses.Columns.Contains("acc_name") Then
-                dgvExpenses.Columns("acc_name").HeaderText = "ชื่อบัญชี" ' แสดงชื่อบัญชีแทนรหัสบัญชี
+                dgvExpenses.Columns("acc_name").HeaderText = "ชื่อบัญชี"
             End If
             If dgvExpenses.Columns.Contains("acc_id") Then
-                dgvExpenses.Columns("acc_id").Visible = False ' ซ่อนคอลัมน์ acc_id
+                dgvExpenses.Columns("acc_id").Visible = False
             End If
             If dgvExpenses.Columns.Contains("ex_note") Then
-                dgvExpenses.Columns("ex_note").Visible = False ' ซ่อนคอลัมน์ ex_note
+                dgvExpenses.Columns("ex_note").Visible = False
             End If
 
         Catch ex As Exception
@@ -97,6 +111,11 @@ Public Class frmEditExpense
         Finally
             conn.Close()
         End Try
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Dim searchValue As String = txtSearch.Text.Trim()
+        LoadExpenses(searchValue) ' ส่งค่าที่ผู้ใช้พิมพ์ไปในฟังก์ชัน LoadExpenses
     End Sub
 
     Private Sub LoadExpenseDetails()

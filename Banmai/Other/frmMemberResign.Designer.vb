@@ -25,6 +25,7 @@ Partial Class frmMemberResign
         Me.components = New System.ComponentModel.Container()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -35,21 +36,35 @@ Partial Class frmMemberResign
         Me.Guna2GroupBox3 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtGuarantor = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.Guna2GroupBox2 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtTotalLoan = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.Guna2GroupBox2 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.txtTotalRemainingBalance = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.txtRemainingBalanceAcc1 = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.txtRemainingBalanceAcc3 = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.txtRemainingBalanceAcc2 = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtTotalLoan = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtLoanPublic = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtLoanSaving = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtLoanAccount1 = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Guna2ContextMenuStrip1 = New Guna.UI2.WinForms.Guna2ContextMenuStrip()
         Me.Guna2GroupBox1.SuspendLayout()
         Me.Guna2GroupBox3.SuspendLayout()
         Me.Guna2GroupBox2.SuspendLayout()
@@ -62,6 +77,7 @@ Partial Class frmMemberResign
         '
         'Guna2GroupBox1
         '
+        Me.Guna2GroupBox1.Controls.Add(Me.Label16)
         Me.Guna2GroupBox1.Controls.Add(Me.Label11)
         Me.Guna2GroupBox1.Controls.Add(Me.Label5)
         Me.Guna2GroupBox1.Controls.Add(Me.Label1)
@@ -72,9 +88,21 @@ Partial Class frmMemberResign
         Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
         Me.Guna2GroupBox1.Location = New System.Drawing.Point(15, 80)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
-        Me.Guna2GroupBox1.Size = New System.Drawing.Size(816, 162)
+        Me.Guna2GroupBox1.Size = New System.Drawing.Size(963, 162)
         Me.Guna2GroupBox1.TabIndex = 17
         Me.Guna2GroupBox1.Text = "เงินฝาก"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.BackColor = System.Drawing.Color.White
+        Me.Label16.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.ForeColor = System.Drawing.Color.Black
+        Me.Label16.Location = New System.Drawing.Point(375, 89)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(37, 21)
+        Me.Label16.TabIndex = 15
+        Me.Label16.Text = "บาท"
         '
         'Label11
         '
@@ -82,7 +110,7 @@ Partial Class frmMemberResign
         Me.Label11.BackColor = System.Drawing.Color.White
         Me.Label11.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.Black
-        Me.Label11.Location = New System.Drawing.Point(765, 129)
+        Me.Label11.Location = New System.Drawing.Point(863, 89)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(37, 21)
         Me.Label11.TabIndex = 15
@@ -94,7 +122,7 @@ Partial Class frmMemberResign
         Me.Label5.BackColor = System.Drawing.Color.White
         Me.Label5.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(427, 129)
+        Me.Label5.Location = New System.Drawing.Point(525, 89)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(84, 21)
         Me.Label5.TabIndex = 14
@@ -106,7 +134,7 @@ Partial Class frmMemberResign
         Me.Label1.BackColor = System.Drawing.Color.White
         Me.Label1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(21, 89)
+        Me.Label1.Location = New System.Drawing.Point(45, 89)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(75, 21)
         Me.Label1.TabIndex = 6
@@ -123,9 +151,9 @@ Partial Class frmMemberResign
         Me.txtTotalSaving.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtTotalSaving.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtTotalSaving.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTotalSaving.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTotalSaving.Font = New System.Drawing.Font("FC Minimal", 14.25!)
         Me.txtTotalSaving.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTotalSaving.Location = New System.Drawing.Point(517, 120)
+        Me.txtTotalSaving.Location = New System.Drawing.Point(615, 80)
         Me.txtTotalSaving.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtTotalSaving.Name = "txtTotalSaving"
         Me.txtTotalSaving.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -146,9 +174,10 @@ Partial Class frmMemberResign
         Me.txtBeforeTotalSaving.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtBeforeTotalSaving.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtBeforeTotalSaving.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtBeforeTotalSaving.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBeforeTotalSaving.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtBeforeTotalSaving.ForeColor = System.Drawing.Color.Black
         Me.txtBeforeTotalSaving.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtBeforeTotalSaving.Location = New System.Drawing.Point(103, 80)
+        Me.txtBeforeTotalSaving.Location = New System.Drawing.Point(127, 80)
         Me.txtBeforeTotalSaving.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtBeforeTotalSaving.Name = "txtBeforeTotalSaving"
         Me.txtBeforeTotalSaving.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -162,7 +191,7 @@ Partial Class frmMemberResign
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(539, 44)
+        Me.Label13.Location = New System.Drawing.Point(555, 46)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(151, 21)
         Me.Label13.TabIndex = 21
@@ -170,6 +199,7 @@ Partial Class frmMemberResign
         '
         'txtSearchMember
         '
+        Me.txtSearchMember.Animated = True
         Me.txtSearchMember.BorderRadius = 10
         Me.txtSearchMember.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtSearchMember.DefaultText = ""
@@ -178,15 +208,16 @@ Partial Class frmMemberResign
         Me.txtSearchMember.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtSearchMember.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtSearchMember.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearchMember.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearchMember.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.txtSearchMember.ForeColor = System.Drawing.Color.Black
         Me.txtSearchMember.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearchMember.Location = New System.Drawing.Point(696, 35)
+        Me.txtSearchMember.Location = New System.Drawing.Point(712, 37)
         Me.txtSearchMember.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtSearchMember.Name = "txtSearchMember"
         Me.txtSearchMember.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtSearchMember.PlaceholderText = ""
+        Me.txtSearchMember.PlaceholderText = "กรอกชื่อสมาชิก"
         Me.txtSearchMember.SelectedText = ""
-        Me.txtSearchMember.Size = New System.Drawing.Size(135, 38)
+        Me.txtSearchMember.Size = New System.Drawing.Size(266, 38)
         Me.txtSearchMember.TabIndex = 20
         '
         'Guna2GroupBox3
@@ -196,9 +227,9 @@ Partial Class frmMemberResign
         Me.Guna2GroupBox3.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox3.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox3.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox3.Location = New System.Drawing.Point(15, 455)
+        Me.Guna2GroupBox3.Location = New System.Drawing.Point(15, 511)
         Me.Guna2GroupBox3.Name = "Guna2GroupBox3"
-        Me.Guna2GroupBox3.Size = New System.Drawing.Size(816, 105)
+        Me.Guna2GroupBox3.Size = New System.Drawing.Size(963, 127)
         Me.Guna2GroupBox3.TabIndex = 19
         Me.Guna2GroupBox3.Text = "ภาระค้ำประกัน"
         '
@@ -225,7 +256,8 @@ Partial Class frmMemberResign
         Me.txtGuarantor.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtGuarantor.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtGuarantor.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtGuarantor.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtGuarantor.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtGuarantor.ForeColor = System.Drawing.Color.Black
         Me.txtGuarantor.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtGuarantor.Location = New System.Drawing.Point(144, 52)
         Me.txtGuarantor.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -237,17 +269,77 @@ Partial Class frmMemberResign
         Me.txtGuarantor.Size = New System.Drawing.Size(320, 38)
         Me.txtGuarantor.TabIndex = 4
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.BackColor = System.Drawing.Color.White
+        Me.Label10.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.Black
+        Me.Label10.Location = New System.Drawing.Point(375, 210)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(37, 21)
+        Me.Label10.TabIndex = 16
+        Me.Label10.Text = "บาท"
+        '
+        'txtTotalLoan
+        '
+        Me.txtTotalLoan.BackColor = System.Drawing.Color.White
+        Me.txtTotalLoan.BorderRadius = 10
+        Me.txtTotalLoan.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtTotalLoan.DefaultText = ""
+        Me.txtTotalLoan.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtTotalLoan.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtTotalLoan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtTotalLoan.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtTotalLoan.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtTotalLoan.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtTotalLoan.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalLoan.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtTotalLoan.Location = New System.Drawing.Point(127, 201)
+        Me.txtTotalLoan.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtTotalLoan.Name = "txtTotalLoan"
+        Me.txtTotalLoan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtTotalLoan.PlaceholderText = ""
+        Me.txtTotalLoan.ReadOnly = True
+        Me.txtTotalLoan.SelectedText = ""
+        Me.txtTotalLoan.Size = New System.Drawing.Size(242, 38)
+        Me.txtTotalLoan.TabIndex = 4
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.BackColor = System.Drawing.Color.White
+        Me.Label9.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.Black
+        Me.Label9.Location = New System.Drawing.Point(37, 210)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(84, 21)
+        Me.Label9.TabIndex = 13
+        Me.Label9.Text = "รวมเป็นเงิน"
+        '
         'Guna2GroupBox2
         '
+        Me.Guna2GroupBox2.Controls.Add(Me.txtTotalRemainingBalance)
+        Me.Guna2GroupBox2.Controls.Add(Me.txtRemainingBalanceAcc1)
+        Me.Guna2GroupBox2.Controls.Add(Me.txtRemainingBalanceAcc3)
         Me.Guna2GroupBox2.Controls.Add(Me.Label10)
+        Me.Guna2GroupBox2.Controls.Add(Me.txtRemainingBalanceAcc2)
         Me.Guna2GroupBox2.Controls.Add(Me.Label9)
+        Me.Guna2GroupBox2.Controls.Add(Me.txtTotalLoan)
+        Me.Guna2GroupBox2.Controls.Add(Me.Label24)
+        Me.Guna2GroupBox2.Controls.Add(Me.Label21)
+        Me.Guna2GroupBox2.Controls.Add(Me.Label20)
+        Me.Guna2GroupBox2.Controls.Add(Me.Label12)
+        Me.Guna2GroupBox2.Controls.Add(Me.Label18)
+        Me.Guna2GroupBox2.Controls.Add(Me.Label23)
+        Me.Guna2GroupBox2.Controls.Add(Me.Label19)
+        Me.Guna2GroupBox2.Controls.Add(Me.Label15)
         Me.Guna2GroupBox2.Controls.Add(Me.Label8)
         Me.Guna2GroupBox2.Controls.Add(Me.Label7)
         Me.Guna2GroupBox2.Controls.Add(Me.Label6)
         Me.Guna2GroupBox2.Controls.Add(Me.Label4)
         Me.Guna2GroupBox2.Controls.Add(Me.Label3)
         Me.Guna2GroupBox2.Controls.Add(Me.Label2)
-        Me.Guna2GroupBox2.Controls.Add(Me.txtTotalLoan)
         Me.Guna2GroupBox2.Controls.Add(Me.txtLoanPublic)
         Me.Guna2GroupBox2.Controls.Add(Me.txtLoanSaving)
         Me.Guna2GroupBox2.Controls.Add(Me.txtLoanAccount1)
@@ -256,33 +348,201 @@ Partial Class frmMemberResign
         Me.Guna2GroupBox2.ForeColor = System.Drawing.Color.White
         Me.Guna2GroupBox2.Location = New System.Drawing.Point(15, 248)
         Me.Guna2GroupBox2.Name = "Guna2GroupBox2"
-        Me.Guna2GroupBox2.Size = New System.Drawing.Size(816, 201)
+        Me.Guna2GroupBox2.Size = New System.Drawing.Size(963, 257)
         Me.Guna2GroupBox2.TabIndex = 18
         Me.Guna2GroupBox2.Text = "เงินกู้"
         '
-        'Label10
+        'txtTotalRemainingBalance
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.BackColor = System.Drawing.Color.White
-        Me.Label10.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.Color.Black
-        Me.Label10.Location = New System.Drawing.Point(765, 168)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(37, 21)
-        Me.Label10.TabIndex = 16
-        Me.Label10.Text = "บาท"
+        Me.txtTotalRemainingBalance.Animated = True
+        Me.txtTotalRemainingBalance.BorderRadius = 5
+        Me.txtTotalRemainingBalance.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtTotalRemainingBalance.DefaultText = ""
+        Me.txtTotalRemainingBalance.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtTotalRemainingBalance.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtTotalRemainingBalance.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtTotalRemainingBalance.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtTotalRemainingBalance.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtTotalRemainingBalance.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtTotalRemainingBalance.ForeColor = System.Drawing.Color.Black
+        Me.txtTotalRemainingBalance.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtTotalRemainingBalance.Location = New System.Drawing.Point(626, 201)
+        Me.txtTotalRemainingBalance.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtTotalRemainingBalance.Name = "txtTotalRemainingBalance"
+        Me.txtTotalRemainingBalance.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtTotalRemainingBalance.PlaceholderText = ""
+        Me.txtTotalRemainingBalance.SelectedText = ""
+        Me.txtTotalRemainingBalance.Size = New System.Drawing.Size(242, 38)
+        Me.txtTotalRemainingBalance.TabIndex = 19
+        Me.txtTotalRemainingBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label9
+        'txtRemainingBalanceAcc1
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.BackColor = System.Drawing.Color.White
-        Me.Label9.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.Black
-        Me.Label9.Location = New System.Drawing.Point(427, 168)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(84, 21)
-        Me.Label9.TabIndex = 13
-        Me.Label9.Text = "รวมเป็นเงิน"
+        Me.txtRemainingBalanceAcc1.Animated = True
+        Me.txtRemainingBalanceAcc1.BorderRadius = 5
+        Me.txtRemainingBalanceAcc1.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtRemainingBalanceAcc1.DefaultText = ""
+        Me.txtRemainingBalanceAcc1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtRemainingBalanceAcc1.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtRemainingBalanceAcc1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtRemainingBalanceAcc1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtRemainingBalanceAcc1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtRemainingBalanceAcc1.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtRemainingBalanceAcc1.ForeColor = System.Drawing.Color.Black
+        Me.txtRemainingBalanceAcc1.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtRemainingBalanceAcc1.Location = New System.Drawing.Point(626, 48)
+        Me.txtRemainingBalanceAcc1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtRemainingBalanceAcc1.Name = "txtRemainingBalanceAcc1"
+        Me.txtRemainingBalanceAcc1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtRemainingBalanceAcc1.PlaceholderText = ""
+        Me.txtRemainingBalanceAcc1.SelectedText = ""
+        Me.txtRemainingBalanceAcc1.Size = New System.Drawing.Size(242, 38)
+        Me.txtRemainingBalanceAcc1.TabIndex = 18
+        Me.txtRemainingBalanceAcc1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtRemainingBalanceAcc3
+        '
+        Me.txtRemainingBalanceAcc3.Animated = True
+        Me.txtRemainingBalanceAcc3.BorderRadius = 5
+        Me.txtRemainingBalanceAcc3.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtRemainingBalanceAcc3.DefaultText = ""
+        Me.txtRemainingBalanceAcc3.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtRemainingBalanceAcc3.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtRemainingBalanceAcc3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtRemainingBalanceAcc3.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtRemainingBalanceAcc3.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtRemainingBalanceAcc3.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtRemainingBalanceAcc3.ForeColor = System.Drawing.Color.Black
+        Me.txtRemainingBalanceAcc3.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtRemainingBalanceAcc3.Location = New System.Drawing.Point(626, 140)
+        Me.txtRemainingBalanceAcc3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtRemainingBalanceAcc3.Name = "txtRemainingBalanceAcc3"
+        Me.txtRemainingBalanceAcc3.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtRemainingBalanceAcc3.PlaceholderText = ""
+        Me.txtRemainingBalanceAcc3.SelectedText = ""
+        Me.txtRemainingBalanceAcc3.Size = New System.Drawing.Size(242, 38)
+        Me.txtRemainingBalanceAcc3.TabIndex = 18
+        Me.txtRemainingBalanceAcc3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtRemainingBalanceAcc2
+        '
+        Me.txtRemainingBalanceAcc2.Animated = True
+        Me.txtRemainingBalanceAcc2.BorderRadius = 5
+        Me.txtRemainingBalanceAcc2.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtRemainingBalanceAcc2.DefaultText = ""
+        Me.txtRemainingBalanceAcc2.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtRemainingBalanceAcc2.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtRemainingBalanceAcc2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtRemainingBalanceAcc2.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtRemainingBalanceAcc2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtRemainingBalanceAcc2.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtRemainingBalanceAcc2.ForeColor = System.Drawing.Color.Black
+        Me.txtRemainingBalanceAcc2.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtRemainingBalanceAcc2.Location = New System.Drawing.Point(626, 94)
+        Me.txtRemainingBalanceAcc2.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtRemainingBalanceAcc2.Name = "txtRemainingBalanceAcc2"
+        Me.txtRemainingBalanceAcc2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtRemainingBalanceAcc2.PlaceholderText = ""
+        Me.txtRemainingBalanceAcc2.SelectedText = ""
+        Me.txtRemainingBalanceAcc2.Size = New System.Drawing.Size(242, 38)
+        Me.txtRemainingBalanceAcc2.TabIndex = 17
+        Me.txtRemainingBalanceAcc2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.BackColor = System.Drawing.Color.White
+        Me.Label24.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.ForeColor = System.Drawing.Color.Black
+        Me.Label24.Location = New System.Drawing.Point(874, 210)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(37, 21)
+        Me.Label24.TabIndex = 16
+        Me.Label24.Text = "บาท"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.BackColor = System.Drawing.Color.White
+        Me.Label21.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.ForeColor = System.Drawing.Color.Black
+        Me.Label21.Location = New System.Drawing.Point(874, 149)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(37, 21)
+        Me.Label21.TabIndex = 16
+        Me.Label21.Text = "บาท"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.BackColor = System.Drawing.Color.White
+        Me.Label20.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.ForeColor = System.Drawing.Color.Black
+        Me.Label20.Location = New System.Drawing.Point(874, 57)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(37, 21)
+        Me.Label20.TabIndex = 16
+        Me.Label20.Text = "บาท"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.BackColor = System.Drawing.Color.White
+        Me.Label12.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.ForeColor = System.Drawing.Color.Black
+        Me.Label12.Location = New System.Drawing.Point(874, 103)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(37, 21)
+        Me.Label12.TabIndex = 16
+        Me.Label12.Text = "บาท"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.BackColor = System.Drawing.Color.White
+        Me.Label18.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.ForeColor = System.Drawing.Color.Black
+        Me.Label18.Location = New System.Drawing.Point(529, 57)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(91, 21)
+        Me.Label18.TabIndex = 13
+        Me.Label18.Text = "ยอดคงเหลือ"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.BackColor = System.Drawing.Color.White
+        Me.Label23.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.ForeColor = System.Drawing.Color.Black
+        Me.Label23.Location = New System.Drawing.Point(460, 210)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(160, 21)
+        Me.Label23.TabIndex = 13
+        Me.Label23.Text = "รวมคงเหลือทั้ง 3 บัญชี"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.BackColor = System.Drawing.Color.White
+        Me.Label19.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.Black
+        Me.Label19.Location = New System.Drawing.Point(529, 149)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(91, 21)
+        Me.Label19.TabIndex = 13
+        Me.Label19.Text = "ยอดคงเหลือ"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.BackColor = System.Drawing.Color.White
+        Me.Label15.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.Color.Black
+        Me.Label15.Location = New System.Drawing.Point(529, 103)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(91, 21)
+        Me.Label15.TabIndex = 13
+        Me.Label15.Text = "ยอดคงเหลือ"
         '
         'Label8
         '
@@ -356,29 +616,6 @@ Partial Class frmMemberResign
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "บัญชี1 :"
         '
-        'txtTotalLoan
-        '
-        Me.txtTotalLoan.BackColor = System.Drawing.Color.White
-        Me.txtTotalLoan.BorderRadius = 10
-        Me.txtTotalLoan.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtTotalLoan.DefaultText = ""
-        Me.txtTotalLoan.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.txtTotalLoan.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.txtTotalLoan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtTotalLoan.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtTotalLoan.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTotalLoan.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTotalLoan.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTotalLoan.Location = New System.Drawing.Point(517, 159)
-        Me.txtTotalLoan.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.txtTotalLoan.Name = "txtTotalLoan"
-        Me.txtTotalLoan.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtTotalLoan.PlaceholderText = ""
-        Me.txtTotalLoan.ReadOnly = True
-        Me.txtTotalLoan.SelectedText = ""
-        Me.txtTotalLoan.Size = New System.Drawing.Size(242, 38)
-        Me.txtTotalLoan.TabIndex = 4
-        '
         'txtLoanPublic
         '
         Me.txtLoanPublic.BackColor = System.Drawing.Color.White
@@ -390,7 +627,8 @@ Partial Class frmMemberResign
         Me.txtLoanPublic.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtLoanPublic.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtLoanPublic.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtLoanPublic.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLoanPublic.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtLoanPublic.ForeColor = System.Drawing.Color.Black
         Me.txtLoanPublic.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtLoanPublic.Location = New System.Drawing.Point(127, 140)
         Me.txtLoanPublic.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -413,7 +651,8 @@ Partial Class frmMemberResign
         Me.txtLoanSaving.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtLoanSaving.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtLoanSaving.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtLoanSaving.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLoanSaving.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtLoanSaving.ForeColor = System.Drawing.Color.Black
         Me.txtLoanSaving.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtLoanSaving.Location = New System.Drawing.Point(127, 94)
         Me.txtLoanSaving.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -436,7 +675,8 @@ Partial Class frmMemberResign
         Me.txtLoanAccount1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtLoanAccount1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtLoanAccount1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtLoanAccount1.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLoanAccount1.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtLoanAccount1.ForeColor = System.Drawing.Color.Black
         Me.txtLoanAccount1.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtLoanAccount1.Location = New System.Drawing.Point(127, 48)
         Me.txtLoanAccount1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -455,7 +695,7 @@ Partial Class frmMemberResign
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(843, 33)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(990, 33)
         Me.Guna2Panel1.TabIndex = 22
         '
         'Guna2ControlBox1
@@ -465,19 +705,44 @@ Partial Class frmMemberResign
         Me.Guna2ControlBox1.CustomIconSize = 30.0!
         Me.Guna2ControlBox1.FillColor = System.Drawing.Color.LightGray
         Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(793, 1)
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(940, 1)
         Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
         Me.Guna2ControlBox1.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox1.TabIndex = 5
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("FC Minimal", 26.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(12, 40)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(164, 35)
+        Me.Label22.TabIndex = 21
+        Me.Label22.Text = "สมาชิกลาออก"
+        '
+        'Guna2ContextMenuStrip1
+        '
+        Me.Guna2ContextMenuStrip1.Name = "Guna2ContextMenuStrip1"
+        Me.Guna2ContextMenuStrip1.RenderStyle.ArrowColor = System.Drawing.Color.FromArgb(CType(CType(151, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Guna2ContextMenuStrip1.RenderStyle.BorderColor = System.Drawing.Color.Gainsboro
+        Me.Guna2ContextMenuStrip1.RenderStyle.ColorTable = Nothing
+        Me.Guna2ContextMenuStrip1.RenderStyle.RoundedEdges = True
+        Me.Guna2ContextMenuStrip1.RenderStyle.SelectionArrowColor = System.Drawing.Color.White
+        Me.Guna2ContextMenuStrip1.RenderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Guna2ContextMenuStrip1.RenderStyle.SelectionForeColor = System.Drawing.Color.White
+        Me.Guna2ContextMenuStrip1.RenderStyle.SeparatorColor = System.Drawing.Color.Gainsboro
+        Me.Guna2ContextMenuStrip1.RenderStyle.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault
+        Me.Guna2ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
         '
         'frmMemberResign
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(843, 572)
+        Me.ClientSize = New System.Drawing.Size(990, 705)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.Guna2GroupBox1)
+        Me.Controls.Add(Me.Label22)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.txtSearchMember)
         Me.Controls.Add(Me.Guna2GroupBox3)
@@ -525,4 +790,19 @@ Partial Class frmMemberResign
     Friend WithEvents txtLoanAccount1 As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents txtRemainingBalanceAcc2 As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents txtRemainingBalanceAcc3 As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents txtRemainingBalanceAcc1 As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label22 As Label
+    Friend WithEvents txtTotalRemainingBalance As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents Label23 As Label
+    Friend WithEvents Guna2ContextMenuStrip1 As Guna.UI2.WinForms.Guna2ContextMenuStrip
+    Friend WithEvents Label24 As Label
+    Friend WithEvents Label16 As Label
 End Class

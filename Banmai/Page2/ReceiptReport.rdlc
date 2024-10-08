@@ -165,7 +165,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
             <Top>0.16541in</Top>
-            <Left>1.44635in</Left>
+            <Left>1.46591in</Left>
             <Height>2.01389in</Height>
             <Width>5.1149in</Width>
             <Style>
@@ -456,10 +456,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>IncomeDataSet</DataSetName>
-            <Top>3.28695in</Top>
-            <Left>1.44635in</Left>
+            <Top>3.17173in</Top>
+            <Left>1.46593in</Left>
             <Height>1.06218in</Height>
-            <Width>5.1149in</Width>
+            <Width>5.11488in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -496,10 +496,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox36</rd:DefaultName>
-            <Top>2.82545in</Top>
-            <Left>1.44635in</Left>
+            <Top>2.71024in</Top>
+            <Left>3.04924in</Left>
             <Height>0.39205in</Height>
-            <Width>5.1149in</Width>
+            <Width>3.53157in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -538,8 +538,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox38</rd:DefaultName>
-            <Top>1.35353in</Top>
-            <Left>6.64458in</Left>
+            <Top>2.24874in</Top>
+            <Left>1.46593in</Left>
             <Height>0.39205in</Height>
             <Width>1.41035in</Width>
             <ZIndex>3</ZIndex>
@@ -580,8 +580,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox38</rd:DefaultName>
-            <Top>1.78725in</Top>
-            <Left>6.63069in</Left>
+            <Top>2.69635in</Top>
+            <Left>1.46593in</Left>
             <Height>0.39205in</Height>
             <Width>1.41035in</Width>
             <ZIndex>4</ZIndex>
@@ -624,10 +624,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox38</rd:DefaultName>
-            <Top>2.24874in</Top>
-            <Left>1.44635in</Left>
+            <Top>2.23486in</Top>
+            <Left>3.04924in</Left>
             <Height>0.39205in</Height>
-            <Width>5.1149in</Width>
+            <Width>3.53157in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -639,11 +639,78 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox40">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>ชื่อ          </Value>
+                    <Style>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!m_name.Value</Value>
+                    <Style>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>  ผู้รับเงิน</Value>
+                    <Style>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>ลงชื่อ (                                                    ) ผู้รับเงิน</Value>
+                    <Style>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox38</rd:DefaultName>
+            <Top>4.52793in</Top>
+            <Left>1.46591in</Left>
+            <Height>0.64205in</Height>
+            <Width>5.1149in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>5.07292in</Height>
+        <Height>5.89584in</Height>
         <Style />
       </Body>
-      <Width>10.83373in</Width>
+      <Width>8.65537in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>

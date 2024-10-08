@@ -28,12 +28,13 @@ Partial Class frmStatement
         Me.cmbAccountName = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel2 = New Guna.UI2.WinForms.Guna2HtmlLabel()
-        Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.btnGenerateReport = New Guna.UI2.WinForms.Guna2Button()
         Me.dtpStartDate = New Guna.UI2.WinForms.Guna2DateTimePicker()
         Me.dtpEndDate = New Guna.UI2.WinForms.Guna2DateTimePicker()
         Me.Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.Guna2HtmlLabel4 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -41,10 +42,10 @@ Partial Class frmStatement
         '
         Me.ReportViewer1.DocumentMapWidth = 84
         Me.ReportViewer1.LocalReport.ReportEmbeddedResource = "Banmai.StatementReport.rdlc"
-        Me.ReportViewer1.Location = New System.Drawing.Point(12, 101)
+        Me.ReportViewer1.Location = New System.Drawing.Point(12, 140)
         Me.ReportViewer1.Name = "ReportViewer1"
         Me.ReportViewer1.ServerReport.BearerToken = Nothing
-        Me.ReportViewer1.Size = New System.Drawing.Size(944, 671)
+        Me.ReportViewer1.Size = New System.Drawing.Size(1080, 665)
         Me.ReportViewer1.TabIndex = 0
         '
         'Guna2Elipse1
@@ -62,16 +63,16 @@ Partial Class frmStatement
         Me.cmbAccountName.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbAccountName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.cmbAccountName.ItemHeight = 30
-        Me.cmbAccountName.Location = New System.Drawing.Point(62, 59)
+        Me.cmbAccountName.Location = New System.Drawing.Point(63, 98)
         Me.cmbAccountName.Name = "cmbAccountName"
-        Me.cmbAccountName.Size = New System.Drawing.Size(154, 36)
+        Me.cmbAccountName.Size = New System.Drawing.Size(231, 36)
         Me.cmbAccountName.TabIndex = 1
         '
         'Guna2HtmlLabel1
         '
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(19, 66)
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(20, 105)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
         Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(37, 23)
         Me.Guna2HtmlLabel1.TabIndex = 2
@@ -81,33 +82,11 @@ Partial Class frmStatement
         '
         Me.Guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(249, 68)
+        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(300, 107)
         Me.Guna2HtmlLabel2.Name = "Guna2HtmlLabel2"
         Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(69, 23)
         Me.Guna2HtmlLabel2.TabIndex = 2
         Me.Guna2HtmlLabel2.Text = "ตั้งแต่วันที่"
-        '
-        'Guna2Panel1
-        '
-        Me.Guna2Panel1.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.Guna2Panel1.Controls.Add(Me.Guna2ControlBox1)
-        Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(968, 33)
-        Me.Guna2Panel1.TabIndex = 42
-        '
-        'Guna2ControlBox1
-        '
-        Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Guna2ControlBox1.BackColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox1.CustomIconSize = 30.0!
-        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.LightGray
-        Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(918, 1)
-        Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
-        Me.Guna2ControlBox1.Size = New System.Drawing.Size(38, 29)
-        Me.Guna2ControlBox1.TabIndex = 5
         '
         'btnGenerateReport
         '
@@ -120,7 +99,7 @@ Partial Class frmStatement
         Me.btnGenerateReport.FillColor = System.Drawing.Color.ForestGreen
         Me.btnGenerateReport.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
         Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
-        Me.btnGenerateReport.Location = New System.Drawing.Point(827, 59)
+        Me.btnGenerateReport.Location = New System.Drawing.Point(843, 98)
         Me.btnGenerateReport.Name = "btnGenerateReport"
         Me.btnGenerateReport.Size = New System.Drawing.Size(129, 36)
         Me.btnGenerateReport.TabIndex = 43
@@ -135,12 +114,13 @@ Partial Class frmStatement
         Me.dtpStartDate.FillColor = System.Drawing.Color.White
         Me.dtpStartDate.Font = New System.Drawing.Font("FC Minimal", 15.75!)
         Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpStartDate.Location = New System.Drawing.Point(324, 59)
+        Me.dtpStartDate.Location = New System.Drawing.Point(375, 98)
         Me.dtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpStartDate.Name = "dtpStartDate"
         Me.dtpStartDate.Size = New System.Drawing.Size(200, 36)
         Me.dtpStartDate.TabIndex = 44
+        Me.dtpStartDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.dtpStartDate.Value = New Date(2024, 10, 1, 1, 30, 2, 121)
         '
         'dtpEndDate
@@ -150,33 +130,67 @@ Partial Class frmStatement
         Me.dtpEndDate.FillColor = System.Drawing.Color.White
         Me.dtpEndDate.Font = New System.Drawing.Font("FC Minimal", 15.75!)
         Me.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpEndDate.Location = New System.Drawing.Point(586, 59)
+        Me.dtpEndDate.Location = New System.Drawing.Point(637, 98)
         Me.dtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpEndDate.Name = "dtpEndDate"
         Me.dtpEndDate.Size = New System.Drawing.Size(200, 36)
         Me.dtpEndDate.TabIndex = 44
+        Me.dtpEndDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.dtpEndDate.Value = New Date(2024, 10, 1, 1, 11, 38, 114)
         '
         'Guna2HtmlLabel3
         '
         Me.Guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(530, 68)
+        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(581, 107)
         Me.Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
         Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(50, 23)
         Me.Guna2HtmlLabel3.TabIndex = 2
         Me.Guna2HtmlLabel3.Text = "ถึงวันที่"
         '
+        'Guna2Panel1
+        '
+        Me.Guna2Panel1.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2Panel1.Controls.Add(Me.Guna2ControlBox2)
+        Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Guna2Panel1.Name = "Guna2Panel1"
+        Me.Guna2Panel1.Size = New System.Drawing.Size(1104, 30)
+        Me.Guna2Panel1.TabIndex = 56
+        '
+        'Guna2ControlBox2
+        '
+        Me.Guna2ControlBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2ControlBox2.BackColor = System.Drawing.Color.Red
+        Me.Guna2ControlBox2.CustomIconSize = 30.0!
+        Me.Guna2ControlBox2.FillColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Red
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(1054, 1)
+        Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
+        Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
+        Me.Guna2ControlBox2.TabIndex = 15
+        '
+        'Guna2HtmlLabel4
+        '
+        Me.Guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel4.Font = New System.Drawing.Font("FC Minimal", 26.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel4.Location = New System.Drawing.Point(382, 45)
+        Me.Guna2HtmlLabel4.Name = "Guna2HtmlLabel4"
+        Me.Guna2HtmlLabel4.Size = New System.Drawing.Size(249, 37)
+        Me.Guna2HtmlLabel4.TabIndex = 61
+        Me.Guna2HtmlLabel4.Text = "รายงานงบกำไร-ขาดทุน"
+        '
         'frmStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(968, 784)
+        Me.ClientSize = New System.Drawing.Size(1104, 817)
+        Me.Controls.Add(Me.Guna2HtmlLabel4)
+        Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.dtpEndDate)
         Me.Controls.Add(Me.dtpStartDate)
         Me.Controls.Add(Me.btnGenerateReport)
-        Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.Guna2HtmlLabel3)
         Me.Controls.Add(Me.Guna2HtmlLabel2)
         Me.Controls.Add(Me.Guna2HtmlLabel1)
@@ -197,10 +211,11 @@ Partial Class frmStatement
     Friend WithEvents cmbAccountName As Guna.UI2.WinForms.Guna2ComboBox
     Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel2 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents btnGenerateReport As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents dtpStartDate As Guna.UI2.WinForms.Guna2DateTimePicker
     Friend WithEvents dtpEndDate As Guna.UI2.WinForms.Guna2DateTimePicker
     Friend WithEvents Guna2HtmlLabel3 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents Guna2HtmlLabel4 As Guna.UI2.WinForms.Guna2HtmlLabel
 End Class

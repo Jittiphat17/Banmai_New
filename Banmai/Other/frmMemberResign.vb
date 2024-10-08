@@ -46,7 +46,6 @@ Public Class frmMemberResign
         End If
     End Sub
 
-    ' Method to search for member details and display them in Guna2TextBoxes
     Private Sub SearchMemberDetails(memberName As String)
         Try
             Conn.Open()
@@ -127,12 +126,46 @@ Public Class frmMemberResign
             Dim totalLoan As Decimal = totalLoanAccount1 + totalLoanSaving + totalLoanPublic
             txtTotalLoan.Text = totalLoan.ToString("N2")
 
+            ' คำนวณยอดคงเหลือแยกตามบัญชี
+            Dim totalRemainingBalance As Decimal = 0 ' ตัวแปรสำหรับเก็บยอดรวมของยอดคงเหลือทั้ง 3 บัญชี
+
+            Dim queryRemainingBalance As String = "SELECT c.acc_id, SUM(p.payment_prin) AS total_principal " &
+                                                  "FROM Payment p, Contract c, Member m " &
+                                                  "WHERE p.con_id = c.con_id AND c.m_id = m.m_id AND m.m_name = @memberName " &
+                                                  "GROUP BY c.acc_id"
+            Dim cmdRemainingBalance As New OleDbCommand(queryRemainingBalance, Conn)
+            cmdRemainingBalance.Parameters.AddWithValue("@memberName", memberName)
+            Dim reader As OleDbDataReader = cmdRemainingBalance.ExecuteReader()
+
+            While reader.Read()
+                Dim accId As String = reader("acc_id").ToString()
+                Dim totalPrincipal As Decimal = Convert.ToDecimal(reader("total_principal"))
+
+                ' แสดงยอดคงเหลือตามบัญชี และเพิ่มเข้าไปในยอดรวมทั้งหมด
+                If accId = "ACC001" Then
+                    txtRemainingBalanceAcc1.Text = totalPrincipal.ToString("N2") ' ยอดคงเหลือสำหรับบัญชี ACC001
+                ElseIf accId = "ACC002" Then
+                    txtRemainingBalanceAcc2.Text = totalPrincipal.ToString("N2") ' ยอดคงเหลือสำหรับบัญชี ACC002
+                ElseIf accId = "ACC003" Then
+                    txtRemainingBalanceAcc3.Text = totalPrincipal.ToString("N2") ' ยอดคงเหลือสำหรับบัญชี ACC003
+                End If
+
+                ' เพิ่มยอดคงเหลือของบัญชีปัจจุบันไปยังยอดรวมทั้งหมด
+                totalRemainingBalance += totalPrincipal
+            End While
+
+            reader.Close()
+
+            ' แสดงยอดรวมของยอดคงเหลือทั้ง 3 บัญชี
+            txtTotalRemainingBalance.Text = totalRemainingBalance.ToString("N2")
+
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการดึงข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             Conn.Close()
         End Try
     End Sub
+
 
 
 End Class

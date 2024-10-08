@@ -503,22 +503,6 @@ Public Class frmBrrow
                 Return
             End If
 
-            ' ตรวจสอบว่าผู้ค้ำมีสัญญาที่ยังค้างชำระอยู่หรือไม่
-            Dim guarantorNames As String() = {txtSearch1.Text, txtSearch2.Text, txtSearch3.Text}
-            For Each guarantorName As String In guarantorNames
-                If Not String.IsNullOrEmpty(guarantorName) Then
-                    Dim guarantorId As Integer = GetMemberIdByName(guarantorName)
-                    If guarantorId <> -1 Then
-                        ' ตรวจสอบว่าผู้ค้ำยังมีสัญญาที่ยังค้างชำระหรือไม่
-                        Dim activeContracts As Integer = GetActiveGuaranteeCount(guarantorId)
-                        If activeContracts > 0 Then
-                            MessageBox.Show("ผู้ค้ำประกัน " & guarantorName & " มีสัญญาที่ยังคงเหลืออยู่ และไม่สามารถค้ำประกันเพิ่มได้จนกว่าจะชำระเงินครบ", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                            Return ' หยุดการทำงานและไม่เพิ่มข้อมูลผู้ค้ำรายนี้
-                        End If
-                    End If
-                End If
-            Next
-
             ' ดำเนินการเพิ่มข้อมูลใหม่ใน DataGridView
             Dim principal As Decimal = Decimal.Parse(txtMoney.Text.Replace(",", ""))
             Dim loanDate As DateTime = dtpBirth.Value

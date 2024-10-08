@@ -181,8 +181,7 @@ Public Class frmIncome
                 incomeTypeColumn.Items.Add("ดอกเบี้ยเงินฝากธนาคาร") 'รายได้
                 incomeTypeColumn.Items.Add("ค่าธรรมเนียมแรกเข้า") 'รายได้
                 incomeTypeColumn.Items.Add("อื่น ๆ") 'รายได้
-                incomeTypeColumn.Items.Add("เงินต้น")
-                incomeTypeColumn.Items.Add("ดอกเบี้ย")
+                incomeTypeColumn.Items.Add("ค่าเอกสาร")
                 incomeTypeColumn.Items.Add("ค่าปรับ")
             End Using
         Catch ex As Exception
@@ -305,19 +304,6 @@ Public Class frmIncome
                 ' ดึงค่าจากคอลัมน์ PaymentContractNumber ใน DataGridView
                 Dim contractNumber As String = dgvPaymentDetails.CurrentRow.Cells("PaymentContractNumber").Value.ToString()
 
-                ' ตรวจสอบว่าค่า contractNumber ไม่ใช่ค่าว่าง
-                If Not String.IsNullOrEmpty(contractNumber) Then
-                    ' สร้างอินสแตนซ์ของฟอร์ม TestGetData
-                    Dim testGetDataForm As New TestGetData()
-
-                    ' ตั้งค่าข้อความใน TextBoxConId ของฟอร์ม TestGetData
-                    testGetDataForm.TextBoxConId.Text = contractNumber
-
-                    ' แสดงฟอร์ม TestGetData
-                    testGetDataForm.ShowDialog()
-                Else
-                    MessageBox.Show("กรุณาเลือกเลขที่สัญญาก่อน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                End If
             Else
                 MessageBox.Show("ไม่มีข้อมูลให้เลือก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
@@ -325,6 +311,7 @@ Public Class frmIncome
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการส่งข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
         Try
             ' ตรวจสอบว่า lblBalanceAmount.Text มีข้อมูลและเป็นตัวเลข
             Dim balanceAmount As Decimal
@@ -347,7 +334,7 @@ Public Class frmIncome
 
                 ' ตรวจสอบว่าเซลล์มีค่า และแปลงค่าให้ถูกต้อง
                 If Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentContractNumber").Value.ToString(), conId) AndAlso
-                   Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentPeriod").Value.ToString(), paymentPeriod) Then
+               Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentPeriod").Value.ToString(), paymentPeriod) Then
 
                     ' ตรวจสอบว่าค่า conId และ paymentPeriod มีค่ามากกว่า 0
                     If conId > 0 AndAlso paymentPeriod > 0 Then
@@ -408,6 +395,7 @@ Public Class frmIncome
             MessageBox.Show("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
     Public Sub cleartext()
         ' ล้างแถวทั้งหมดใน DataGridView ก่อนที่จะตั้งค่าคอลัมน์ใหม่
@@ -1333,16 +1321,31 @@ Public Class frmIncome
                             End Using
                         Next
 
-                        ' วนลูปบันทึกรายละเอียดรายรับใน Income_Details
-                        For Each row As DataGridViewRow In dgvIncomeDetails.Rows
-                            If row.IsNewRow Then Continue For
+                        ' วนลูปบันทึกรายละเอียดรายรับใน Income_Details โดยดึง con_id จาก dgvPaymentDetails
+                        For Each rowIncome As DataGridViewRow In dgvIncomeDetails.Rows
+                            If rowIncome.IsNewRow Then Continue For
 
-                            Dim incomeType As String = row.Cells("IncomeType").Value.ToString()
-                            Dim incomeAmount As Decimal = Convert.ToDecimal(row.Cells("Amount").Value)
+                            Dim incomeType As String = rowIncome.Cells("IncomeType").Value.ToString()
+                            Dim incomeAmount As Decimal = Convert.ToDecimal(rowIncome.Cells("Amount").Value)
+                            Dim contractNumber As Integer = 0 ' ค่าเริ่มต้นของ con_id
 
-                            Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@incomeType, @incomeAmount, @ind_date, @m_id, @acc_id, @inc_id)"
+                            ' ค้นหา con_id ที่สอดคล้องกันใน dgvPaymentDetails
+                            For Each rowPayment As DataGridViewRow In dgvPaymentDetails.Rows
+                                If rowPayment.IsNewRow Then Continue For
+
+                                ' สมมติว่า PaymentContractNumber เป็นคอลัมน์ที่มี con_id ใน dgvPaymentDetails
+                                Dim paymentContractNumber As Integer = Convert.ToInt32(rowPayment.Cells("PaymentContractNumber").Value)
+
+                                ' ถ้าเจอ con_id ที่ต้องการจาก dgvPaymentDetails ให้ใช้งาน con_id นั้น
+                                contractNumber = paymentContractNumber
+                                Exit For ' ออกจากลูปเมื่อเจอ con_id ที่ตรงกัน
+                            Next
+
+                            ' บันทึกข้อมูลลงใน Income_Details
+                            Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@incomeType, @contractNumber, @incomeAmount, @ind_date, @m_id, @acc_id, @inc_id)"
                             Using cmdDetails As New OleDbCommand(queryDetails, Conn)
                                 cmdDetails.Parameters.AddWithValue("@incomeType", incomeType)
+                                cmdDetails.Parameters.AddWithValue("@contractNumber", contractNumber) ' ใช้ con_id ที่ได้จาก dgvPaymentDetails
                                 cmdDetails.Parameters.AddWithValue("@incomeAmount", incomeAmount)
                                 cmdDetails.Parameters.AddWithValue("@ind_date", indDate)
                                 cmdDetails.Parameters.AddWithValue("@m_id", CInt(memberId))
@@ -1351,6 +1354,7 @@ Public Class frmIncome
                                 cmdDetails.ExecuteNonQuery()
                             End Using
                         Next
+
                     End Using
 
                     ' แสดงข้อความว่าได้บันทึกข้อมูลสำเร็จ
@@ -1385,8 +1389,6 @@ Public Class frmIncome
         Dim balanceAmount As Decimal = enteredAmount - totalAmount
         lblBalanceAmount.Text = balanceAmount.ToString("N2")
     End Sub
-
-
 
 
 End Class

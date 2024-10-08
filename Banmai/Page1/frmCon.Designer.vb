@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmCon
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmCon
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -49,7 +49,6 @@ Partial Class frmCon
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.btnShowReport = New Guna.UI2.WinForms.Guna2Button()
         CType(Me.dgvPayments, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2GroupBox1.SuspendLayout()
         Me.Guna2Panel1.SuspendLayout()
@@ -122,7 +121,7 @@ Partial Class frmCon
         Me.btnSearch.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.btnSearch.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSearch.ForeColor = System.Drawing.Color.White
-        Me.btnSearch.Location = New System.Drawing.Point(1050, 58)
+        Me.btnSearch.Location = New System.Drawing.Point(1189, 58)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(79, 36)
         Me.btnSearch.TabIndex = 35
@@ -373,7 +372,7 @@ Partial Class frmCon
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(701, 66)
+        Me.Label7.Location = New System.Drawing.Point(840, 66)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(137, 21)
         Me.Label7.TabIndex = 33
@@ -391,7 +390,7 @@ Partial Class frmCon
         Me.txtSearchContractNumber.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtSearchContractNumber.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtSearchContractNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearchContractNumber.Location = New System.Drawing.Point(844, 58)
+        Me.txtSearchContractNumber.Location = New System.Drawing.Point(983, 58)
         Me.txtSearchContractNumber.Name = "txtSearchContractNumber"
         Me.txtSearchContractNumber.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtSearchContractNumber.PlaceholderText = ""
@@ -431,23 +430,6 @@ Partial Class frmCon
         Me.Label10.TabIndex = 38
         Me.Label10.Text = "ตารางเงินกู้"
         '
-        'btnShowReport
-        '
-        Me.btnShowReport.Animated = True
-        Me.btnShowReport.BorderRadius = 10
-        Me.btnShowReport.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.btnShowReport.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.btnShowReport.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btnShowReport.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btnShowReport.FillColor = System.Drawing.Color.DarkSlateBlue
-        Me.btnShowReport.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnShowReport.ForeColor = System.Drawing.Color.White
-        Me.btnShowReport.Location = New System.Drawing.Point(1135, 58)
-        Me.btnShowReport.Name = "btnShowReport"
-        Me.btnShowReport.Size = New System.Drawing.Size(79, 36)
-        Me.btnShowReport.TabIndex = 35
-        Me.btnShowReport.Text = "ค้นหา"
-        '
         'frmCon
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -457,7 +439,6 @@ Partial Class frmCon
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.dgvPayments)
-        Me.Controls.Add(Me.btnShowReport)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.Guna2GroupBox1)
         Me.Controls.Add(Me.Label7)
@@ -497,5 +478,4 @@ Partial Class frmCon
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents Label10 As Label
-    Friend WithEvents btnShowReport As Guna.UI2.WinForms.Guna2Button
 End Class

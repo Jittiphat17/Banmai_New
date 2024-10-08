@@ -8,6 +8,7 @@ Public Class frmSearch
     Private Sub frmSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' เรียกฟังก์ชัน LoadAllContracts ทันทีเมื่อเปิดฟอร์มเพื่อแสดงข้อมูล
         LoadAllContracts()
+        LoadDirectors()
 
         ' กำหนดค่าของ ReportViewer1 สำหรับรายงานสัญญากู้ยืม
         Me.ReportViewer1.LocalReport.ReportPath = "D:\Project-2022\Banmai\Banmai\report\LoanReport1.rdlc"
@@ -17,8 +18,51 @@ Public Class frmSearch
         Me.ReportViewer2.LocalReport.ReportPath = "D:\Project-2022\Banmai\Banmai\report\GuarantorReport.rdlc"
         Me.ReportViewer2.RefreshReport()
     End Sub
+    Private Sub LoadDirectors()
+        Try
+            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+                conn.Open()
+
+                ' ดึงข้อมูลกรรมการพร้อมชื่อและคำนำหน้าจากตาราง Member โดย JOIN กับ Director
+                Dim query As String = "
+            SELECT d.fu_id, m.m_name, m.m_gender, m.m_id 
+            FROM Director d 
+            INNER JOIN Member m ON d.m_id = m.m_id"
+
+                Dim cmd As New OleDbCommand(query, conn)
+                Dim adapter As New OleDbDataAdapter(cmd)
+                Dim table As New DataTable()
+                adapter.Fill(table)
+
+                ' เพิ่มคอลัมน์ใหม่เพื่อรวมคำนำหน้าและชื่อ
+                table.Columns.Add("FullName", GetType(String), "m_gender + ' ' + m_name") ' สร้างคอลัมน์ FullName
+
+                ' ใส่ข้อมูลกรรมการ (ชื่อพร้อมคำนำหน้า) ลงใน ComboBox ทั้งสอง
+                ComboBoxDirector1.DataSource = table.Copy() ' สำเนาตารางสำหรับ ComboBox ตัวแรก
+                ComboBoxDirector2.DataSource = table.Copy() ' สำเนาตารางสำหรับ ComboBox ตัวที่สอง
+
+                ' แสดงชื่อกรรมการใน ComboBox
+                ComboBoxDirector1.DisplayMember = "FullName" ' แสดงชื่อกรรมการรวมคำนำหน้า
+                ComboBoxDirector2.DisplayMember = "FullName"
+
+                ' ค่าเบื้องหลังยังคงเป็น m_id เพื่อใช้ในการอ้างอิง
+                ComboBoxDirector1.ValueMember = "m_id"
+                ComboBoxDirector2.ValueMember = "m_id"
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("เกิดข้อผิดพลาดในการดึงข้อมูลกรรมการ: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
 
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnReport.Click
+        If String.IsNullOrWhiteSpace(txtSearch.Text) Then
+            LoadAllContracts()
+        Else
+            SearchContracts(txtSearch.Text)
+        End If
+    End Sub
     Private Sub FormatDataGridView()
         ' สร้างฟอนต์ FC Minimal Bold ขนาด 12pt
         Dim fcMinimalBoldFont As New Font("FC Minimal", 12)
@@ -70,14 +114,6 @@ Public Class frmSearch
         dgvResults.Columns("con_GuaranteeType").HeaderText = "ประเภทการค้ำประกัน"
     End Sub
 
-
-    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnReport.Click
-        If String.IsNullOrWhiteSpace(txtSearch.Text) Then
-            LoadAllContracts()
-        Else
-            SearchContracts(txtSearch.Text)
-        End If
-    End Sub
 
     Private Sub LoadAllContracts()
         Try
@@ -238,6 +274,26 @@ Public Class frmSearch
             Return
         End If
 
+        ' ตรวจสอบการเลือกกรรมการจาก ComboBox
+        If ComboBoxDirector1.SelectedIndex = -1 Or ComboBoxDirector2.SelectedIndex = -1 Then
+            MessageBox.Show("กรุณาเลือกกรรมการ 2 คน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        ' ดึง m_id ของกรรมการจาก ComboBox
+        Dim director1ID As String = ComboBoxDirector1.SelectedValue.ToString() ' m_id ของกรรมการคนแรก
+        Dim director2ID As String = ComboBoxDirector2.SelectedValue.ToString() ' m_id ของกรรมการคนที่สอง
+
+        ' ตรวจสอบว่า m_id ของกรรมการทั้งสองคนไม่เหมือนกัน
+        If director1ID = director2ID Then
+            MessageBox.Show("กรุณาเลือกกรรมการที่มี m_id ไม่ซ้ำกัน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        ' ดึงชื่อกรรมการจาก ComboBox
+        Dim director1 As String = ComboBoxDirector1.Text
+        Dim director2 As String = ComboBoxDirector2.Text
+
         Dim selectedConId As String = dgvResults.SelectedRows(0).Cells("con_id").Value.ToString()
         Dim selectedMemberId As String = dgvResults.SelectedRows(0).Cells("m_id").Value.ToString()
         Dim selectedAccId As String = dgvResults.SelectedRows(0).Cells("acc_id").Value.ToString()
@@ -286,7 +342,6 @@ Public Class frmSearch
                 Dim table5 As New DataTable()
                 adapter5.Fill(table5)
 
-
                 ' ชื่อ DataSource ต้องตรงกับชื่อในรายงาน
                 Dim rds1 As New ReportDataSource("DataSet1", table1)
                 Dim rds2 As New ReportDataSource("DataSet2", table2)
@@ -314,6 +369,11 @@ Public Class frmSearch
                 Me.ReportViewer2.LocalReport.SetParameters(New ReportParameter("AmountText", amountText))
                 Me.ReportViewer2.LocalReport.SetParameters(New ReportParameter("AmountWithCommas", amountWithCommas))
 
+                ' ส่งข้อมูลกรรมการเป็นพารามิเตอร์ไปยังรายงาน
+                Me.ReportViewer1.LocalReport.SetParameters(New ReportParameter("DirectorName1", director1))
+                Me.ReportViewer1.LocalReport.SetParameters(New ReportParameter("DirectorName2", director2))
+                Me.ReportViewer2.LocalReport.SetParameters(New ReportParameter("DirectorName1", director1))
+                Me.ReportViewer2.LocalReport.SetParameters(New ReportParameter("DirectorName2", director2))
                 ' ส่งข้อมูลวันที่ชำระเงินแรกและสุดท้ายไปยังรายงาน
                 Dim firstPaymentDate As Date = Date.MinValue
                 Dim lastPaymentDate As Date = Date.MinValue
@@ -339,7 +399,6 @@ Public Class frmSearch
                 Dim conDateMonthYear1 As String = ConvertToThaiMonthYear(conDate)
                 Me.ReportViewer1.LocalReport.SetParameters(New ReportParameter("conDate1", conDateMonthYear1))
                 Me.ReportViewer2.LocalReport.SetParameters(New ReportParameter("conDate1", conDateMonthYear1))
-
 
                 ' ตรวจสอบว่ามีผู้ค้ำประกันหรือไม่
                 If table5.Rows.Count > 0 Then

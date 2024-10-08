@@ -103,36 +103,79 @@ Public Class frmMain
         End Try
     End Sub
 
-    ' ฟังก์ชันดึงยอดเงินจากบัญชี
     Private Sub UpdateAccountBalances()
         Try
             ' เปิดการเชื่อมต่อฐานข้อมูล
             If Conn.State = ConnectionState.Open Then Conn.Close()
             Conn.Open()
 
-            ' ดึงยอดเงินจากบัญชีเงินฝาก
-            Dim querySaving As String = "SELECT SUM(inc_amount) FROM Income WHERE acc_id = 'ACC002'"
-            Dim cmdSaving As New OleDbCommand(querySaving, Conn)
-            Dim totalSaving As Object = cmdSaving.ExecuteScalar()
-            If IsDBNull(totalSaving) OrElse totalSaving Is Nothing Then
-                totalSaving = 0
+            ' ดึงยอดเงินรายรับจากบัญชีเงินสัจจะ
+            Dim queryIncomeSaving As String = "SELECT SUM(inc_amount) FROM Income WHERE acc_id = 'ACC002'"
+            Dim cmdIncomeSaving As New OleDbCommand(queryIncomeSaving, Conn)
+            Dim totalIncomeSaving As Object = cmdIncomeSaving.ExecuteScalar()
+            If IsDBNull(totalIncomeSaving) OrElse totalIncomeSaving Is Nothing Then
+                totalIncomeSaving = 0
             End If
 
-            ' ดึงยอดเงินจากบัญชีกู้เงิน
-            Dim queryLoan As String = "SELECT SUM(con_amount) FROM Contract WHERE acc_id = 'ACC001'"
-            Dim cmdLoan As New OleDbCommand(queryLoan, Conn)
-            Dim totalLoan As Object = cmdLoan.ExecuteScalar()
-            If IsDBNull(totalLoan) OrElse totalLoan Is Nothing Then
-                totalLoan = 0
+            ' ดึงยอดเงินรายจ่ายจากบัญชีกู้เงิน
+            Dim queryExpenseLoan As String = "SELECT SUM(con_amount) FROM Contract WHERE acc_id = 'ACC001'"
+            Dim cmdExpenseLoan As New OleDbCommand(queryExpenseLoan, Conn)
+            Dim totalExpenseLoan As Object = cmdExpenseLoan.ExecuteScalar()
+            If IsDBNull(totalExpenseLoan) OrElse totalExpenseLoan Is Nothing Then
+                totalExpenseLoan = 0
             End If
 
-            ' ดึงยอดเงินจากบัญชีกู้เงินสาธารณะ
-            Dim queryPublicLoan As String = "SELECT SUM(con_amount) FROM Contract WHERE acc_id = 'ACC003'"
-            Dim cmdPublicLoan As New OleDbCommand(queryPublicLoan, Conn)
-            Dim totalPublicLoan As Object = cmdPublicLoan.ExecuteScalar()
-            If IsDBNull(totalPublicLoan) OrElse totalPublicLoan Is Nothing Then
-                totalPublicLoan = 0
+            ' ดึงยอดเงินรายจ่ายจากบัญชีกู้เงินสาธารณะ
+            Dim queryExpensePublicLoan As String = "SELECT SUM(con_amount) FROM Contract WHERE acc_id = 'ACC003'"
+            Dim cmdExpensePublicLoan As New OleDbCommand(queryExpensePublicLoan, Conn)
+            Dim totalExpensePublicLoan As Object = cmdExpensePublicLoan.ExecuteScalar()
+            If IsDBNull(totalExpensePublicLoan) OrElse totalExpensePublicLoan Is Nothing Then
+                totalExpensePublicLoan = 0
             End If
+
+            ' ------------------- Chart1: แสดงรายรับ ------------------- '
+            Chart1.Series.Clear() ' ล้างข้อมูลใน Chart ก่อน
+            Chart1.Legends.Clear() ' ล้าง Legend เก่า
+
+            ' เพิ่ม Legend ใหม่ใน Chart1
+            Dim legendIncome As New Legend("รายรับ") ' สร้าง Legend ใหม่
+            Chart1.Legends.Add(legendIncome) ' เพิ่ม Legend ใน Chart1
+
+            ' สร้าง Series สำหรับรายรับ
+            Dim seriesIncome As New Series("รายรับ") ' สร้าง Series ใหม่สำหรับแสดงรายรับ
+            seriesIncome.ChartType = SeriesChartType.Bar ' กำหนดชนิดของกราฟเป็น Bar
+            seriesIncome.Points.AddXY("บัญชีเงินสัจจะ", Convert.ToDecimal(totalIncomeSaving))
+            seriesIncome.Points(0).Label = Convert.ToDecimal(totalIncomeSaving).ToString("N2") & " บาท"
+            seriesIncome.Points(0).Color = Color.Green ' กำหนดสีของบัญชีเงินสัจจะ
+            seriesIncome.Points(0).LegendText = "บัญชีเงินสัจจะ" ' กำหนดชื่อใน Legend
+
+            ' เพิ่ม Series ใน Chart1 (รายรับ)
+            Chart1.Series.Add(seriesIncome)
+
+            ' ------------------- Chart2: แสดงรายจ่าย ------------------- '
+            Chart2.Series.Clear() ' ล้างข้อมูลใน Chart ก่อน
+            Chart2.Legends.Clear() ' ล้าง Legend เก่า
+
+            ' เพิ่ม Legend ใหม่ใน Chart2
+            Dim legendExpense As New Legend("รายจ่าย") ' สร้าง Legend ใหม่
+            Chart2.Legends.Add(legendExpense) ' เพิ่ม Legend ใน Chart2
+
+            ' สร้าง Series สำหรับรายจ่าย
+            Dim seriesExpense As New Series("รายจ่าย") ' สร้าง Series ใหม่สำหรับแสดงรายจ่าย
+            seriesExpense.ChartType = SeriesChartType.Bar ' กำหนดชนิดของกราฟเป็น Bar
+
+            seriesExpense.Points.AddXY("บัญชี1", Convert.ToDecimal(totalExpenseLoan))
+            seriesExpense.Points(0).Label = Convert.ToDecimal(totalExpenseLoan).ToString("N2") & " บาท"
+            seriesExpense.Points(0).Color = Color.Red ' กำหนดสีของบัญชี1
+            seriesExpense.Points(0).LegendText = "บัญชี1" ' กำหนดชื่อใน Legend
+
+            seriesExpense.Points.AddXY("บัญชีเงินประชารัฐ", Convert.ToDecimal(totalExpensePublicLoan))
+            seriesExpense.Points(1).Label = Convert.ToDecimal(totalExpensePublicLoan).ToString("N2") & " บาท"
+            seriesExpense.Points(1).Color = Color.Blue ' กำหนดสีของบัญชีเงินประชารัฐ
+            seriesExpense.Points(1).LegendText = "บัญชีเงินประชารัฐ" ' กำหนดชื่อใน Legend
+
+            ' เพิ่ม Series ใน Chart2 (รายจ่าย)
+            Chart2.Series.Add(seriesExpense)
 
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการดึงข้อมูลยอดเงิน: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -141,6 +184,7 @@ Public Class frmMain
             Conn.Close()
         End Try
     End Sub
+
 
     ' ฟังก์ชันเพื่อรีเฟรชข้อมูลในหน้าหลักเมื่อปิดฟอร์มอื่นๆ
     Private Sub RefreshMainForm(ByVal sender As Object, ByVal e As FormClosedEventArgs)
@@ -305,4 +349,6 @@ Public Class frmMain
         AddHandler frm.FormClosed, AddressOf RefreshMainForm
         frm.ShowDialog()
     End Sub
+
+
 End Class

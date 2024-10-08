@@ -14,10 +14,12 @@ Public Class frmSajja
         Next
         ComboBox1.Items.Add("ทั้งหมด") ' เพิ่มตัวเลือกสำหรับยอดรวมทั้งปี
 
-        ' เพิ่มรายการปีใน ComboBox2 (แสดงข้อมูล 5 ปีย้อนหลังในรูปแบบ พ.ศ.)
-        Dim currentYear As Integer = DateTime.Now.Year + 543 ' แปลงเป็น พ.ศ.
+        ' เพิ่มรายการปีใน ComboBox2 (แสดงข้อมูล 5 ปีย้อนหลังในรูปแบบ ค.ศ.)
+        Dim currentYear As Integer = DateTime.Now.Year ' ค.ศ. ไม่ต้องแปลง
+
+        ' เติม ComboBox2 ด้วยปี ค.ศ.
         For i As Integer = 0 To 4
-            ComboBox2.Items.Add(currentYear - i)
+            ComboBox2.Items.Add(currentYear - i) ' ใช้ปี ค.ศ.
         Next
 
         ' ตั้งค่าเริ่มต้น
@@ -27,6 +29,7 @@ Public Class frmSajja
         ' โหลดข้อมูลรายงานสำหรับเดือนและปีที่เลือก
         LoadReportData(ComboBox1.SelectedIndex + 1, CInt(ComboBox2.SelectedItem))
     End Sub
+
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         LoadReportData(ComboBox1.SelectedIndex + 1, CInt(ComboBox2.SelectedItem))
@@ -38,6 +41,9 @@ Public Class frmSajja
 
     Private Sub LoadReportData(selectedMonth As Integer, selectedYear As Integer)
         Try
+            ' Convert selectedYear to ค.ศ. (CE)
+            Dim selectedCEYear As Integer = selectedYear - 543 ' แปลงปี พ.ศ. เป็น ค.ศ.
+
             Using conn As New OleDbConnection(connString)
                 conn.Open()
 
@@ -55,20 +61,20 @@ Public Class frmSajja
                     If ComboBox1.SelectedItem.ToString() = "ทั้งหมด" Then
                         ' Query สำหรับยอดรวมทั้งปี
                         query = "SELECT d.m_id, SUM(d.ind_amount) AS ind_amount " &
-                                "FROM Income_Details d " &
-                                "WHERE d.ind_accname = 'เงินฝากสัจจะ' AND YEAR(d.ind_date) = @Year " &
-                                "GROUP BY d.m_id"
+                            "FROM Income_Details d " &
+                            "WHERE d.ind_accname = 'เงินฝากสัจจะ' AND YEAR(d.ind_date) = @Year " &
+                            "GROUP BY d.m_id"
                         adapter2.SelectCommand = New OleDbCommand(query, conn)
-                        adapter2.SelectCommand.Parameters.AddWithValue("@Year", selectedYear - 543) ' แปลงเป็น ค.ศ.
+                        adapter2.SelectCommand.Parameters.AddWithValue("@Year", selectedCEYear) ' ใช้ ค.ศ.
                     Else
                         ' Query สำหรับเดือนและปีที่เลือก
                         query = "SELECT d.m_id, SUM(d.ind_amount) AS ind_amount " &
-                                "FROM Income_Details d " &
-                                "WHERE d.ind_accname = 'เงินฝากสัจจะ' AND MONTH(d.ind_date) = @Month AND YEAR(d.ind_date) = @Year " &
-                                "GROUP BY d.m_id"
+                            "FROM Income_Details d " &
+                            "WHERE d.ind_accname = 'เงินฝากสัจจะ' AND MONTH(d.ind_date) = @Month AND YEAR(d.ind_date) = @Year " &
+                            "GROUP BY d.m_id"
                         adapter2.SelectCommand = New OleDbCommand(query, conn)
                         adapter2.SelectCommand.Parameters.AddWithValue("@Month", selectedMonth)
-                        adapter2.SelectCommand.Parameters.AddWithValue("@Year", selectedYear - 543) ' แปลงเป็น ค.ศ.
+                        adapter2.SelectCommand.Parameters.AddWithValue("@Year", selectedCEYear) ' ใช้ ค.ศ.
                     End If
 
                     adapter2.Fill(ds2, "IncomeDataSet")
@@ -109,14 +115,22 @@ Public Class frmSajja
                 Me.ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("MemberDataSet", ds1.Tables("MemberDataSet")))
                 Me.ReportViewer1.LocalReport.DataSources.Add(New ReportDataSource("IncomeDataSet", ds2.Tables("IncomeDataSet")))
 
-                ' เพิ่มพารามิเตอร์เพื่อแสดงวัน เดือน ปี พ.ศ. ในรายงาน
+                ' เพิ่มพารามิเตอร์เพื่อแสดงวัน เดือน ปี ค.ศ. ในรายงาน
                 Dim thaiCulture As New CultureInfo("th-TH")
-                Dim monthName As String = If(ComboBox1.SelectedItem.ToString() = "ทั้งหมด", "ทั้งหมด", thaiCulture.DateTimeFormat.GetMonthName(selectedMonth))
-                Dim reportDate As String = $"{DateTime.Now.Day} {monthName} {selectedYear}" ' วันที่ เดือน ปี พ.ศ.
+                Dim monthName As String = If(ComboBox1.SelectedItem.ToString() = "ทั้งหมด", "ทั้งปี", thaiCulture.DateTimeFormat.GetMonthName(selectedMonth))
+                Dim reportDate As String
 
+                ' ถ้าเลือก "ทั้งหมด"
+                If ComboBox1.SelectedItem.ToString() = "ทั้งหมด" Then
+                    reportDate = $"ทั้งปี {selectedCEYear}" ' ใช้ปี ค.ศ.
+                Else
+                    reportDate = $"{DateTime.Now.Day} {monthName} {selectedCEYear}" ' ใช้วัน, เดือน, และปี ค.ศ.
+                End If
+
+                ' ส่งพารามิเตอร์ไปยังรายงาน
                 Dim reportParams As New List(Of ReportParameter) From {
-                    New ReportParameter("ReportDate", reportDate)
-                }
+                New ReportParameter("ReportDate", reportDate)
+            }
 
                 Me.ReportViewer1.LocalReport.SetParameters(reportParams)
 
@@ -129,83 +143,7 @@ Public Class frmSajja
         End Try
     End Sub
 
-    Private Sub btnExportExcel_Click(sender As Object, e As EventArgs) Handles btnExportExcel.Click
-        Try
-            ' ดึงข้อมูลจาก ReportViewer ในรูปแบบ Excel (รูปแบบ Excel แบบเก่า .xls)
-            Dim warnings As Warning() = Nothing
-            Dim streamids As String() = Nothing
-            Dim mimeType As String = String.Empty
-            Dim encoding As String = String.Empty
-            Dim extension As String = "xls" ' ใช้ .xls แทน .xlsx
-            Dim deviceInfo As String = "<DeviceInfo>" &
-                                       "  <OutputFormat>Excel</OutputFormat>" &
-                                       "  <PageWidth>8.5in</PageWidth>" &
-                                       "  <PageHeight>11in</PageHeight>" &
-                                       "  <MarginTop>0.5in</MarginTop>" &
-                                       "  <MarginLeft>0.5in</MarginLeft>" &
-                                       "  <MarginRight>0.5in</MarginRight>" &
-                                       "  <MarginBottom>0.5in</MarginBottom>" &
-                                       "</DeviceInfo>"
 
-            ' Render รายงานเป็น Excel (.xls)
-            Dim renderedBytes As Byte() = ReportViewer1.LocalReport.Render("EXCEL", deviceInfo, mimeType, encoding, extension, streamids, warnings)
 
-            ' แสดง Dialog ให้ผู้ใช้เลือกตำแหน่งที่จะบันทึกไฟล์
-            Dim saveFileDialog As New SaveFileDialog()
-            saveFileDialog.Filter = "Excel Files|*.xls"
-            saveFileDialog.Title = "Save Report as Excel"
-            saveFileDialog.FileName = "Sajja_Report.xls" ' ใช้ .xls แทน .xlsx
-
-            If saveFileDialog.ShowDialog() = DialogResult.OK Then
-                ' บันทึกไฟล์ Excel
-                Using fs As New IO.FileStream(saveFileDialog.FileName, IO.FileMode.Create)
-                    fs.Write(renderedBytes, 0, renderedBytes.Length)
-                End Using
-
-                MessageBox.Show("บันทึกไฟล์สำเร็จ!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
-        Catch ex As Exception
-            MessageBox.Show($"เกิดข้อผิดพลาดในการบันทึกไฟล์: {ex.Message}")
-        End Try
-    End Sub
-    Private Sub btnExportPDF_Click(sender As Object, e As EventArgs) Handles btnExportPDF.Click
-        Try
-            ' ดึงข้อมูลจาก ReportViewer ในรูปแบบ PDF
-            Dim warnings As Warning() = Nothing
-            Dim streamids As String() = Nothing
-            Dim mimeType As String = String.Empty
-            Dim encoding As String = String.Empty
-            Dim extension As String = "pdf"
-            Dim deviceInfo As String = "<DeviceInfo>" &
-                                       "  <OutputFormat>PDF</OutputFormat>" &
-                                       "  <PageWidth>8.5in</PageWidth>" &
-                                       "  <PageHeight>11in</PageHeight>" &
-                                       "  <MarginTop>0.5in</MarginTop>" &
-                                       "  <MarginLeft>0.5in</MarginLeft>" &
-                                       "  <MarginRight>0.5in</MarginRight>" &
-                                       "  <MarginBottom>0.5in</MarginBottom>" &
-                                       "</DeviceInfo>"
-
-            ' Render รายงานเป็น PDF
-            Dim renderedBytes As Byte() = ReportViewer1.LocalReport.Render("PDF", deviceInfo, mimeType, encoding, extension, streamids, warnings)
-
-            ' แสดง Dialog ให้ผู้ใช้เลือกตำแหน่งที่จะบันทึกไฟล์
-            Dim saveFileDialog As New SaveFileDialog()
-            saveFileDialog.Filter = "PDF Files|*.pdf"
-            saveFileDialog.Title = "Save Report as PDF"
-            saveFileDialog.FileName = "Sajja_Report.pdf"
-
-            If saveFileDialog.ShowDialog() = DialogResult.OK Then
-                ' บันทึกไฟล์ PDF
-                Using fs As New IO.FileStream(saveFileDialog.FileName, IO.FileMode.Create)
-                    fs.Write(renderedBytes, 0, renderedBytes.Length)
-                End Using
-
-                MessageBox.Show("บันทึกไฟล์สำเร็จ!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
-        Catch ex As Exception
-            MessageBox.Show($"เกิดข้อผิดพลาดในการบันทึกไฟล์: {ex.Message}")
-        End Try
-    End Sub
 
 End Class

@@ -269,6 +269,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -380,12 +381,6 @@
       <DependentUpon>frmReceipts.vb</DependentUpon>
     </Compile>
     <Compile Include="Page2\frmReceipts.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="report\frmDebtor.Designer.vb">
-      <DependentUpon>frmDebtor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="report\frmDebtor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="report\frmDebtorV2.Designer.vb">
@@ -505,9 +500,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Page2\ReceiptReport.rdlc" />
     <EmbeddedResource Include="report\Financial.rdlc" />
-    <EmbeddedResource Include="report\frmDebtor.resx">
-      <DependentUpon>frmDebtor.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="report\frmDebtorV2.resx">
       <DependentUpon>frmDebtorV2.vb</DependentUpon>
     </EmbeddedResource>
@@ -527,7 +519,6 @@
       <DependentUpon>frmStatement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="report\GuarantorReport.rdlc" />
-    <EmbeddedResource Include="report\Individualdebtor.rdlc" />
     <EmbeddedResource Include="report\IndividualdebtorV2.rdlc" />
     <EmbeddedResource Include="report\LoanReport1.rdlc" />
     <EmbeddedResource Include="report\SajjaReport.rdlc" />

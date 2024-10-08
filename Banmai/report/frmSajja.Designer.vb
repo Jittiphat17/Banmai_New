@@ -32,9 +32,6 @@ Partial Class frmSajja
         Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel2 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
-        Me.btnExportExcel = New Guna.UI2.WinForms.Guna2Button()
-        Me.btnExportPDF = New Guna.UI2.WinForms.Guna2Button()
-        Me.btnSearch = New FontAwesome.Sharp.IconButton()
         Me.Guna2Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -49,7 +46,7 @@ Partial Class frmSajja
         Me.ComboBox2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox2.ForeColor = System.Drawing.Color.Black
         Me.ComboBox2.ItemHeight = 30
-        Me.ComboBox2.Location = New System.Drawing.Point(590, 57)
+        Me.ComboBox2.Location = New System.Drawing.Point(690, 57)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(104, 36)
         Me.ComboBox2.TabIndex = 5
@@ -65,7 +62,7 @@ Partial Class frmSajja
         Me.ComboBox1.Font = New System.Drawing.Font("FC Minimal", 14.25!)
         Me.ComboBox1.ForeColor = System.Drawing.Color.Black
         Me.ComboBox1.ItemHeight = 30
-        Me.ComboBox1.Location = New System.Drawing.Point(783, 57)
+        Me.ComboBox1.Location = New System.Drawing.Point(883, 57)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(210, 36)
         Me.ComboBox1.TabIndex = 4
@@ -105,7 +102,7 @@ Partial Class frmSajja
         '
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(561, 64)
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(661, 64)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
         Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(23, 23)
         Me.Guna2HtmlLabel1.TabIndex = 23
@@ -115,7 +112,7 @@ Partial Class frmSajja
         '
         Me.Guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(700, 64)
+        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(800, 64)
         Me.Guna2HtmlLabel2.Name = "Guna2HtmlLabel2"
         Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(77, 23)
         Me.Guna2HtmlLabel2.TabIndex = 23
@@ -131,61 +128,12 @@ Partial Class frmSajja
         Me.Guna2HtmlLabel3.TabIndex = 24
         Me.Guna2HtmlLabel3.Text = "รายงานดอกเบี้ยสัจจะ"
         '
-        'btnExportExcel
-        '
-        Me.btnExportExcel.Animated = True
-        Me.btnExportExcel.BorderRadius = 5
-        Me.btnExportExcel.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.btnExportExcel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.btnExportExcel.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btnExportExcel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btnExportExcel.FillColor = System.Drawing.Color.DarkGreen
-        Me.btnExportExcel.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.btnExportExcel.ForeColor = System.Drawing.Color.White
-        Me.btnExportExcel.Location = New System.Drawing.Point(242, 48)
-        Me.btnExportExcel.Name = "btnExportExcel"
-        Me.btnExportExcel.Size = New System.Drawing.Size(72, 45)
-        Me.btnExportExcel.TabIndex = 25
-        Me.btnExportExcel.Text = "EXCEL"
-        '
-        'btnExportPDF
-        '
-        Me.btnExportPDF.Animated = True
-        Me.btnExportPDF.BorderRadius = 5
-        Me.btnExportPDF.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.btnExportPDF.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.btnExportPDF.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.btnExportPDF.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btnExportPDF.FillColor = System.Drawing.Color.Red
-        Me.btnExportPDF.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
-        Me.btnExportPDF.ForeColor = System.Drawing.Color.White
-        Me.btnExportPDF.Location = New System.Drawing.Point(320, 48)
-        Me.btnExportPDF.Name = "btnExportPDF"
-        Me.btnExportPDF.Size = New System.Drawing.Size(72, 45)
-        Me.btnExportPDF.TabIndex = 26
-        Me.btnExportPDF.Text = "PDF"
-        '
-        'btnSearch
-        '
-        Me.btnSearch.IconChar = FontAwesome.Sharp.IconChar.None
-        Me.btnSearch.IconColor = System.Drawing.Color.Black
-        Me.btnSearch.IconFont = FontAwesome.Sharp.IconFont.[Auto]
-        Me.btnSearch.Location = New System.Drawing.Point(999, 64)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.btnSearch.TabIndex = 28
-        Me.btnSearch.Text = "IconButton1"
-        Me.btnSearch.UseVisualStyleBackColor = True
-        '
         'frmSajja
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1105, 619)
-        Me.Controls.Add(Me.btnSearch)
-        Me.Controls.Add(Me.btnExportPDF)
-        Me.Controls.Add(Me.btnExportExcel)
         Me.Controls.Add(Me.Guna2HtmlLabel3)
         Me.Controls.Add(Me.Guna2HtmlLabel2)
         Me.Controls.Add(Me.Guna2HtmlLabel1)
@@ -212,7 +160,4 @@ Partial Class frmSajja
     Friend WithEvents Guna2HtmlLabel1 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel2 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel3 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents btnExportExcel As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents btnExportPDF As Guna.UI2.WinForms.Guna2Button
-    Friend WithEvents btnSearch As FontAwesome.Sharp.IconButton
 End Class

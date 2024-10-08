@@ -23,6 +23,12 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.Guna2Elipse2 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.lblUserInfo = New Guna.UI2.WinForms.Guna2HtmlLabel()
@@ -42,6 +48,7 @@ Partial Class frmMain
         Me.tsm_inc = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายรบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.แกไขรายรบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VvToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsm_report = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายงานสญญาเงนกToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายงานดอกเบยสจจะToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -67,12 +74,15 @@ Partial Class frmMain
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
-        Me.VvToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Guna2GroupBox2.SuspendLayout()
         Me.Guna2Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.Guna2GroupBox1.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
+        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Guna2Elipse1
@@ -110,7 +120,7 @@ Partial Class frmMain
         Me.Guna2GroupBox2.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox2.Location = New System.Drawing.Point(174, 225)
+        Me.Guna2GroupBox2.Location = New System.Drawing.Point(174, 168)
         Me.Guna2GroupBox2.Name = "Guna2GroupBox2"
         Me.Guna2GroupBox2.Size = New System.Drawing.Size(830, 113)
         Me.Guna2GroupBox2.TabIndex = 30
@@ -216,14 +226,20 @@ Partial Class frmMain
         'รายรบToolStripMenuItem
         '
         Me.รายรบToolStripMenuItem.Name = "รายรบToolStripMenuItem"
-        Me.รายรบToolStripMenuItem.Size = New System.Drawing.Size(192, 32)
+        Me.รายรบToolStripMenuItem.Size = New System.Drawing.Size(238, 32)
         Me.รายรบToolStripMenuItem.Text = "บันทึกรายรับ"
         '
         'แกไขรายรบToolStripMenuItem
         '
         Me.แกไขรายรบToolStripMenuItem.Name = "แกไขรายรบToolStripMenuItem"
-        Me.แกไขรายรบToolStripMenuItem.Size = New System.Drawing.Size(192, 32)
+        Me.แกไขรายรบToolStripMenuItem.Size = New System.Drawing.Size(238, 32)
         Me.แกไขรายรบToolStripMenuItem.Text = "แก้ไขรายรับ"
+        '
+        'VvToolStripMenuItem
+        '
+        Me.VvToolStripMenuItem.Name = "VvToolStripMenuItem"
+        Me.VvToolStripMenuItem.Size = New System.Drawing.Size(238, 32)
+        Me.VvToolStripMenuItem.Text = "ออกใบเสร็จรับเงิน"
         '
         'tsm_report
         '
@@ -361,7 +377,7 @@ Partial Class frmMain
         Me.Guna2GroupBox1.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox1.Location = New System.Drawing.Point(174, 63)
+        Me.Guna2GroupBox1.Location = New System.Drawing.Point(174, 36)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
         Me.Guna2GroupBox1.Size = New System.Drawing.Size(830, 113)
         Me.Guna2GroupBox1.TabIndex = 29
@@ -404,11 +420,41 @@ Partial Class frmMain
         Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox2.TabIndex = 15
         '
-        'VvToolStripMenuItem
+        'Chart1
         '
-        Me.VvToolStripMenuItem.Name = "VvToolStripMenuItem"
-        Me.VvToolStripMenuItem.Size = New System.Drawing.Size(238, 32)
-        Me.VvToolStripMenuItem.Text = "ออกใบเสร็จรับเงิน"
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend2)
+        Me.Chart1.Location = New System.Drawing.Point(174, 287)
+        Me.Chart1.Name = "Chart1"
+        Me.Chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.Chart1.Series.Add(Series2)
+        Me.Chart1.Size = New System.Drawing.Size(382, 280)
+        Me.Chart1.TabIndex = 32
+        Me.Chart1.Text = "Chart1"
+        '
+        'Chart2
+        '
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend1)
+        Me.Chart2.Location = New System.Drawing.Point(622, 287)
+        Me.Chart2.Name = "Chart2"
+        Me.Chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series2"
+        Me.Chart2.Series.Add(Series1)
+        Me.Chart2.Size = New System.Drawing.Size(382, 280)
+        Me.Chart2.TabIndex = 33
+        Me.Chart2.Text = "Chart2"
         '
         'frmMain
         '
@@ -416,6 +462,8 @@ Partial Class frmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1016, 608)
+        Me.Controls.Add(Me.Chart2)
+        Me.Controls.Add(Me.Chart1)
         Me.Controls.Add(Me.Guna2Panel2)
         Me.Controls.Add(Me.lblUserInfo)
         Me.Controls.Add(Me.lblDateTime)
@@ -435,6 +483,8 @@ Partial Class frmMain
         Me.Guna2GroupBox1.ResumeLayout(False)
         Me.Guna2GroupBox1.PerformLayout()
         Me.Guna2Panel2.ResumeLayout(False)
+        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -485,4 +535,6 @@ Partial Class frmMain
     Friend WithEvents การปดงบToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents งบแสดงฐานะทางการเงนToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents VvToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Chart1 As DataVisualization.Charting.Chart
+    Friend WithEvents Chart2 As DataVisualization.Charting.Chart
 End Class
