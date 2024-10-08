@@ -1,6 +1,7 @@
 ﻿Imports System.Data.OleDb
 Imports System.Drawing.Printing
 Imports System.Windows.Controls
+Imports Guna.UI2.WinForms
 
 Public Class frmEditExpense
     Dim conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
@@ -8,10 +9,29 @@ Public Class frmEditExpense
     Private printDocument As New PrintDocument()
     Private printPreviewDialog As New PrintPreviewDialog()
 
+    Public Sub Loadinfo()
+        ' ตรวจสอบประเภทของผู้ใช้
+        If User_type = "Admin" Or User_type = "ประธาน" Then
+            ' แสดงปุ่มบันทึกและลบสำหรับ Admin หรือ ประธาน
+            btnSave.Visible = True
+            btnDelete.Visible = True
+        ElseIf User_type = "เหรัญญิก" Then
+            ' ซ่อนปุ่มบันทึกและลบสำหรับเหรัญญิก
+            btnSave.Visible = False
+            btnDelete.Visible = False
+        Else
+            ' ซ่อนปุ่มบันทึกและลบสำหรับผู้ใช้ประเภทอื่น
+            btnSave.Visible = False
+            btnDelete.Visible = False
+        End If
+    End Sub
+
+
+
     Private Sub frmEditExpense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadAccounts() ' โหลดข้อมูลบัญชี
         LoadExpenses() ' โหลดรายการรายจ่าย
-
+        Loadinfo()
 
         ' ตั้งค่า TextAlign ของ TextBox ที่แสดงจำนวนเงินให้ชิดขวา
         txtExpenseAmount.TextAlign = HorizontalAlignment.Right
@@ -23,7 +43,6 @@ Public Class frmEditExpense
         ' ตั้งค่า PrintPreviewDialog
         printPreviewDialog.Document = printDocument
     End Sub
-
     Private Sub LoadAccounts()
         Try
             If conn.State = ConnectionState.Closed Then conn.Open()
@@ -86,6 +105,8 @@ Public Class frmEditExpense
             End If
             If dgvExpenses.Columns.Contains("ex_amount") Then
                 dgvExpenses.Columns("ex_amount").HeaderText = "จำนวนเงิน"
+                dgvExpenses.Columns("ex_amount").DefaultCellStyle.Format = "N2" ' รูปแบบจำนวนเงินให้มี 2 ตำแหน่งทศนิยม
+                dgvExpenses.Columns("ex_amount").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight ' ชิดขวา
             End If
             If dgvExpenses.Columns.Contains("ex_date") Then
                 dgvExpenses.Columns("ex_date").HeaderText = "วันที่จ่าย"
@@ -112,6 +133,7 @@ Public Class frmEditExpense
             conn.Close()
         End Try
     End Sub
+
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
         Dim searchValue As String = txtSearch.Text.Trim()
@@ -226,6 +248,18 @@ Public Class frmEditExpense
             Return
         End If
 
+        ' ตรวจสอบยอดใน dgvExpenses
+        Dim expenseRow As DataGridViewRow = dgvExpenses.CurrentRow
+        If expenseRow IsNot Nothing Then
+            Dim currentExpenseAmount As Decimal = Convert.ToDecimal(expenseRow.Cells("ex_amount").Value)
+
+            ' ตรวจสอบว่าค่ารายจ่ายหลักเท่ากับยอดใน dgvExpenses หรือไม่
+            If mainExpenseAmount <> currentExpenseAmount Then
+                MessageBox.Show("The main expense amount must match the current amount in the expenses list (" & currentExpenseAmount.ToString("N2") & ").")
+                Return
+            End If
+        End If
+
         Try
             If conn.State = ConnectionState.Closed Then conn.Open()
 
@@ -255,6 +289,7 @@ Public Class frmEditExpense
             conn.Close()
         End Try
     End Sub
+
 
     Private Sub UpdateExpenseDetails()
         Try
@@ -388,7 +423,7 @@ Public Class frmEditExpense
         offset += 40
 
         ' รายละเอียดการจ่าย (Details Section)
-        Dim detailsTitle As String = "รายละเอียด:"
+        Dim detailsTitle As String = "รายละเอียด:" & txtExpenseDescription.Text
         startX = (pageWidth - e.Graphics.MeasureString(detailsTitle, boldFont).Width) / 2 ' Center the details title
         e.Graphics.DrawString(detailsTitle, boldFont, Brushes.Black, startX, startY + offset)
         offset += 20
@@ -457,6 +492,26 @@ Public Class frmEditExpense
         startX = (pageWidth - e.Graphics.MeasureString(signatureText, font).Width) / 2 ' Center the signature line
         e.Graphics.DrawString(signatureText, font, Brushes.Black, startX, startY + offset)
         e.Graphics.DrawString("..........................................", font, Brushes.Black, startX + 100, startY + offset)
+    End Sub
+
+
+    Private Sub txtExpenseAmount_TextChanged(sender As Object, e As EventArgs) Handles txtExpenseAmount.TextChanged
+        ' เรียกฟังก์ชันเพื่อจัดรูปแบบตัวเลข
+        FormatNumberWithComma(txtExpenseAmount)
+    End Sub
+
+    Private Sub txtDetailAmount_TextChanged(sender As Object, e As EventArgs) Handles txtDetailAmount.TextChanged
+        ' เรียกฟังก์ชันเพื่อจัดรูปแบบตัวเลข
+        FormatNumberWithComma(txtDetailAmount)
+    End Sub
+    Private Sub FormatNumberWithComma(textBox As Guna2TextBox)
+        If Not String.IsNullOrWhiteSpace(textBox.Text) Then
+            Dim value As Decimal
+            ' ลบคอมม่าออกก่อนแปลงค่า และจัดรูปแบบใหม่ด้วยเครื่องหมายคอมมา
+            If Decimal.TryParse(textBox.Text.Replace(",", ""), value) Then
+                textBox.Text = value.ToString("N2") ' รูปแบบทศนิยม 2 ตำแหน่ง
+            End If
+        End If
     End Sub
 
 End Class

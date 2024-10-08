@@ -61,6 +61,7 @@ Partial Class frmCon
         'dgvPayments
         '
         Me.dgvPayments.AllowUserToAddRows = False
+        Me.dgvPayments.AllowUserToDeleteRows = False
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
         Me.dgvPayments.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvPayments.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -85,6 +86,7 @@ Partial Class frmCon
         Me.dgvPayments.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dgvPayments.Location = New System.Drawing.Point(421, 100)
         Me.dgvPayments.Name = "dgvPayments"
+        Me.dgvPayments.ReadOnly = True
         Me.dgvPayments.RowHeadersVisible = False
         Me.dgvPayments.Size = New System.Drawing.Size(847, 319)
         Me.dgvPayments.TabIndex = 36
@@ -101,7 +103,7 @@ Partial Class frmCon
         Me.dgvPayments.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
         Me.dgvPayments.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
         Me.dgvPayments.ThemeStyle.HeaderStyle.Height = 50
-        Me.dgvPayments.ThemeStyle.ReadOnly = False
+        Me.dgvPayments.ThemeStyle.ReadOnly = True
         Me.dgvPayments.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvPayments.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.dgvPayments.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))

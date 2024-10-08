@@ -80,10 +80,8 @@ Public Class frmManageMembers
         dgvMembers.Columns.Add("m_tel", "เบอร์โทรติดต่อ")
         dgvMembers.Columns.Add("m_accountName", "ชื่อบัญชี")
         dgvMembers.Columns.Add("m_accountNum", "เลขบัญชี")
-        dgvMembers.Columns.Add("m_beginning", "ยอดยกมา")
-        dgvMembers.Columns.Add("m_outstanding", "ลูกหนี้ค้างชำระ")
         dgvMembers.Columns.Add("m_national", "สัญชาติ")
-        dgvMembers.Columns.Add("s_id", "สถานะสมาชิก") ' Add the new column for s_id
+        dgvMembers.Columns.Add("s_id", "สถานะสมาชิก")
 
         ' Set other DataGridView properties
         dgvMembers.DefaultCellStyle.Font = New Font("Tahoma", 10)
@@ -95,6 +93,7 @@ Public Class frmManageMembers
         dgvMembers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
         dgvMembers.EnableHeadersVisualStyles = False
     End Sub
+
 
     Sub Loadinfo()
         strSQL = "SELECT * FROM Member"
@@ -108,17 +107,17 @@ Public Class frmManageMembers
 
                     While dr.Read
                         Dim birthDate As String = DateTime.Parse(dr("m_birth").ToString()).ToString("dd/MM/yyyy")
-                        Dim age As Integer = dr("m_age") ' Retrieve age from the database
+                        Dim age As Integer = dr("m_age") ' ดึงข้อมูลอายุจากฐานข้อมูล
 
                         ' แปลงค่า s_id เป็นสถานะสมาชิก
                         Dim memberStatus As String = If(dr("s_id") = 0, "สมาชิกลาออก", "สมาชิกคงอยู่")
 
+                        ' เพิ่มข้อมูลลงใน DataGridView โดยไม่ดึง m_beginning และ m_outstanding
                         dgvMembers.Rows.Add(dr("m_id").ToString, dr("m_gender").ToString, dr("m_name").ToString,
                                         dr("m_nick").ToString, birthDate, age, dr("m_thaiid").ToString, dr("m_job").ToString,
                                         dr("m_address").ToString, dr("m_post").ToString, dr("m_tel").ToString,
                                         dr("m_accountName").ToString, dr("m_accountNum").ToString,
-                                        dr("m_beginning").ToString, dr("m_outstanding").ToString, dr("m_national").ToString,
-                                        memberStatus) ' แสดงสถานะสมาชิกแทนค่า s_id
+                                        dr("m_national").ToString, memberStatus) ' แสดงสถานะสมาชิกแทนค่า s_id
                     End While
                 Catch ex As Exception
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -126,6 +125,7 @@ Public Class frmManageMembers
             End Using
         End Using
     End Sub
+
 
     Sub ClearAllData()
         txtID.Clear()
@@ -137,8 +137,6 @@ Public Class frmManageMembers
         txtAddress.Clear()
         txtPost.Clear()
         txtTel.Clear()
-        txtOutstanding.Clear()
-        txtBeginning.Clear()
         txtAccountname.Clear()
         txtAccountnum.Clear()
 
@@ -200,17 +198,14 @@ Public Class frmManageMembers
             Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
                 conn.Open()
 
-                ' ตรวจสอบว่าเป็นการเพิ่มหรือแก้ไข
                 If isEditing Then
-                    ' Update SQL query to include s_id
                     strSQL = "UPDATE Member SET m_gender = @m_gender, m_name = @m_name, m_nick = @m_nick, m_birth = @m_birth, m_national = @m_national, " &
-                             "m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, m_post = @m_post, m_tel = @m_tel, m_accountName = @m_accountName, " &
-                             "m_accountNum = @m_accountNum, m_beginning = @m_beginning, m_outstanding = @m_outstanding, m_age = @m_age, s_id = @s_id WHERE m_id = @m_id"
+                         "m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, m_post = @m_post, m_tel = @m_tel, " &
+                         "m_accountName = @m_accountName, m_accountNum = @m_accountNum, m_age = @m_age, s_id = @s_id WHERE m_id = @m_id"
                 Else
-                    ' Insert SQL query to include s_id
-                    strSQL = "INSERT INTO Member (m_id, m_gender, m_name, m_nick, m_birth, m_national, m_thaiid, m_job, m_address, m_post, m_tel, m_accountName, " &
-                             "m_accountNum, m_beginning, m_outstanding, m_age, s_id) VALUES (@m_id, @m_gender, @m_name, @m_nick, @m_birth, @m_national, @m_thaiid, " &
-                             "@m_job, @m_address, @m_post, @m_tel, @m_accountName, @m_accountNum, @m_beginning, @m_outstanding, @m_age, @s_id)"
+                    strSQL = "INSERT INTO Member (m_id, m_gender, m_name, m_nick, m_birth, m_national, m_thaiid, m_job, m_address, m_post, m_tel, " &
+                         "m_accountName, m_accountNum, m_age, s_id) VALUES (@m_id, @m_gender, @m_name, @m_nick, @m_birth, @m_national, " &
+                         "@m_thaiid, @m_job, @m_address, @m_post, @m_tel, @m_accountName, @m_accountNum, @m_age, @s_id)"
                 End If
 
                 Using cmd As New OleDbCommand(strSQL, conn)
@@ -227,27 +222,13 @@ Public Class frmManageMembers
                     cmd.Parameters.AddWithValue("@m_tel", txtTel.Text.Trim())
                     cmd.Parameters.AddWithValue("@m_accountName", txtAccountname.Text.Trim())
                     cmd.Parameters.AddWithValue("@m_accountNum", txtAccountnum.Text.Trim())
-
-                    ' Check and add parameters for m_beginning and m_outstanding
-                    If String.IsNullOrEmpty(txtBeginning.Text.Trim()) Then
-                        cmd.Parameters.AddWithValue("@m_beginning", DBNull.Value)
-                    Else
-                        cmd.Parameters.AddWithValue("@m_beginning", Double.Parse(txtBeginning.Text.Trim()))
-                    End If
-
-                    If String.IsNullOrEmpty(txtOutstanding.Text.Trim()) Then
-                        cmd.Parameters.AddWithValue("@m_outstanding", DBNull.Value)
-                    Else
-                        cmd.Parameters.AddWithValue("@m_outstanding", Double.Parse(txtOutstanding.Text.Trim()))
-                    End If
-
                     cmd.Parameters.AddWithValue("@m_age", CalculateAge(dtpBirth.Value.ToString("dd/MM/yyyy")))
-                    cmd.Parameters.AddWithValue("@s_id", If(cmbStatus.SelectedItem.ToString() = "สมาชิกคงอยู่", 1, 0)) ' Add the s_id parameter
+                    cmd.Parameters.AddWithValue("@s_id", If(cmbStatus.SelectedItem.ToString() = "สมาชิกคงอยู่", 1, 0))
 
                     Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
                     If rowsAffected > 0 Then
                         MessageBox.Show("บันทึกข้อมูลสำเร็จ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        Loadinfo()  ' Refresh the data in DataGridView
+                        Loadinfo()
                         If Not isEditing Then
                             ClearAllData()
                             Auto_id()
@@ -261,6 +242,7 @@ Public Class frmManageMembers
             MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
     Private Function AllFieldsFilled() As Boolean
 
@@ -314,8 +296,6 @@ Public Class frmManageMembers
             txtTel.Text = row.Cells("m_tel").Value.ToString()
             txtAccountname.Text = row.Cells("m_accountName").Value.ToString()
             txtAccountnum.Text = row.Cells("m_accountNum").Value.ToString()
-            txtBeginning.Text = row.Cells("m_beginning").Value.ToString()
-            txtOutstanding.Text = row.Cells("m_outstanding").Value.ToString()
             cmbNational.SelectedItem = row.Cells("m_national").Value.ToString()
 
             ' แปลงค่า s_id เป็นสถานะสมาชิก
@@ -376,13 +356,11 @@ Public Class frmManageMembers
     End Sub
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        ' ตรวจสอบว่ามีการเลือกข้อมูลหรือไม่
         If String.IsNullOrWhiteSpace(txtID.Text) Then
             MessageBox.Show("กรุณาเลือกสมาชิกก่อนทำการอัปเดต", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        ' ตรวจสอบว่าฟิลด์ทั้งหมดถูกกรอกแล้ว
         If Not AllFieldsFilled() Then
             MessageBox.Show("โปรดกรอกข้อมูลให้ครบถ้วน", "Incomplete Data", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -407,7 +385,6 @@ Public Class frmManageMembers
                 reader.Close()
             End Using
 
-            ' ตรวจสอบว่าพบ s_id หรือไม่
             If s_id = -1 Then
                 MessageBox.Show("ไม่พบสถานะที่เลือก", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Return
@@ -415,16 +392,11 @@ Public Class frmManageMembers
 
             ' คำสั่ง SQL สำหรับอัปเดตข้อมูลสมาชิก
             strSQL = "UPDATE Member SET m_gender = @m_gender, m_name = @m_name, m_nick = @m_nick, m_birth = @m_birth, " &
-                     "m_national = @m_national, m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, " &
-                     "m_post = @m_post, m_tel = @m_tel, m_accountName = @m_accountName, m_accountNum = @m_accountNum, " &
-                     "m_beginning = @m_beginning, m_outstanding = @m_outstanding, m_age = @m_age, s_id = @s_id WHERE m_id = @m_id"
+                 "m_national = @m_national, m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, " &
+                 "m_post = @m_post, m_tel = @m_tel, m_accountName = @m_accountName, m_accountNum = @m_accountNum, " &
+                 "m_age = @m_age, s_id = @s_id WHERE m_id = @m_id"
 
-            ' แสดง SQL Query ที่จะถูกส่งไปยังฐานข้อมูล
-            Debug.WriteLine("SQL Query: " & strSQL)
-
-            ' สร้าง OleDbCommand สำหรับอัปเดตข้อมูล
             Using cmd As New OleDbCommand(strSQL, conn)
-                ' กำหนดค่าให้กับพารามิเตอร์
                 cmd.Parameters.AddWithValue("@m_gender", cmbGender.SelectedItem.ToString())
                 cmd.Parameters.AddWithValue("@m_name", txtName.Text.Trim())
                 cmd.Parameters.AddWithValue("@m_nick", txtnick.Text.Trim())
@@ -437,37 +409,17 @@ Public Class frmManageMembers
                 cmd.Parameters.AddWithValue("@m_tel", txtTel.Text.Trim())
                 cmd.Parameters.AddWithValue("@m_accountName", txtAccountname.Text.Trim())
                 cmd.Parameters.AddWithValue("@m_accountNum", txtAccountnum.Text.Trim())
-
-                ' แปลงค่าเริ่มต้นและยอดค้างชำระ
-                If String.IsNullOrEmpty(txtBeginning.Text.Trim()) Then
-                    cmd.Parameters.AddWithValue("@m_beginning", DBNull.Value)
-                Else
-                    cmd.Parameters.AddWithValue("@m_beginning", Double.Parse(txtBeginning.Text.Trim()))
-                End If
-
-                If String.IsNullOrEmpty(txtOutstanding.Text.Trim()) Then
-                    cmd.Parameters.AddWithValue("@m_outstanding", DBNull.Value)
-                Else
-                    cmd.Parameters.AddWithValue("@m_outstanding", Double.Parse(txtOutstanding.Text.Trim()))
-                End If
-
-                ' คำนวณอายุ
                 cmd.Parameters.AddWithValue("@m_age", CalculateAge(dtpBirth.Value.ToString("dd/MM/yyyy")))
-
-                ' เพิ่มค่า s_id ที่ได้จากตาราง Memberstatus
                 cmd.Parameters.AddWithValue("@s_id", s_id)
-
-                ' กำหนดค่า ID
                 cmd.Parameters.AddWithValue("@m_id", txtID.Text.Trim())
 
-                ' ดำเนินการอัปเดต
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
                 If rowsAffected > 0 Then
                     MessageBox.Show("อัปเดตข้อมูลสำเร็จ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Loadinfo() ' โหลดข้อมูลใหม่ใน DataGridView
-                    ClearAllData() ' เคลียร์ข้อมูลทั้งหมดหลังอัปเดต
-                    Auto_id() ' สร้าง ID ใหม่สำหรับรายการถัดไป
+                    Loadinfo()
+                    ClearAllData()
+                    Auto_id()
                 Else
                     MessageBox.Show("ไม่มีการเปลี่ยนแปลงข้อมูล", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
@@ -482,6 +434,7 @@ Public Class frmManageMembers
     End Sub
 
 
+
     Private Function IsLettersOnly(input As String) As Boolean
         ' วนลูปผ่านทุกตัวอักษรในสตริงเพื่อตรวจสอบว่าทุกตัวเป็นตัวอักษร
         For Each c As Char In input
@@ -491,6 +444,82 @@ Public Class frmManageMembers
         Next
         Return True ' ถ้าเป็นตัวอักษรทั้งหมด ให้คืนค่าเป็น True
     End Function
+
+    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
+        Dim currentText As String = txtName.Text
+        Dim filteredText As String = ""
+
+        ' วนลูปตรวจสอบแต่ละตัวอักษรใน TextBox
+        For Each c As Char In currentText
+            ' ตรวจสอบว่าเป็นตัวอักษร (รวมทั้งภาษาไทย) หรือช่องว่างเท่านั้น
+            If Char.IsLetter(c) Or Char.IsWhiteSpace(c) Or Char.GetUnicodeCategory(c) = Globalization.UnicodeCategory.NonSpacingMark Then
+                filteredText &= c ' ถ้าเป็นตัวอักษรหรือช่องว่างให้นำมาใช้ได้
+            End If
+        Next
+
+        ' กำหนดค่าใหม่ให้กับ TextBox โดยกรองตัวเลขออกไป
+        If filteredText <> currentText Then
+            txtName.Text = filteredText
+            txtName.SelectionStart = txtName.Text.Length ' เลื่อนเคอร์เซอร์ไปที่ตำแหน่งท้ายสุดของข้อความ
+        End If
+    End Sub
+
+    Private Sub txtJob_TextChanged(sender As Object, e As EventArgs) Handles txtJob.TextChanged
+        Dim currentText As String = txtJob.Text
+        Dim filteredText As String = ""
+
+        ' วนลูปตรวจสอบแต่ละตัวอักษรใน TextBox
+        For Each c As Char In currentText
+            ' ตรวจสอบว่าเป็นตัวอักษร (รวมทั้งภาษาไทย) หรือช่องว่างเท่านั้น
+            If Char.IsLetter(c) Or Char.IsWhiteSpace(c) Or Char.GetUnicodeCategory(c) = Globalization.UnicodeCategory.NonSpacingMark Then
+                filteredText &= c ' ถ้าเป็นตัวอักษรหรือช่องว่างให้นำมาใช้ได้
+            End If
+        Next
+
+        ' กำหนดค่าใหม่ให้กับ TextBox โดยกรองตัวเลขออกไป
+        If filteredText <> currentText Then
+            txtJob.Text = filteredText
+            txtJob.SelectionStart = txtJob.Text.Length ' เลื่อนเคอร์เซอร์ไปที่ตำแหน่งท้ายสุดของข้อความ
+        End If
+    End Sub
+
+    Private Sub txtAccountname_TextChanged(sender As Object, e As EventArgs) Handles txtAccountname.TextChanged
+        Dim currentText As String = txtAccountname.Text
+        Dim filteredText As String = ""
+
+        ' วนลูปตรวจสอบแต่ละตัวอักษรใน TextBox
+        For Each c As Char In currentText
+            ' ตรวจสอบว่าเป็นตัวอักษร (รวมทั้งภาษาไทย) หรือช่องว่างเท่านั้น
+            If Char.IsLetter(c) Or Char.IsWhiteSpace(c) Or Char.GetUnicodeCategory(c) = Globalization.UnicodeCategory.NonSpacingMark Then
+                filteredText &= c ' ถ้าเป็นตัวอักษรหรือช่องว่างให้นำมาใช้ได้
+            End If
+        Next
+
+        ' กำหนดค่าใหม่ให้กับ TextBox โดยกรองตัวเลขออกไป
+        If filteredText <> currentText Then
+            txtAccountname.Text = filteredText
+            txtAccountname.SelectionStart = txtAccountname.Text.Length ' เลื่อนเคอร์เซอร์ไปที่ตำแหน่งท้ายสุดของข้อความ
+        End If
+    End Sub
+
+    Private Sub txtnick_TextChanged(sender As Object, e As EventArgs) Handles txtnick.TextChanged
+        Dim currentText As String = txtnick.Text
+        Dim filteredText As String = ""
+
+        ' วนลูปตรวจสอบแต่ละตัวอักษรใน TextBox
+        For Each c As Char In currentText
+            ' ตรวจสอบว่าเป็นตัวอักษร (รวมทั้งภาษาไทย) หรือช่องว่างเท่านั้น
+            If Char.IsLetter(c) Or Char.IsWhiteSpace(c) Or Char.GetUnicodeCategory(c) = Globalization.UnicodeCategory.NonSpacingMark Then
+                filteredText &= c ' ถ้าเป็นตัวอักษรหรือช่องว่างให้นำมาใช้ได้
+            End If
+        Next
+
+        ' กำหนดค่าใหม่ให้กับ TextBox โดยกรองตัวเลขออกไป
+        If filteredText <> currentText Then
+            txtnick.Text = filteredText
+            txtnick.SelectionStart = txtnick.Text.Length ' เลื่อนเคอร์เซอร์ไปที่ตำแหน่งท้ายสุดของข้อความ
+        End If
+    End Sub
 
 
 End Class

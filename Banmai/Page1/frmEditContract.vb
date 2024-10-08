@@ -587,4 +587,19 @@ Public Class frmEditContract
         End If
     End Sub
 
+
+    Private Sub txtContractAmount_TextChanged(sender As Object, e As EventArgs) Handles txtContractAmount.TextChanged
+        ' ฟอร์แมตตัวเลขเมื่อผู้ใช้ออกจาก TextBox
+        If txtContractAmount.Text.Length > 0 Then
+            ' ลบคอมมาออกก่อนการจัดรูปแบบใหม่
+            Dim valueWithoutComma As String = txtContractAmount.Text.Replace(",", "")
+
+            ' ตรวจสอบว่า input เป็นตัวเลขทศนิยมหรือไม่
+            If IsNumeric(valueWithoutComma) Then
+                ' แปลง input เป็นทศนิยมและจัดรูปแบบใหม่ด้วยคอมมา (ทศนิยม 2 ตำแหน่ง)
+                Dim amount As Decimal = Decimal.Parse(valueWithoutComma)
+                txtContractAmount.Text = String.Format("{0:N2}", amount) ' แสดงตัวเลขพร้อมคอมมาและทศนิยม 2 ตำแหน่ง
+            End If
+        End If
+    End Sub
 End Class

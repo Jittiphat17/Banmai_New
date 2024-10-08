@@ -15,12 +15,30 @@ Public Class frmMain
             tsm_inc.Enabled = True
             tsm_report.Enabled = True
             tsm_other.Enabled = True
+
+        ElseIf User_type = "เหรัญญิก" Then
+            ' เปิดการใช้งานเมนูสำหรับเหรัญญิก
+            tsm_exp.Enabled = True
+            tsm_inc.Enabled = True
+            tsm_report.Enabled = True
+            tsm_other.Enabled = True
+            แกไขสญญาToolStripMenuItem.Visible = False ' ปิดการใช้งานสำหรับเหรัญญิก
+            แกไขรายรบToolStripMenuItem.Visible = False
+            จดการสมาชกToolStripMenuItem.Visible = False
+            จดการสทธToolStripMenuItem.Visible = False
+
+
         Else
-            ' ปิดการใช้งานเมนูสำหรับผู้ใช้ที่ไม่ใช่ Admin หรือ ประธาน
-            tsm_exp.Enabled = False
-            tsm_inc.Enabled = False
-            tsm_report.Enabled = False
-            tsm_other.Enabled = False
+            ' ปิดการใช้งานเมนูสำหรับผู้ใช้ที่ไม่ใช่ Admin หรือ ประธาน หรือ เหรัญญิก
+            สมาชกลาออกToolStripMenuItem.Visible = False
+            จดการสมาชกToolStripMenuItem.Visible = False
+            อานบตรToolStripMenuItem.Visible = False
+            ขอมลToolStripMenuItem.Visible = False
+            จดการสทธToolStripMenuItem.Visible = False
+            จดการกองทนToolStripMenuItem.Visible = False
+            การปดงบToolStripMenuItem.Visible = False
+            tsm_exp.Visible = False
+            tsm_inc.Visible = False
         End If
     End Sub
 

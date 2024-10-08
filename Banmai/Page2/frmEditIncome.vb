@@ -179,7 +179,7 @@ Public Class frmEditIncome
             Dim cmd As New OleDbCommand(query, conn)
             cmd.Parameters.AddWithValue("@description", txtIncomeName.Text)
             cmd.Parameters.AddWithValue("@date", dtpIncomeDate.Value)
-            cmd.Parameters.AddWithValue("@amount", Convert.ToDouble(txtIncomeAmount.Text))
+            cmd.Parameters.AddWithValue("@amount", Convert.ToDecimal(txtIncomeAmount.Text))
             cmd.Parameters.AddWithValue("@acc_id", Convert.ToString(cmbAccount.SelectedValue))
             cmd.Parameters.AddWithValue("@inc_id", Convert.ToInt32(txtIncomeID.Text))
             cmd.ExecuteNonQuery()
@@ -188,8 +188,8 @@ Public Class frmEditIncome
             UpdateIncomeDetails()
 
             MessageBox.Show("แก้ไขข้อมูลสำเร็จ")
-            LoadIncome()
-            LoadIncomeDetails()
+            LoadIncome() ' โหลดข้อมูลรายรับใหม่
+            LoadIncomeDetails() ' โหลดข้อมูลรายละเอียดรายรับใหม่
 
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " & ex.Message)
@@ -198,23 +198,52 @@ Public Class frmEditIncome
         End Try
     End Sub
 
-    ' ฟังก์ชันบันทึกการแก้ไขรายละเอียดรายรับ
     Private Sub UpdateIncomeDetails()
         Try
-            For Each row As DataGridViewRow In dgvIncomeDetails.Rows
-                If Not row.IsNewRow Then
-                    Dim query As String = "UPDATE Income_Details SET ind_accname = @accname, ind_amount = @amount WHERE ind_id = @ind_id"
-                    Dim cmd As New OleDbCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@accname", row.Cells("ind_accname").Value)
-                    cmd.Parameters.AddWithValue("@amount", Convert.ToDouble(row.Cells("ind_amount").Value))
-                    cmd.Parameters.AddWithValue("@ind_id", Convert.ToInt32(row.Cells("ind_id").Value))
-                    cmd.ExecuteNonQuery()
+            If conn.State = ConnectionState.Closed Then conn.Open()
+
+            ' Use Transaction for data integrity
+            Dim transaction As OleDbTransaction = conn.BeginTransaction()
+
+            Try
+                ' Fetch values for updating Income_Details
+                Dim detailID As String = txtDetailID.Text
+                Dim accname As String = txtDetailName.Text
+                Dim amount As Decimal = Convert.ToDecimal(txtDetailAmount.Text)
+
+                ' Check that values are not empty
+                If String.IsNullOrEmpty(detailID) OrElse String.IsNullOrEmpty(accname) OrElse amount = 0 Then
+                    MessageBox.Show("Please fill in all details correctly.")
+                    transaction.Rollback()
+                    Return
                 End If
-            Next
+
+                ' Prepare update query for Income_Details table
+                Dim updateDetailQuery As String = "UPDATE Income_Details SET ind_accname = @accname, ind_amount = @amount WHERE ind_id = @ind_id"
+                Dim cmdUpdateDetail As New OleDbCommand(updateDetailQuery, conn, transaction)
+                cmdUpdateDetail.Parameters.AddWithValue("@accname", accname)
+                cmdUpdateDetail.Parameters.AddWithValue("@amount", amount)
+
+                cmdUpdateDetail.Parameters.AddWithValue("@ind_id", detailID)
+
+                cmdUpdateDetail.ExecuteNonQuery()
+
+                ' Commit if everything goes well
+                transaction.Commit()
+                MessageBox.Show("Income details updated successfully!")
+
+            Catch ex As Exception
+                transaction.Rollback()
+                MessageBox.Show("Error updating income details: " & ex.Message)
+            End Try
+
         Catch ex As Exception
-            MessageBox.Show("เกิดข้อผิดพลาดในการอัปเดตรายละเอียดรายรับ: " & ex.Message)
+            MessageBox.Show("Error updating income details: " & ex.Message)
+        Finally
+            If conn.State = ConnectionState.Open Then conn.Close()
         End Try
     End Sub
+
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         ' ตรวจสอบว่ามีการเลือกข้อมูลใน DataGridView หรือไม่
@@ -308,5 +337,23 @@ Public Class frmEditIncome
         End Try
     End Sub
 
+    Private Sub txtIncomeAmount_TextChanged(sender As Object, e As EventArgs) Handles txtIncomeAmount.TextChanged
+        ' เรียกฟังก์ชันเพื่อจัดรูปแบบตัวเลข
+        FormatNumberWithComma(txtIncomeAmount)
+    End Sub
+
+    Private Sub txtDetailAmount_TextChanged(sender As Object, e As EventArgs) Handles txtDetailAmount.TextChanged
+        ' เรียกฟังก์ชันเพื่อจัดรูปแบบตัวเลข
+        FormatNumberWithComma(txtDetailAmount)
+    End Sub
+    Private Sub FormatNumberWithComma(textBox As Guna2TextBox)
+        If Not String.IsNullOrWhiteSpace(textBox.Text) Then
+            Dim value As Decimal
+            ' ลบคอมม่าออกก่อนแปลงค่า และจัดรูปแบบใหม่ด้วยเครื่องหมายคอมมา
+            If Decimal.TryParse(textBox.Text.Replace(",", ""), value) Then
+                textBox.Text = value.ToString("N2") ' รูปแบบทศนิยม 2 ตำแหน่ง
+            End If
+        End If
+    End Sub
 
 End Class

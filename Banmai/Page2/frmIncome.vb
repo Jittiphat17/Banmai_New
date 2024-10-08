@@ -305,7 +305,7 @@ Public Class frmIncome
                 Dim contractNumber As String = dgvPaymentDetails.CurrentRow.Cells("PaymentContractNumber").Value.ToString()
 
             Else
-                MessageBox.Show("ไม่มีข้อมูลให้เลือก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
             End If
 
         Catch ex As Exception
@@ -372,6 +372,7 @@ Public Class frmIncome
                                         ' เรียกฟังก์ชันอื่นๆ หลังจากอัพเดทข้อมูล
                                         SaveTransactionToDatabase()
 
+
                                         ' ล้างข้อมูลในฟอร์มหลังจากบันทึกเสร็จ
                                         cleartext()
                                     End Using
@@ -391,6 +392,36 @@ Public Class frmIncome
                 SaveIncomeDetailsToDatabase()
                 cleartext() ' ล้างข้อมูลในฟอร์ม
             End If
+        Catch ex As Exception
+            MessageBox.Show("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+    Private Sub SavePaymentData()
+        Try
+            ' ดึงข้อมูลสมาชิก
+            Dim memberId As String = txtMemberID.Text
+
+            If String.IsNullOrEmpty(memberId) Then
+                MessageBox.Show("กรุณาเลือกหรือระบุชื่อสมาชิก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            ' ชำระเงินสำหรับทุกรายการในตาราง dgvPaymentDetails
+            For Each row As DataGridViewRow In dgvPaymentDetails.Rows
+                If Not row.IsNewRow Then
+                    Dim contractNumber As String = row.Cells("PaymentContractNumber").Value.ToString()
+                    Dim paymentType As String = row.Cells("PaymentType").Value.ToString()
+                    Dim amount As Decimal = CDec(row.Cells("PaymentAmount").Value)
+
+                    ' หักยอดเงินและอัปเดตสถานะการชำระเงิน พร้อมอัปเดตฟิลด์ payment_balance
+                    If DeductBalance(contractNumber, amount) Then
+                        UpdatePaymentStatus(contractNumber)
+                    End If
+                End If
+            Next
+
+            ' เคลียร์ข้อมูลหลังจากบันทึกเสร็จ
+            ClearAll()
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -669,7 +700,10 @@ Public Class frmIncome
             ' รวมยอดจากทั้งสอง DataGridView
             Dim grandTotal As Decimal = totalPaymentAmount + totalIncomeAmount
 
-            ' เรียกใช้ฟังก์ชัน CheckPaymentDate (ถ้ามีการเลือกแถว)
+            ' เรียกใช้ฟังก์ชัน
+            '
+            '
+            ' (ถ้ามีการเลือกแถว)
             If dgvPaymentDetails.CurrentRow IsNot Nothing Then
                 CheckPaymentDate()
             End If
@@ -1058,15 +1092,24 @@ Public Class frmIncome
                                     Dim dateDifference As Integer = (currentDate - paymentDate).Days
 
                                     ' ถ้าความแตกต่างมากกว่า 7 วัน
+                                    ' ถ้าความแตกต่างมากกว่า 7 วัน
                                     If dateDifference > 7 Then
                                         ' แสดง popup แจ้งเตือน
                                         MessageBox.Show("ท่านชำระบริการเกินกำหนดในงวดนี้ : " & (dateDifference - 7).ToString() & " วัน", "แจ้งเตือน", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                                         ' เพิ่มแถวใหม่ใน DataGridView สำหรับ "ค่าปรับ"
                                         Dim newRowIndex As Integer = dgvPaymentDetails.Rows.Add()
+
+                                        ' กำหนดค่าให้กับเซลล์ในแถวใหม่
+                                        dgvPaymentDetails.Rows(newRowIndex).Cells("PaymentContractNumber").Value = contractNumber ' เลขที่สัญญา
+
                                         dgvPaymentDetails.Rows(newRowIndex).Cells("PaymentType").Value = "ค่าปรับ"
-                                        dgvPaymentDetails.Rows(newRowIndex).Cells("PaymentAmount").Value = (paymentAmount * 0.05D) * (dateDifference - 7)
+
+                                        ' คำนวณค่าปรับจากจำนวนวันเกินกำหนด
+                                        Dim fineAmount As Decimal = (paymentAmount * 0.05D) * (dateDifference - 7)
+                                        dgvPaymentDetails.Rows(newRowIndex).Cells("PaymentAmount").Value = fineAmount ' ค่าปรับ
                                     End If
+
 
                                 End While
                             Else
@@ -1388,6 +1431,17 @@ Public Class frmIncome
         ' คำนวณยอดคงเหลือ
         Dim balanceAmount As Decimal = enteredAmount - totalAmount
         lblBalanceAmount.Text = balanceAmount.ToString("N2")
+    End Sub
+
+    Private Sub btnGenerateReceipt_Click(sender As Object, e As EventArgs) Handles btnGenerateReceipt.Click
+        ' สร้างอินสแตนซ์ของ frmCon
+        Dim frm As New frmCon()
+
+        ' แสดงฟอร์ม frmCon
+        frm.Show()
+
+        ' ถ้าคุณต้องการซ่อนฟอร์มปัจจุบัน (frmIncome) เมื่อเปิด frmCon ให้เพิ่มบรรทัดนี้:
+        ' Me.Hide()
     End Sub
 
 

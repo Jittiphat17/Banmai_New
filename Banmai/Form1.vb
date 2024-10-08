@@ -82,8 +82,20 @@ Public Class Form1
     End Sub
 
     Private Sub Guna2ControlBox1_Click(sender As Object, e As EventArgs) Handles Guna2ControlBox1.Click
-        ' ออกจากโปรแกรม
-        Application.Exit()
+        ' ตรวจสอบว่าผู้ใช้ต้องการออกจากโปรแกรม
+        Dim result As DialogResult = MessageBox.Show("คุณต้องการปิดโปรแกรมหรือไม่?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        ' ตรวจสอบว่าผู้ใช้คลิก Yes หรือไม่
+        If result = DialogResult.Yes Then
+            ' ปิดการเชื่อมต่อฐานข้อมูลถ้ามีการเปิดอยู่
+            If Conn IsNot Nothing AndAlso Conn.State = ConnectionState.Open Then
+                Conn.Close()
+            End If
+
+            ' ออกจากโปรแกรม
+            Application.Exit()
+        End If
     End Sub
+
 
 End Class
