@@ -662,7 +662,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>  ผู้รับเงิน</Value>
+                    <Value>     ผู้จ่ายเงิน</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
                       <FontSize>14pt</FontSize>
@@ -677,7 +677,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>ลงชื่อ (                                                    ) ผู้รับเงิน</Value>
+                    <Value>ลงชื่อ (                                                    ) ผู้จ่ายเงิน</Value>
                     <Style>
                       <FontFamily>Angsana New</FontFamily>
                       <FontSize>14pt</FontSize>

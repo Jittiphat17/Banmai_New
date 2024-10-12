@@ -194,7 +194,7 @@ Partial Class frmCard
         Me.cbStaus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbStaus.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.cbStaus.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cbStaus.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbStaus.Font = New System.Drawing.Font("FC Minimal", 14.25!)
         Me.cbStaus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.cbStaus.ItemHeight = 30
         Me.cbStaus.Location = New System.Drawing.Point(898, 512)

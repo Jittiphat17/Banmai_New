@@ -264,6 +264,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>individualDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="individualDS.vb">
+      <DependentUpon>individualDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

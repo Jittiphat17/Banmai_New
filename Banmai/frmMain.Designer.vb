@@ -29,14 +29,20 @@ Partial Class frmMain
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.Guna2Elipse2 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.lblUserInfo = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.lblDateTime = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2GroupBox2 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.lbContractCount = New System.Windows.Forms.Label()
-        Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
+        Me.lbCount = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.miniToolStrip = New System.Windows.Forms.MenuStrip()
         Me.tsm_exp = New System.Windows.Forms.ToolStripMenuItem()
         Me.สญญาToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ทำสญญาToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -69,25 +75,17 @@ Partial Class frmMain
         Me.จดการกองทนToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.การปดงบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ออกจากระบบToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
-        Me.lbCount = New System.Windows.Forms.Label()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
-        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
-        Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ปดToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Guna2GroupBox2.SuspendLayout()
-        Me.Guna2Panel1.SuspendLayout()
-        Me.MenuStrip1.SuspendLayout()
         Me.Guna2GroupBox1.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Guna2Panel1.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Guna2Elipse1
-        '
-        Me.Guna2Elipse1.BorderRadius = 0
         '
         'Guna2Elipse2
         '
@@ -95,9 +93,11 @@ Partial Class frmMain
         '
         'lblUserInfo
         '
+        Me.lblUserInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblUserInfo.BackColor = System.Drawing.Color.Transparent
         Me.lblUserInfo.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUserInfo.Location = New System.Drawing.Point(174, 573)
+        Me.lblUserInfo.Location = New System.Drawing.Point(257, 573)
         Me.lblUserInfo.Name = "lblUserInfo"
         Me.lblUserInfo.Size = New System.Drawing.Size(131, 23)
         Me.lblUserInfo.TabIndex = 26
@@ -105,9 +105,11 @@ Partial Class frmMain
         '
         'lblDateTime
         '
+        Me.lblDateTime.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblDateTime.BackColor = System.Drawing.Color.Transparent
         Me.lblDateTime.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDateTime.Location = New System.Drawing.Point(758, 573)
+        Me.lblDateTime.Location = New System.Drawing.Point(740, 573)
         Me.lblDateTime.Name = "lblDateTime"
         Me.lblDateTime.Size = New System.Drawing.Size(133, 23)
         Me.lblDateTime.TabIndex = 27
@@ -115,14 +117,16 @@ Partial Class frmMain
         '
         'Guna2GroupBox2
         '
-        Me.Guna2GroupBox2.BackColor = System.Drawing.Color.Black
+        Me.Guna2GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2GroupBox2.BackColor = System.Drawing.Color.White
         Me.Guna2GroupBox2.Controls.Add(Me.lbContractCount)
         Me.Guna2GroupBox2.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox2.Location = New System.Drawing.Point(174, 168)
+        Me.Guna2GroupBox2.Location = New System.Drawing.Point(174, 182)
         Me.Guna2GroupBox2.Name = "Guna2GroupBox2"
-        Me.Guna2GroupBox2.Size = New System.Drawing.Size(830, 113)
+        Me.Guna2GroupBox2.Size = New System.Drawing.Size(830, 150)
         Me.Guna2GroupBox2.TabIndex = 30
         Me.Guna2GroupBox2.Text = "จำนวนการทำสัญญา"
         '
@@ -138,37 +142,131 @@ Partial Class frmMain
         Me.lbContractCount.TabIndex = 2
         Me.lbContractCount.Text = "แสดงจำนวนสัญญา"
         '
-        'Guna2Panel1
+        'Guna2GroupBox1
         '
-        Me.Guna2Panel1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Guna2Panel1.Controls.Add(Me.MenuStrip1)
-        Me.Guna2Panel1.Location = New System.Drawing.Point(0, 28)
-        Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.ShadowDecoration.BorderRadius = 30
-        Me.Guna2Panel1.ShadowDecoration.Color = System.Drawing.Color.Gray
-        Me.Guna2Panel1.ShadowDecoration.Depth = 20
-        Me.Guna2Panel1.ShadowDecoration.Enabled = True
-        Me.Guna2Panel1.Size = New System.Drawing.Size(159, 598)
-        Me.Guna2Panel1.TabIndex = 28
+        Me.Guna2GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2GroupBox1.Controls.Add(Me.lbCount)
+        Me.Guna2GroupBox1.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2GroupBox1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
+        Me.Guna2GroupBox1.Location = New System.Drawing.Point(174, 36)
+        Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
+        Me.Guna2GroupBox1.Size = New System.Drawing.Size(830, 140)
+        Me.Guna2GroupBox1.TabIndex = 30
+        Me.Guna2GroupBox1.Text = "จำนวนสมาชิก"
         '
-        'MenuStrip1
+        'lbCount
         '
-        Me.MenuStrip1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.MenuStrip1.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsm_exp, Me.tsm_inc, Me.tsm_report, Me.tsm_other, Me.ออกจากระบบToolStripMenuItem1})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.MenuStrip1.Size = New System.Drawing.Size(161, 598)
-        Me.MenuStrip1.TabIndex = 0
-        Me.MenuStrip1.Text = "MenuStrip1"
+        Me.lbCount.AutoSize = True
+        Me.lbCount.BackColor = System.Drawing.Color.White
+        Me.lbCount.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lbCount.Location = New System.Drawing.Point(120, 65)
+        Me.lbCount.Name = "lbCount"
+        Me.lbCount.Size = New System.Drawing.Size(130, 21)
+        Me.lbCount.TabIndex = 1
+        Me.lbCount.Text = "แสดงจำนวนสมาชิก"
+        '
+        'Timer1
+        '
+        '
+        'Guna2Panel2
+        '
+        Me.Guna2Panel2.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2Panel2.Controls.Add(Me.Guna2ControlBox1)
+        Me.Guna2Panel2.Controls.Add(Me.Guna2ControlBox2)
+        Me.Guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Guna2Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Guna2Panel2.Name = "Guna2Panel2"
+        Me.Guna2Panel2.Size = New System.Drawing.Size(1016, 30)
+        Me.Guna2Panel2.TabIndex = 31
+        '
+        'Guna2ControlBox1
+        '
+        Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2ControlBox1.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MaximizeBox
+        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2ControlBox1.IconColor = System.Drawing.Color.White
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(915, 1)
+        Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
+        Me.Guna2ControlBox1.Size = New System.Drawing.Size(45, 29)
+        Me.Guna2ControlBox1.TabIndex = 16
+        '
+        'Guna2ControlBox2
+        '
+        Me.Guna2ControlBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2ControlBox2.BackColor = System.Drawing.Color.Red
+        Me.Guna2ControlBox2.CustomIconSize = 30.0!
+        Me.Guna2ControlBox2.FillColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Red
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(966, 1)
+        Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
+        Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
+        Me.Guna2ControlBox2.TabIndex = 15
+        '
+        'Chart1
+        '
+        Me.Chart1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend2)
+        Me.Chart1.Location = New System.Drawing.Point(174, 338)
+        Me.Chart1.Name = "Chart1"
+        Me.Chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.Chart1.Series.Add(Series2)
+        Me.Chart1.Size = New System.Drawing.Size(382, 217)
+        Me.Chart1.TabIndex = 32
+        Me.Chart1.Text = "Chart1"
+        '
+        'Chart2
+        '
+        Me.Chart2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend1)
+        Me.Chart2.Location = New System.Drawing.Point(622, 338)
+        Me.Chart2.Name = "Chart2"
+        Me.Chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series2"
+        Me.Chart2.Series.Add(Series1)
+        Me.Chart2.Size = New System.Drawing.Size(382, 217)
+        Me.Chart2.TabIndex = 33
+        Me.Chart2.Text = "Chart2"
+        '
+        'miniToolStrip
+        '
+        Me.miniToolStrip.AccessibleName = "New item selection"
+        Me.miniToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ComboBox
+        Me.miniToolStrip.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.miniToolStrip.AutoSize = False
+        Me.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None
+        Me.miniToolStrip.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.miniToolStrip.Location = New System.Drawing.Point(473, 8)
+        Me.miniToolStrip.Name = "miniToolStrip"
+        Me.miniToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.miniToolStrip.Size = New System.Drawing.Size(424, 35)
+        Me.miniToolStrip.TabIndex = 0
         '
         'tsm_exp
         '
         Me.tsm_exp.AutoSize = False
         Me.tsm_exp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.สญญาToolStripMenuItem1, Me.คาใชจายToolStripMenuItem, Me.ตารางเงนกToolStripMenuItem})
         Me.tsm_exp.Name = "tsm_exp"
-        Me.tsm_exp.Size = New System.Drawing.Size(150, 50)
+        Me.tsm_exp.Size = New System.Drawing.Size(160, 60)
         Me.tsm_exp.Text = "รายจ่าย"
         '
         'สญญาToolStripMenuItem1
@@ -218,9 +316,9 @@ Partial Class frmMain
         'tsm_inc
         '
         Me.tsm_inc.AutoSize = False
-        Me.tsm_inc.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายรบToolStripMenuItem, Me.แกไขรายรบToolStripMenuItem, Me.VvToolStripMenuItem})
+        Me.tsm_inc.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายรบToolStripMenuItem, Me.แกไขรายรบToolStripMenuItem, Me.VvToolStripMenuItem, Me.ปดToolStripMenuItem})
         Me.tsm_inc.Name = "tsm_inc"
-        Me.tsm_inc.Size = New System.Drawing.Size(150, 50)
+        Me.tsm_inc.Size = New System.Drawing.Size(160, 60)
         Me.tsm_inc.Text = "รายรับ"
         '
         'รายรบToolStripMenuItem
@@ -246,7 +344,7 @@ Partial Class frmMain
         Me.tsm_report.AutoSize = False
         Me.tsm_report.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายงานสญญาเงนกToolStripMenuItem, Me.รายงานดอกเบยสจจะToolStripMenuItem, Me.หนToolStripMenuItem, Me.รายงานงบกำไรขาดทนToolStripMenuItem, Me.รายงานลกหนรายตวToolStripMenuItem, Me.งบแสดงฐานะทางการเงนToolStripMenuItem})
         Me.tsm_report.Name = "tsm_report"
-        Me.tsm_report.Size = New System.Drawing.Size(150, 50)
+        Me.tsm_report.Size = New System.Drawing.Size(160, 60)
         Me.tsm_report.Text = "รายงาน"
         '
         'รายงานสญญาเงนกToolStripMenuItem
@@ -290,7 +388,7 @@ Partial Class frmMain
         Me.tsm_other.AutoSize = False
         Me.tsm_other.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.สมาชกToolStripMenuItem, Me.อานบตรToolStripMenuItem, Me.ขอมลToolStripMenuItem, Me.จดการสทธToolStripMenuItem, Me.จดการกองทนToolStripMenuItem, Me.การปดงบToolStripMenuItem})
         Me.tsm_other.Name = "tsm_other"
-        Me.tsm_other.Size = New System.Drawing.Size(150, 50)
+        Me.tsm_other.Size = New System.Drawing.Size(160, 60)
         Me.tsm_other.Text = "อื่นๆ"
         '
         'สมาชกToolStripMenuItem
@@ -368,100 +466,49 @@ Partial Class frmMain
         Me.ออกจากระบบToolStripMenuItem1.Margin = New System.Windows.Forms.Padding(5, 0, 0, 0)
         Me.ออกจากระบบToolStripMenuItem1.Name = "ออกจากระบบToolStripMenuItem1"
         Me.ออกจากระบบToolStripMenuItem1.Padding = New System.Windows.Forms.Padding(5, 0, 4, 0)
-        Me.ออกจากระบบToolStripMenuItem1.Size = New System.Drawing.Size(150, 50)
+        Me.ออกจากระบบToolStripMenuItem1.Size = New System.Drawing.Size(160, 60)
         Me.ออกจากระบบToolStripMenuItem1.Text = "ออกจากระบบ"
         '
-        'Guna2GroupBox1
+        'Guna2Panel1
         '
-        Me.Guna2GroupBox1.Controls.Add(Me.lbCount)
-        Me.Guna2GroupBox1.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
-        Me.Guna2GroupBox1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox1.Location = New System.Drawing.Point(174, 36)
-        Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
-        Me.Guna2GroupBox1.Size = New System.Drawing.Size(830, 113)
-        Me.Guna2GroupBox1.TabIndex = 29
-        Me.Guna2GroupBox1.Text = "จำนวนสมาชิก"
+        Me.Guna2Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Guna2Panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.Guna2Panel1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Guna2Panel1.Controls.Add(Me.MenuStrip1)
+        Me.Guna2Panel1.Location = New System.Drawing.Point(0, 28)
+        Me.Guna2Panel1.Name = "Guna2Panel1"
+        Me.Guna2Panel1.ShadowDecoration.BorderRadius = 30
+        Me.Guna2Panel1.ShadowDecoration.Color = System.Drawing.Color.Gray
+        Me.Guna2Panel1.ShadowDecoration.Depth = 20
+        Me.Guna2Panel1.ShadowDecoration.Enabled = True
+        Me.Guna2Panel1.Size = New System.Drawing.Size(168, 604)
+        Me.Guna2Panel1.TabIndex = 28
         '
-        'lbCount
+        'MenuStrip1
         '
-        Me.lbCount.AutoSize = True
-        Me.lbCount.BackColor = System.Drawing.Color.White
-        Me.lbCount.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lbCount.Location = New System.Drawing.Point(120, 65)
-        Me.lbCount.Name = "lbCount"
-        Me.lbCount.Size = New System.Drawing.Size(130, 21)
-        Me.lbCount.TabIndex = 1
-        Me.lbCount.Text = "แสดงจำนวนสมาชิก"
+        Me.MenuStrip1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.MenuStrip1.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsm_exp, Me.tsm_inc, Me.tsm_report, Me.tsm_other, Me.ออกจากระบบToolStripMenuItem1})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.MenuStrip1.Size = New System.Drawing.Size(171, 604)
+        Me.MenuStrip1.TabIndex = 0
+        Me.MenuStrip1.Text = "MenuStrip1"
         '
-        'Timer1
+        'ปดToolStripMenuItem
         '
-        '
-        'Guna2Panel2
-        '
-        Me.Guna2Panel2.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.Guna2Panel2.Controls.Add(Me.Guna2ControlBox2)
-        Me.Guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Guna2Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Guna2Panel2.Name = "Guna2Panel2"
-        Me.Guna2Panel2.Size = New System.Drawing.Size(1016, 30)
-        Me.Guna2Panel2.TabIndex = 31
-        '
-        'Guna2ControlBox2
-        '
-        Me.Guna2ControlBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Guna2ControlBox2.BackColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox2.CustomIconSize = 30.0!
-        Me.Guna2ControlBox2.FillColor = System.Drawing.Color.DarkSlateBlue
-        Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox2.Location = New System.Drawing.Point(966, 1)
-        Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
-        Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
-        Me.Guna2ControlBox2.TabIndex = 15
-        '
-        'Chart1
-        '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend2)
-        Me.Chart1.Location = New System.Drawing.Point(174, 287)
-        Me.Chart1.Name = "Chart1"
-        Me.Chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel
-        Series2.ChartArea = "ChartArea1"
-        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.Chart1.Series.Add(Series2)
-        Me.Chart1.Size = New System.Drawing.Size(382, 280)
-        Me.Chart1.TabIndex = 32
-        Me.Chart1.Text = "Chart1"
-        '
-        'Chart2
-        '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend1)
-        Me.Chart2.Location = New System.Drawing.Point(622, 287)
-        Me.Chart2.Name = "Chart2"
-        Me.Chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series2"
-        Me.Chart2.Series.Add(Series1)
-        Me.Chart2.Size = New System.Drawing.Size(382, 280)
-        Me.Chart2.TabIndex = 33
-        Me.Chart2.Text = "Chart2"
+        Me.ปดToolStripMenuItem.Name = "ปดToolStripMenuItem"
+        Me.ปดToolStripMenuItem.Size = New System.Drawing.Size(238, 32)
+        Me.ปดToolStripMenuItem.Text = "ปิด"
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1016, 608)
+        Me.ClientSize = New System.Drawing.Size(1016, 614)
         Me.Controls.Add(Me.Chart2)
         Me.Controls.Add(Me.Chart1)
         Me.Controls.Add(Me.Guna2Panel2)
@@ -476,26 +523,31 @@ Partial Class frmMain
         Me.Text = "frmMain"
         Me.Guna2GroupBox2.ResumeLayout(False)
         Me.Guna2GroupBox2.PerformLayout()
-        Me.Guna2Panel1.ResumeLayout(False)
-        Me.Guna2Panel1.PerformLayout()
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
         Me.Guna2GroupBox1.ResumeLayout(False)
         Me.Guna2GroupBox1.PerformLayout()
         Me.Guna2Panel2.ResumeLayout(False)
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Guna2Panel1.ResumeLayout(False)
+        Me.Guna2Panel1.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents Guna2Elipse1 As Guna.UI2.WinForms.Guna2Elipse
     Friend WithEvents Guna2Elipse2 As Guna.UI2.WinForms.Guna2Elipse
     Friend WithEvents lblUserInfo As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents lblDateTime As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2GroupBox2 As Guna.UI2.WinForms.Guna2GroupBox
     Friend WithEvents lbContractCount As Label
+    Friend WithEvents Guna2GroupBox1 As Guna.UI2.WinForms.Guna2GroupBox
+    Friend WithEvents lbCount As Label
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents Guna2Panel2 As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents Chart1 As DataVisualization.Charting.Chart
+    Friend WithEvents Chart2 As DataVisualization.Charting.Chart
     Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents tsm_exp As ToolStripMenuItem
@@ -507,13 +559,16 @@ Partial Class frmMain
     Friend WithEvents แกToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ตารางเงนกToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsm_inc As ToolStripMenuItem
-    Friend WithEvents แกไขรายรบToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents รายรบToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents แกไขรายรบToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents VvToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsm_report As ToolStripMenuItem
     Friend WithEvents รายงานสญญาเงนกToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents รายงานดอกเบยสจจะToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents หนToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents รายงานงบกำไรขาดทนToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents รายงานลกหนรายตวToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents งบแสดงฐานะทางการเงนToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsm_other As ToolStripMenuItem
     Friend WithEvents สมาชกToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents จดการสมาชกToolStripMenuItem As ToolStripMenuItem
@@ -525,16 +580,9 @@ Partial Class frmMain
     Friend WithEvents นำเขาขอมลToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents จดการสทธToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents จดการกองทนToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ออกจากระบบToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents Guna2GroupBox1 As Guna.UI2.WinForms.Guna2GroupBox
-    Friend WithEvents lbCount As Label
-    Friend WithEvents Timer1 As Timer
-    Friend WithEvents รายงานลกหนรายตวToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Guna2Panel2 As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents การปดงบToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents งบแสดงฐานะทางการเงนToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents VvToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Chart1 As DataVisualization.Charting.Chart
-    Friend WithEvents Chart2 As DataVisualization.Charting.Chart
+    Friend WithEvents ออกจากระบบToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents miniToolStrip As MenuStrip
+    Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents ปดToolStripMenuItem As ToolStripMenuItem
 End Class

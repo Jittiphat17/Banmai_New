@@ -42,7 +42,7 @@ Public Class frmSajja
     Private Sub LoadReportData(selectedMonth As Integer, selectedYear As Integer)
         Try
             ' Convert selectedYear to ค.ศ. (CE)
-            Dim selectedCEYear As Integer = selectedYear - 543 ' แปลงปี พ.ศ. เป็น ค.ศ.
+            Dim selectedCEYear As Integer = selectedYear
 
             Using conn As New OleDbConnection(connString)
                 conn.Open()

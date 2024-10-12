@@ -225,11 +225,11 @@ Public Class frmExpense
                 Return
             End If
 
-            ' ใช้ข้อมูลจาก txtMemberID โดยตรงในการค้นหา m_id
+            ' ตรวจสอบข้อมูลสมาชิก หากไม่พบ ให้ใช้ memberId เป็น 0
             Dim memberId As Integer = GetMemberIdByName(txtMemberID.Text)
             If memberId = 0 Then
-                MessageBox.Show("ไม่พบข้อมูลสมาชิก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
+                MessageBox.Show("ไม่พบข้อมูลสมาชิก จะบันทึกข้อมูลโดยไม่ระบุสมาชิก", "ข้อสังเกต", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                memberId = 0 ' หรือใช้ DBNull.Value ในกรณีที่ฐานข้อมูลรองรับ
             End If
 
             ' ดำเนินการบันทึกข้อมูลรายจ่าย
@@ -272,7 +272,7 @@ Public Class frmExpense
                                     cmdDetails.Parameters.AddWithValue("@exd_amount", amount)
                                     cmdDetails.Parameters.AddWithValue("@exd_date", expenseDate)
                                     cmdDetails.Parameters.AddWithValue("@ex_id", exId)
-                                    cmdDetails.Parameters.AddWithValue("@m_id", memberId) ' บันทึกค่า m_id
+                                    cmdDetails.Parameters.AddWithValue("@m_id", memberId) ' บันทึกค่า m_id (ถ้าไม่พบสมาชิกจะเป็น 0)
                                     cmdDetails.Parameters.AddWithValue("@acc_id", cboDepositType.SelectedValue) ' บันทึกค่า acc_id จาก ComboBox
 
                                     cmdDetails.ExecuteNonQuery()
@@ -292,6 +292,7 @@ Public Class frmExpense
             MessageBox.Show("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
 
     Private Sub ClearAll()
@@ -395,10 +396,27 @@ Public Class frmExpense
     End Sub
 
     Private Sub btnPrintReceipt_Click_1(sender As Object, e As EventArgs) Handles btnPrintReceipt.Click
-        Dim printPreview As New PrintPreviewDialog()
-        printPreview.Document = printDoc
-        printPreview.ShowDialog()
+        ' ตรวจสอบว่าจำนวนเงินรวมตรงกับจำนวนเงินที่ระบุหรือไม่
+        Dim totalAmount As Decimal
+        Dim inputAmount As Decimal
+
+        ' ลองแปลงค่าจาก lblTotalAmount และ txtAmount
+        If Decimal.TryParse(lblTotalAmount.Text, totalAmount) AndAlso Decimal.TryParse(txtAmount.Text, inputAmount) Then
+            ' ตรวจสอบว่าค่าทั้งสองเท่ากันหรือไม่
+            If totalAmount = inputAmount Then
+                ' เปิดการพิมพ์ถ้าจำนวนเงินตรงกัน
+                Dim printPreview As New PrintPreviewDialog()
+                printPreview.Document = printDoc
+                printPreview.ShowDialog()
+            Else
+                ' แสดงข้อความแจ้งเตือนถ้าจำนวนเงินไม่ตรงกัน
+                MessageBox.Show("จำนวนเงินรวมไม่ตรงกับจำนวนเงินที่ระบุ", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        Else
+            MessageBox.Show("กรุณากรอกจำนวนเงินที่ถูกต้อง", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
     End Sub
+
 
     Private Sub txtAmount_TextChanged(sender As Object, e As EventArgs) Handles txtAmount.TextChanged
         ' ตรวจสอบว่าไม่ใช่การลบข้อมูลทั้งหมด

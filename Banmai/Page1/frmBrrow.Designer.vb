@@ -23,9 +23,9 @@ Partial Class frmBrrow
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.guna2DataGridView1 = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.btnClear = New Guna.UI2.WinForms.Guna2Button()
@@ -62,14 +62,15 @@ Partial Class frmBrrow
         Me.txtDetail = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtCid = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Guna2HtmlLabel11 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         CType(Me.guna2DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2GroupBox2.SuspendLayout()
         Me.Guna2GroupBox1.SuspendLayout()
-        Me.Guna2Panel1.SuspendLayout()
+        Me.Guna2Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Guna2Elipse1
@@ -78,33 +79,36 @@ Partial Class frmBrrow
         '
         'guna2DataGridView1
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        Me.guna2DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+        Me.guna2DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle13
+        Me.guna2DataGridView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.guna2DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.guna2DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.guna2DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle14
         Me.guna2DataGridView1.ColumnHeadersHeight = 50
         Me.guna2DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.guna2DataGridView1.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.guna2DataGridView1.DefaultCellStyle = DataGridViewCellStyle15
         Me.guna2DataGridView1.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.guna2DataGridView1.Location = New System.Drawing.Point(13, 577)
         Me.guna2DataGridView1.Name = "guna2DataGridView1"
         Me.guna2DataGridView1.ReadOnly = True
         Me.guna2DataGridView1.RowHeadersVisible = False
-        Me.guna2DataGridView1.Size = New System.Drawing.Size(1149, 159)
+        Me.guna2DataGridView1.Size = New System.Drawing.Size(1255, 159)
         Me.guna2DataGridView1.TabIndex = 20
         Me.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -130,56 +134,60 @@ Partial Class frmBrrow
         '
         'btnClear
         '
+        Me.btnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnClear.Animated = True
-        Me.btnClear.BorderRadius = 10
+        Me.btnClear.BorderRadius = 5
         Me.btnClear.DisabledState.BorderColor = System.Drawing.Color.DarkGray
         Me.btnClear.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
         Me.btnClear.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnClear.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnClear.FillColor = System.Drawing.Color.Red
-        Me.btnClear.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClear.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold)
         Me.btnClear.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.btnClear.Location = New System.Drawing.Point(689, 742)
+        Me.btnClear.Location = New System.Drawing.Point(751, 742)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(180, 45)
+        Me.btnClear.Size = New System.Drawing.Size(161, 40)
         Me.btnClear.TabIndex = 17
         Me.btnClear.Text = "เคลียร์"
         '
         'btnAdd
         '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnAdd.Animated = True
-        Me.btnAdd.BorderRadius = 10
+        Me.btnAdd.BorderRadius = 5
         Me.btnAdd.DisabledState.BorderColor = System.Drawing.Color.DarkGray
         Me.btnAdd.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
         Me.btnAdd.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnAdd.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btnAdd.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold)
         Me.btnAdd.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.btnAdd.Location = New System.Drawing.Point(503, 742)
+        Me.btnAdd.Location = New System.Drawing.Point(584, 742)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(180, 45)
+        Me.btnAdd.Size = New System.Drawing.Size(161, 40)
         Me.btnAdd.TabIndex = 18
         Me.btnAdd.Text = "เพิ่ม"
         '
         'btnSave
         '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnSave.Animated = True
-        Me.btnSave.BorderRadius = 10
+        Me.btnSave.BorderRadius = 5
         Me.btnSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray
         Me.btnSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
         Me.btnSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnSave.FillColor = System.Drawing.Color.ForestGreen
-        Me.btnSave.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.Font = New System.Drawing.Font("FC Minimal", 20.25!, System.Drawing.FontStyle.Bold)
         Me.btnSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.btnSave.Location = New System.Drawing.Point(317, 742)
+        Me.btnSave.Location = New System.Drawing.Point(417, 742)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(180, 45)
+        Me.btnSave.Size = New System.Drawing.Size(161, 40)
         Me.btnSave.TabIndex = 19
         Me.btnSave.Text = "บันทึก"
         '
         'Guna2GroupBox2
         '
+        Me.Guna2GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2GroupBox2.Controls.Add(Me.chkGuarantor)
         Me.Guna2GroupBox2.Controls.Add(Me.Label3)
         Me.Guna2GroupBox2.Controls.Add(Me.Label2)
@@ -193,9 +201,9 @@ Partial Class frmBrrow
         Me.Guna2GroupBox2.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox2.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox2.Location = New System.Drawing.Point(593, 122)
+        Me.Guna2GroupBox2.Location = New System.Drawing.Point(648, 122)
         Me.Guna2GroupBox2.Name = "Guna2GroupBox2"
-        Me.Guna2GroupBox2.Size = New System.Drawing.Size(569, 449)
+        Me.Guna2GroupBox2.Size = New System.Drawing.Size(620, 449)
         Me.Guna2GroupBox2.TabIndex = 16
         Me.Guna2GroupBox2.Text = "ผู้ค้ำ"
         Me.Guna2GroupBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -400,8 +408,7 @@ Partial Class frmBrrow
         '
         'Guna2GroupBox1
         '
-        Me.Guna2GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.Guna2GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2GroupBox1.BackColor = System.Drawing.Color.White
         Me.Guna2GroupBox1.Controls.Add(Me.Label15)
@@ -427,7 +434,7 @@ Partial Class frmBrrow
         Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
         Me.Guna2GroupBox1.Location = New System.Drawing.Point(13, 122)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
-        Me.Guna2GroupBox1.Size = New System.Drawing.Size(574, 449)
+        Me.Guna2GroupBox1.Size = New System.Drawing.Size(629, 449)
         Me.Guna2GroupBox1.TabIndex = 15
         Me.Guna2GroupBox1.Text = "ผู้กู้"
         Me.Guna2GroupBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -714,7 +721,7 @@ Partial Class frmBrrow
         Me.txtCid.Font = New System.Drawing.Font("TH SarabunPSK", 14.25!)
         Me.txtCid.ForeColor = System.Drawing.Color.Black
         Me.txtCid.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtCid.Location = New System.Drawing.Point(1079, 77)
+        Me.txtCid.Location = New System.Drawing.Point(1185, 77)
         Me.txtCid.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.txtCid.Name = "txtCid"
         Me.txtCid.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -725,15 +732,27 @@ Partial Class frmBrrow
         Me.txtCid.Size = New System.Drawing.Size(83, 37)
         Me.txtCid.TabIndex = 23
         '
-        'Guna2Panel1
+        'Guna2Panel2
         '
-        Me.Guna2Panel1.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.Guna2Panel1.Controls.Add(Me.Guna2ControlBox2)
-        Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(1174, 30)
-        Me.Guna2Panel1.TabIndex = 21
+        Me.Guna2Panel2.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2Panel2.Controls.Add(Me.Guna2ControlBox1)
+        Me.Guna2Panel2.Controls.Add(Me.Guna2ControlBox2)
+        Me.Guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Guna2Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Guna2Panel2.Name = "Guna2Panel2"
+        Me.Guna2Panel2.Size = New System.Drawing.Size(1280, 30)
+        Me.Guna2Panel2.TabIndex = 32
+        '
+        'Guna2ControlBox1
+        '
+        Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2ControlBox1.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MaximizeBox
+        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2ControlBox1.IconColor = System.Drawing.Color.White
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1179, 1)
+        Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
+        Me.Guna2ControlBox1.Size = New System.Drawing.Size(45, 29)
+        Me.Guna2ControlBox1.TabIndex = 16
         '
         'Guna2ControlBox2
         '
@@ -742,7 +761,7 @@ Partial Class frmBrrow
         Me.Guna2ControlBox2.CustomIconSize = 30.0!
         Me.Guna2ControlBox2.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox2.Location = New System.Drawing.Point(1124, 1)
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(1230, 1)
         Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
         Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox2.TabIndex = 15
@@ -753,7 +772,7 @@ Partial Class frmBrrow
         Me.Label5.BackColor = System.Drawing.Color.White
         Me.Label5.Font = New System.Drawing.Font("TH SarabunPSK", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.Black
-        Me.Label5.Location = New System.Drawing.Point(987, 83)
+        Me.Label5.Location = New System.Drawing.Point(1093, 83)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(86, 24)
         Me.Label5.TabIndex = 22
@@ -763,7 +782,7 @@ Partial Class frmBrrow
         '
         Me.Guna2HtmlLabel11.BackColor = System.Drawing.Color.White
         Me.Guna2HtmlLabel11.Font = New System.Drawing.Font("FC Minimal", 27.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel11.Location = New System.Drawing.Point(512, 66)
+        Me.Guna2HtmlLabel11.Location = New System.Drawing.Point(584, 69)
         Me.Guna2HtmlLabel11.Name = "Guna2HtmlLabel11"
         Me.Guna2HtmlLabel11.Size = New System.Drawing.Size(114, 38)
         Me.Guna2HtmlLabel11.TabIndex = 24
@@ -774,10 +793,10 @@ Partial Class frmBrrow
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1174, 796)
+        Me.ClientSize = New System.Drawing.Size(1280, 796)
+        Me.Controls.Add(Me.Guna2Panel2)
         Me.Controls.Add(Me.Guna2HtmlLabel11)
         Me.Controls.Add(Me.txtCid)
-        Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.guna2DataGridView1)
         Me.Controls.Add(Me.btnClear)
@@ -794,7 +813,7 @@ Partial Class frmBrrow
         Me.Guna2GroupBox2.PerformLayout()
         Me.Guna2GroupBox1.ResumeLayout(False)
         Me.Guna2GroupBox1.PerformLayout()
-        Me.Guna2Panel1.ResumeLayout(False)
+        Me.Guna2Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -836,8 +855,9 @@ Partial Class frmBrrow
     Friend WithEvents txtDetail As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents txtCid As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents Guna2Panel2 As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
-    Friend WithEvents Label5 As Label
     Friend WithEvents Guna2HtmlLabel11 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Label5 As Label
 End Class

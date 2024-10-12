@@ -27,8 +27,6 @@ Partial Class frmEditContract
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
-        Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.dgvContracts = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.btnDelete = New Guna.UI2.WinForms.Guna2Button()
         Me.btnSave = New Guna.UI2.WinForms.Guna2Button()
@@ -46,7 +44,6 @@ Partial Class frmEditContract
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmbGuarantor2 = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -61,36 +58,17 @@ Partial Class frmEditContract
         Me.txtSearch = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Guna2Panel1.SuspendLayout()
+        Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
+        Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
         CType(Me.dgvContracts, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2GroupBox1.SuspendLayout()
+        Me.Guna2Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Guna2Elipse1
         '
         Me.Guna2Elipse1.TargetControl = Me
-        '
-        'Guna2Panel1
-        '
-        Me.Guna2Panel1.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.Guna2Panel1.Controls.Add(Me.Guna2ControlBox1)
-        Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(891, 33)
-        Me.Guna2Panel1.TabIndex = 32
-        '
-        'Guna2ControlBox1
-        '
-        Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Guna2ControlBox1.BackColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox1.CustomIconSize = 30.0!
-        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.LightGray
-        Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(841, 1)
-        Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
-        Me.Guna2ControlBox1.Size = New System.Drawing.Size(38, 29)
-        Me.Guna2ControlBox1.TabIndex = 5
         '
         'dgvContracts
         '
@@ -99,6 +77,9 @@ Partial Class frmEditContract
         Me.dgvContracts.AllowUserToOrderColumns = True
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
         Me.dgvContracts.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvContracts.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvContracts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvContracts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -124,7 +105,7 @@ Partial Class frmEditContract
         Me.dgvContracts.ReadOnly = True
         Me.dgvContracts.RowHeadersVisible = False
         Me.dgvContracts.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
-        Me.dgvContracts.Size = New System.Drawing.Size(867, 205)
+        Me.dgvContracts.Size = New System.Drawing.Size(1156, 205)
         Me.dgvContracts.TabIndex = 30
         Me.dgvContracts.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvContracts.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -159,7 +140,7 @@ Partial Class frmEditContract
         Me.btnDelete.FillColor = System.Drawing.Color.Red
         Me.btnDelete.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
         Me.btnDelete.ForeColor = System.Drawing.Color.White
-        Me.btnDelete.Location = New System.Drawing.Point(407, 553)
+        Me.btnDelete.Location = New System.Drawing.Point(610, 558)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(180, 45)
         Me.btnDelete.TabIndex = 28
@@ -176,7 +157,7 @@ Partial Class frmEditContract
         Me.btnSave.FillColor = System.Drawing.Color.ForestGreen
         Me.btnSave.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
         Me.btnSave.ForeColor = System.Drawing.Color.White
-        Me.btnSave.Location = New System.Drawing.Point(221, 553)
+        Me.btnSave.Location = New System.Drawing.Point(424, 558)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(180, 45)
         Me.btnSave.TabIndex = 29
@@ -184,6 +165,8 @@ Partial Class frmEditContract
         '
         'Guna2GroupBox1
         '
+        Me.Guna2GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2GroupBox1.BackColor = System.Drawing.Color.White
         Me.Guna2GroupBox1.Controls.Add(Me.Guna2HtmlLabel4)
         Me.Guna2GroupBox1.Controls.Add(Me.Guna2HtmlLabel9)
@@ -198,7 +181,6 @@ Partial Class frmEditContract
         Me.Guna2GroupBox1.Controls.Add(Me.Label1)
         Me.Guna2GroupBox1.Controls.Add(Me.cmbGuarantor2)
         Me.Guna2GroupBox1.Controls.Add(Me.Label10)
-        Me.Guna2GroupBox1.Controls.Add(Me.Label7)
         Me.Guna2GroupBox1.Controls.Add(Me.Label4)
         Me.Guna2GroupBox1.Controls.Add(Me.Label6)
         Me.Guna2GroupBox1.Controls.Add(Me.Label3)
@@ -215,12 +197,13 @@ Partial Class frmEditContract
         Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
         Me.Guna2GroupBox1.Location = New System.Drawing.Point(12, 317)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
-        Me.Guna2GroupBox1.Size = New System.Drawing.Size(867, 222)
+        Me.Guna2GroupBox1.Size = New System.Drawing.Size(1156, 222)
         Me.Guna2GroupBox1.TabIndex = 27
         Me.Guna2GroupBox1.Text = "แก้ไขข้อมูล"
         '
         'Guna2HtmlLabel4
         '
+        Me.Guna2HtmlLabel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel4.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel4.ForeColor = System.Drawing.Color.Black
@@ -232,10 +215,11 @@ Partial Class frmEditContract
         '
         'Guna2HtmlLabel9
         '
+        Me.Guna2HtmlLabel9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2HtmlLabel9.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel9.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel9.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel9.Location = New System.Drawing.Point(510, 62)
+        Me.Guna2HtmlLabel9.Location = New System.Drawing.Point(667, 62)
         Me.Guna2HtmlLabel9.Name = "Guna2HtmlLabel9"
         Me.Guna2HtmlLabel9.Size = New System.Drawing.Size(30, 23)
         Me.Guna2HtmlLabel9.TabIndex = 26
@@ -243,10 +227,11 @@ Partial Class frmEditContract
         '
         'Guna2HtmlLabel3
         '
+        Me.Guna2HtmlLabel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel3.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(573, 62)
+        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(884, 62)
         Me.Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
         Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(57, 23)
         Me.Guna2HtmlLabel3.TabIndex = 26
@@ -254,10 +239,11 @@ Partial Class frmEditContract
         '
         'Guna2HtmlLabel5
         '
+        Me.Guna2HtmlLabel5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel5.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel5.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel5.Location = New System.Drawing.Point(288, 62)
+        Me.Guna2HtmlLabel5.Location = New System.Drawing.Point(445, 62)
         Me.Guna2HtmlLabel5.Name = "Guna2HtmlLabel5"
         Me.Guna2HtmlLabel5.Size = New System.Drawing.Size(70, 23)
         Me.Guna2HtmlLabel5.TabIndex = 26
@@ -265,10 +251,11 @@ Partial Class frmEditContract
         '
         'Guna2HtmlLabel8
         '
+        Me.Guna2HtmlLabel8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel8.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel8.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel8.Location = New System.Drawing.Point(581, 180)
+        Me.Guna2HtmlLabel8.Location = New System.Drawing.Point(892, 180)
         Me.Guna2HtmlLabel8.Name = "Guna2HtmlLabel8"
         Me.Guna2HtmlLabel8.Size = New System.Drawing.Size(49, 23)
         Me.Guna2HtmlLabel8.TabIndex = 26
@@ -276,10 +263,11 @@ Partial Class frmEditContract
         '
         'Guna2HtmlLabel7
         '
+        Me.Guna2HtmlLabel7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel7.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel7.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel7.Location = New System.Drawing.Point(300, 180)
+        Me.Guna2HtmlLabel7.Location = New System.Drawing.Point(457, 180)
         Me.Guna2HtmlLabel7.Name = "Guna2HtmlLabel7"
         Me.Guna2HtmlLabel7.Size = New System.Drawing.Size(49, 23)
         Me.Guna2HtmlLabel7.TabIndex = 26
@@ -287,6 +275,7 @@ Partial Class frmEditContract
         '
         'Guna2HtmlLabel6
         '
+        Me.Guna2HtmlLabel6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2HtmlLabel6.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel6.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel6.ForeColor = System.Drawing.Color.Black
@@ -298,10 +287,11 @@ Partial Class frmEditContract
         '
         'Guna2HtmlLabel2
         '
+        Me.Guna2HtmlLabel2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel2.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(593, 119)
+        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(904, 119)
         Me.Guna2HtmlLabel2.Name = "Guna2HtmlLabel2"
         Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(37, 23)
         Me.Guna2HtmlLabel2.TabIndex = 26
@@ -309,6 +299,7 @@ Partial Class frmEditContract
         '
         'Guna2HtmlLabel1
         '
+        Me.Guna2HtmlLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel1.ForeColor = System.Drawing.Color.Black
@@ -320,6 +311,7 @@ Partial Class frmEditContract
         '
         'cmbGuarantor3
         '
+        Me.cmbGuarantor3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbGuarantor3.BackColor = System.Drawing.Color.Transparent
         Me.cmbGuarantor3.BorderRadius = 10
         Me.cmbGuarantor3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
@@ -329,16 +321,17 @@ Partial Class frmEditContract
         Me.cmbGuarantor3.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbGuarantor3.ForeColor = System.Drawing.Color.Black
         Me.cmbGuarantor3.ItemHeight = 30
-        Me.cmbGuarantor3.Location = New System.Drawing.Point(636, 172)
+        Me.cmbGuarantor3.Location = New System.Drawing.Point(947, 172)
         Me.cmbGuarantor3.Name = "cmbGuarantor3"
         Me.cmbGuarantor3.Size = New System.Drawing.Size(186, 36)
         Me.cmbGuarantor3.TabIndex = 4
         '
         'Label1
         '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(303, 180)
+        Me.Label1.Location = New System.Drawing.Point(460, 180)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(46, 21)
         Me.Label1.TabIndex = 17
@@ -346,6 +339,7 @@ Partial Class frmEditContract
         '
         'cmbGuarantor2
         '
+        Me.cmbGuarantor2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbGuarantor2.BackColor = System.Drawing.Color.Transparent
         Me.cmbGuarantor2.BorderRadius = 10
         Me.cmbGuarantor2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
@@ -355,36 +349,28 @@ Partial Class frmEditContract
         Me.cmbGuarantor2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbGuarantor2.ForeColor = System.Drawing.Color.Black
         Me.cmbGuarantor2.ItemHeight = 30
-        Me.cmbGuarantor2.Location = New System.Drawing.Point(355, 172)
+        Me.cmbGuarantor2.Location = New System.Drawing.Point(512, 172)
         Me.cmbGuarantor2.Name = "cmbGuarantor2"
         Me.cmbGuarantor2.Size = New System.Drawing.Size(186, 36)
         Me.cmbGuarantor2.TabIndex = 5
         '
         'Label10
         '
+        Me.Label10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(551, 180)
+        Me.Label10.Location = New System.Drawing.Point(862, 180)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(46, 21)
         Me.Label10.TabIndex = 17
         Me.Label10.Text = "ผู้ค้ำ :"
         '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(528, 62)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(69, 21)
-        Me.Label7.TabIndex = 18
-        Me.Label7.Text = "ดอกเบี้ย :"
-        '
         'Label4
         '
+        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(267, 62)
+        Me.Label4.Location = New System.Drawing.Point(424, 62)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(82, 21)
         Me.Label4.TabIndex = 14
@@ -392,9 +378,10 @@ Partial Class frmEditContract
         '
         'Label6
         '
+        Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(546, 119)
+        Me.Label6.Location = New System.Drawing.Point(857, 119)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(51, 21)
         Me.Label6.TabIndex = 14
@@ -402,6 +389,7 @@ Partial Class frmEditContract
         '
         'Label3
         '
+        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(27, 180)
@@ -412,6 +400,7 @@ Partial Class frmEditContract
         '
         'Label5
         '
+        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(3, 119)
@@ -422,6 +411,7 @@ Partial Class frmEditContract
         '
         'Label2
         '
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(3, 62)
@@ -432,6 +422,7 @@ Partial Class frmEditContract
         '
         'dtpContractDate
         '
+        Me.dtpContractDate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtpContractDate.Animated = True
         Me.dtpContractDate.BorderRadius = 10
         Me.dtpContractDate.Checked = True
@@ -443,12 +434,13 @@ Partial Class frmEditContract
         Me.dtpContractDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpContractDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpContractDate.Name = "dtpContractDate"
-        Me.dtpContractDate.Size = New System.Drawing.Size(140, 36)
+        Me.dtpContractDate.Size = New System.Drawing.Size(178, 36)
         Me.dtpContractDate.TabIndex = 4
         Me.dtpContractDate.Value = New Date(2024, 9, 7, 22, 10, 28, 596)
         '
         'cmbGuarantor1
         '
+        Me.cmbGuarantor1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbGuarantor1.BackColor = System.Drawing.Color.Transparent
         Me.cmbGuarantor1.BorderRadius = 10
         Me.cmbGuarantor1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
@@ -465,6 +457,7 @@ Partial Class frmEditContract
         '
         'cmbAccount
         '
+        Me.cmbAccount.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbAccount.BackColor = System.Drawing.Color.Transparent
         Me.cmbAccount.BorderRadius = 10
         Me.cmbAccount.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
@@ -474,13 +467,14 @@ Partial Class frmEditContract
         Me.cmbAccount.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbAccount.ForeColor = System.Drawing.Color.Black
         Me.cmbAccount.ItemHeight = 30
-        Me.cmbAccount.Location = New System.Drawing.Point(636, 112)
+        Me.cmbAccount.Location = New System.Drawing.Point(947, 112)
         Me.cmbAccount.Name = "cmbAccount"
         Me.cmbAccount.Size = New System.Drawing.Size(186, 36)
         Me.cmbAccount.TabIndex = 3
         '
         'txtContractInterest
         '
+        Me.txtContractInterest.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtContractInterest.BorderRadius = 10
         Me.txtContractInterest.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtContractInterest.DefaultText = ""
@@ -492,18 +486,19 @@ Partial Class frmEditContract
         Me.txtContractInterest.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtContractInterest.ForeColor = System.Drawing.Color.Black
         Me.txtContractInterest.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtContractInterest.Location = New System.Drawing.Point(636, 54)
+        Me.txtContractInterest.Location = New System.Drawing.Point(947, 54)
         Me.txtContractInterest.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.txtContractInterest.Name = "txtContractInterest"
         Me.txtContractInterest.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtContractInterest.PlaceholderForeColor = System.Drawing.Color.White
         Me.txtContractInterest.PlaceholderText = ""
         Me.txtContractInterest.SelectedText = ""
-        Me.txtContractInterest.Size = New System.Drawing.Size(140, 36)
+        Me.txtContractInterest.Size = New System.Drawing.Size(186, 36)
         Me.txtContractInterest.TabIndex = 1
         '
         'txtContractAmount
         '
+        Me.txtContractAmount.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtContractAmount.Animated = True
         Me.txtContractAmount.BorderRadius = 10
         Me.txtContractAmount.Cursor = System.Windows.Forms.Cursors.IBeam
@@ -516,7 +511,7 @@ Partial Class frmEditContract
         Me.txtContractAmount.Font = New System.Drawing.Font("FC Minimal", 15.75!)
         Me.txtContractAmount.ForeColor = System.Drawing.Color.Black
         Me.txtContractAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtContractAmount.Location = New System.Drawing.Point(364, 54)
+        Me.txtContractAmount.Location = New System.Drawing.Point(521, 54)
         Me.txtContractAmount.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.txtContractAmount.Name = "txtContractAmount"
         Me.txtContractAmount.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -529,6 +524,7 @@ Partial Class frmEditContract
         '
         'txtContractID
         '
+        Me.txtContractID.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtContractID.BorderRadius = 10
         Me.txtContractID.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtContractID.DefaultText = ""
@@ -553,6 +549,7 @@ Partial Class frmEditContract
         '
         'txtSearch
         '
+        Me.txtSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSearch.BorderRadius = 10
         Me.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtSearch.DefaultText = ""
@@ -564,7 +561,7 @@ Partial Class frmEditContract
         Me.txtSearch.Font = New System.Drawing.Font("FC Minimal", 15.75!)
         Me.txtSearch.ForeColor = System.Drawing.Color.Black
         Me.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearch.Location = New System.Drawing.Point(739, 53)
+        Me.txtSearch.Location = New System.Drawing.Point(1028, 53)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(3, 5, 3, 5)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -576,9 +573,10 @@ Partial Class frmEditContract
         '
         'Label8
         '
+        Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(629, 61)
+        Me.Label8.Location = New System.Drawing.Point(918, 61)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(104, 21)
         Me.Label8.TabIndex = 31
@@ -594,14 +592,48 @@ Partial Class frmEditContract
         Me.Label9.TabIndex = 39
         Me.Label9.Text = "แก้ไขสัญญา"
         '
+        'Guna2Panel2
+        '
+        Me.Guna2Panel2.BackColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2Panel2.Controls.Add(Me.Guna2ControlBox1)
+        Me.Guna2Panel2.Controls.Add(Me.Guna2ControlBox2)
+        Me.Guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Guna2Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Guna2Panel2.Name = "Guna2Panel2"
+        Me.Guna2Panel2.Size = New System.Drawing.Size(1180, 30)
+        Me.Guna2Panel2.TabIndex = 40
+        '
+        'Guna2ControlBox1
+        '
+        Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2ControlBox1.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MaximizeBox
+        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2ControlBox1.IconColor = System.Drawing.Color.White
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1079, 1)
+        Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
+        Me.Guna2ControlBox1.Size = New System.Drawing.Size(45, 29)
+        Me.Guna2ControlBox1.TabIndex = 16
+        '
+        'Guna2ControlBox2
+        '
+        Me.Guna2ControlBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2ControlBox2.BackColor = System.Drawing.Color.Red
+        Me.Guna2ControlBox2.CustomIconSize = 30.0!
+        Me.Guna2ControlBox2.FillColor = System.Drawing.Color.DarkSlateBlue
+        Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Red
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(1130, 1)
+        Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
+        Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
+        Me.Guna2ControlBox2.TabIndex = 15
+        '
         'frmEditContract
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(891, 606)
+        Me.ClientSize = New System.Drawing.Size(1180, 615)
+        Me.Controls.Add(Me.Guna2Panel2)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.dgvContracts)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
@@ -612,18 +644,16 @@ Partial Class frmEditContract
         Me.Name = "frmEditContract"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmEditContract"
-        Me.Guna2Panel1.ResumeLayout(False)
         CType(Me.dgvContracts, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2GroupBox1.ResumeLayout(False)
         Me.Guna2GroupBox1.PerformLayout()
+        Me.Guna2Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents Guna2Elipse1 As Guna.UI2.WinForms.Guna2Elipse
-    Friend WithEvents Guna2Panel1 As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents dgvContracts As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents btnDelete As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents btnSave As Guna.UI2.WinForms.Guna2Button
@@ -641,7 +671,6 @@ Partial Class frmEditContract
     Friend WithEvents Label1 As Label
     Friend WithEvents cmbGuarantor2 As Guna.UI2.WinForms.Guna2ComboBox
     Friend WithEvents Label10 As Label
-    Friend WithEvents Label7 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label3 As Label
@@ -656,4 +685,7 @@ Partial Class frmEditContract
     Friend WithEvents txtSearch As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
+    Friend WithEvents Guna2Panel2 As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
+    Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
 End Class

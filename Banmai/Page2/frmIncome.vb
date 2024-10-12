@@ -42,8 +42,10 @@ Public Class frmIncome
         End Try
     End Sub
 
-    ' ฟังก์ชัน SetupDataGridView
     Private Sub SetupDataGridView()
+        ' สร้างฟอนต์ขนาด 14pt
+        Dim cellFont As New Font("Fc Minimal", 14)
+
         ' เพิ่มคอลัมน์ ComboBox สำหรับประเภทของรายรับ
         Dim colIncomeType As New DataGridViewComboBoxColumn()
         colIncomeType.HeaderText = "ประเภทของรายรับ"
@@ -76,9 +78,16 @@ Public Class frmIncome
         dgvIncomeDetails.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvIncomeDetails.RowTemplate.Height = 30
         dgvIncomeDetails.AllowUserToAddRows = True
+
+        ' ตั้งค่าฟอนต์ขนาด 14pt สำหรับทุกเซลล์ใน DataGridView
+        dgvIncomeDetails.DefaultCellStyle.Font = cellFont
+        dgvIncomeDetails.ColumnHeadersDefaultCellStyle.Font = cellFont
     End Sub
 
     Private Sub SetupDataGridViewForPayments()
+        ' สร้างฟอนต์ขนาด 14pt
+        Dim cellFont As New Font("Fc Minimal", 14)
+
         ' เพิ่มคอลัมน์ ComboBox สำหรับประเภทของค่างวด
         Dim colPaymentType As New DataGridViewComboBoxColumn()
         colPaymentType.HeaderText = "ประเภทของค่างวด"
@@ -122,7 +131,12 @@ Public Class frmIncome
         dgvPaymentDetails.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPaymentDetails.RowTemplate.Height = 30
         dgvPaymentDetails.AllowUserToAddRows = True
+
+        ' ตั้งค่าฟอนต์ขนาด 14pt สำหรับทุกเซลล์ใน DataGridView
+        dgvPaymentDetails.DefaultCellStyle.Font = cellFont
+        dgvPaymentDetails.ColumnHeadersDefaultCellStyle.Font = cellFont
     End Sub
+
     Private Sub LoadPaymentTypes()
         Try
             Dim paymentTypeColumn As DataGridViewComboBoxColumn = CType(dgvPaymentDetails.Columns("PaymentType"), DataGridViewComboBoxColumn)
@@ -183,6 +197,7 @@ Public Class frmIncome
                 incomeTypeColumn.Items.Add("อื่น ๆ") 'รายได้
                 incomeTypeColumn.Items.Add("ค่าเอกสาร")
                 incomeTypeColumn.Items.Add("ค่าปรับ")
+                incomeTypeColumn.Items.Add("ดอกเบี้ย")
             End Using
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการโหลดข้อมูลประเภทเงินฝาก: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -304,8 +319,24 @@ Public Class frmIncome
                 ' ดึงค่าจากคอลัมน์ PaymentContractNumber ใน DataGridView
                 Dim contractNumber As String = dgvPaymentDetails.CurrentRow.Cells("PaymentContractNumber").Value.ToString()
 
-            Else
-
+                ' เรียกฟังก์ชันหักยอด (อัปเดตตามโค้ดที่เราได้ปรับปรุง)
+                If Not String.IsNullOrEmpty(contractNumber) Then
+                    Dim balanceAmount As Decimal
+                    If Decimal.TryParse(lblBalanceAmount.Text, balanceAmount) Then
+                        If balanceAmount > 0 Then
+                            ' หักยอดจากงวดสุดท้ายที่ยังค้างชำระ
+                            If DeductBalance(contractNumber, balanceAmount) Then
+                                MessageBox.Show("ชำระเงินเรียบร้อย", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            Else
+                                MessageBox.Show("เกิดข้อผิดพลาดในการชำระเงิน", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            End If
+                        Else
+                            MessageBox.Show("ยอดเงินต้องมากกว่า 0", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+                    Else
+                        MessageBox.Show("ยอดคงเหลือต้องเป็นตัวเลข", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+                End If
             End If
 
         Catch ex As Exception
@@ -334,7 +365,7 @@ Public Class frmIncome
 
                 ' ตรวจสอบว่าเซลล์มีค่า และแปลงค่าให้ถูกต้อง
                 If Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentContractNumber").Value.ToString(), conId) AndAlso
-               Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentPeriod").Value.ToString(), paymentPeriod) Then
+           Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentPeriod").Value.ToString(), paymentPeriod) Then
 
                     ' ตรวจสอบว่าค่า conId และ paymentPeriod มีค่ามากกว่า 0
                     If conId > 0 AndAlso paymentPeriod > 0 Then
@@ -371,8 +402,6 @@ Public Class frmIncome
 
                                         ' เรียกฟังก์ชันอื่นๆ หลังจากอัพเดทข้อมูล
                                         SaveTransactionToDatabase()
-
-
                                         ' ล้างข้อมูลในฟอร์มหลังจากบันทึกเสร็จ
                                         cleartext()
                                     End Using
@@ -396,6 +425,7 @@ Public Class frmIncome
             MessageBox.Show("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
     Private Sub SavePaymentData()
         Try
             ' ดึงข้อมูลสมาชิก
@@ -548,32 +578,67 @@ Public Class frmIncome
             Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
                 Conn.Open()
 
-                ' ดึงจำนวนเงินที่มีอยู่ในสัญญาปัจจุบัน
-                Dim queryAmount As String = "SELECT con_amount FROM Contract WHERE con_id = @contractNumber"
-                Dim cmdAmount As New OleDbCommand(queryAmount, Conn)
-                cmdAmount.Parameters.AddWithValue("@contractNumber", contractNumber)
-                Dim currentAmount As Decimal = Convert.ToDecimal(cmdAmount.ExecuteScalar())
+                ' ดึงข้อมูลงวดสุดท้ายที่ยังมีเงินต้นค้างอยู่
+                Dim query As String = "SELECT payment_period, payment_prin, payment_interest FROM Payment WHERE con_id = @contractNumber AND payment_prin > 0 ORDER BY payment_period DESC"
+                Dim cmd As New OleDbCommand(query, Conn)
+                cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
+                Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
-                Dim newAmount As Decimal = currentAmount - amount
+                ' ทำงานในลูปถ้ามีเงินที่ต้องหักและยังมีงวดที่ยังค้างชำระเงินต้น
+                While reader.Read() And amount > 0
+                    Dim paymentPeriod As Integer = Convert.ToInt32(reader("payment_period"))
+                    Dim principalAmount As Decimal = Convert.ToDecimal(reader("payment_prin"))
+                    Dim interestAmount As Decimal = Convert.ToDecimal(reader("payment_interest"))
 
-                If newAmount < 0 Then
-                    MessageBox.Show("ไม่สามารถหักยอดเงินได้เนื่องจากยอดเงินคงเหลือติดลบ", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Return False
+                    ' ตรวจสอบว่าเงินที่จ่ายพอหักเงินต้นหรือไม่
+                    If amount >= principalAmount Then
+                        ' หักเงินต้นทั้งหมด งวดนี้เหลือ 0
+                        amount -= principalAmount
+                        principalAmount = 0
+
+                        ' ถ้าเงินต้นเหลือ 0 ให้ตัดดอกเบี้ยด้วย
+                        interestAmount = 0
+
+                        ' อัปเดตสถานะงวดเป็นชำระแล้ว
+                        Dim updateStatusQuery As String = "UPDATE Payment SET status_id = 2 WHERE con_id = @contractNumber AND payment_period = @paymentPeriod"
+                        Dim updateStatusCmd As New OleDbCommand(updateStatusQuery, Conn)
+                        updateStatusCmd.Parameters.AddWithValue("@contractNumber", contractNumber)
+                        updateStatusCmd.Parameters.AddWithValue("@paymentPeriod", paymentPeriod)
+                        updateStatusCmd.ExecuteNonQuery()
+                    Else
+                        ' หักตามจำนวนเงินที่เหลือ
+                        principalAmount -= amount
+                        amount = 0
+                    End If
+
+                    ' อัปเดตยอดเงินต้นและดอกเบี้ยในตาราง Payment
+                    Dim updateQuery As String = "UPDATE Payment SET payment_prin = @newPrincipal, payment_interest = @newInterest WHERE con_id = @contractNumber AND payment_period = @paymentPeriod"
+                    Dim updateCmd As New OleDbCommand(updateQuery, Conn)
+                    updateCmd.Parameters.AddWithValue("@newPrincipal", principalAmount)
+                    updateCmd.Parameters.AddWithValue("@newInterest", interestAmount)
+                    updateCmd.Parameters.AddWithValue("@contractNumber", contractNumber)
+                    updateCmd.Parameters.AddWithValue("@paymentPeriod", paymentPeriod)
+                    updateCmd.ExecuteNonQuery()
+                End While
+
+                ' หากมีเงินเหลือจากการชำระ ให้บันทึกลงในตาราง income_details
+                If amount > 0 Then
+                    MessageBox.Show("ยอดเงินที่จ่ายเกิน จะถูกบันทึกเป็นรายได้เกิน", "ข้อมูล", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    ' บันทึกยอดเงินที่เกินลงในตาราง income_details
+                    Dim insertIncomeDetailsQuery As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, inc_id, m_id, acc_id) VALUES (@accName, @contractNumber, @excessAmount, @paymentDate, @incId, @memberId, @accId)"
+                    Dim insertCmd As New OleDbCommand(insertIncomeDetailsQuery, Conn)
+                    insertCmd.Parameters.AddWithValue("@accName", "ยอดเงินที่จ่ายเกิน") ' รายละเอียดของยอดเงิน
+                    insertCmd.Parameters.AddWithValue("@contractNumber", contractNumber)
+                    insertCmd.Parameters.AddWithValue("@excessAmount", amount)
+                    insertCmd.Parameters.AddWithValue("@paymentDate", DateTime.Now) ' วันที่ปัจจุบัน
+                    insertCmd.Parameters.AddWithValue("@incId", DBNull.Value) ' หากไม่มี inc_id ให้ใช้ DBNull
+                    insertCmd.Parameters.AddWithValue("@memberId", DBNull.Value) ' ใส่ค่า m_id หากมี หรือใช้ DBNull
+                    insertCmd.Parameters.AddWithValue("@accId", DBNull.Value) ' ใส่ค่า acc_id หากมี หรือใช้ DBNull
+                    insertCmd.ExecuteNonQuery()
+                Else
+                    MessageBox.Show("ชำระเงินและหักยอดครบเรียบร้อย", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
-
-                ' อัปเดตจำนวนเงินในสัญญา
-                Dim queryUpdateContract As String = "UPDATE Contract SET con_amount = @newAmount WHERE con_id = @contractNumber"
-                Dim cmdUpdateContract As New OleDbCommand(queryUpdateContract, Conn)
-                cmdUpdateContract.Parameters.AddWithValue("@newAmount", newAmount)
-                cmdUpdateContract.Parameters.AddWithValue("@contractNumber", contractNumber)
-                cmdUpdateContract.ExecuteNonQuery()
-
-                ' อัปเดตฟิลด์ payment_balance ในตาราง Payment
-                Dim queryUpdatePayment As String = "UPDATE Payment SET payment_balance = @newAmount WHERE con_id = @contractNumber"
-                Dim cmdUpdatePayment As New OleDbCommand(queryUpdatePayment, Conn)
-                cmdUpdatePayment.Parameters.AddWithValue("@newAmount", newAmount)
-                cmdUpdatePayment.Parameters.AddWithValue("@contractNumber", contractNumber)
-                cmdUpdatePayment.ExecuteNonQuery()
 
                 Return True
             End Using
@@ -582,6 +647,10 @@ Public Class frmIncome
             Return False
         End Try
     End Function
+
+
+
+
     Private Sub UpdatePaymentStatus(contractNumber As String)
         Try
             Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
@@ -1420,7 +1489,7 @@ Public Class frmIncome
 
         ' ตรวจสอบว่า txtAmount เป็นตัวเลขหรือไม่ ถ้าไม่เป็น ให้กำหนดค่าเป็น 0
         If Not Decimal.TryParse(txtAmount.Text, enteredAmount) Then
-            enteredAmount = 0
+            enteredAmount = 1
         End If
 
         ' ตรวจสอบว่า lblTotalAmount เป็นตัวเลขหรือไม่ ถ้าไม่เป็น ให้กำหนดค่าเป็น 0
@@ -1430,8 +1499,15 @@ Public Class frmIncome
 
         ' คำนวณยอดคงเหลือ
         Dim balanceAmount As Decimal = enteredAmount - totalAmount
+
+        ' แสดงผลในรูปแบบที่มีเครื่องหมายคอมมาและทศนิยม 2 ตำแหน่ง
         lblBalanceAmount.Text = balanceAmount.ToString("N2")
+
+        ' จัดรูปแบบ txtAmount ให้มีเครื่องหมายคอมมาเช่นกัน (โดยไม่กระทบการคำนวณ)
+        txtAmount.Text = enteredAmount.ToString("N2")
+        txtAmount.SelectionStart = txtAmount.Text.Length ' ให้เคอร์เซอร์อยู่ท้ายข้อความใน txtAmount
     End Sub
+
 
     Private Sub btnGenerateReceipt_Click(sender As Object, e As EventArgs) Handles btnGenerateReceipt.Click
         ' สร้างอินสแตนซ์ของ frmCon

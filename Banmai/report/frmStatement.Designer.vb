@@ -111,8 +111,9 @@ Partial Class frmStatement
         Me.dtpStartDate.BackColor = System.Drawing.Color.White
         Me.dtpStartDate.BorderRadius = 5
         Me.dtpStartDate.Checked = True
-        Me.dtpStartDate.FillColor = System.Drawing.Color.White
-        Me.dtpStartDate.Font = New System.Drawing.Font("FC Minimal", 15.75!)
+        Me.dtpStartDate.FillColor = System.Drawing.Color.DarkSlateBlue
+        Me.dtpStartDate.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.dtpStartDate.ForeColor = System.Drawing.Color.White
         Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpStartDate.Location = New System.Drawing.Point(375, 98)
         Me.dtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
@@ -121,14 +122,16 @@ Partial Class frmStatement
         Me.dtpStartDate.Size = New System.Drawing.Size(200, 36)
         Me.dtpStartDate.TabIndex = 44
         Me.dtpStartDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.dtpStartDate.Value = New Date(2024, 10, 1, 1, 30, 2, 121)
+        Me.dtpStartDate.Value = New Date(2024, 10, 9, 0, 0, 0, 0)
         '
         'dtpEndDate
         '
+        Me.dtpEndDate.Animated = True
         Me.dtpEndDate.BorderRadius = 5
         Me.dtpEndDate.Checked = True
-        Me.dtpEndDate.FillColor = System.Drawing.Color.White
-        Me.dtpEndDate.Font = New System.Drawing.Font("FC Minimal", 15.75!)
+        Me.dtpEndDate.FillColor = System.Drawing.Color.DarkSlateBlue
+        Me.dtpEndDate.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.dtpEndDate.ForeColor = System.Drawing.Color.White
         Me.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpEndDate.Location = New System.Drawing.Point(637, 98)
         Me.dtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
@@ -137,7 +140,7 @@ Partial Class frmStatement
         Me.dtpEndDate.Size = New System.Drawing.Size(200, 36)
         Me.dtpEndDate.TabIndex = 44
         Me.dtpEndDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.dtpEndDate.Value = New Date(2024, 10, 1, 1, 11, 38, 114)
+        Me.dtpEndDate.Value = New Date(2024, 10, 9, 0, 0, 0, 0)
         '
         'Guna2HtmlLabel3
         '

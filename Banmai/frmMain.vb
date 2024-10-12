@@ -61,13 +61,14 @@ Public Class frmMain
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Loadinfo()
 
+
+
         ' อัปเดตข้อมูลสมาชิกและสัญญา
         UpdateMemberCount()
         UpdateContractCount()
 
         ' อัปเดตยอดเงินในบัญชี
         UpdateAccountBalances()
-
 
         ' อัปเดตข้อมูลผู้ใช้และเวลา
         UpdateUserInfo()
@@ -76,6 +77,8 @@ Public Class frmMain
         ' เริ่มการทำงานของ Timer
         Timer1.Start()
     End Sub
+
+
 
     ' ฟังก์ชันดึงข้อมูลจำนวนสมาชิก
     Private Sub UpdateMemberCount()
@@ -366,6 +369,11 @@ Public Class frmMain
         Dim frm As New frmReceipts
         AddHandler frm.FormClosed, AddressOf RefreshMainForm
         frm.ShowDialog()
+    End Sub
+
+    Private Sub AutoDockControl(ByVal control As Control)
+        ' ตั้งค่าให้คอนโทรลขยายเต็มพื้นที่
+        control.Dock = DockStyle.Fill
     End Sub
 
 

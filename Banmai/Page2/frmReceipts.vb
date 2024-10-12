@@ -17,7 +17,6 @@ Public Class frmReceipts
         LoadIncomeData()
     End Sub
 
-    ' ฟังก์ชันสำหรับดึงข้อมูลจากตาราง Income และ income_details
     Private Sub LoadIncomeData()
         Try
             Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
@@ -25,7 +24,7 @@ Public Class frmReceipts
 
                 ' ดึงข้อมูลจากตาราง Income
                 Dim query As String = "SELECT i.[inc_id], i.[m_id], i.[inc_detail], i.[inc_description], i.[inc_amount], i.[inc_date], i.[acc_id] " &
-                                  "FROM [Income] AS i"
+                              "FROM [Income] AS i"
                 Dim cmd As New OleDbCommand(query, conn)
                 Dim adapter As New OleDbDataAdapter(cmd)
 
@@ -34,7 +33,7 @@ Public Class frmReceipts
 
                 ' ดึงข้อมูลจากตาราง Income_Details
                 Dim detailsQuery As String = "SELECT d.[inc_id], d.[ind_accname], d.[ind_amount], d.[ind_date] " &
-                                         "FROM [Income_Details] AS d"
+                                     "FROM [Income_Details] AS d"
                 Dim detailsCmd As New OleDbCommand(detailsQuery, conn)
                 Dim detailsAdapter As New OleDbDataAdapter(detailsCmd)
 
@@ -54,6 +53,10 @@ Public Class frmReceipts
                     .Columns("inc_amount").HeaderText = "ยอดเงิน"
                     .Columns("inc_date").HeaderText = "วันที่"
                     .Columns("acc_id").HeaderText = "รหัสบัญชี"
+
+                    ' จัดรูปแบบคอลัมน์ยอดเงินให้ชิดขวาและมีเครื่องหมายคอมมา
+                    .Columns("inc_amount").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    .Columns("inc_amount").DefaultCellStyle.Format = "N2" ' รูปแบบตัวเลข: มีเครื่องหมายคอมมาและทศนิยม 2 ตำแหน่ง
                 End With
 
             End Using
@@ -62,6 +65,7 @@ Public Class frmReceipts
             MessageBox.Show("เกิดข้อผิดพลาดในการดึงข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
 
     ' เหตุการณ์เมื่อคลิกเซลล์ใน DataGridView

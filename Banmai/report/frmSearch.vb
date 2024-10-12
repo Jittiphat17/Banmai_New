@@ -86,6 +86,11 @@ Public Class frmSearch
         dgvResults.Columns("con_interest").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         dgvResults.Columns("con_permonth").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
+        ' เพิ่มการจัดรูปแบบตัวเลขให้มีเครื่องหมายคอมมา
+        dgvResults.Columns("con_amount").DefaultCellStyle.Format = "N2" ' แสดงจำนวนเงินด้วยทศนิยม 2 ตำแหน่ง และเครื่องหมายคอมมา
+        dgvResults.Columns("con_interest").DefaultCellStyle.Format = "N2"
+        dgvResults.Columns("con_permonth").DefaultCellStyle.Format = "N2"
+
         ' ตั้งค่าให้ข้อความในเซลล์ตัดบรรทัด (Wrap Text)
         dgvResults.DefaultCellStyle.WrapMode = DataGridViewTriState.True
 
@@ -113,6 +118,7 @@ Public Class frmSearch
         dgvResults.Columns("guarantor_names").HeaderText = "ชื่อผู้ค้ำประกัน"
         dgvResults.Columns("con_GuaranteeType").HeaderText = "ประเภทการค้ำประกัน"
     End Sub
+
 
 
     Private Sub LoadAllContracts()

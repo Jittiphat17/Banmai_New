@@ -308,7 +308,7 @@ Public Class frmClose
         If Not String.IsNullOrWhiteSpace(txtIncomeAmount.Text) Then
             Dim value As Decimal
             If Decimal.TryParse(txtIncomeAmount.Text.Replace(",", ""), value) Then
-                txtIncomeAmount.Text = String.Format("{0:N0}", value)
+                txtIncomeAmount.Text = String.Format("{0:N2}", value)
                 txtIncomeAmount.SelectionStart = txtIncomeAmount.Text.Length ' เลื่อนเคอร์เซอร์ไปที่ท้าย
             End If
         End If
@@ -319,7 +319,7 @@ Public Class frmClose
         If Not String.IsNullOrWhiteSpace(txtExpenseAmount.Text) Then
             Dim value As Decimal
             If Decimal.TryParse(txtExpenseAmount.Text.Replace(",", ""), value) Then
-                txtExpenseAmount.Text = String.Format("{0:N0}", value)
+                txtExpenseAmount.Text = String.Format("{0:N2}", value)
                 txtExpenseAmount.SelectionStart = txtExpenseAmount.Text.Length ' เลื่อนเคอร์เซอร์ไปที่ท้าย
             End If
         End If

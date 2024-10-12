@@ -22,6 +22,7 @@ Public Class frmBrrow
 
         ' ปิดการใช้งานปุ่ม Save ในตอนเริ่มต้น
         btnSave.Enabled = False
+
     End Sub
 
 
@@ -264,7 +265,7 @@ Public Class frmBrrow
         Return savingsBalance
     End Function
 
-    Private Sub CheckGuaranteeWithSavings()
+    Private Function CheckGuaranteeWithSavings() As Boolean
         If cbGuaranteeType.SelectedItem.ToString() = "เงินในบัญชี" Then
             Try
                 Dim loanAmount As Decimal
@@ -272,24 +273,32 @@ Public Class frmBrrow
                     Dim borrowerId As Integer = GetMemberIdByName(txtSearch.Text)
                     If borrowerId = -1 Then
                         MessageBox.Show("ไม่พบข้อมูลผู้กู้", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        Return
+                        Return False
                     End If
 
                     Dim savingsBalance As Decimal = GetSavingsBalance(borrowerId)
 
                     If savingsBalance >= loanAmount Then
                         MessageBox.Show("สามารถใช้เงินในบัญชีค้ำประกันได้", "การค้ำประกัน", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Return True
                     Else
                         MessageBox.Show("เงินในบัญชีไม่เพียงพอสำหรับการค้ำประกัน", "การค้ำประกัน", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return False
                     End If
                 Else
                     MessageBox.Show("กรุณากรอกจำนวนเงินที่ต้องการกู้ให้ถูกต้อง", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return False
                 End If
             Catch ex As Exception
                 MessageBox.Show("Database error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
             End Try
         End If
-    End Sub
+
+        ' If the guarantee type is not "เงินในบัญชี", the check is not applicable
+        Return True
+    End Function
+
 
     Private Sub cbGuaranteeType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGuaranteeType.SelectedIndexChanged
         If cbGuaranteeType.SelectedItem.ToString() = "เงินในบัญชี" Then
@@ -503,6 +512,12 @@ Public Class frmBrrow
                 Return
             End If
 
+            ' เช็คการค้ำประกันด้วยเงินในบัญชีก่อนเพิ่มข้อมูล
+            If Not CheckGuaranteeWithSavings() Then
+                ' ถ้าเงินในบัญชีไม่พอสำหรับการค้ำประกัน ให้หยุดการดำเนินการ
+                Return
+            End If
+
             ' ดำเนินการเพิ่มข้อมูลใหม่ใน DataGridView
             Dim principal As Decimal = Decimal.Parse(txtMoney.Text.Replace(",", ""))
             Dim loanDate As DateTime = dtpBirth.Value
@@ -545,6 +560,8 @@ Public Class frmBrrow
             MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+
 
     ' ฟังก์ชันเพื่อตรวจสอบว่าผู้ค้ำประกันมีสัญญาที่ค้างชำระอยู่หรือไม่
     Private Function GetActiveGuaranteeCount(guarantorId As Integer) As Integer

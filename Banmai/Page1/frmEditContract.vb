@@ -18,6 +18,10 @@ Public Class frmEditContract
         txtContractAmount.ReadOnly = False
         dtpContractDate.Enabled = True
         cmbAccount.Enabled = True
+
+        dgvContracts.AutoSize = True
+        Guna2GroupBox1.AutoSize = True
+
     End Sub
 
     Private Sub ConfigureDataGridView()
@@ -95,6 +99,8 @@ Public Class frmEditContract
 
         ' เปิดการเลื่อนแถบ (ScrollBars)
         dgvContracts.ScrollBars = ScrollBars.Both ' เปิดทั้งแถบเลื่อนแนวนอนและแนวตั้ง
+        dgvContracts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+
     End Sub
 
 
@@ -601,5 +607,9 @@ Public Class frmEditContract
                 txtContractAmount.Text = String.Format("{0:N2}", amount) ' แสดงตัวเลขพร้อมคอมมาและทศนิยม 2 ตำแหน่ง
             End If
         End If
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
     End Sub
 End Class

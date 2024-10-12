@@ -12,6 +12,7 @@ Public Class frmFinancial
         ' Me.ReportViewer1.LocalReport.ReportPath = "D:\Project-2022\Banmai\Banmai\report\Financial.rdlc"
 
         ' โหลดข้อมูลบัญชีใน ComboBox
+
         LoadAccountNames()
     End Sub
 
@@ -179,9 +180,9 @@ Public Class frmFinancial
                 .Append(",sum(iif(ind_accname = 'เงินกู้',ind_amount,0.00)) as IncLoanAmt ")
                 .Append(",sum(iif(ind_accname = 'เงินฝากสัจจะ',ind_amount,0.00)) as TruSavAmt ")
                 .Append(",sum(iif(acc_id = 'ACC001' and ind_accname = 'ทุนบัญชี1',ind_amount,iif(acc_id = 'ACC003' and ind_accname = 'ทุนบัญชีประชารัฐ',ind_amount,0.00))) as CostAmt ")
-                .Append(",sum(iif(ind_accname = 'กาไรสะสม',ind_amount,0.00)) as RetEarnAmt ")
+                .Append(",sum(iif(ind_accname = 'กำไรสะสม',ind_amount,0.00)) as RetEarnAmt ")
                 .Append(",sum(iif(ind_accname = 'เงินประกันความเสี่ยง',ind_amount,0.00)) as HedgingAmt ")
-                .Append(",sum(iif(ind_accname = 'เงินสบทบ',ind_amount,0.00)) as ContribAmt ")
+                .Append(",sum(iif(ind_accname = 'เงินสมทบ',ind_amount,0.00)) as ContribAmt ")
                 .Append("from income_details ")
                 .Append("where acc_id = @para_accid and ind_date between @para_dat1 and @para_dat2 ")
                 .Append("group by acc_id ")
@@ -265,5 +266,9 @@ Public Class frmFinancial
         ' เรียกใช้ฟังก์ชันเพื่อสร้างรายงาน
         'LoadReport()
         LoadFinancialReport()
+    End Sub
+
+    Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.ValueChanged
+
     End Sub
 End Class

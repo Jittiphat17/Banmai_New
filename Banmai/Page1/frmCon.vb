@@ -15,6 +15,8 @@ Public Class frmCon
             SearchContract(SelectedContractId)
             SearchPayments(SelectedContractId)
         End If
+
+        txtContractNumber.AutoSize = True
     End Sub
 
     ' เมื่อคลิกปุ่มค้นหา
@@ -57,7 +59,6 @@ Public Class frmCon
         End Try
     End Sub
 
-    ' ฟังก์ชันสำหรับค้นหาข้อมูลการชำระเงิน
     Private Sub SearchPayments(contractNumber As String)
         Try
             ' ตรวจสอบการเชื่อมต่อฐานข้อมูล
@@ -66,11 +67,11 @@ Public Class frmCon
                 Return
             End If
 
-            ' SQL query to retrieve payment data, excluding payment_Principal and payment_Mprincipal fields
+            ' SQL query to retrieve payment data
             Dim strSQL As String = "SELECT p.payment_id, p.con_id, p.payment_date, p.payment_amount, p.payment_prin AS Principal, p.payment_interest AS Interest, p.payment_period, s.status_name " &
-               "FROM Payment p " &
-               "INNER JOIN Status s ON p.status_id = s.status_id " &
-               "WHERE p.con_id = @contractNumber"
+       "FROM Payment p " &
+       "INNER JOIN Status s ON p.status_id = s.status_id " &
+       "WHERE p.con_id = @contractNumber"
 
             Dim cmd As New OleDbCommand(strSQL, Conn)
             cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
@@ -100,7 +101,7 @@ Public Class frmCon
             dgvPayments.Columns("Principal").HeaderText = "เงินต้น"
             dgvPayments.Columns("Interest").HeaderText = "ดอกเบี้ย (บาท)"
             dgvPayments.Columns("payment_period").HeaderText = "งวด"
-            dgvPayments.Columns("status_name").HeaderText = "สถานะการชำระ" ' แสดงสถานะการชำระเป็นคอลัมน์ธรรมดา
+            dgvPayments.Columns("status_name").HeaderText = "สถานะการชำระ"
 
             ' Format to show two decimal places and align text to the right
             dgvPayments.Columns("payment_amount").DefaultCellStyle.Format = "N2"
@@ -113,9 +114,23 @@ Public Class frmCon
             dgvPayments.Columns("Interest").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
             ' Set the font for DataGridView cells to FC Mini Mal
-            Dim fcMiniMalFont As New Font("FC Minimal", 14) ' Adjust font size as needed
+            Dim fcMiniMalFont As New Font("FC Minimal", 16) ' Adjust font size as needed
             dgvPayments.DefaultCellStyle.Font = fcMiniMalFont
             dgvPayments.ColumnHeadersDefaultCellStyle.Font = fcMiniMalFont
+
+            ' คำนวณยอดเงินต้นคงเหลือทั้งหมด
+            Dim totalPrincipalBalance As Decimal = 0
+            Dim totalInterestBalance As Decimal = 0
+            For Each row As DataRow In dt.Rows
+                totalPrincipalBalance += Convert.ToDecimal(row("Principal"))
+                totalInterestBalance += Convert.ToDecimal(row("Interest"))
+            Next
+
+            ' แสดงยอดเงินต้นคงเหลือใน TextBox สำหรับยอดเงินต้น
+            Guna2TextBox1.Text = totalPrincipalBalance.ToString("N2")
+
+            ' แสดงยอดรวมของเงินต้น + ดอกเบี้ย
+            txtTotalBalance.Text = (totalPrincipalBalance + totalInterestBalance).ToString("N2")
 
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -126,6 +141,8 @@ Public Class frmCon
             End If
         End Try
     End Sub
+
+
 
 
     ' ฟังก์ชันสำหรับดึง status_id จาก status_name
@@ -151,5 +168,6 @@ Public Class frmCon
         End Try
         Return statusId
     End Function
+
 
 End Class

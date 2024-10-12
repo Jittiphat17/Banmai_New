@@ -751,13 +751,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>ทุนบัญชีประชารัฐ</Value>
+                    <Value>ทุนบัญชี</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Angsana New</FontFamily>
                       <FontSize>14pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                       <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!acc_name.Value</Value>
+                    <Style>
+                      <FontFamily>Angsana New</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
