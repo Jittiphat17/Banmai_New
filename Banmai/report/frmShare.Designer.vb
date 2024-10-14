@@ -39,7 +39,7 @@ Partial Class frmShare
         Me.ReportViewer1.Location = New System.Drawing.Point(12, 98)
         Me.ReportViewer1.Name = "ReportViewer1"
         Me.ReportViewer1.ServerReport.BearerToken = Nothing
-        Me.ReportViewer1.Size = New System.Drawing.Size(945, 443)
+        Me.ReportViewer1.Size = New System.Drawing.Size(1876, 870)
         Me.ReportViewer1.TabIndex = 0
         '
         'Guna2Elipse1
@@ -49,10 +49,10 @@ Partial Class frmShare
         'Guna2HtmlLabel3
         '
         Me.Guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 26.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(12, 55)
+        Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 36.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(12, 42)
         Me.Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
-        Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(116, 37)
+        Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(157, 50)
         Me.Guna2HtmlLabel3.TabIndex = 49
         Me.Guna2HtmlLabel3.Text = "รายงานหุ้น"
         '
@@ -63,7 +63,7 @@ Partial Class frmShare
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(969, 30)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(1900, 30)
         Me.Guna2Panel1.TabIndex = 50
         '
         'Guna2ControlBox2
@@ -73,7 +73,7 @@ Partial Class frmShare
         Me.Guna2ControlBox2.CustomIconSize = 30.0!
         Me.Guna2ControlBox2.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox2.Location = New System.Drawing.Point(919, 1)
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(1850, 1)
         Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
         Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox2.TabIndex = 15
@@ -86,12 +86,12 @@ Partial Class frmShare
         Me.cmbMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMonth.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.cmbMonth.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cmbMonth.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.cmbMonth.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMonth.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.cmbMonth.ItemHeight = 30
-        Me.cmbMonth.Location = New System.Drawing.Point(620, 55)
+        Me.cmbMonth.Location = New System.Drawing.Point(1395, 55)
         Me.cmbMonth.Name = "cmbMonth"
-        Me.cmbMonth.Size = New System.Drawing.Size(202, 36)
+        Me.cmbMonth.Size = New System.Drawing.Size(304, 36)
         Me.cmbMonth.TabIndex = 51
         '
         'btnGenerateReport
@@ -103,21 +103,21 @@ Partial Class frmShare
         Me.btnGenerateReport.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnGenerateReport.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnGenerateReport.FillColor = System.Drawing.Color.ForestGreen
-        Me.btnGenerateReport.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGenerateReport.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
-        Me.btnGenerateReport.Location = New System.Drawing.Point(828, 55)
+        Me.btnGenerateReport.Location = New System.Drawing.Point(1705, 55)
         Me.btnGenerateReport.Name = "btnGenerateReport"
-        Me.btnGenerateReport.Size = New System.Drawing.Size(129, 37)
+        Me.btnGenerateReport.Size = New System.Drawing.Size(183, 37)
         Me.btnGenerateReport.TabIndex = 52
         Me.btnGenerateReport.Text = "สร้างรายงาน"
         '
         'Guna2HtmlLabel1
         '
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(577, 62)
+        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(1334, 58)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(37, 23)
+        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(55, 34)
         Me.Guna2HtmlLabel1.TabIndex = 53
         Me.Guna2HtmlLabel1.Text = "เดือน"
         '
@@ -126,7 +126,7 @@ Partial Class frmShare
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(969, 553)
+        Me.ClientSize = New System.Drawing.Size(1900, 980)
         Me.Controls.Add(Me.Guna2HtmlLabel1)
         Me.Controls.Add(Me.btnGenerateReport)
         Me.Controls.Add(Me.cmbMonth)

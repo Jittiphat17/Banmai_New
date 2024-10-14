@@ -36,30 +36,31 @@ Public Class frmEditIncome
             conn.Close()
         End Try
     End Sub
-
     ' ตั้งค่าการแสดงผล DataGridView สำหรับรายรับ
     Private Sub ConfigureDataGridView()
-        dgvIncome.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Dark
-        dgvIncome.DefaultCellStyle.Font = New Font("Fc Minimal", 12)
-        dgvIncome.DefaultCellStyle.BackColor = Color.White
-        dgvIncome.DefaultCellStyle.ForeColor = Color.Black
-        dgvIncome.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
-        dgvIncome.ColumnHeadersDefaultCellStyle.Font = New Font("Fc Minimal", 10, FontStyle.Bold)
-        dgvIncome.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
-        dgvIncome.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+        dgvIncome.DefaultCellStyle.Font = New Font("Fc Minimal", 20)
+
+        ' กำหนดความสูงของแถว
+        dgvIncome.RowTemplate.Height = 40
+
+        ' กำหนดฟอนต์สำหรับหัวคอลัมน์
+        dgvIncome.ColumnHeadersDefaultCellStyle.Font = New Font("Fc Minimal", 22)
+
+        ' ปิดการใช้งานการแสดงผลของ Header visual styles เพื่อให้สามารถปรับแต่งได้
         dgvIncome.EnableHeadersVisualStyles = False
+
+        ' รีเฟรช DataGridView หลังจากการตั้งค่า
+        dgvIncome.Refresh()
     End Sub
+
 
     ' ตั้งค่าการแสดงผล DataGridView สำหรับรายละเอียดรายรับ
     Private Sub ConfigureDetailsDataGridView()
-        dgvIncomeDetails.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Dark
-        dgvIncomeDetails.DefaultCellStyle.Font = New Font("Fc Minimal", 12)
-        dgvIncomeDetails.DefaultCellStyle.BackColor = Color.White
-        dgvIncomeDetails.DefaultCellStyle.ForeColor = Color.Black
-        dgvIncomeDetails.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
-        dgvIncomeDetails.ColumnHeadersDefaultCellStyle.Font = New Font("Fc Minimal", 10, FontStyle.Bold)
-        dgvIncomeDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
-        dgvIncomeDetails.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+        dgvIncomeDetails.DefaultCellStyle.Font = New Font("Fc Minimal", 20)
+        dgvIncomeDetails.RowTemplate.Height = 40 ' กำหนดความสูงของแถว
+
+        dgvIncomeDetails.ColumnHeadersDefaultCellStyle.Font = New Font("Fc Minimal", 22)
+
         dgvIncomeDetails.EnableHeadersVisualStyles = False
     End Sub
 
@@ -96,7 +97,6 @@ Public Class frmEditIncome
     End Sub
 
 
-    ' โหลดข้อมูลรายละเอียดรายรับลงใน DataGridView
     Private Sub LoadIncomeDetails()
         Try
             If conn.State = ConnectionState.Closed Then conn.Open()
@@ -121,6 +121,8 @@ Public Class frmEditIncome
             dgvIncomeDetails.Columns("con_id").HeaderText = "รหัสสัญญา"
             dgvIncomeDetails.Columns("ind_amount").HeaderText = "จำนวนเงิน"
             dgvIncomeDetails.Columns("ind_date").HeaderText = "วันที่"
+            dgvIncomeDetails.Columns("inc_id").HeaderText = "รหัสรายรับ" ' แปลง inc_id เป็นภาษาไทย
+            dgvIncomeDetails.Columns("m_id").HeaderText = "รหัสสมาชิก" ' แปลง m_id เป็นภาษาไทย
             dgvIncomeDetails.Columns("acc_name").HeaderText = "ชื่อบัญชี" ' แสดงชื่อบัญชีแทนรหัสบัญชี
             dgvIncomeDetails.Columns("acc_id").HeaderText = "รหัสบัญชี" ' เพิ่มการแสดงรหัสบัญชีด้วย
         Catch ex As Exception
@@ -129,6 +131,7 @@ Public Class frmEditIncome
             conn.Close()
         End Try
     End Sub
+
 
 
     ' เมื่อคลิกเลือกข้อมูลใน DataGridView รายรับ
@@ -314,21 +317,38 @@ Public Class frmEditIncome
             ' รับค่าจาก TextBox ที่ผู้ใช้กรอก
             Dim searchText As String = txtSearch.Text.Trim()
 
-            ' คำสั่ง SQL ที่มีเงื่อนไขการค้นหาในตาราง Income
-            Dim query As String = "SELECT i.inc_id, i.m_id, i.inc_detail, i.inc_description, i.inc_date, i.inc_amount, a.acc_id, a.acc_name " &
+            ' หากผู้ใช้ลบข้อความทั้งหมดในช่องค้นหา จะดึงข้อมูลทั้งหมดมาแสดง
+            If String.IsNullOrEmpty(searchText) Then
+                ' คำสั่ง SQL ที่ดึงข้อมูลทั้งหมด
+                Dim query As String = "SELECT i.inc_id, i.m_id, i.inc_detail, i.inc_description, i.inc_date, i.inc_amount, a.acc_id, a.acc_name " &
+                                  "FROM Income i " &
+                                  "INNER JOIN Account a ON i.acc_id = a.acc_id"
+
+                ' สร้างคำสั่ง OleDbCommand
+                Dim cmd As New OleDbCommand(query, conn)
+
+                ' ดึงข้อมูลและแสดงใน DataGridView
+                Dim adapter As New OleDbDataAdapter(cmd)
+                Dim table As New DataTable()
+                adapter.Fill(table)
+                dgvIncome.DataSource = table
+            Else
+                ' คำสั่ง SQL ที่ค้นหา inc_id ในตาราง Income
+                Dim query As String = "SELECT i.inc_id, i.m_id, i.inc_detail, i.inc_description, i.inc_date, i.inc_amount, a.acc_id, a.acc_name " &
                                   "FROM Income i " &
                                   "INNER JOIN Account a ON i.acc_id = a.acc_id " &
-                                  "WHERE i.inc_description LIKE @searchText OR i.inc_detail LIKE @searchText OR a.acc_name LIKE @searchText"
+                                  "WHERE i.inc_id = @searchId"
 
-            ' สร้างคำสั่ง OleDbCommand
-            Dim cmd As New OleDbCommand(query, conn)
-            cmd.Parameters.AddWithValue("@searchText", "%" & searchText & "%") ' ใช้ LIKE เพื่อค้นหาข้อมูลที่เกี่ยวข้องกับคำที่กรอก
+                ' สร้างคำสั่ง OleDbCommand
+                Dim cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("@searchId", searchText)
 
-            ' ดึงข้อมูลและแสดงใน DataGridView
-            Dim adapter As New OleDbDataAdapter(cmd)
-            Dim table As New DataTable()
-            adapter.Fill(table)
-            dgvIncome.DataSource = table
+                ' ดึงข้อมูลและแสดงใน DataGridView
+                Dim adapter As New OleDbDataAdapter(cmd)
+                Dim table As New DataTable()
+                adapter.Fill(table)
+                dgvIncome.DataSource = table
+            End If
 
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการค้นหา: " & ex.Message)
@@ -336,6 +356,8 @@ Public Class frmEditIncome
             conn.Close()
         End Try
     End Sub
+
+
 
     Private Sub txtIncomeAmount_TextChanged(sender As Object, e As EventArgs) Handles txtIncomeAmount.TextChanged
         ' เรียกฟังก์ชันเพื่อจัดรูปแบบตัวเลข

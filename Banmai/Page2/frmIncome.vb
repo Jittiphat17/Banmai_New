@@ -44,7 +44,9 @@ Public Class frmIncome
 
     Private Sub SetupDataGridView()
         ' สร้างฟอนต์ขนาด 14pt
-        Dim cellFont As New Font("Fc Minimal", 14)
+        Dim cellFont As New Font("Fc Minimal", 20)
+        Dim headerFont As New Font("Fc Minimal", 22, FontStyle.Bold)
+
 
         ' เพิ่มคอลัมน์ ComboBox สำหรับประเภทของรายรับ
         Dim colIncomeType As New DataGridViewComboBoxColumn()
@@ -77,6 +79,7 @@ Public Class frmIncome
         dgvIncomeDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         dgvIncomeDetails.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvIncomeDetails.RowTemplate.Height = 30
+
         dgvIncomeDetails.AllowUserToAddRows = True
 
         ' ตั้งค่าฟอนต์ขนาด 14pt สำหรับทุกเซลล์ใน DataGridView
@@ -86,7 +89,7 @@ Public Class frmIncome
 
     Private Sub SetupDataGridViewForPayments()
         ' สร้างฟอนต์ขนาด 14pt
-        Dim cellFont As New Font("Fc Minimal", 14)
+        Dim cellFont As New Font("Fc Minimal", 20)
 
         ' เพิ่มคอลัมน์ ComboBox สำหรับประเภทของค่างวด
         Dim colPaymentType As New DataGridViewComboBoxColumn()
@@ -1482,14 +1485,31 @@ Public Class frmIncome
         End Try
     End Sub
 
+
+
+
+    Private Sub btnGenerateReceipt_Click(sender As Object, e As EventArgs) Handles btnGenerateReceipt.Click
+        ' สร้างอินสแตนซ์ของ frmCon
+        Dim frm As New frmCon()
+
+        ' แสดงฟอร์ม frmCon
+        frm.Show()
+
+        ' ถ้าคุณต้องการซ่อนฟอร์มปัจจุบัน (frmIncome) เมื่อเปิด frmCon ให้เพิ่มบรรทัดนี้:
+        ' Me.Hide()
+    End Sub
+
     Private Sub txtAmount_TextChanged(sender As Object, e As EventArgs) Handles txtAmount.TextChanged
         ' ตรวจสอบและจัดการกรณีที่ txtAmount หรือ lblTotalAmount ไม่มีค่า
         Dim enteredAmount As Decimal
         Dim totalAmount As Decimal
 
+        ' เก็บตำแหน่งเคอร์เซอร์ปัจจุบัน
+        Dim cursorPosition As Integer = txtAmount.SelectionStart
+
         ' ตรวจสอบว่า txtAmount เป็นตัวเลขหรือไม่ ถ้าไม่เป็น ให้กำหนดค่าเป็น 0
-        If Not Decimal.TryParse(txtAmount.Text, enteredAmount) Then
-            enteredAmount = 1
+        If Not Decimal.TryParse(txtAmount.Text.Replace(",", ""), enteredAmount) Then
+            enteredAmount = 0
         End If
 
         ' ตรวจสอบว่า lblTotalAmount เป็นตัวเลขหรือไม่ ถ้าไม่เป็น ให้กำหนดค่าเป็น 0
@@ -1505,20 +1525,9 @@ Public Class frmIncome
 
         ' จัดรูปแบบ txtAmount ให้มีเครื่องหมายคอมมาเช่นกัน (โดยไม่กระทบการคำนวณ)
         txtAmount.Text = enteredAmount.ToString("N2")
-        txtAmount.SelectionStart = txtAmount.Text.Length ' ให้เคอร์เซอร์อยู่ท้ายข้อความใน txtAmount
+
+        ' รักษาตำแหน่งเคอร์เซอร์
+        txtAmount.SelectionStart = Math.Min(cursorPosition, txtAmount.Text.Length)
     End Sub
-
-
-    Private Sub btnGenerateReceipt_Click(sender As Object, e As EventArgs) Handles btnGenerateReceipt.Click
-        ' สร้างอินสแตนซ์ของ frmCon
-        Dim frm As New frmCon()
-
-        ' แสดงฟอร์ม frmCon
-        frm.Show()
-
-        ' ถ้าคุณต้องการซ่อนฟอร์มปัจจุบัน (frmIncome) เมื่อเปิด frmCon ให้เพิ่มบรรทัดนี้:
-        ' Me.Hide()
-    End Sub
-
 
 End Class

@@ -115,9 +115,9 @@ Public Class frmClose
     ' Method to customize the DataGridView
     Private Sub CustomizeDataGridView()
         ' ตั้งค่าใช้ฟอนต์ FC Minimal ขนาด 16 สำหรับเนื้อหาในตาราง (ตัวปกติ)
-        Dim fcMinimalFont As New Font("FC Minimal", 16, FontStyle.Regular)
+        Dim fcMinimalFont As New Font("FC Minimal", 20, FontStyle.Regular)
         ' ตั้งค่าใช้ฟอนต์ FC Minimal ขนาด 16 สำหรับหัวตาราง (ตัวหนา)
-        Dim fcMinimalBoldFont As New Font("FC Minimal", 16, FontStyle.Bold)
+        Dim fcMinimalBoldFont As New Font("FC Minimal", 22, FontStyle.Bold)
 
         ' ตั้งฟอนต์สำหรับ Guna2DataGridView1 (รายได้)
         Me.Guna2DataGridView1.DefaultCellStyle.Font = fcMinimalFont ' ตัวปกติสำหรับเนื้อหา

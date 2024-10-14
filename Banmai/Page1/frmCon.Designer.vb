@@ -23,9 +23,9 @@ Partial Class frmCon
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Guna2Elipse1 = New Guna.UI2.WinForms.Guna2Elipse(Me.components)
         Me.dgvPayments = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.btnSearch = New Guna.UI2.WinForms.Guna2Button()
@@ -48,7 +48,6 @@ Partial Class frmCon
         Me.txtSearchContractNumber = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.Guna2ControlBox2 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.txtTotalBalance = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -69,30 +68,30 @@ Partial Class frmCon
         '
         Me.dgvPayments.AllowUserToAddRows = False
         Me.dgvPayments.AllowUserToDeleteRows = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        Me.dgvPayments.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        Me.dgvPayments.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvPayments.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvPayments.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvPayments.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvPayments.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvPayments.ColumnHeadersHeight = 50
         Me.dgvPayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvPayments.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvPayments.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvPayments.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.dgvPayments.Location = New System.Drawing.Point(421, 100)
         Me.dgvPayments.Name = "dgvPayments"
@@ -193,6 +192,7 @@ Partial Class frmCon
         Me.txtTransactionDate.ForeColor = System.Drawing.Color.Black
         Me.txtTransactionDate.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtTransactionDate.Location = New System.Drawing.Point(156, 344)
+        Me.txtTransactionDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtTransactionDate.Name = "txtTransactionDate"
         Me.txtTransactionDate.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtTransactionDate.PlaceholderText = ""
@@ -226,6 +226,7 @@ Partial Class frmCon
         Me.txtMonths.ForeColor = System.Drawing.Color.Black
         Me.txtMonths.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtMonths.Location = New System.Drawing.Point(156, 287)
+        Me.txtMonths.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtMonths.Name = "txtMonths"
         Me.txtMonths.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtMonths.PlaceholderText = ""
@@ -248,6 +249,7 @@ Partial Class frmCon
         Me.txtAmount.ForeColor = System.Drawing.Color.Black
         Me.txtAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtAmount.Location = New System.Drawing.Point(156, 230)
+        Me.txtAmount.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtAmount.PlaceholderText = ""
@@ -271,6 +273,7 @@ Partial Class frmCon
         Me.txtDetails.ForeColor = System.Drawing.Color.Black
         Me.txtDetails.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtDetails.Location = New System.Drawing.Point(156, 174)
+        Me.txtDetails.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtDetails.Name = "txtDetails"
         Me.txtDetails.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtDetails.PlaceholderText = ""
@@ -293,6 +296,7 @@ Partial Class frmCon
         Me.txtBorrowerName.ForeColor = System.Drawing.Color.Black
         Me.txtBorrowerName.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtBorrowerName.Location = New System.Drawing.Point(156, 120)
+        Me.txtBorrowerName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtBorrowerName.Name = "txtBorrowerName"
         Me.txtBorrowerName.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtBorrowerName.PlaceholderText = ""
@@ -315,6 +319,7 @@ Partial Class frmCon
         Me.txtContractNumber.ForeColor = System.Drawing.Color.Black
         Me.txtContractNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtContractNumber.Location = New System.Drawing.Point(156, 68)
+        Me.txtContractNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtContractNumber.Name = "txtContractNumber"
         Me.txtContractNumber.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtContractNumber.PlaceholderText = ""
@@ -416,6 +421,7 @@ Partial Class frmCon
         Me.txtSearchContractNumber.ForeColor = System.Drawing.Color.Black
         Me.txtSearchContractNumber.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtSearchContractNumber.Location = New System.Drawing.Point(983, 58)
+        Me.txtSearchContractNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtSearchContractNumber.Name = "txtSearchContractNumber"
         Me.txtSearchContractNumber.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtSearchContractNumber.PlaceholderText = "กรอกเลขที่สัญญา"
@@ -436,24 +442,12 @@ Partial Class frmCon
         'Guna2Panel2
         '
         Me.Guna2Panel2.BackColor = System.Drawing.Color.DarkSlateBlue
-        Me.Guna2Panel2.Controls.Add(Me.Guna2ControlBox1)
         Me.Guna2Panel2.Controls.Add(Me.Guna2ControlBox2)
         Me.Guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel2.Name = "Guna2Panel2"
         Me.Guna2Panel2.Size = New System.Drawing.Size(1280, 30)
         Me.Guna2Panel2.TabIndex = 39
-        '
-        'Guna2ControlBox1
-        '
-        Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Guna2ControlBox1.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MaximizeBox
-        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.DarkSlateBlue
-        Me.Guna2ControlBox1.IconColor = System.Drawing.Color.White
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1179, 1)
-        Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
-        Me.Guna2ControlBox1.Size = New System.Drawing.Size(45, 29)
-        Me.Guna2ControlBox1.TabIndex = 16
         '
         'Guna2ControlBox2
         '
@@ -482,6 +476,7 @@ Partial Class frmCon
         Me.txtTotalBalance.ForeColor = System.Drawing.Color.Black
         Me.txtTotalBalance.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtTotalBalance.Location = New System.Drawing.Point(566, 558)
+        Me.txtTotalBalance.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtTotalBalance.Name = "txtTotalBalance"
         Me.txtTotalBalance.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtTotalBalance.PlaceholderText = ""
@@ -528,6 +523,7 @@ Partial Class frmCon
         Me.Guna2TextBox1.ForeColor = System.Drawing.Color.Black
         Me.Guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.Guna2TextBox1.Location = New System.Drawing.Point(1024, 558)
+        Me.Guna2TextBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Guna2TextBox1.Name = "Guna2TextBox1"
         Me.Guna2TextBox1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.Guna2TextBox1.PlaceholderText = ""
@@ -613,7 +609,6 @@ Partial Class frmCon
     Friend WithEvents txtSearchContractNumber As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents Guna2Panel2 As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents Guna2ControlBox1 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents Guna2ControlBox2 As Guna.UI2.WinForms.Guna2ControlBox
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label

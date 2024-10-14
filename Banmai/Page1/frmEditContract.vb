@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports Guna.UI2.WinForms
 
 Public Class frmEditContract
     Dim conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
@@ -26,6 +27,9 @@ Public Class frmEditContract
 
     Private Sub ConfigureDataGridView()
         ' ใช้ Guna2DataGridView พร้อมตั้งค่า Theme
+        dgvContracts.RowTemplate.Height = 40 ' กำหนดความสูงของแถว
+        dgvContracts.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 22, FontStyle.Bold) ' กำหนดฟอนต์ FC Minimal ขนาด 18 และเป็นตัวหนา
+
         dgvContracts.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Dark
 
         ' เปิดการใช้งาน ScrollBars
@@ -35,14 +39,14 @@ Public Class frmEditContract
         dgvContracts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None
 
         ' ตั้งค่าฟอนต์และสีสำหรับ DefaultCellStyle
-        dgvContracts.DefaultCellStyle.Font = New Font("Fc minimal", 15)
+        dgvContracts.DefaultCellStyle.Font = New Font("Fc minimal", 20)
         dgvContracts.DefaultCellStyle.BackColor = Color.White
         dgvContracts.DefaultCellStyle.ForeColor = Color.Black
         dgvContracts.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
         dgvContracts.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black
 
         ' ตั้งค่าฟอนต์และสีสำหรับ ColumnHeaders
-        dgvContracts.ColumnHeadersDefaultCellStyle.Font = New Font("Fc minimal", 10, FontStyle.Bold)
+        dgvContracts.ColumnHeadersDefaultCellStyle.Font = New Font("Fc minimal", 22, FontStyle.Bold)
         dgvContracts.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
         dgvContracts.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
 

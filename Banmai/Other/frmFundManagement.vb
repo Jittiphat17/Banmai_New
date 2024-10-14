@@ -42,15 +42,10 @@ Public Class frmFundManagement
         dgvFunds.ReadOnly = True ' This will disable editing, but allow selection
 
         ' Set Font to FC Minimal Bold
-        dgvFunds.DefaultCellStyle.Font = New Font("FC Minimal Bold", 10)
-        dgvFunds.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal Bold", 12, FontStyle.Bold)
+        dgvFunds.DefaultCellStyle.Font = New Font("FC Minimal", 20)
+        dgvFunds.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 22)
+        dgvFunds.RowTemplate.Height = 40
 
-        ' Set colors to match your style
-        dgvFunds.DefaultCellStyle.BackColor = Color.LightBlue
-        dgvFunds.DefaultCellStyle.ForeColor = Color.Black
-        dgvFunds.AlternatingRowsDefaultCellStyle.BackColor = Color.White
-        dgvFunds.ColumnHeadersDefaultCellStyle.BackColor = Color.RoyalBlue
-        dgvFunds.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
 
         ' Set Gridline and border styles
         dgvFunds.GridColor = Color.Black

@@ -27,8 +27,10 @@ Public Class frmManageUser
 
     Private Sub CustomizeDataGridView()
         ' ตั้งค่าฟอนต์สำหรับ Guna2DataGridView
-        gunaDataGridView1.DefaultCellStyle.Font = New Font("FC Minimal", 12, FontStyle.Regular)
-        gunaDataGridView1.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold)
+        gunaDataGridView1.DefaultCellStyle.Font = New Font("FC Minimal", 20, FontStyle.Regular)
+        gunaDataGridView1.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 22)
+        gunaDataGridView1.RowTemplate.Height = 40
+
 
     End Sub
 

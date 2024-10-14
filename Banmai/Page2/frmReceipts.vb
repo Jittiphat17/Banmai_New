@@ -24,7 +24,7 @@ Public Class frmReceipts
 
                 ' ดึงข้อมูลจากตาราง Income
                 Dim query As String = "SELECT i.[inc_id], i.[m_id], i.[inc_detail], i.[inc_description], i.[inc_amount], i.[inc_date], i.[acc_id] " &
-                              "FROM [Income] AS i"
+                          "FROM [Income] AS i"
                 Dim cmd As New OleDbCommand(query, conn)
                 Dim adapter As New OleDbDataAdapter(cmd)
 
@@ -33,7 +33,7 @@ Public Class frmReceipts
 
                 ' ดึงข้อมูลจากตาราง Income_Details
                 Dim detailsQuery As String = "SELECT d.[inc_id], d.[ind_accname], d.[ind_amount], d.[ind_date] " &
-                                     "FROM [Income_Details] AS d"
+                                 "FROM [Income_Details] AS d"
                 Dim detailsCmd As New OleDbCommand(detailsQuery, conn)
                 Dim detailsAdapter As New OleDbDataAdapter(detailsCmd)
 
@@ -43,6 +43,10 @@ Public Class frmReceipts
                 ' แสดงข้อมูลใน DataGridView
                 dgvResults.DataSource = incomeTable
                 dgvResults.Refresh()
+
+                ' กำหนดฟอนต์สำหรับเซลล์ (ขนาด 20) และหัวตาราง (ขนาด 22) โดยใช้ฟอนต์ Fc Minimal
+                Dim cellFont As New Font("Fc Minimal", 20)
+                Dim headerFont As New Font("Fc Minimal", 22)
 
                 ' ตั้งชื่อหัวตารางใน DataGridView เป็นภาษาไทย
                 With dgvResults
@@ -57,6 +61,13 @@ Public Class frmReceipts
                     ' จัดรูปแบบคอลัมน์ยอดเงินให้ชิดขวาและมีเครื่องหมายคอมมา
                     .Columns("inc_amount").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                     .Columns("inc_amount").DefaultCellStyle.Format = "N2" ' รูปแบบตัวเลข: มีเครื่องหมายคอมมาและทศนิยม 2 ตำแหน่ง
+
+                    ' กำหนดฟอนต์สำหรับเซลล์และหัวตาราง
+                    .DefaultCellStyle.Font = cellFont
+                    .ColumnHeadersDefaultCellStyle.Font = headerFont
+
+                    ' ตั้งให้หัวตารางจัดอยู่ตรงกลาง
+                    .ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
                 End With
 
             End Using

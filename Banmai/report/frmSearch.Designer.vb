@@ -54,7 +54,7 @@ Partial Class frmSearch
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(1237, 33)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(1900, 33)
         Me.Guna2Panel1.TabIndex = 41
         '
         'Guna2ControlBox1
@@ -62,9 +62,9 @@ Partial Class frmSearch
         Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2ControlBox1.BackColor = System.Drawing.Color.Red
         Me.Guna2ControlBox1.CustomIconSize = 30.0!
-        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.LightGray
+        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1187, 1)
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1850, 1)
         Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
         Me.Guna2ControlBox1.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox1.TabIndex = 5
@@ -72,19 +72,19 @@ Partial Class frmSearch
         'ReportViewer1
         '
         Me.ReportViewer1.DocumentMapWidth = 48
-        Me.ReportViewer1.Location = New System.Drawing.Point(10, 303)
+        Me.ReportViewer1.Location = New System.Drawing.Point(12, 372)
         Me.ReportViewer1.Name = "ReportViewer1"
         Me.ReportViewer1.ServerReport.BearerToken = Nothing
-        Me.ReportViewer1.Size = New System.Drawing.Size(604, 480)
+        Me.ReportViewer1.Size = New System.Drawing.Size(930, 596)
         Me.ReportViewer1.TabIndex = 42
         '
         'ReportViewer2
         '
         Me.ReportViewer2.DocumentMapWidth = 48
-        Me.ReportViewer2.Location = New System.Drawing.Point(623, 303)
+        Me.ReportViewer2.Location = New System.Drawing.Point(958, 372)
         Me.ReportViewer2.Name = "ReportViewer2"
         Me.ReportViewer2.ServerReport.BearerToken = Nothing
-        Me.ReportViewer2.Size = New System.Drawing.Size(604, 480)
+        Me.ReportViewer2.Size = New System.Drawing.Size(930, 596)
         Me.ReportViewer2.TabIndex = 42
         '
         'dgvResults
@@ -92,7 +92,7 @@ Partial Class frmSearch
         Me.dgvResults.AllowUserToDeleteRows = False
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
         Me.dgvResults.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None
+        Me.dgvResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.dgvResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -102,7 +102,7 @@ Partial Class frmSearch
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvResults.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvResults.ColumnHeadersHeight = 50
+        Me.dgvResults.ColumnHeadersHeight = 70
         Me.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
@@ -116,8 +116,8 @@ Partial Class frmSearch
         Me.dgvResults.Location = New System.Drawing.Point(12, 98)
         Me.dgvResults.Name = "dgvResults"
         Me.dgvResults.RowHeadersVisible = False
-        Me.dgvResults.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
-        Me.dgvResults.Size = New System.Drawing.Size(1215, 199)
+        Me.dgvResults.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgvResults.Size = New System.Drawing.Size(1876, 268)
         Me.dgvResults.TabIndex = 43
         Me.dgvResults.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvResults.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -131,7 +131,7 @@ Partial Class frmSearch
         Me.dgvResults.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dgvResults.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
         Me.dgvResults.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.dgvResults.ThemeStyle.HeaderStyle.Height = 50
+        Me.dgvResults.ThemeStyle.HeaderStyle.Height = 70
         Me.dgvResults.ThemeStyle.ReadOnly = False
         Me.dgvResults.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvResults.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
@@ -151,40 +151,41 @@ Partial Class frmSearch
         Me.txtSearch.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtSearch.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearch.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtSearch.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearch.Location = New System.Drawing.Point(448, 55)
+        Me.txtSearch.Location = New System.Drawing.Point(536, 58)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtSearch.PlaceholderText = "กรอกเลขที่สัญญา"
         Me.txtSearch.SelectedText = ""
-        Me.txtSearch.Size = New System.Drawing.Size(84, 36)
+        Me.txtSearch.Size = New System.Drawing.Size(260, 36)
         Me.txtSearch.TabIndex = 45
         '
         'btnReport
         '
+        Me.btnReport.Animated = True
         Me.btnReport.BorderRadius = 5
         Me.btnReport.DisabledState.BorderColor = System.Drawing.Color.DarkGray
         Me.btnReport.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
         Me.btnReport.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnReport.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnReport.FillColor = System.Drawing.Color.ForestGreen
-        Me.btnReport.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.btnReport.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnReport.ForeColor = System.Drawing.Color.White
-        Me.btnReport.Location = New System.Drawing.Point(1105, 55)
+        Me.btnReport.Location = New System.Drawing.Point(1700, 55)
         Me.btnReport.Name = "btnReport"
-        Me.btnReport.Size = New System.Drawing.Size(122, 36)
+        Me.btnReport.Size = New System.Drawing.Size(188, 36)
         Me.btnReport.TabIndex = 46
         Me.btnReport.Text = "สร้างรายงาน"
         '
         'Guna2HtmlLabel3
         '
         Me.Guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 26.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(12, 55)
+        Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 36.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(12, 44)
         Me.Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
-        Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(324, 37)
+        Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(445, 50)
         Me.Guna2HtmlLabel3.TabIndex = 48
         Me.Guna2HtmlLabel3.Text = "รายงานสัญญาเงินกู้/สัญญาค้ำ"
         '
@@ -199,9 +200,9 @@ Partial Class frmSearch
         Me.ComboBoxDirector1.Font = New System.Drawing.Font("FC Minimal", 14.25!)
         Me.ComboBoxDirector1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ComboBoxDirector1.ItemHeight = 30
-        Me.ComboBoxDirector1.Location = New System.Drawing.Point(605, 56)
+        Me.ComboBoxDirector1.Location = New System.Drawing.Point(1303, 56)
         Me.ComboBoxDirector1.Name = "ComboBoxDirector1"
-        Me.ComboBoxDirector1.Size = New System.Drawing.Size(244, 36)
+        Me.ComboBoxDirector1.Size = New System.Drawing.Size(391, 36)
         Me.ComboBoxDirector1.TabIndex = 49
         '
         'ComboBoxDirector2
@@ -212,31 +213,31 @@ Partial Class frmSearch
         Me.ComboBoxDirector2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxDirector2.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ComboBoxDirector2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ComboBoxDirector2.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxDirector2.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBoxDirector2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ComboBoxDirector2.ItemHeight = 30
-        Me.ComboBoxDirector2.Location = New System.Drawing.Point(855, 56)
+        Me.ComboBoxDirector2.Location = New System.Drawing.Point(906, 56)
         Me.ComboBoxDirector2.Name = "ComboBoxDirector2"
-        Me.ComboBoxDirector2.Size = New System.Drawing.Size(244, 36)
+        Me.ComboBoxDirector2.Size = New System.Drawing.Size(391, 36)
         Me.ComboBoxDirector2.TabIndex = 49
         '
         'Guna2HtmlLabel2
         '
         Me.Guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(538, 63)
+        Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(802, 58)
         Me.Guna2HtmlLabel2.Name = "Guna2HtmlLabel2"
-        Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(61, 21)
+        Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(98, 34)
         Me.Guna2HtmlLabel2.TabIndex = 50
         Me.Guna2HtmlLabel2.Text = "กรรมการ"
         '
         'Guna2HtmlLabel1
         '
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(405, 63)
+        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(471, 58)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(37, 21)
+        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(59, 34)
         Me.Guna2HtmlLabel1.TabIndex = 50
         Me.Guna2HtmlLabel1.Text = "ค้นหา"
         '
@@ -245,7 +246,7 @@ Partial Class frmSearch
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1237, 791)
+        Me.ClientSize = New System.Drawing.Size(1900, 980)
         Me.Controls.Add(Me.Guna2HtmlLabel1)
         Me.Controls.Add(Me.Guna2HtmlLabel2)
         Me.Controls.Add(Me.ComboBoxDirector2)

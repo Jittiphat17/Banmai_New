@@ -84,13 +84,10 @@ Public Class frmManageMembers
         dgvMembers.Columns.Add("s_id", "สถานะสมาชิก")
 
         ' Set other DataGridView properties
-        dgvMembers.DefaultCellStyle.Font = New Font("Tahoma", 10)
-        dgvMembers.DefaultCellStyle.BackColor = Color.White
-        dgvMembers.DefaultCellStyle.ForeColor = Color.Black
-        dgvMembers.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
-        dgvMembers.ColumnHeadersDefaultCellStyle.Font = New Font("Tahoma", 10, FontStyle.Bold)
-        dgvMembers.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
-        dgvMembers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+        dgvMembers.DefaultCellStyle.Font = New Font("Fc Minimal", 20)
+        dgvMembers.RowTemplate.Height = 40
+        dgvMembers.ColumnHeadersDefaultCellStyle.Font = New Font("Fc Minimal", 22)
+
         dgvMembers.EnableHeadersVisualStyles = False
     End Sub
 

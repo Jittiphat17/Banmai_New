@@ -38,14 +38,15 @@ Public Class frmBrrow
             ' ตรวจสอบว่าเป็นจำนวนเงินที่ถูกต้องหรือไม่
             Dim value As Decimal
             If Decimal.TryParse(valueWithoutComma, value) Then
-                ' จัดรูปแบบและใส่คอมม่า
-                txtMoney.Text = String.Format("{0:N0}", value)
+                ' จัดรูปแบบและใส่คอมม่าพร้อมกับทศนิยม (2 ตำแหน่ง)
+                txtMoney.Text = String.Format("{0:N2}", value)
 
                 ' กำหนดตำแหน่งเคอร์เซอร์กลับไปที่ตำแหน่งเดิม
                 txtMoney.SelectionStart = cursorPosition + (txtMoney.Text.Length - valueWithoutComma.Length)
             End If
         End If
     End Sub
+
 
     Private Sub LoadGuaranteeTypes()
         cbGuaranteeType.Items.Clear()
@@ -57,26 +58,41 @@ Public Class frmBrrow
     End Sub
 
     Private Sub SetupGuna2DataGridView()
-        guna2DataGridView1.Font = New Font("FC Minimal", 12, FontStyle.Bold)
+        ' ตั้งค่าฟอนต์ของ DataGridView
+        guna2DataGridView1.Font = New Font("FC Minimal", 20, FontStyle.Bold)
         guna2DataGridView1.Columns.Clear()
 
+        ' ชื่อคอลัมน์ที่ต้องการแสดง
         Dim columnNames As String() = {"เลขที่สัญญา", "ผู้กู้", "รายละเอียดผู้กู้", "จำนวนเงินกู้", "แหล่งจ่าย",
-                                   "จำนวนเดือน", "ดอกเบี้ย", "วันที่ทำรายการ", "ผู้ค้ำที่ 1", "ผู้ค้ำที่ 2",
-                                   "ผู้ค้ำที่ 3", "ผ่อนชำระต่อเดือน"}
+                                "จำนวนเดือน", "ดอกเบี้ย", "วันที่ทำรายการ", "ผู้ค้ำที่ 1", "ผู้ค้ำที่ 2",
+                                "ผู้ค้ำที่ 3", "ผ่อนชำระต่อเดือน"}
 
+        ' เพิ่มคอลัมน์ให้กับ DataGridView
         For Each colName As String In columnNames
             Dim column As New DataGridViewTextBoxColumn()
             column.HeaderText = colName
             column.Name = colName
 
+            ' จัดรูปแบบคอลัมน์ที่เกี่ยวข้องกับตัวเลขหรือจำนวนเงิน
             If colName = "จำนวนเงินกู้" OrElse colName = "ผ่อนชำระต่อเดือน" Then
                 column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
                 column.DefaultCellStyle.Format = "N2" ' แสดงจำนวนเงินด้วยคอมม่า
             End If
 
+            ' เพิ่มคอลัมน์เข้าไปใน DataGridView
             guna2DataGridView1.Columns.Add(column)
         Next
+
+        ' ตั้งค่าเพิ่มเติมให้ DataGridView
+        guna2DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill ' ให้คอลัมน์ขยายตามขนาดของหน้าจอ
+        guna2DataGridView1.RowTemplate.Height = 40 ' กำหนดความสูงของแถว
+
+        ' กำหนดรูปแบบตัวอักษรในส่วนหัวตาราง
+        guna2DataGridView1.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 22, FontStyle.Bold) ' กำหนดฟอนต์ FC Minimal ขนาด 18 และเป็นตัวหนา
+        guna2DataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter ' จัดหัวตารางให้อยู่ตรงกลาง
     End Sub
+
+
 
     Private Sub SetupEventHandlers()
         AddHandler txtSearch.TextChanged, AddressOf txtSearch_TextChanged
@@ -710,7 +726,7 @@ Public Class frmBrrow
                                 Dim ex_id As Integer = Convert.ToInt32(cmdExpense.ExecuteScalar())
 
                                 ' บันทึกข้อมูลในตาราง Expense_Details
-                                Dim accountNameFromGrid As String = "เงินกู้ " & row.Cells("แหล่งจ่าย").Value.ToString()
+                                Dim accountNameFromGrid As String = "กู้เงิน " & row.Cells("แหล่งจ่าย").Value.ToString()
                                 strSQL = "INSERT INTO Expense_Details (exd_nameacc, exd_amount, ex_id, m_id, exd_date, acc_id) VALUES (@exd_nameacc, @exd_amount, @ex_id, @m_id, @exd_date, @acc_id)"
                                 Using cmdExpenseDetails As New OleDbCommand(strSQL, conn)
                                     cmdExpenseDetails.Parameters.AddWithValue("@exd_nameacc", accountNameFromGrid)

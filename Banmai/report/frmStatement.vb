@@ -11,6 +11,8 @@ Public Class frmStatement
     Private Sub frmProfitLossReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' ดึงข้อมูลบัญชีเพื่อลงใน ComboBox
         LoadAccountNames()
+        dtpStartDate.Value = DateTime.Now
+        dtpEndDate.Value = DateTime.Now
     End Sub
 
     ' ฟังก์ชันสำหรับโหลดข้อมูลบัญชีลงใน ComboBox

@@ -45,7 +45,7 @@ Partial Class frmStatement
         Me.ReportViewer1.Location = New System.Drawing.Point(12, 140)
         Me.ReportViewer1.Name = "ReportViewer1"
         Me.ReportViewer1.ServerReport.BearerToken = Nothing
-        Me.ReportViewer1.Size = New System.Drawing.Size(1080, 665)
+        Me.ReportViewer1.Size = New System.Drawing.Size(1876, 828)
         Me.ReportViewer1.TabIndex = 0
         '
         'Guna2Elipse1
@@ -60,31 +60,31 @@ Partial Class frmStatement
         Me.cmbAccountName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAccountName.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.cmbAccountName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.cmbAccountName.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbAccountName.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbAccountName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.cmbAccountName.ItemHeight = 30
-        Me.cmbAccountName.Location = New System.Drawing.Point(63, 98)
+        Me.cmbAccountName.Location = New System.Drawing.Point(755, 92)
         Me.cmbAccountName.Name = "cmbAccountName"
-        Me.cmbAccountName.Size = New System.Drawing.Size(231, 36)
+        Me.cmbAccountName.Size = New System.Drawing.Size(306, 36)
         Me.cmbAccountName.TabIndex = 1
         '
         'Guna2HtmlLabel1
         '
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(20, 105)
+        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(695, 92)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(37, 23)
+        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(54, 34)
         Me.Guna2HtmlLabel1.TabIndex = 2
         Me.Guna2HtmlLabel1.Text = "บัญชี"
         '
         'Guna2HtmlLabel2
         '
         Me.Guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(300, 107)
+        Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(1067, 92)
         Me.Guna2HtmlLabel2.Name = "Guna2HtmlLabel2"
-        Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(69, 23)
+        Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(102, 34)
         Me.Guna2HtmlLabel2.TabIndex = 2
         Me.Guna2HtmlLabel2.Text = "ตั้งแต่วันที่"
         '
@@ -97,11 +97,11 @@ Partial Class frmStatement
         Me.btnGenerateReport.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnGenerateReport.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnGenerateReport.FillColor = System.Drawing.Color.ForestGreen
-        Me.btnGenerateReport.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.btnGenerateReport.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
-        Me.btnGenerateReport.Location = New System.Drawing.Point(843, 98)
+        Me.btnGenerateReport.Location = New System.Drawing.Point(1683, 86)
         Me.btnGenerateReport.Name = "btnGenerateReport"
-        Me.btnGenerateReport.Size = New System.Drawing.Size(129, 36)
+        Me.btnGenerateReport.Size = New System.Drawing.Size(205, 42)
         Me.btnGenerateReport.TabIndex = 43
         Me.btnGenerateReport.Text = "สร้างรายงาน"
         '
@@ -112,14 +112,14 @@ Partial Class frmStatement
         Me.dtpStartDate.BorderRadius = 5
         Me.dtpStartDate.Checked = True
         Me.dtpStartDate.FillColor = System.Drawing.Color.DarkSlateBlue
-        Me.dtpStartDate.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.dtpStartDate.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpStartDate.ForeColor = System.Drawing.Color.White
         Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpStartDate.Location = New System.Drawing.Point(375, 98)
+        Me.dtpStartDate.Location = New System.Drawing.Point(1175, 86)
         Me.dtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpStartDate.Name = "dtpStartDate"
-        Me.dtpStartDate.Size = New System.Drawing.Size(200, 36)
+        Me.dtpStartDate.Size = New System.Drawing.Size(208, 42)
         Me.dtpStartDate.TabIndex = 44
         Me.dtpStartDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.dtpStartDate.Value = New Date(2024, 10, 9, 0, 0, 0, 0)
@@ -130,14 +130,14 @@ Partial Class frmStatement
         Me.dtpEndDate.BorderRadius = 5
         Me.dtpEndDate.Checked = True
         Me.dtpEndDate.FillColor = System.Drawing.Color.DarkSlateBlue
-        Me.dtpEndDate.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold)
+        Me.dtpEndDate.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpEndDate.ForeColor = System.Drawing.Color.White
         Me.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpEndDate.Location = New System.Drawing.Point(637, 98)
+        Me.dtpEndDate.Location = New System.Drawing.Point(1469, 86)
         Me.dtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.dtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.dtpEndDate.Name = "dtpEndDate"
-        Me.dtpEndDate.Size = New System.Drawing.Size(200, 36)
+        Me.dtpEndDate.Size = New System.Drawing.Size(208, 42)
         Me.dtpEndDate.TabIndex = 44
         Me.dtpEndDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.dtpEndDate.Value = New Date(2024, 10, 9, 0, 0, 0, 0)
@@ -145,10 +145,10 @@ Partial Class frmStatement
         'Guna2HtmlLabel3
         '
         Me.Guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(581, 107)
+        Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(1389, 92)
         Me.Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
-        Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(50, 23)
+        Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(74, 34)
         Me.Guna2HtmlLabel3.TabIndex = 2
         Me.Guna2HtmlLabel3.Text = "ถึงวันที่"
         '
@@ -159,7 +159,7 @@ Partial Class frmStatement
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(1104, 30)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(1900, 30)
         Me.Guna2Panel1.TabIndex = 56
         '
         'Guna2ControlBox2
@@ -169,7 +169,7 @@ Partial Class frmStatement
         Me.Guna2ControlBox2.CustomIconSize = 30.0!
         Me.Guna2ControlBox2.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2ControlBox2.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox2.Location = New System.Drawing.Point(1054, 1)
+        Me.Guna2ControlBox2.Location = New System.Drawing.Point(1850, 1)
         Me.Guna2ControlBox2.Name = "Guna2ControlBox2"
         Me.Guna2ControlBox2.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox2.TabIndex = 15
@@ -177,10 +177,10 @@ Partial Class frmStatement
         'Guna2HtmlLabel4
         '
         Me.Guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel4.Font = New System.Drawing.Font("FC Minimal", 26.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel4.Location = New System.Drawing.Point(382, 45)
+        Me.Guna2HtmlLabel4.Font = New System.Drawing.Font("FC Minimal", 36.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel4.Location = New System.Drawing.Point(12, 84)
         Me.Guna2HtmlLabel4.Name = "Guna2HtmlLabel4"
-        Me.Guna2HtmlLabel4.Size = New System.Drawing.Size(249, 37)
+        Me.Guna2HtmlLabel4.Size = New System.Drawing.Size(341, 50)
         Me.Guna2HtmlLabel4.TabIndex = 61
         Me.Guna2HtmlLabel4.Text = "รายงานงบกำไร-ขาดทุน"
         '
@@ -188,7 +188,7 @@ Partial Class frmStatement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1104, 817)
+        Me.ClientSize = New System.Drawing.Size(1900, 980)
         Me.Controls.Add(Me.Guna2HtmlLabel4)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.dtpEndDate)

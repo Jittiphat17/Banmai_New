@@ -50,8 +50,10 @@ Public Class frmMemberResign
         Try
             Conn.Open()
 
-            ' ดึงข้อมูลเงินฝากจากบัญชีสัจจะ
-            Dim queryIncome As String = "SELECT SUM(inc_amount) FROM Income WHERE m_id = (SELECT m_id FROM Member WHERE m_name = @memberName) AND acc_id = 'ACC002'"
+            ' ดึงข้อมูลเงินฝากจากบัญชีสัจจะ (ind_accname = 'เงินฝากสัจจะ') และ acc_id = 'ACC002'
+            Dim queryIncome As String = "SELECT SUM(inc_amount) FROM Income " &
+                                "WHERE m_id = (SELECT m_id FROM Member WHERE m_name = @memberName) " &
+                                "AND inc_id IN (SELECT inc_id FROM Income_Details WHERE ind_accname = 'เงินฝากสัจจะ' AND acc_id = 'ACC002')"
             Dim cmdIncome As New OleDbCommand(queryIncome, Conn)
             cmdIncome.Parameters.AddWithValue("@memberName", memberName)
             Dim incomeResult As Object = cmdIncome.ExecuteScalar()

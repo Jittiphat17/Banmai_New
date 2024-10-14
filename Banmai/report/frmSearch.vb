@@ -65,21 +65,18 @@ Public Class frmSearch
     End Sub
     Private Sub FormatDataGridView()
         ' สร้างฟอนต์ FC Minimal Bold ขนาด 12pt
-        Dim fcMinimalBoldFont As New Font("FC Minimal", 12)
+        Dim fcMinimalBoldFont As New Font("FC Minimal", 16)
 
         ' ตั้งค่าฟอนต์ให้กับ DataGridView
         dgvResults.Font = fcMinimalBoldFont
+        dgvResults.RowTemplate.Height = 40
+
 
         ' ตั้งค่าสีสำหรับ Header
         dgvResults.EnableHeadersVisualStyles = False
         dgvResults.ColumnHeadersDefaultCellStyle.BackColor = Color.MediumSlateBlue
         dgvResults.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
         dgvResults.ColumnHeadersDefaultCellStyle.Font = fcMinimalBoldFont
-
-        ' ตั้งค่าสีสำหรับแถวสลับสี
-        dgvResults.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
-        dgvResults.DefaultCellStyle.BackColor = Color.White
-        dgvResults.DefaultCellStyle.ForeColor = Color.Black
 
         ' ตั้งค่าการจัดข้อความสำหรับคอลัมน์ตัวเลข
         dgvResults.Columns("con_amount").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -94,7 +91,7 @@ Public Class frmSearch
         ' ตั้งค่าให้ข้อความในเซลล์ตัดบรรทัด (Wrap Text)
         dgvResults.DefaultCellStyle.WrapMode = DataGridViewTriState.True
 
-        ' ปรับขนาดคอลัมน์ที่ไม่ต้องการขยายอัตโนมัติ
+        ' ปรับขนาดคอลัมน์ที่ต้องการขนาดเฉพาะ
         dgvResults.Columns("con_details").Width = 200
         dgvResults.Columns("con_amount").Width = 100
         dgvResults.Columns("con_interest").Width = 80
@@ -103,8 +100,8 @@ Public Class frmSearch
         ' ตั้งค่าการเลื่อน (Scrollbar)
         dgvResults.ScrollBars = ScrollBars.Both ' เปิด scrollbar ทั้งแนวตั้งและแนวนอน
 
-        ' ตั้งค่าการขยายคอลัมน์อัตโนมัติสำหรับคอลัมน์ที่เหลือ
-        dgvResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        ' ตั้งค่าให้คอลัมน์ขยายอัตโนมัติและเติมเต็มพื้นที่ DataGridView
+        dgvResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
         ' กำหนดชื่อคอลัมน์ให้กับ DataGridView
         dgvResults.Columns("con_id").HeaderText = "รหัสสัญญา"
@@ -117,7 +114,10 @@ Public Class frmSearch
         dgvResults.Columns("acc_id").HeaderText = "ชื่อบัญชี"
         dgvResults.Columns("guarantor_names").HeaderText = "ชื่อผู้ค้ำประกัน"
         dgvResults.Columns("con_GuaranteeType").HeaderText = "ประเภทการค้ำประกัน"
+
+
     End Sub
+
 
 
 

@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports Guna.UI2.WinForms
 
 Public Class frmViewMember
     Dim Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
@@ -65,22 +66,20 @@ Public Class frmViewMember
         dgvConn.Columns.Add("m_tel", "เบอร์โทรศัพท์")
         dgvConn.Columns.Add("m_accountName", "ชื่อบัญชี")
         dgvConn.Columns.Add("m_accountNum", "หมายเลขบัญชี")
-        dgvConn.Columns.Add("m_beginning", "ยอดยกมา")
-        dgvConn.Columns.Add("m_outstanding", "ยอดคงเหลือ")
         dgvConn.Columns.Add("m_national", "สัญชาติ")
         dgvConn.Columns.Add("acc_name", "ประเภทบัญชี") ' Column for the account type
         dgvConn.Columns.Add("status", "สถานะสมาชิก") ' Column for member status
 
         ' Apply Guna.UI2 styling
-        dgvConn.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
-        dgvConn.DefaultCellStyle.SelectionBackColor = Color.LightBlue
-        dgvConn.DefaultCellStyle.SelectionForeColor = Color.Black
         dgvConn.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
         dgvConn.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single
-        dgvConn.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
-        dgvConn.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+
         dgvConn.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvConn.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+
+        dgvConn.DefaultCellStyle.Font = New Font("FC Minimal", 16, FontStyle.Regular)
+        dgvConn.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 22)
+        dgvConn.RowTemplate.Height = 40
 
         For Each column As DataGridViewColumn In dgvConn.Columns
             column.SortMode = DataGridViewColumnSortMode.Automatic
@@ -88,11 +87,10 @@ Public Class frmViewMember
     End Sub
 
     Sub Loadinfo()
-        ' SQL query to select member info including s_id
+        ' SQL query to select member info excluding m_beginning and m_outstanding
         strSQL = "SELECT Member.m_id, Member.m_gender, Member.m_name, Member.m_nick, Member.m_birth, " &
                  "Member.m_thaiid, Member.m_job, Member.m_address, Member.m_post, Member.m_tel, " &
-                 "Member.m_accountName, Member.m_accountNum, Member.m_beginning, Member.m_outstanding, " &
-                 "Member.m_national, Account.acc_name, Member.s_id " &
+                 "Member.m_accountName, Member.m_accountNum, Member.m_national, Account.acc_name, Member.s_id " &
                  "FROM (Member " &
                  "LEFT JOIN Account_Details ON Member.m_id = Account_Details.m_id) " &
                  "LEFT JOIN Account ON Account_Details.acc_id = Account.acc_id"
@@ -126,8 +124,6 @@ Public Class frmViewMember
                         dr("m_tel").ToString(),
                         dr("m_accountName").ToString(),
                         dr("m_accountNum").ToString(),
-                        dr("m_beginning").ToString(),
-                        dr("m_outstanding").ToString(),
                         dr("m_national").ToString(),
                         accountName,
                         memberStatus ' แสดงสถานะสมาชิก (สมาชิกลาออก หรือ สมาชิกคงอยู่)
@@ -164,8 +160,7 @@ Public Class frmViewMember
     Sub SearchByAccountType()
         strSQL = "SELECT Member.m_id, Member.m_gender, Member.m_name, Member.m_nick, Member.m_birth, " &
                  "Member.m_thaiid, Member.m_job, Member.m_address, Member.m_post, Member.m_tel, " &
-                 "Member.m_accountName, Member.m_accountNum, Member.m_beginning, Member.m_outstanding, " &
-                 "Member.m_national, Account.acc_name, Member.s_id " &
+                 "Member.m_accountName, Member.m_accountNum, Member.m_national, Account.acc_name, Member.s_id " &
                  "FROM (Member " &
                  "LEFT JOIN Account_Details ON Member.m_id = Account_Details.m_id) " &
                  "LEFT JOIN Account ON Account_Details.acc_id = Account.acc_id "
@@ -206,8 +201,6 @@ Public Class frmViewMember
                         dr("m_tel").ToString(),
                         dr("m_accountName").ToString(),
                         dr("m_accountNum").ToString(),
-                        dr("m_beginning").ToString(),
-                        dr("m_outstanding").ToString(),
                         dr("m_national").ToString(),
                         accountName,
                         memberStatus ' แสดงสถานะสมาชิก (สมาชิกลาออก หรือ สมาชิกคงอยู่)
@@ -225,8 +218,7 @@ Public Class frmViewMember
     Sub SearchByName()
         strSQL = "SELECT Member.m_id, Member.m_gender, Member.m_name, Member.m_nick, Member.m_birth, " &
                  "Member.m_thaiid, Member.m_job, Member.m_address, Member.m_post, Member.m_tel, " &
-                 "Member.m_accountName, Member.m_accountNum, Member.m_beginning, Member.m_outstanding, " &
-                 "Member.m_national, Account.acc_name, Member.s_id " &
+                 "Member.m_accountName, Member.m_accountNum, Member.m_national, Account.acc_name, Member.s_id " &
                  "FROM (Member " &
                  "LEFT JOIN Account_Details ON Member.m_id = Account_Details.m_id) " &
                  "LEFT JOIN Account ON Account_Details.acc_id = Account.acc_id " &
@@ -261,8 +253,6 @@ Public Class frmViewMember
                         dr("m_tel").ToString(),
                         dr("m_accountName").ToString(),
                         dr("m_accountNum").ToString(),
-                        dr("m_beginning").ToString(),
-                        dr("m_outstanding").ToString(),
                         dr("m_national").ToString(),
                         accountName,
                         memberStatus ' แสดงสถานะสมาชิก (สมาชิกลาออก หรือ สมาชิกคงอยู่)

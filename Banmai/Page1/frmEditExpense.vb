@@ -93,8 +93,9 @@ Public Class frmEditExpense
             dgvExpenses.DataSource = table
 
             ' ตั้งค่าฟอนต์สำหรับหัวตารางและเนื้อหา
-            dgvExpenses.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold)
-            dgvExpenses.DefaultCellStyle.Font = New Font("FC Minimal", 12)
+            dgvExpenses.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 22)
+            dgvExpenses.DefaultCellStyle.Font = New Font("FC Minimal", 20)
+            dgvExpenses.RowTemplate.Height = 40 ' กำหนดความสูงของแถว
 
             ' ตั้งชื่อหัวตารางเป็นภาษาไทย
             If dgvExpenses.Columns.Contains("ex_id") Then
@@ -155,8 +156,9 @@ Public Class frmEditExpense
             dgvExpenseDetails.DataSource = table
 
             ' ตั้งค่าฟอนต์สำหรับหัวตารางและเนื้อหา
-            dgvExpenseDetails.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold) ' ฟอนต์หัวตารางขนาด 14
-            dgvExpenseDetails.DefaultCellStyle.Font = New Font("FC Minimal", 12) ' ฟอนต์เนื้อหาตารางขนาด 12
+            dgvExpenseDetails.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 22)
+            dgvExpenseDetails.DefaultCellStyle.Font = New Font("FC Minimal", 20)
+            dgvExpenseDetails.RowTemplate.Height = 40 ' กำหนดความสูงของแถว
 
             ' ตั้งชื่อหัวตารางเป็นภาษาไทย
             If dgvExpenseDetails.Columns.Contains("exd_id") Then

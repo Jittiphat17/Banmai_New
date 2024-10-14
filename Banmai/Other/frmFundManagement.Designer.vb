@@ -68,21 +68,21 @@ Partial Class frmFundManagement
         Me.btnClear.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnClear.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnClear.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.btnClear.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.btnClear.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClear.ForeColor = System.Drawing.Color.White
-        Me.btnClear.Location = New System.Drawing.Point(575, 509)
+        Me.btnClear.Location = New System.Drawing.Point(976, 898)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(180, 45)
+        Me.btnClear.Size = New System.Drawing.Size(201, 57)
         Me.btnClear.TabIndex = 17
         Me.btnClear.Text = "เคลียร์"
         '
         'Guna2HtmlLabel7
         '
         Me.Guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel7.Font = New System.Drawing.Font("FC Minimal", 27.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel7.Location = New System.Drawing.Point(445, 47)
+        Me.Guna2HtmlLabel7.Font = New System.Drawing.Font("FC Minimal", 36.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel7.Location = New System.Drawing.Point(12, 39)
         Me.Guna2HtmlLabel7.Name = "Guna2HtmlLabel7"
-        Me.Guna2HtmlLabel7.Size = New System.Drawing.Size(227, 38)
+        Me.Guna2HtmlLabel7.Size = New System.Drawing.Size(291, 50)
         Me.Guna2HtmlLabel7.TabIndex = 11
         Me.Guna2HtmlLabel7.Text = "จัดการข้อมูลกองทุน"
         '
@@ -95,11 +95,11 @@ Partial Class frmFundManagement
         Me.btnDeleteFund.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnDeleteFund.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnDeleteFund.FillColor = System.Drawing.Color.Red
-        Me.btnDeleteFund.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.btnDeleteFund.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDeleteFund.ForeColor = System.Drawing.Color.White
-        Me.btnDeleteFund.Location = New System.Drawing.Point(761, 509)
+        Me.btnDeleteFund.Location = New System.Drawing.Point(1183, 898)
         Me.btnDeleteFund.Name = "btnDeleteFund"
-        Me.btnDeleteFund.Size = New System.Drawing.Size(180, 45)
+        Me.btnDeleteFund.Size = New System.Drawing.Size(201, 57)
         Me.btnDeleteFund.TabIndex = 14
         Me.btnDeleteFund.Text = "ลบ"
         '
@@ -112,11 +112,11 @@ Partial Class frmFundManagement
         Me.btnUpdateFund.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnUpdateFund.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
         Me.btnUpdateFund.FillColor = System.Drawing.Color.ForestGreen
-        Me.btnUpdateFund.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.btnUpdateFund.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdateFund.ForeColor = System.Drawing.Color.White
-        Me.btnUpdateFund.Location = New System.Drawing.Point(389, 509)
+        Me.btnUpdateFund.Location = New System.Drawing.Point(769, 898)
         Me.btnUpdateFund.Name = "btnUpdateFund"
-        Me.btnUpdateFund.Size = New System.Drawing.Size(180, 45)
+        Me.btnUpdateFund.Size = New System.Drawing.Size(201, 57)
         Me.btnUpdateFund.TabIndex = 15
         Me.btnUpdateFund.Text = "อัพเดต"
         '
@@ -128,11 +128,11 @@ Partial Class frmFundManagement
         Me.btnAddFund.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
         Me.btnAddFund.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
         Me.btnAddFund.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.btnAddFund.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.btnAddFund.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddFund.ForeColor = System.Drawing.Color.White
-        Me.btnAddFund.Location = New System.Drawing.Point(203, 509)
+        Me.btnAddFund.Location = New System.Drawing.Point(562, 898)
         Me.btnAddFund.Name = "btnAddFund"
-        Me.btnAddFund.Size = New System.Drawing.Size(180, 45)
+        Me.btnAddFund.Size = New System.Drawing.Size(201, 57)
         Me.btnAddFund.TabIndex = 16
         Me.btnAddFund.Text = "เพิ่ม"
         '
@@ -157,14 +157,15 @@ Partial Class frmFundManagement
         Me.Guna2GroupBox1.CustomBorderColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2GroupBox1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2GroupBox1.ForeColor = System.Drawing.Color.White
-        Me.Guna2GroupBox1.Location = New System.Drawing.Point(12, 247)
+        Me.Guna2GroupBox1.Location = New System.Drawing.Point(12, 623)
         Me.Guna2GroupBox1.Name = "Guna2GroupBox1"
-        Me.Guna2GroupBox1.Size = New System.Drawing.Size(1116, 249)
+        Me.Guna2GroupBox1.Size = New System.Drawing.Size(1876, 249)
         Me.Guna2GroupBox1.TabIndex = 13
         Me.Guna2GroupBox1.Text = "ข้อมูล"
         '
         'txtSearchMember
         '
+        Me.txtSearchMember.BorderRadius = 5
         Me.txtSearchMember.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtSearchMember.DefaultText = ""
         Me.txtSearchMember.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
@@ -172,98 +173,100 @@ Partial Class frmFundManagement
         Me.txtSearchMember.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtSearchMember.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtSearchMember.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearchMember.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txtSearchMember.Font = New System.Drawing.Font("FC Minimal", 24.0!)
         Me.txtSearchMember.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSearchMember.Location = New System.Drawing.Point(1014, 45)
+        Me.txtSearchMember.Location = New System.Drawing.Point(1022, 49)
+        Me.txtSearchMember.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.txtSearchMember.Name = "txtSearchMember"
         Me.txtSearchMember.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtSearchMember.PlaceholderText = ""
+        Me.txtSearchMember.PlaceholderText = "กรอกชื่อกรรมการ"
         Me.txtSearchMember.SelectedText = ""
-        Me.txtSearchMember.Size = New System.Drawing.Size(99, 36)
+        Me.txtSearchMember.Size = New System.Drawing.Size(447, 36)
         Me.txtSearchMember.TabIndex = 3
         '
         'Guna2HtmlLabel8
         '
         Me.Guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel8.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel8.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel8.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel8.Location = New System.Drawing.Point(857, 58)
+        Me.Guna2HtmlLabel8.Location = New System.Drawing.Point(918, 91)
         Me.Guna2HtmlLabel8.Name = "Guna2HtmlLabel8"
-        Me.Guna2HtmlLabel8.Size = New System.Drawing.Size(67, 23)
+        Me.Guna2HtmlLabel8.Size = New System.Drawing.Size(98, 34)
         Me.Guna2HtmlLabel8.TabIndex = 1
         Me.Guna2HtmlLabel8.Text = "กรรมการ"
         '
         'Guna2HtmlLabel3
         '
         Me.Guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel3.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel3.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(371, 127)
+        Me.Guna2HtmlLabel3.Location = New System.Drawing.Point(541, 126)
         Me.Guna2HtmlLabel3.Name = "Guna2HtmlLabel3"
-        Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(56, 23)
+        Me.Guna2HtmlLabel3.Size = New System.Drawing.Size(83, 34)
         Me.Guna2HtmlLabel3.TabIndex = 1
         Me.Guna2HtmlLabel3.Text = "ที่ทำการ"
         '
         'chkListDirectors
         '
+        Me.chkListDirectors.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkListDirectors.FormattingEnabled = True
-        Me.chkListDirectors.Location = New System.Drawing.Point(666, 87)
+        Me.chkListDirectors.Location = New System.Drawing.Point(1022, 91)
         Me.chkListDirectors.Name = "chkListDirectors"
-        Me.chkListDirectors.Size = New System.Drawing.Size(447, 142)
+        Me.chkListDirectors.Size = New System.Drawing.Size(837, 140)
         Me.chkListDirectors.TabIndex = 2
         '
         'Guna2HtmlLabel5
         '
         Me.Guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel5.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel5.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel5.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel5.Location = New System.Drawing.Point(335, 193)
+        Me.Guna2HtmlLabel5.Location = New System.Drawing.Point(487, 184)
         Me.Guna2HtmlLabel5.Name = "Guna2HtmlLabel5"
-        Me.Guna2HtmlLabel5.Size = New System.Drawing.Size(92, 23)
+        Me.Guna2HtmlLabel5.Size = New System.Drawing.Size(137, 34)
         Me.Guna2HtmlLabel5.TabIndex = 1
         Me.Guna2HtmlLabel5.Text = "เบอร์โทรศัพท์"
         '
         'Guna2HtmlLabel4
         '
         Me.Guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel4.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel4.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel4.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel4.Location = New System.Drawing.Point(3, 193)
+        Me.Guna2HtmlLabel4.Location = New System.Drawing.Point(17, 184)
         Me.Guna2HtmlLabel4.Name = "Guna2HtmlLabel4"
-        Me.Guna2HtmlLabel4.Size = New System.Drawing.Size(80, 23)
+        Me.Guna2HtmlLabel4.Size = New System.Drawing.Size(118, 34)
         Me.Guna2HtmlLabel4.TabIndex = 1
         Me.Guna2HtmlLabel4.Text = "รหัสกองทุน"
         '
         'Guna2HtmlLabel6
         '
         Me.Guna2HtmlLabel6.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel6.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel6.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel6.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel6.Location = New System.Drawing.Point(51, 127)
+        Me.Guna2HtmlLabel6.Location = New System.Drawing.Point(87, 126)
         Me.Guna2HtmlLabel6.Name = "Guna2HtmlLabel6"
-        Me.Guna2HtmlLabel6.Size = New System.Drawing.Size(33, 23)
+        Me.Guna2HtmlLabel6.Size = New System.Drawing.Size(48, 34)
         Me.Guna2HtmlLabel6.TabIndex = 1
         Me.Guna2HtmlLabel6.Text = "ที่อยู่"
         '
         'Guna2HtmlLabel2
         '
         Me.Guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel2.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel2.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(51, 68)
+        Me.Guna2HtmlLabel2.Location = New System.Drawing.Point(89, 66)
         Me.Guna2HtmlLabel2.Name = "Guna2HtmlLabel2"
-        Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(32, 23)
+        Me.Guna2HtmlLabel2.Size = New System.Drawing.Size(46, 34)
         Me.Guna2HtmlLabel2.TabIndex = 1
         Me.Guna2HtmlLabel2.Text = "รหัส"
         '
         'Guna2HtmlLabel1
         '
         Me.Guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel1.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel1.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(357, 68)
+        Me.Guna2HtmlLabel1.Location = New System.Drawing.Point(520, 66)
         Me.Guna2HtmlLabel1.Name = "Guna2HtmlLabel1"
-        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(70, 23)
+        Me.Guna2HtmlLabel1.Size = New System.Drawing.Size(104, 34)
         Me.Guna2HtmlLabel1.TabIndex = 1
         Me.Guna2HtmlLabel1.Text = "ชื่อกองทุน"
         '
@@ -278,10 +281,10 @@ Partial Class frmFundManagement
         Me.txtFundName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtFundName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtFundName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtFundName.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtFundName.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFundName.ForeColor = System.Drawing.Color.Black
         Me.txtFundName.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtFundName.Location = New System.Drawing.Point(433, 58)
+        Me.txtFundName.Location = New System.Drawing.Point(630, 62)
         Me.txtFundName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtFundName.Name = "txtFundName"
         Me.txtFundName.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -301,10 +304,10 @@ Partial Class frmFundManagement
         Me.txtOffice.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtOffice.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtOffice.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtOffice.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtOffice.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtOffice.ForeColor = System.Drawing.Color.Black
         Me.txtOffice.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtOffice.Location = New System.Drawing.Point(433, 118)
+        Me.txtOffice.Location = New System.Drawing.Point(630, 122)
         Me.txtOffice.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtOffice.Name = "txtOffice"
         Me.txtOffice.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -324,10 +327,10 @@ Partial Class frmFundManagement
         Me.txtTel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtTel.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtTel.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTel.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtTel.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTel.ForeColor = System.Drawing.Color.Black
         Me.txtTel.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTel.Location = New System.Drawing.Point(433, 184)
+        Me.txtTel.Location = New System.Drawing.Point(630, 180)
         Me.txtTel.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtTel.Name = "txtTel"
         Me.txtTel.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -347,10 +350,10 @@ Partial Class frmFundManagement
         Me.txtPass.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtPass.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtPass.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtPass.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtPass.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPass.ForeColor = System.Drawing.Color.Black
         Me.txtPass.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtPass.Location = New System.Drawing.Point(89, 184)
+        Me.txtPass.Location = New System.Drawing.Point(141, 180)
         Me.txtPass.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtPass.Name = "txtPass"
         Me.txtPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -370,10 +373,10 @@ Partial Class frmFundManagement
         Me.txtAddress.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtAddress.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtAddress.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtAddress.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtAddress.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress.ForeColor = System.Drawing.Color.Black
         Me.txtAddress.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtAddress.Location = New System.Drawing.Point(90, 118)
+        Me.txtAddress.Location = New System.Drawing.Point(141, 122)
         Me.txtAddress.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -394,10 +397,10 @@ Partial Class frmFundManagement
         Me.txtFundID.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtFundID.FillColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.txtFundID.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtFundID.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.txtFundID.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFundID.ForeColor = System.Drawing.Color.Black
         Me.txtFundID.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtFundID.Location = New System.Drawing.Point(90, 58)
+        Me.txtFundID.Location = New System.Drawing.Point(141, 62)
         Me.txtFundID.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtFundID.Name = "txtFundID"
         Me.txtFundID.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -421,7 +424,7 @@ Partial Class frmFundManagement
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvFunds.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvFunds.ColumnHeadersHeight = 50
+        Me.dgvFunds.ColumnHeadersHeight = 70
         Me.dgvFunds.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
@@ -435,7 +438,7 @@ Partial Class frmFundManagement
         Me.dgvFunds.Location = New System.Drawing.Point(12, 91)
         Me.dgvFunds.Name = "dgvFunds"
         Me.dgvFunds.RowHeadersVisible = False
-        Me.dgvFunds.Size = New System.Drawing.Size(1116, 150)
+        Me.dgvFunds.Size = New System.Drawing.Size(1876, 526)
         Me.dgvFunds.TabIndex = 12
         Me.dgvFunds.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvFunds.ThemeStyle.AlternatingRowsStyle.Font = Nothing
@@ -449,7 +452,7 @@ Partial Class frmFundManagement
         Me.dgvFunds.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dgvFunds.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
         Me.dgvFunds.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.dgvFunds.ThemeStyle.HeaderStyle.Height = 50
+        Me.dgvFunds.ThemeStyle.HeaderStyle.Height = 70
         Me.dgvFunds.ThemeStyle.ReadOnly = False
         Me.dgvFunds.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
         Me.dgvFunds.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
@@ -466,7 +469,7 @@ Partial Class frmFundManagement
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(1140, 33)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(1900, 33)
         Me.Guna2Panel1.TabIndex = 18
         '
         'Guna2ControlBox1
@@ -474,9 +477,9 @@ Partial Class frmFundManagement
         Me.Guna2ControlBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2ControlBox1.BackColor = System.Drawing.Color.Red
         Me.Guna2ControlBox1.CustomIconSize = 30.0!
-        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.LightGray
+        Me.Guna2ControlBox1.FillColor = System.Drawing.Color.DarkSlateBlue
         Me.Guna2ControlBox1.IconColor = System.Drawing.Color.Red
-        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1090, 1)
+        Me.Guna2ControlBox1.Location = New System.Drawing.Point(1850, 1)
         Me.Guna2ControlBox1.Name = "Guna2ControlBox1"
         Me.Guna2ControlBox1.Size = New System.Drawing.Size(38, 29)
         Me.Guna2ControlBox1.TabIndex = 5
@@ -486,7 +489,7 @@ Partial Class frmFundManagement
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1140, 566)
+        Me.ClientSize = New System.Drawing.Size(1900, 980)
         Me.Controls.Add(Me.Guna2Panel1)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.Guna2HtmlLabel7)

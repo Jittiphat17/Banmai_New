@@ -47,16 +47,18 @@ Public Class frmExpense
         ' ใช้ Guna2DataGridView สำหรับรายละเอียดรายจ่าย
         dgvExpenseDetails.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.Dark
         ' ตั้งค่าฟอนต์ FC Minimal และสีของ DataGridView สำหรับรายละเอียดรายจ่าย
-        dgvExpenseDetails.DefaultCellStyle.Font = New Font("FC Minimal", 12) ' ใช้ฟอนต์ FC Minimal
+        dgvExpenseDetails.DefaultCellStyle.Font = New Font("FC Minimal", 16) ' ใช้ฟอนต์ FC Minimal
         dgvExpenseDetails.DefaultCellStyle.BackColor = Color.White
         dgvExpenseDetails.DefaultCellStyle.ForeColor = Color.Black
         dgvExpenseDetails.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
-        dgvExpenseDetails.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 14, FontStyle.Bold) ' ใช้ฟอนต์ FC Minimal สำหรับหัวตาราง
+        dgvExpenseDetails.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 20, FontStyle.Bold) ' ใช้ฟอนต์ FC Minimal สำหรับหัวตาราง
         dgvExpenseDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy
         dgvExpenseDetails.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
 
-        dgvExpenseDetails.DefaultCellStyle.Font = New Font("FC Minimal", 14)
-        dgvExpenseDetails.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 12, FontStyle.Bold)
+        dgvExpenseDetails.DefaultCellStyle.Font = New Font("FC Minimal", 20)
+        dgvExpenseDetails.ColumnHeadersDefaultCellStyle.Font = New Font("FC Minimal", 22, FontStyle.Bold)
+        dgvExpenseDetails.RowTemplate.Height = 40 ' ตัวอย่างการตั้งค่าความสูงของเซลล์เป็น 40
+
 
         ' เพิ่มคอลัมน์ ComboBox สำหรับประเภทของรายจ่าย
         Dim colExpenseType As New DataGridViewComboBoxColumn()
@@ -527,5 +529,13 @@ Public Class frmExpense
         startX = (pageWidth - e.Graphics.MeasureString(signatureText, font).Width) / 2 ' Center the signature line
         e.Graphics.DrawString(signatureText, font, Brushes.Black, startX, startY + offset)
         e.Graphics.DrawString("..........................................", font, Brushes.Black, startX + 100, startY + offset)
+    End Sub
+
+    Private Sub Guna2GroupBox1_Click(sender As Object, e As EventArgs) Handles Guna2GroupBox1.Click
+
+    End Sub
+
+    Private Sub txtDescrip_TextChanged(sender As Object, e As EventArgs) Handles txtDescrip.TextChanged
+
     End Sub
 End Class

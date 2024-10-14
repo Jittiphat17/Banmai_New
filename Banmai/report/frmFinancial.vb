@@ -14,6 +14,8 @@ Public Class frmFinancial
         ' โหลดข้อมูลบัญชีใน ComboBox
 
         LoadAccountNames()
+        dtpStartDate.Value = DateTime.Now
+        dtpEndDate.Value = DateTime.Now
     End Sub
 
     Private Sub LoadAccountNames()
@@ -268,7 +270,5 @@ Public Class frmFinancial
         LoadFinancialReport()
     End Sub
 
-    Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.ValueChanged
 
-    End Sub
 End Class
