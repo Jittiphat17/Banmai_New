@@ -420,12 +420,9 @@ Public Class frmExpense
     End Sub
 
 
-    Private Sub txtAmount_TextChanged(sender As Object, e As EventArgs) Handles txtAmount.TextChanged
+    Private Sub txtAmount_LostFocus(sender As Object, e As EventArgs) Handles txtAmount.LostFocus
         ' ตรวจสอบว่าไม่ใช่การลบข้อมูลทั้งหมด
         If txtAmount.Text.Length > 0 Then
-            ' เก็บตำแหน่งเคอร์เซอร์ปัจจุบัน
-            Dim cursorPosition As Integer = txtAmount.SelectionStart
-
             ' ลบคอมม่าออกก่อนการจัดรูปแบบใหม่
             Dim valueWithoutComma As String = txtAmount.Text.Replace(",", "")
 
@@ -433,13 +430,14 @@ Public Class frmExpense
             Dim value As Decimal
             If Decimal.TryParse(valueWithoutComma, value) Then
                 ' จัดรูปแบบและใส่คอมม่า
-                txtAmount.Text = String.Format("{0:N0}", value)
-
-                ' กำหนดตำแหน่งเคอร์เซอร์กลับไปที่ตำแหน่งเดิม
-                txtAmount.SelectionStart = cursorPosition + (txtAmount.Text.Length - valueWithoutComma.Length)
+                txtAmount.Text = String.Format("{0:N2}", value)
             End If
         End If
     End Sub
+
+
+
+
 
     Private Sub printDoc_PrintPage(sender As Object, e As PrintPageEventArgs) Handles printDoc.PrintPage
         Dim font As New Font("Arial", 10)

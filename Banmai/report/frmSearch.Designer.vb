@@ -197,10 +197,10 @@ Partial Class frmSearch
         Me.ComboBoxDirector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxDirector1.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ComboBoxDirector1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ComboBoxDirector1.Font = New System.Drawing.Font("FC Minimal", 14.25!)
+        Me.ComboBoxDirector1.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBoxDirector1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ComboBoxDirector1.ItemHeight = 30
-        Me.ComboBoxDirector1.Location = New System.Drawing.Point(1303, 56)
+        Me.ComboBoxDirector1.Location = New System.Drawing.Point(906, 56)
         Me.ComboBoxDirector1.Name = "ComboBoxDirector1"
         Me.ComboBoxDirector1.Size = New System.Drawing.Size(391, 36)
         Me.ComboBoxDirector1.TabIndex = 49
@@ -213,10 +213,10 @@ Partial Class frmSearch
         Me.ComboBoxDirector2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxDirector2.FocusedColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.ComboBoxDirector2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.ComboBoxDirector2.Font = New System.Drawing.Font("FC Minimal", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBoxDirector2.Font = New System.Drawing.Font("FC Minimal", 18.0!)
         Me.ComboBoxDirector2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.ComboBoxDirector2.ItemHeight = 30
-        Me.ComboBoxDirector2.Location = New System.Drawing.Point(906, 56)
+        Me.ComboBoxDirector2.Location = New System.Drawing.Point(1303, 55)
         Me.ComboBoxDirector2.Name = "ComboBoxDirector2"
         Me.ComboBoxDirector2.Size = New System.Drawing.Size(391, 36)
         Me.ComboBoxDirector2.TabIndex = 49

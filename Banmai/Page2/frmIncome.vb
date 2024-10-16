@@ -368,7 +368,7 @@ Public Class frmIncome
 
                 ' ตรวจสอบว่าเซลล์มีค่า และแปลงค่าให้ถูกต้อง
                 If Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentContractNumber").Value.ToString(), conId) AndAlso
-           Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentPeriod").Value.ToString(), paymentPeriod) Then
+                Integer.TryParse(dgvPaymentDetails.CurrentRow.Cells("PaymentPeriod").Value.ToString(), paymentPeriod) Then
 
                     ' ตรวจสอบว่าค่า conId และ paymentPeriod มีค่ามากกว่า 0
                     If conId > 0 AndAlso paymentPeriod > 0 Then
@@ -394,6 +394,52 @@ Public Class frmIncome
 
                                 ' ตรวจสอบว่าอัพเดทสำเร็จหรือไม่
                                 If rowsAffected > 0 Then
+                                    ' ตรวจสอบว่ายอดเงินคงเหลือมีเกินกว่าที่ค้างชำระหรือไม่
+                                    ' Assuming the connection is open and ready
+                                    If balanceAmount > 0 Then
+                                        ' ดึง m_id จากตาราง Member โดยใช้ชื่อสมาชิก
+                                        Dim queryGetMemberId As String = "SELECT m_id FROM Member WHERE m_name = @memberName"
+                                        Dim cmdGetMemberId As New OleDbCommand(queryGetMemberId, Conn)
+                                        cmdGetMemberId.Parameters.AddWithValue("@memberName", txtMemberID.Text)
+                                        Dim memberId As Object = cmdGetMemberId.ExecuteScalar()
+
+                                        If memberId Is Nothing OrElse DBNull.Value.Equals(memberId) Then
+                                            MessageBox.Show("ไม่พบข้อมูลสมาชิก", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                            Return
+                                        End If
+
+                                        ' ดึง acc_id จาก ComboBox
+                                        Dim accId As String = cboDepositType.SelectedValue.ToString()
+
+                                        ' ดึง inc_id ที่ถูกสร้างขึ้นในตาราง Income
+                                        Dim queryGetIncId As String = "SELECT @@IDENTITY"
+                                        Dim cmdGetIncId As New OleDbCommand(queryGetIncId, Conn)
+                                        Dim incId As Integer = Convert.ToInt32(cmdGetIncId.ExecuteScalar())
+
+                                        ' บันทึกยอดส่วนเกินในตาราง Income_Details
+                                        Dim indDate As DateTime = dtpBirth.Value ' ใช้วันที่จาก DateTimePicker
+
+                                        ' ปรับปรุงคำสั่ง SQL เพื่อบันทึก m_id, acc_id, inc_id เพิ่มเติม
+                                        Dim insertIncomeDetailsQuery As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@accName, @conId, @excessAmount, @paymentDate, @mId, @accId, @incId)"
+                                        Using cmdInsert As New OleDbCommand(insertIncomeDetailsQuery, Conn)
+                                            ' กำหนดค่าพารามิเตอร์
+                                            cmdInsert.Parameters.AddWithValue("@accName", "เงินต้น") ' รายละเอียดของการชำระเงิน
+                                            cmdInsert.Parameters.AddWithValue("@conId", conId) ' รหัสสัญญา
+                                            cmdInsert.Parameters.AddWithValue("@excessAmount", balanceAmount) ' ยอดเงินที่เกิน
+                                            cmdInsert.Parameters.AddWithValue("@paymentDate", indDate) ' วันที่การชำระเงิน
+
+                                            ' กำหนดค่าพารามิเตอร์เพิ่มเติมสำหรับ m_id, acc_id, inc_id
+                                            cmdInsert.Parameters.AddWithValue("@mId", CInt(memberId)) ' memberId ที่ได้จากตาราง Member
+                                            cmdInsert.Parameters.AddWithValue("@accId", accId) ' accId ที่ได้จาก ComboBox
+                                            cmdInsert.Parameters.AddWithValue("@incId", incId) ' incId ที่ได้จาก Income
+
+                                            ' ดำเนินการบันทึก
+                                            cmdInsert.ExecuteNonQuery()
+                                        End Using
+                                    End If
+
+
+                                    ' อัพเดทวันที่ชำระเงิน
                                     Dim queryUpdateDatePayment As String = "UPDATE Payment SET date_payment = @date_payment WHERE con_id = @conId AND payment_period = @paymentPeriod"
 
                                     ' สร้างคำสั่งสำหรับการอัพเดทข้อมูล
@@ -428,6 +474,7 @@ Public Class frmIncome
             MessageBox.Show("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
     Private Sub SavePaymentData()
         Try
@@ -609,7 +656,7 @@ Public Class frmIncome
                         updateStatusCmd.Parameters.AddWithValue("@paymentPeriod", paymentPeriod)
                         updateStatusCmd.ExecuteNonQuery()
                     Else
-                        ' หักตามจำนวนเงินที่เหลือ
+                        ' หักเฉพาะจำนวนเงินที่เหลือ ไม่ให้ติดลบ
                         principalAmount -= amount
                         amount = 0
                     End If
@@ -627,17 +674,20 @@ Public Class frmIncome
                 ' หากมีเงินเหลือจากการชำระ ให้บันทึกลงในตาราง income_details
                 If amount > 0 Then
                     MessageBox.Show("ยอดเงินที่จ่ายเกิน จะถูกบันทึกเป็นรายได้เกิน", "ข้อมูล", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Dim queryGetIncId As String = "SELECT @@IDENTITY"
+                    Dim cmdGetIncId As New OleDbCommand(queryGetIncId, Conn)
+                    Dim incId As Integer = Convert.ToInt32(cmdGetIncId.ExecuteScalar())
 
                     ' บันทึกยอดเงินที่เกินลงในตาราง income_details
-                    Dim insertIncomeDetailsQuery As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, inc_id, m_id, acc_id) VALUES (@accName, @contractNumber, @excessAmount, @paymentDate, @incId, @memberId, @accId)"
+                    Dim insertIncomeDetailsQuery As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, inc_id, m_id, acc_id) VALUES (@accName, @contractNumber, @excessAmount, @paymentDate, inc_id, memberId, acc_id)"
                     Dim insertCmd As New OleDbCommand(insertIncomeDetailsQuery, Conn)
-                    insertCmd.Parameters.AddWithValue("@accName", "ยอดเงินที่จ่ายเกิน") ' รายละเอียดของยอดเงิน
+                    insertCmd.Parameters.AddWithValue("@accName", "ยอดเงินที่จ่ายเกิน")
                     insertCmd.Parameters.AddWithValue("@contractNumber", contractNumber)
                     insertCmd.Parameters.AddWithValue("@excessAmount", amount)
-                    insertCmd.Parameters.AddWithValue("@paymentDate", DateTime.Now) ' วันที่ปัจจุบัน
-                    insertCmd.Parameters.AddWithValue("@incId", DBNull.Value) ' หากไม่มี inc_id ให้ใช้ DBNull
-                    insertCmd.Parameters.AddWithValue("@memberId", DBNull.Value) ' ใส่ค่า m_id หากมี หรือใช้ DBNull
-                    insertCmd.Parameters.AddWithValue("@accId", DBNull.Value) ' ใส่ค่า acc_id หากมี หรือใช้ DBNull
+                    insertCmd.Parameters.AddWithValue("@paymentDate", DateTime.Now)
+                    insertCmd.Parameters.AddWithValue("@incId", incId) ' ใส่ inc_id ถ้ามี
+                    insertCmd.Parameters.AddWithValue("@memberId", DBNull.Value) ' ใส่ m_id ถ้ามี
+                    insertCmd.Parameters.AddWithValue("@accId", DBNull.Value) ' ใส่ acc_id ถ้ามี
                     insertCmd.ExecuteNonQuery()
                 Else
                     MessageBox.Show("ชำระเงินและหักยอดครบเรียบร้อย", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -650,7 +700,6 @@ Public Class frmIncome
             Return False
         End Try
     End Function
-
 
 
 
@@ -1158,7 +1207,9 @@ Public Class frmIncome
                                     Dim paymentDate As DateTime = Convert.ToDateTime(reader("payment_date"))
 
                                     ' คำนวณวันที่ปัจจุบัน
-                                    Dim currentDate As DateTime = DateTime.Now.Date
+                                    ' คำนวณวันที่จาก DateTimePicker แทนการใช้วันที่ปัจจุบัน
+                                    Dim currentDate As DateTime = dtpBirth.Value.Date
+
 
                                     ' คำนวณจำนวนวันที่แตกต่างกัน
                                     Dim dateDifference As Integer = (currentDate - paymentDate).Days
@@ -1499,13 +1550,10 @@ Public Class frmIncome
         ' Me.Hide()
     End Sub
 
+    ' เมื่อผู้ใช้พิมพ์ไม่จัดการฟอร์แมต แต่ยังสามารถคำนวณยอดคงเหลือได้
     Private Sub txtAmount_TextChanged(sender As Object, e As EventArgs) Handles txtAmount.TextChanged
-        ' ตรวจสอบและจัดการกรณีที่ txtAmount หรือ lblTotalAmount ไม่มีค่า
         Dim enteredAmount As Decimal
         Dim totalAmount As Decimal
-
-        ' เก็บตำแหน่งเคอร์เซอร์ปัจจุบัน
-        Dim cursorPosition As Integer = txtAmount.SelectionStart
 
         ' ตรวจสอบว่า txtAmount เป็นตัวเลขหรือไม่ ถ้าไม่เป็น ให้กำหนดค่าเป็น 0
         If Not Decimal.TryParse(txtAmount.Text.Replace(",", ""), enteredAmount) Then
@@ -1513,21 +1561,27 @@ Public Class frmIncome
         End If
 
         ' ตรวจสอบว่า lblTotalAmount เป็นตัวเลขหรือไม่ ถ้าไม่เป็น ให้กำหนดค่าเป็น 0
-        If Not Decimal.TryParse(lblTotalAmount.Text, totalAmount) Then
+        If Not Decimal.TryParse(lblTotalAmount.Text.Replace(",", ""), totalAmount) Then
             totalAmount = 0
         End If
 
         ' คำนวณยอดคงเหลือ
         Dim balanceAmount As Decimal = enteredAmount - totalAmount
 
-        ' แสดงผลในรูปแบบที่มีเครื่องหมายคอมมาและทศนิยม 2 ตำแหน่ง
+        ' แสดงผลใน lblBalanceAmount
         lblBalanceAmount.Text = balanceAmount.ToString("N2")
-
-        ' จัดรูปแบบ txtAmount ให้มีเครื่องหมายคอมมาเช่นกัน (โดยไม่กระทบการคำนวณ)
-        txtAmount.Text = enteredAmount.ToString("N2")
-
-        ' รักษาตำแหน่งเคอร์เซอร์
-        txtAmount.SelectionStart = Math.Min(cursorPosition, txtAmount.Text.Length)
     End Sub
+
+    ' เมื่อช่องเสียโฟกัส จัดรูปแบบตัวเลขใน txtAmount ให้มีคอมมา
+    Private Sub txtAmount_Leave(sender As Object, e As EventArgs) Handles txtAmount.Leave
+        Dim enteredAmount As Decimal
+
+        ' ตรวจสอบว่า txtAmount เป็นตัวเลขหรือไม่ ถ้าไม่เป็น ให้กำหนดค่าเป็น 0
+        If Decimal.TryParse(txtAmount.Text.Replace(",", ""), enteredAmount) Then
+            ' จัดรูปแบบเป็นคอมม่าและทศนิยม 2 ตำแหน่ง
+            txtAmount.Text = enteredAmount.ToString("N2")
+        End If
+    End Sub
+
 
 End Class

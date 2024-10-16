@@ -541,7 +541,51 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>1.) นายดำรงค์  สงแก้ว และ 2.) นางยุพา  สงแก้ว เป็นผู้แทนกองทุนหมู่บ้านฯในการทำสัญญาค้ำประกันครั้งนี้ ซึ่งต่อ</Value>
+                    <Value>1.)</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>AngsanaUPC</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!DirectorName1.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>AngsanaUPC</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> และ 2.) </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>AngsanaUPC</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!DirectorName2.Value</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>AngsanaUPC</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> เป็นผู้แทนกองทุนหมู่บ้านฯในการทำสัญญาค้ำประกันครั้งนี้ ซึ่งต่อ</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>AngsanaUPC</FontFamily>
@@ -1510,7 +1554,11 @@
           </Textbox>
         </ReportItems>
         <Height>18.23336in</Height>
-        <Style />
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
       </Body>
       <Width>8.56803in</Width>
       <Page>

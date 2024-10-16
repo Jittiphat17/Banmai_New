@@ -54,7 +54,6 @@ Partial Class frmMain
         Me.รายรบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.แกไขรายรบToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VvToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ปดToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsm_report = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายงานสญญาเงนกToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.รายงานดอกเบยสจจะToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -304,7 +303,7 @@ Partial Class frmMain
         'tsm_inc
         '
         Me.tsm_inc.AutoSize = False
-        Me.tsm_inc.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายรบToolStripMenuItem, Me.แกไขรายรบToolStripMenuItem, Me.VvToolStripMenuItem, Me.ปดToolStripMenuItem})
+        Me.tsm_inc.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.รายรบToolStripMenuItem, Me.แกไขรายรบToolStripMenuItem, Me.VvToolStripMenuItem})
         Me.tsm_inc.Font = New System.Drawing.Font("FC Minimal", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tsm_inc.Name = "tsm_inc"
         Me.tsm_inc.Size = New System.Drawing.Size(280, 100)
@@ -327,12 +326,6 @@ Partial Class frmMain
         Me.VvToolStripMenuItem.Name = "VvToolStripMenuItem"
         Me.VvToolStripMenuItem.Size = New System.Drawing.Size(294, 40)
         Me.VvToolStripMenuItem.Text = "ออกใบเสร็จรับเงิน"
-        '
-        'ปดToolStripMenuItem
-        '
-        Me.ปดToolStripMenuItem.Name = "ปดToolStripMenuItem"
-        Me.ปดToolStripMenuItem.Size = New System.Drawing.Size(294, 40)
-        Me.ปดToolStripMenuItem.Text = "ปิด"
         '
         'tsm_report
         '
@@ -575,5 +568,4 @@ Partial Class frmMain
     Friend WithEvents การปดงบToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ออกจากระบบToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents miniToolStrip As MenuStrip
-    Friend WithEvents ปดToolStripMenuItem As ToolStripMenuItem
 End Class

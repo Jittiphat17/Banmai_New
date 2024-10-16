@@ -121,15 +121,28 @@ Public Class frmCon
             ' คำนวณยอดเงินต้นคงเหลือทั้งหมด
             Dim totalPrincipalBalance As Decimal = 0
             Dim totalInterestBalance As Decimal = 0
+            Dim oneMonthInterest As Decimal = 0
+
             For Each row As DataRow In dt.Rows
-                totalPrincipalBalance += Convert.ToDecimal(row("Principal"))
-                totalInterestBalance += Convert.ToDecimal(row("Interest"))
+                Dim principal As Decimal = Convert.ToDecimal(row("Principal"))
+                Dim interest As Decimal = Convert.ToDecimal(row("Interest"))
+
+                totalPrincipalBalance += principal
+                totalInterestBalance += interest
+
+                ' บันทึกดอกเบี้ยสำหรับ 1 เดือน (จากแถวแรกที่เจอเท่านั้น)
+                If oneMonthInterest = 0 Then
+                    oneMonthInterest = interest
+                End If
             Next
 
-            ' แสดงยอดเงินต้นคงเหลือใน TextBox สำหรับยอดเงินต้น
-            Guna2TextBox1.Text = totalPrincipalBalance.ToString("N2")
+            ' บวกดอกเบี้ยแค่ 1 เดือนให้กับยอดเงินต้น
+            Dim totalWithOneMonthInterest As Decimal = totalPrincipalBalance + oneMonthInterest
 
-            ' แสดงยอดรวมของเงินต้น + ดอกเบี้ย
+            ' แสดงยอดเงินต้นรวมกับดอกเบี้ย 1 เดือนใน TextBox
+            Guna2TextBox1.Text = totalWithOneMonthInterest.ToString("N2")
+
+            ' แสดงยอดรวมของเงินต้น + ดอกเบี้ยทั้งหมด
             txtTotalBalance.Text = (totalPrincipalBalance + totalInterestBalance).ToString("N2")
 
         Catch ex As Exception

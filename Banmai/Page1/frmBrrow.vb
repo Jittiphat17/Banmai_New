@@ -26,12 +26,9 @@ Public Class frmBrrow
     End Sub
 
 
-    Private Sub txtMoney_TextChanged(sender As Object, e As EventArgs) Handles txtMoney.TextChanged
-        ' ตรวจสอบว่าไม่ใช่การลบข้อมูลทั้งหมด
+    Private Sub txtMoney_Leave(sender As Object, e As EventArgs) Handles txtMoney.Leave
+        ' จัดการฟังก์ชันเมื่อผู้ใช้พิมพ์เสร็จ (เมื่อ TextBox เสียโฟกัส)
         If txtMoney.Text.Length > 0 Then
-            ' เก็บตำแหน่งเคอร์เซอร์ปัจจุบัน
-            Dim cursorPosition As Integer = txtMoney.SelectionStart
-
             ' ลบคอมม่าออกก่อนการจัดรูปแบบใหม่
             Dim valueWithoutComma As String = txtMoney.Text.Replace(",", "")
 
@@ -40,12 +37,10 @@ Public Class frmBrrow
             If Decimal.TryParse(valueWithoutComma, value) Then
                 ' จัดรูปแบบและใส่คอมม่าพร้อมกับทศนิยม (2 ตำแหน่ง)
                 txtMoney.Text = String.Format("{0:N2}", value)
-
-                ' กำหนดตำแหน่งเคอร์เซอร์กลับไปที่ตำแหน่งเดิม
-                txtMoney.SelectionStart = cursorPosition + (txtMoney.Text.Length - valueWithoutComma.Length)
             End If
         End If
     End Sub
+
 
 
     Private Sub LoadGuaranteeTypes()
