@@ -132,12 +132,14 @@ Public Class frmReceipts
 
                 ' เพิ่มข้อมูลใน selectedTable ทีละรายการ (แยกรายการแต่ละแถว)
                 For Each detailRow As DataRow In relatedDetails
-                    Dim amount As Decimal = Convert.ToDecimal(detailRow("ind_amount"))
+                    Dim amount As Decimal = GetDecimalValue(detailRow("ind_amount")) ' ใช้ฟังก์ชันตรวจสอบค่า
                     totalAmount += amount ' คำนวณยอดรวมเงิน
 
-                    selectedTable.Rows.Add(selectedRow("inc_id"), selectedRow("m_id"), memberName, selectedRow("inc_detail"), selectedRow("inc_description"),
-                                       detailRow("ind_accname"), amount, thaiDate, selectedRow("acc_id"))
+                    selectedTable.Rows.Add(selectedRow("inc_id"), selectedRow("m_id"), memberName,
+                           selectedRow("inc_detail"), selectedRow("inc_description"),
+                           detailRow("ind_accname"), amount.ToString("N2"), thaiDate, selectedRow("acc_id"))
                 Next
+
 
                 ' แสดงข้อมูลใน ReportViewer
                 ShowReport(selectedTable, totalAmount)
@@ -149,6 +151,14 @@ Public Class frmReceipts
             MessageBox.Show("กรุณาป้อน inc_id ที่ถูกต้อง", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
+    ' ฟังก์ชันสำหรับตรวจสอบและแปลงค่าเป็น Decimal
+    Private Function GetDecimalValue(ByVal value As Object) As Decimal
+        If IsDBNull(value) OrElse value Is Nothing Then
+            Return 0
+        Else
+            Return Convert.ToDecimal(value)
+        End If
+    End Function
 
 
     ' ฟังก์ชันสำหรับดึงชื่อสมาชิกจากตาราง Member โดยใช้ m_id

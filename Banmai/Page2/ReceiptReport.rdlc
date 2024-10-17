@@ -328,6 +328,7 @@
                                   <Style>
                                     <FontFamily>Angsana New</FontFamily>
                                     <FontSize>14pt</FontSize>
+                                    <Format>#,0.00;-#,0.00;'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -407,6 +408,7 @@
                                     <FontFamily>Angsana New</FontFamily>
                                     <FontSize>14pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;-#,0.00;'-'</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
