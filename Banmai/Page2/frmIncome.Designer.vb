@@ -502,7 +502,7 @@ Partial Class frmIncome
         Me.btnCalculate.Name = "btnCalculate"
         Me.btnCalculate.Size = New System.Drawing.Size(201, 57)
         Me.btnCalculate.TabIndex = 33
-        Me.btnCalculate.Text = "คำนวน"
+        Me.btnCalculate.Text = "คำนวณ"
         '
         'txtInid
         '
