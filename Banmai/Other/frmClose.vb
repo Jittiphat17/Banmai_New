@@ -5,11 +5,6 @@ Public Class frmClose
     Private formLoaded As Boolean = False
 
     Private Sub frmClose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' ปิดการใช้งาน ComboBox จนกว่าจะเลือกวันที่
-        ComboBox1.Enabled = False
-
-        ' ตั้งค่า MaxDate เพื่อไม่ให้เลือกวันที่ในอนาคตได้
-        DateTimePicker1.MaxDate = DateTime.Now
 
         ' โหลดข้อมูลบัญชีทั้งหมดลงใน ComboBox
         LoadAccounts()
@@ -222,16 +217,7 @@ Public Class frmClose
         CalculateTotals()
     End Sub
 
-    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
-        ' ตรวจสอบวันที่ล่วงหน้า
-        If DateTimePicker1.Value > DateTime.Now Then
-            MessageBox.Show("ไม่สามารถเลือกวันที่ล่วงหน้าได้ กรุณาเลือกวันที่ใหม่", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            ComboBox1.Enabled = False
-        Else
-            ' เปิดใช้งาน ComboBox เมื่อเลือกวันที่ถูกต้อง
-            ComboBox1.Enabled = True
-        End If
-    End Sub
+
 
     Private Sub AddIncomeData()
         ' ตรวจสอบว่ามีการกรอกจำนวนเงินที่ถูกต้องหรือไม่

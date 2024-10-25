@@ -1,8 +1,9 @@
 ﻿Imports System.Data.OleDb
+Imports System.IO
 
 Public Class Form1
-    ' การเชื่อมต่อฐานข้อมูล Access
-    Dim Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    ' การเชื่อมต่อฐานข้อมูล Access แบบใช้ Relative Path
+    Dim Conn As OleDbConnection
     Dim cmd As OleDbCommand
     Dim da As OleDbDataAdapter
     Dim dt As DataTable
@@ -10,43 +11,41 @@ Public Class Form1
 
     ' ฟังก์ชัน Load เมื่อฟอร์มถูกเปิด
     Private Sub frmLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ' ทำให้ MaterialTextBox ที่ใช้สำหรับรหัสผ่านแสดงเป็น dot (●)
-        txtPass.UseSystemPasswordChar = True
+        ' ใช้ Relative Path เพื่อเชื่อมต่อกับฐานข้อมูลในโฟลเดอร์ Database
+        Dim dbPath As String = Path.Combine(Application.StartupPath, "Database", "db_banmai1.accdb")
+        Dim ConnStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
 
-        ' Focus ที่ txtUser เมื่อเปิดฟอร์ม
-        txtUser.Focus()
+        ' สร้างการเชื่อมต่อกับฐานข้อมูล
+        Conn = New OleDbConnection(ConnStr)
     End Sub
 
-    ' จำกัดการใส่ข้อมูลใน TextBox ให้เฉพาะตัวอักษรภาษาอังกฤษและตัวเลข
+    ' จำกัดการป้อนข้อมูลเฉพาะตัวอักษรและตัวเลข
     Private Sub txtUser_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtUser.KeyPress
         If Not Char.IsLetterOrDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    ' ฟังก์ชันที่ทำงานเมื่อกดปุ่ม "เข้าสู่ระบบ"
+    ' ฟังก์ชันสำหรับการเข้าสู่ระบบ
     Private Sub btn_login_Click(sender As Object, e As EventArgs) Handles btn_login.Click
-        ' ปิดการใช้งานปุ่ม Login ชั่วคราวเพื่อป้องกันการคลิกซ้ำ
-        btn_login.Enabled = False
+        btn_login.Enabled = False  ' ปิดปุ่มเพื่อป้องกันการคลิกซ้ำ
 
+        ' SQL สำหรับการตรวจสอบผู้ใช้
         SQL = "SELECT * FROM Users WHERE user_name= @userName AND user_pass= @userPass"
 
         Try
-            ' ตรวจสอบและเปิดการเชื่อมต่อฐานข้อมูล
             If Conn.State = ConnectionState.Open Then Conn.Close()
             Conn.Open()
 
-            ' การตรวจสอบชื่อผู้ใช้และรหัสผ่าน
             Using cmd As New OleDbCommand(SQL, Conn)
                 cmd.Parameters.AddWithValue("@userName", txtUser.Text.Trim())
                 cmd.Parameters.AddWithValue("@userPass", txtPass.Text.Trim())
 
                 da = New OleDbDataAdapter(cmd)
-                dt = New DataTable
+                dt = New DataTable()
                 da.Fill(dt)
 
                 If dt.Rows.Count > 0 Then
-                    ' ดึงข้อมูลชื่อผู้ใช้และประเภทผู้ใช้จากฐานข้อมูล
                     User_name = dt.Rows(0)("user_name").ToString()
                     User_type = dt.Rows(0)("user_type").ToString()
 
@@ -55,49 +54,33 @@ Public Class Form1
                     frm.Show()
                     Me.Hide()
                 Else
-                    ' แสดงข้อความเตือนหากชื่อผู้ใช้หรือรหัสผ่านผิด
                     MessageBox.Show("ชื่อผู้ใช้งาน หรือ รหัสผ่าน ผิด", "ข้อความจากระบบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     txtUser.Focus()
                 End If
             End Using
 
         Catch ex As Exception
-            ' แสดงข้อความหากเกิดข้อผิดพลาด
-            MessageBox.Show(ex.Message, "ข้อความจากระบบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "ข้อความจากระบบ", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            ' ปิดการเชื่อมต่อฐานข้อมูลและเปิดการใช้งานปุ่มอีกครั้ง
             If Conn.State = ConnectionState.Open Then Conn.Close()
-            btn_login.Enabled = True
+            btn_login.Enabled = True  ' เปิดใช้งานปุ่มอีกครั้ง
         End Try
     End Sub
 
+    ' การจัดการการแสดงหรือซ่อนรหัสผ่าน
     Private Sub Guna2ToggleSwitch1_CheckedChanged(sender As Object, e As EventArgs) Handles Guna2ToggleSwitch1.CheckedChanged
-        If Guna2ToggleSwitch1.Checked Then
-            ' ถ้าสวิตช์เปิด ให้แสดงรหัสผ่าน
-            txtPass.UseSystemPasswordChar = False
-        Else
-            ' ถ้าสวิตช์ปิด ให้ซ่อนรหัสผ่าน
-            txtPass.UseSystemPasswordChar = True
-        End If
+        txtPass.UseSystemPasswordChar = Not Guna2ToggleSwitch1.Checked
     End Sub
 
+    ' ตรวจสอบการออกจากโปรแกรม
     Private Sub Guna2ControlBox1_Click(sender As Object, e As EventArgs) Handles Guna2ControlBox1.Click
-        ' ตรวจสอบว่าผู้ใช้ต้องการออกจากโปรแกรม
         Dim result As DialogResult = MessageBox.Show("คุณต้องการปิดโปรแกรมหรือไม่?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
-        ' ตรวจสอบว่าผู้ใช้คลิก Yes หรือไม่
         If result = DialogResult.Yes Then
-            ' ปิดการเชื่อมต่อฐานข้อมูลถ้ามีการเปิดอยู่
             If Conn IsNot Nothing AndAlso Conn.State = ConnectionState.Open Then
                 Conn.Close()
             End If
-
-            ' ออกจากโปรแกรม
             Application.Exit()
         End If
-    End Sub
-
-    Private Sub Guna2HtmlLabel4_Click(sender As Object, e As EventArgs) Handles Guna2HtmlLabel4.Click
-
     End Sub
 End Class

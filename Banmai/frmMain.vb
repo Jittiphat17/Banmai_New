@@ -2,11 +2,10 @@
 Imports System.Globalization
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports Microsoft.Reporting
-
+Imports System.IO
 Public Class frmMain
     ' เชื่อมต่อกับฐานข้อมูล
-    Dim Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-
+    Dim Conn As OleDbConnection
     Public Sub Loadinfo()
         ' ตรวจสอบประเภทของผู้ใช้
         If User_type = "Admin" Or User_type = "ประธาน" Then
@@ -59,6 +58,25 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        ' ใช้ Relative Path เพื่อเชื่อมต่อกับฐานข้อมูลในโฟลเดอร์ Database
+        Dim dbPath As String = Path.Combine(Application.StartupPath, "Database", "db_banmai1.accdb")
+        Dim ConnStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+        ' สร้างการเชื่อมต่อกับฐานข้อมูล
+        Conn = New OleDbConnection(ConnStr)
+
+        Try
+            Conn.Open()
+            MessageBox.Show("เชื่อมต่อฐานข้อมูลสำเร็จ", "สถานะ", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show($"ไม่สามารถเชื่อมต่อฐานข้อมูลได้: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit()
+        Finally
+            Conn.Close()
+        End Try
+
+
+
         Loadinfo()
 
 
