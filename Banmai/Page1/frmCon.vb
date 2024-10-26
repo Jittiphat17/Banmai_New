@@ -1,16 +1,39 @@
 ﻿Imports System.Data.OleDb
+Imports System.IO
 
 Public Class frmCon
     ' เพิ่ม Property สำหรับเก็บค่าเลขที่สัญญาที่ถูกส่งมาจาก frmIncome
     Public Property SelectedContractId As String
 
     ' เพิ่มตัวเชื่อมต่อฐานข้อมูล
-    Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Private Conn As New OleDbConnection
     ' Dictionary สำหรับเก็บการเปลี่ยนแปลงสถานะการชำระ
     Private statusChanges As New Dictionary(Of Integer, Integer)
+    ' ฟังก์ชันดึง path ฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        Dim dbPath As String = File.ReadAllLines(iniPath).FirstOrDefault(Function(line) line.StartsWith("Path="))
+
+        If Not String.IsNullOrEmpty(dbPath) Then
+            Return dbPath.Replace("Path=", "").Trim()
+        Else
+            Throw New Exception("ไม่พบ Path ของฐานข้อมูลใน config.ini")
+        End If
+    End Function
 
     ' เมื่อฟอร์มโหลด
     Private Sub frmCon_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            Conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
         If Not String.IsNullOrEmpty(SelectedContractId) Then
             SearchContract(SelectedContractId)
             SearchPayments(SelectedContractId)

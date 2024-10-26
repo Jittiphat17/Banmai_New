@@ -4,9 +4,50 @@ Imports System.IO
 
 Public Class frmIncome
     ' เชื่อมต่อกับฐานข้อมูล Access
-    Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Private Conn As New OleDbConnection
+    ' ฟังก์ชันสำหรับดึงค่า path ของฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        If Not File.Exists(iniPath) Then
+            Throw New Exception("ไม่พบไฟล์ config.ini ที่ตำแหน่ง: " & iniPath)
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มี Path
+        Dim dbPathLine = lines.FirstOrDefault(Function(line) line.StartsWith("Path="))
+        If String.IsNullOrEmpty(dbPathLine) Then
+            Throw New Exception("ไม่พบ 'Path' ในไฟล์ config.ini")
+        End If
+
+        ' ดึง path จากบรรทัดนั้นและตัดส่วน 'Path=' ออก
+        Dim dbPath = dbPathLine.Replace("Path=", "").Trim()
+
+        ' แปลง path เป็น path แบบเต็ม (Absolute Path)
+        If dbPath.StartsWith(".\") Then
+            dbPath = Path.Combine(Application.StartupPath, dbPath.Substring(2))
+        End If
+
+        If Not File.Exists(dbPath) Then
+            Throw New Exception($"ไม่พบไฟล์ฐานข้อมูลที่ตำแหน่ง: {dbPath}")
+        End If
+
+        Return dbPath
+    End Function
 
     Private Sub frmIncome_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            Conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
         SetupDataGridView() ' สำหรับรายรับ
         SetupDataGridViewForPayments() ' สำหรับค่างวด
         LoadIncomeTypes()
@@ -25,8 +66,12 @@ Public Class frmIncome
 
     Private Sub GenerateNextIncomeId()
         Try
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open() ' เปิดการเชื่อมต่อฐานข้อมูล
                 Dim query As String = "SELECT MAX(inc_id) FROM Income"
                 Dim cmd As New OleDbCommand(query, Conn)
                 Dim result As Object = cmd.ExecuteScalar()
@@ -154,10 +199,14 @@ Public Class frmIncome
 
     Private Sub LoadAccountData()
         Try
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
                 Dim query As String = "SELECT acc_id, acc_name FROM Account"
-                Dim cmd As New OleDbCommand(query, Conn)
+                Dim cmd As New OleDbCommand(query, conn)
                 Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
                 cboDepositType.Items.Clear()
@@ -175,8 +224,12 @@ Public Class frmIncome
     End Sub
     Private Sub LoadIncomeTypes()
         Try
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
                 Dim incomeTypeColumn As DataGridViewComboBoxColumn = CType(dgvIncomeDetails.Columns("IncomeType"), DataGridViewComboBoxColumn)
                 incomeTypeColumn.Items.Clear() ' ล้างรายการเก่า
 
@@ -208,10 +261,14 @@ Public Class frmIncome
     End Sub
     Private Sub LoadMemberData()
         Try
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
                 Dim query As String = "SELECT m_id, m_name FROM Member"
-                Dim cmd As New OleDbCommand(query, Conn)
+                Dim cmd As New OleDbCommand(query, conn)
                 Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
                 Dim autoComplete As New AutoCompleteStringCollection()
@@ -232,8 +289,12 @@ Public Class frmIncome
     End Sub
     Private Sub LoadContractNumbersForPayment(memberName As String)
         Try
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
 
                 ' ตรวจสอบว่ามีคอลัมน์ PaymentContractNumber ใน dgvPaymentDetails หรือไม่
                 If dgvPaymentDetails.Columns.Contains("PaymentContractNumber") Then
@@ -243,7 +304,7 @@ Public Class frmIncome
 
                     If Not String.IsNullOrEmpty(memberName) Then
                         Dim query As String = "SELECT Contract.con_id FROM Contract INNER JOIN Member ON Contract.m_id = Member.m_id WHERE Member.m_name = @memberName"
-                        Dim cmd As New OleDbCommand(query, Conn)
+                        Dim cmd As New OleDbCommand(query, conn)
                         cmd.Parameters.AddWithValue("@memberName", memberName)
                         Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
@@ -268,10 +329,14 @@ Public Class frmIncome
         End If
 
         Try
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
                 Dim query As String = "SELECT * FROM Member WHERE m_name = @memberName"
-                Dim cmd As New OleDbCommand(query, Conn)
+                Dim cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@memberName", memberName)
                 Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
@@ -353,13 +418,16 @@ Public Class frmIncome
 
                     If conId > 0 AndAlso paymentPeriod > 0 Then
                         Dim paymentDate As DateTime = dtpBirth.Value.Date
+                        ' ดึง path ของฐานข้อมูลจาก config.ini
+                        Dim dbPath As String = GetDatabasePath()
+                        Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
 
-                        Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                            Conn.Open()
+                        Using conn As New OleDbConnection(connStr)
+                            conn.Open()
 
                             Dim queryUpdate As String = "UPDATE Payment SET payment_balance = @balanceAmount, status_id = 2, payment_prin = 0, payment_interest = 0 WHERE con_id = @conId AND payment_period = @paymentPeriod"
 
-                            Using cmdUpdate As New OleDbCommand(queryUpdate, Conn)
+                            Using cmdUpdate As New OleDbCommand(queryUpdate, conn)
                                 cmdUpdate.Parameters.AddWithValue("@balanceAmount", balanceAmount)
                                 cmdUpdate.Parameters.AddWithValue("@conId", conId)
                                 cmdUpdate.Parameters.AddWithValue("@paymentPeriod", paymentPeriod)
@@ -369,7 +437,7 @@ Public Class frmIncome
                                 If rowsAffected > 0 Then
                                     Dim queryUpdateDatePayment As String = "UPDATE Payment SET date_payment = @date_payment WHERE con_id = @conId AND payment_period = @paymentPeriod"
 
-                                    Using cmdUpdateDatePayment As New OleDbCommand(queryUpdateDatePayment, Conn)
+                                    Using cmdUpdateDatePayment As New OleDbCommand(queryUpdateDatePayment, conn)
                                         cmdUpdateDatePayment.Parameters.AddWithValue("@date_payment", paymentDate)
                                         cmdUpdateDatePayment.Parameters.AddWithValue("@conId", conId)
                                         cmdUpdateDatePayment.Parameters.AddWithValue("@paymentPeriod", paymentPeriod)
@@ -417,12 +485,16 @@ Public Class frmIncome
 
     Private Function DeductBalance(contractNumber As String, amount As Decimal) As Boolean
         Try
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
 
                 ' ดึงข้อมูลงวดสุดท้ายที่ยังมีเงินต้นค้างอยู่
                 Dim query As String = "SELECT payment_period, payment_prin, payment_interest FROM Payment WHERE con_id = @contractNumber AND payment_prin > 0 ORDER BY payment_period DESC"
-                Dim cmd As New OleDbCommand(query, Conn)
+                Dim cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
                 Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
@@ -443,7 +515,7 @@ Public Class frmIncome
 
                         ' อัปเดตสถานะงวดเป็นชำระแล้ว
                         Dim updateStatusQuery As String = "UPDATE Payment SET status_id = 2 WHERE con_id = @contractNumber AND payment_period = @paymentPeriod"
-                        Dim updateStatusCmd As New OleDbCommand(updateStatusQuery, Conn)
+                        Dim updateStatusCmd As New OleDbCommand(updateStatusQuery, conn)
                         updateStatusCmd.Parameters.AddWithValue("@contractNumber", contractNumber)
                         updateStatusCmd.Parameters.AddWithValue("@paymentPeriod", paymentPeriod)
                         updateStatusCmd.ExecuteNonQuery()
@@ -455,7 +527,7 @@ Public Class frmIncome
 
                     ' อัปเดตยอดเงินต้นและดอกเบี้ยในตาราง Payment
                     Dim updateQuery As String = "UPDATE Payment SET payment_prin = @newPrincipal, payment_interest = @newInterest WHERE con_id = @contractNumber AND payment_period = @paymentPeriod"
-                    Dim updateCmd As New OleDbCommand(updateQuery, Conn)
+                    Dim updateCmd As New OleDbCommand(updateQuery, conn)
                     updateCmd.Parameters.AddWithValue("@newPrincipal", principalAmount)
                     updateCmd.Parameters.AddWithValue("@newInterest", interestAmount)
                     updateCmd.Parameters.AddWithValue("@contractNumber", contractNumber)
@@ -466,14 +538,14 @@ Public Class frmIncome
                 ' หากมีเงินเหลือจากการชำระ ให้บันทึกลงในตาราง income_details
                 If amount > 0 Then
                     Dim queryGetIncId As String = "SELECT @@IDENTITY"
-                    Dim cmdGetIncId As New OleDbCommand(queryGetIncId, Conn)
+                    Dim cmdGetIncId As New OleDbCommand(queryGetIncId, conn)
                     Dim incId As Integer = Convert.ToInt32(cmdGetIncId.ExecuteScalar())
                     MessageBox.Show("ยอดเงินที่จ่ายเกิน จะถูกบันทึกเป็นรายได้เกิน", "ข้อมูล", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
 
                     ' บันทึกยอดเงินที่เกินลงในตาราง income_details
                     Dim insertIncomeDetailsQuery As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, inc_id, m_id, acc_id) VALUES (@accName, @contractNumber, @excessAmount, @paymentDate, inc_id, memberId, acc_id)"
-                    Dim insertCmd As New OleDbCommand(insertIncomeDetailsQuery, Conn)
+                    Dim insertCmd As New OleDbCommand(insertIncomeDetailsQuery, conn)
                     insertCmd.Parameters.AddWithValue("@accName", "ยอดเงินที่จ่ายเกิน")
                     insertCmd.Parameters.AddWithValue("@contractNumber", contractNumber)
                     insertCmd.Parameters.AddWithValue("@excessAmount", amount)
@@ -498,12 +570,16 @@ Public Class frmIncome
 
     Private Sub UpdatePaymentStatus(contractNumber As String)
         Try
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
 
                 ' ดึงข้อมูลงวดที่ยังไม่ได้ชำระล่าสุด
                 Dim querySelect As String = "SELECT TOP 1 payment_period, payment_prin, payment_interest FROM Payment WHERE con_id = @contractNumber AND status_id = 1 ORDER BY payment_period ASC"
-                Dim cmdSelect As New OleDbCommand(querySelect, Conn)
+                Dim cmdSelect As New OleDbCommand(querySelect, conn)
                 cmdSelect.Parameters.AddWithValue("@contractNumber", contractNumber)
                 Dim reader As OleDbDataReader = cmdSelect.ExecuteReader()
 
@@ -514,7 +590,7 @@ Public Class frmIncome
 
                     ' อัปเดตสถานะของงวดที่พบเป็นชำระแล้ว
                     Dim queryUpdate As String = "UPDATE Payment SET status_id = 2 WHERE con_id = @contractNumber AND payment_period = @period"
-                    Dim cmdUpdate As New OleDbCommand(queryUpdate, Conn)
+                    Dim cmdUpdate As New OleDbCommand(queryUpdate, conn)
                     cmdUpdate.Parameters.AddWithValue("@contractNumber", contractNumber)
                     cmdUpdate.Parameters.AddWithValue("@period", period)
                     cmdUpdate.ExecuteNonQuery()
@@ -756,12 +832,16 @@ Public Class frmIncome
     Private Function GetPaymentData(contractNumber As String) As List(Of (Period As Integer, Principal As Decimal, Interest As Decimal))
         Dim payments As New List(Of (Period As Integer, Principal As Decimal, Interest As Decimal))
 
-        Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-            Conn.Open()
+        ' ดึง path ของฐานข้อมูลจาก config.ini
+        Dim dbPath As String = GetDatabasePath()
+        Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+        Using conn As New OleDbConnection(connStr)
+            conn.Open()
 
             ' ดึงข้อมูลงวดการชำระทั้งหมดที่ยังไม่ได้ชำระเรียงตามลำดับงวด
             Dim query As String = "SELECT payment_period, payment_prin, payment_interest FROM Payment WHERE con_id = @contractNumber AND status_id = 1 ORDER BY payment_period ASC"
-            Dim cmd As New OleDbCommand(query, Conn)
+            Dim cmd As New OleDbCommand(query, conn)
             cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
@@ -826,9 +906,12 @@ Public Class frmIncome
                 Return
             End If
 
-            ' กำหนดการเชื่อมต่อฐานข้อมูล Access
-            Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb"
-            Using conn As New OleDbConnection(connectionString)
+
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
                 ' เปิดการเชื่อมต่อฐานข้อมูล
                 conn.Open()
 
@@ -888,13 +971,17 @@ Public Class frmIncome
     ' ฟังก์ชันตรวจสอบสถานะการชำระเงินของงวดก่อนหน้า
     Private Function CheckPreviousPaymentStatus(contractNumber As String, currentPeriod As Integer) As Boolean
         Try
-            ' เปิดการเชื่อมต่อฐานข้อมูล
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
 
                 ' ตรวจสอบงวดก่อนหน้าว่ามีการชำระเงินหรือไม่ (status_id = 2 คือชำระเงินแล้ว)
                 Dim query As String = "SELECT status_id FROM Payment WHERE con_id = @contractNumber AND payment_period = @previousPeriod"
-                Using cmd As New OleDbCommand(query, Conn)
+                Using cmd As New OleDbCommand(query, conn)
                     cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
                     cmd.Parameters.AddWithValue("@previousPeriod", currentPeriod - 1) ' งวดก่อนหน้า
 
@@ -917,12 +1004,16 @@ Public Class frmIncome
     Private Function CheckCurrentPaymentStatus(contractNumber As String, currentPeriod As Integer) As Boolean
         Try
             ' เปิดการเชื่อมต่อฐานข้อมูล
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
 
                 ' ตรวจสอบว่างวดที่เลือกมีการชำระเงินแล้วหรือไม่ (status_id = 2 คือชำระเงินแล้ว)
                 Dim query As String = "SELECT status_id FROM Payment WHERE con_id = @contractNumber AND payment_period = @currentPeriod"
-                Using cmd As New OleDbCommand(query, Conn)
+                Using cmd As New OleDbCommand(query, conn)
                     cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
                     cmd.Parameters.AddWithValue("@currentPeriod", currentPeriod) ' งวดปัจจุบัน
 
@@ -945,12 +1036,16 @@ Public Class frmIncome
     Private Function GetPaymentAmount(contractNumber As String, paymentPeriod As Integer) As Decimal
         Dim paymentAmount As Decimal = 0
         Try
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
 
                 ' ดึงค่าเงินต้นและดอกเบี้ยจากฐานข้อมูลสำหรับงวดที่เลือก
                 Dim query As String = "SELECT payment_prin, payment_interest FROM Payment WHERE con_id = @contractNumber AND payment_period = @paymentPeriod"
-                Dim cmd As New OleDbCommand(query, Conn)
+                Dim cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
                 cmd.Parameters.AddWithValue("@paymentPeriod", paymentPeriod)
 
@@ -981,12 +1076,16 @@ Public Class frmIncome
                 Dim paymentAmount As Decimal = Convert.ToDecimal(dgvPaymentDetails.CurrentRow.Cells("PaymentAmount").Value)
 
                 ' เชื่อมต่อกับฐานข้อมูล Access
-                Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                    Conn.Open()
+                ' ดึง path ของฐานข้อมูลจาก config.ini
+                Dim dbPath As String = GetDatabasePath()
+                Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+                Using conn As New OleDbConnection(connStr)
+                    conn.Open()
 
                     ' คำสั่ง SQL เพื่อดึงวันที่และจำนวนเงินจากตาราง Payment
                     Dim query As String = "SELECT payment_date FROM Payment WHERE con_id = @contractNumber AND payment_period = @paymentPeriod"
-                    Using cmd As New OleDbCommand(query, Conn)
+                    Using cmd As New OleDbCommand(query, conn)
                         ' กำหนดค่าให้กับพารามิเตอร์
                         cmd.Parameters.AddWithValue("@contractNumber", contractNumber)
                         cmd.Parameters.AddWithValue("@paymentPeriod", paymentPeriod)
@@ -1049,12 +1148,16 @@ Public Class frmIncome
             ' ตรวจสอบว่ามีข้อมูลใน DataGridView หรือไม่
             If dgvPaymentDetails.Rows.Count > 0 Then
                 ' เชื่อมต่อกับฐานข้อมูล
-                Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                    Conn.Open()
+                ' ดึง path ของฐานข้อมูลจาก config.ini
+                Dim dbPath As String = GetDatabasePath()
+                Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+                Using conn As New OleDbConnection(connStr)
+                    conn.Open()
 
                     ' ดึง m_id จากตาราง Member โดยใช้ชื่อสมาชิก
                     Dim queryGetMemberId As String = "SELECT m_id FROM Member WHERE m_name = @memberName"
-                    Dim cmdGetMemberId As New OleDbCommand(queryGetMemberId, Conn)
+                    Dim cmdGetMemberId As New OleDbCommand(queryGetMemberId, conn)
                     cmdGetMemberId.Parameters.AddWithValue("@memberName", txtMemberID.Text)
                     Dim memberId As Object = cmdGetMemberId.ExecuteScalar()
 
@@ -1076,7 +1179,7 @@ Public Class frmIncome
                     Dim indDate As DateTime = dtpBirth.Value ' ใช้วันที่จาก DateTimePicker
                     Dim accId As String = cboDepositType.SelectedValue.ToString() ' Retrieve acc_id
                     Dim queryIncome As String = "INSERT INTO Income (m_id, inc_detail, inc_description, inc_date, inc_amount, acc_id) VALUES (@m_id, @inc_detail, @inc_description, @inc_date, @inc_amount, @acc_id)"
-                    Using cmdIncome As New OleDbCommand(queryIncome, Conn)
+                    Using cmdIncome As New OleDbCommand(queryIncome, conn)
                         cmdIncome.Parameters.AddWithValue("@m_id", CInt(memberId))
                         cmdIncome.Parameters.AddWithValue("@inc_detail", "ชำระเงินรวม")
                         cmdIncome.Parameters.AddWithValue("@inc_description", "รวมการชำระเงินทั้งหมด")
@@ -1087,7 +1190,7 @@ Public Class frmIncome
 
                         ' รับค่า inc_id ที่ถูกสร้างขึ้นในตาราง Income
                         Dim queryGetIncId As String = "SELECT @@IDENTITY"
-                        Dim cmdGetIncId As New OleDbCommand(queryGetIncId, Conn)
+                        Dim cmdGetIncId As New OleDbCommand(queryGetIncId, conn)
                         Dim incId As Integer = Convert.ToInt32(cmdGetIncId.ExecuteScalar())
 
                         ' วนลูปบันทึกรายละเอียดใน Income_Details
@@ -1099,7 +1202,7 @@ Public Class frmIncome
                             Dim contractNumber As Integer = Convert.ToInt32(row.Cells("PaymentContractNumber").Value)
 
                             Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@paymentType, @contractNumber, @paymentAmount, @ind_date, @m_id, @acc_id, @inc_id)"
-                            Using cmdDetails As New OleDbCommand(queryDetails, Conn)
+                            Using cmdDetails As New OleDbCommand(queryDetails, conn)
                                 cmdDetails.Parameters.AddWithValue("@paymentType", paymentType)
                                 cmdDetails.Parameters.AddWithValue("@contractNumber", contractNumber)
                                 cmdDetails.Parameters.AddWithValue("@paymentAmount", paymentAmount)
@@ -1129,13 +1232,17 @@ Public Class frmIncome
         Try
             ' ตรวจสอบว่ามีข้อมูลใน DataGridView หรือไม่
             If dgvIncomeDetails.Rows.Count > 0 Then
-                ' เชื่อมต่อกับฐานข้อมูล
-                Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                    Conn.Open()
+
+                ' ดึง path ของฐานข้อมูลจาก config.ini
+                Dim dbPath As String = GetDatabasePath()
+                Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+                Using conn As New OleDbConnection(connStr)
+                    conn.Open()
 
                     ' ดึง m_id จากตาราง Member โดยใช้ชื่อสมาชิก
                     Dim queryGetMemberId As String = "SELECT m_id FROM Member WHERE m_name = @memberName"
-                    Dim cmdGetMemberId As New OleDbCommand(queryGetMemberId, Conn)
+                    Dim cmdGetMemberId As New OleDbCommand(queryGetMemberId, conn)
                     cmdGetMemberId.Parameters.AddWithValue("@memberName", txtMemberID.Text)
                     Dim memberId As Object = cmdGetMemberId.ExecuteScalar()
 
@@ -1157,7 +1264,7 @@ Public Class frmIncome
                     Dim indDate As DateTime = dtpBirth.Value ' ใช้วันที่จาก DateTimePicker
                     Dim accId As String = cboDepositType.SelectedValue.ToString() ' Retrieve acc_id
                     Dim queryIncome As String = "INSERT INTO Income (m_id, inc_detail, inc_description, inc_date, inc_amount, acc_id) VALUES (@m_id, @inc_detail, @inc_description, @inc_date, @inc_amount, @acc_id)"
-                    Using cmdIncome As New OleDbCommand(queryIncome, Conn)
+                    Using cmdIncome As New OleDbCommand(queryIncome, conn)
                         cmdIncome.Parameters.AddWithValue("@m_id", CInt(memberId))
                         cmdIncome.Parameters.AddWithValue("@inc_detail", "รายรับรวม")
                         cmdIncome.Parameters.AddWithValue("@inc_description", "รวมรายรับทั้งหมด")
@@ -1168,7 +1275,7 @@ Public Class frmIncome
 
                         ' รับค่า inc_id ที่ถูกสร้างขึ้นในตาราง Income
                         Dim queryGetIncId As String = "SELECT @@IDENTITY"
-                        Dim cmdGetIncId As New OleDbCommand(queryGetIncId, Conn)
+                        Dim cmdGetIncId As New OleDbCommand(queryGetIncId, conn)
                         Dim incId As Integer = Convert.ToInt32(cmdGetIncId.ExecuteScalar())
 
                         ' วนลูปบันทึกรายละเอียดใน Income_Details (เชื่อมกับ inc_id ที่เพิ่งบันทึก)
@@ -1179,7 +1286,7 @@ Public Class frmIncome
                             Dim amount As Decimal = Convert.ToDecimal(row.Cells("Amount").Value)
 
                             Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@incomeType, @amount, @ind_date, @m_id, @acc_id, @inc_id)"
-                            Using cmdDetails As New OleDbCommand(queryDetails, Conn)
+                            Using cmdDetails As New OleDbCommand(queryDetails, conn)
                                 cmdDetails.Parameters.AddWithValue("@incomeType", incomeType)
                                 cmdDetails.Parameters.AddWithValue("@amount", amount)
                                 cmdDetails.Parameters.AddWithValue("@ind_date", indDate)
@@ -1207,12 +1314,16 @@ Public Class frmIncome
         Try
             ' ตรวจสอบว่ามีข้อมูลใน DataGridView หรือไม่
             If dgvPaymentDetails.Rows.Count > 0 OrElse dgvIncomeDetails.Rows.Count > 0 Then
-                Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                    Conn.Open()
+                ' ดึง path ของฐานข้อมูลจาก config.ini
+                Dim dbPath As String = GetDatabasePath()
+                Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+                Using conn As New OleDbConnection(connStr)
+                    conn.Open()
 
                     ' ดึง m_id จากตาราง Member โดยใช้ชื่อสมาชิก
                     Dim queryGetMemberId As String = "SELECT m_id FROM Member WHERE m_name = @memberName"
-                    Dim cmdGetMemberId As New OleDbCommand(queryGetMemberId, Conn)
+                    Dim cmdGetMemberId As New OleDbCommand(queryGetMemberId, conn)
                     cmdGetMemberId.Parameters.AddWithValue("@memberName", txtMemberID.Text)
                     Dim memberId As Object = cmdGetMemberId.ExecuteScalar()
 
@@ -1251,7 +1362,7 @@ Public Class frmIncome
                     Dim accId As String = cboDepositType.SelectedValue.ToString()
 
                     Dim queryIncome As String = "INSERT INTO Income (m_id, inc_detail, inc_description, inc_date, inc_amount, acc_id) VALUES (@m_id, @inc_detail, @inc_description, @inc_date, @inc_amount, @acc_id)"
-                    Using cmdIncome As New OleDbCommand(queryIncome, Conn)
+                    Using cmdIncome As New OleDbCommand(queryIncome, conn)
                         cmdIncome.Parameters.AddWithValue("@m_id", CInt(memberId))
                         cmdIncome.Parameters.AddWithValue("@inc_detail", "รายการรวมชำระเงินและรายรับ")
                         cmdIncome.Parameters.AddWithValue("@inc_description", "รวมการชำระเงินและรายรับทั้งหมด")
@@ -1262,7 +1373,7 @@ Public Class frmIncome
 
                         ' ดึง inc_id ที่ถูกสร้าง
                         Dim queryGetIncId As String = "SELECT @@IDENTITY"
-                        Dim cmdGetIncId As New OleDbCommand(queryGetIncId, Conn)
+                        Dim cmdGetIncId As New OleDbCommand(queryGetIncId, conn)
                         Dim incId As Integer = Convert.ToInt32(cmdGetIncId.ExecuteScalar())
 
                         ' วนลูปบันทึกรายละเอียดการชำระเงินใน Income_Details
@@ -1274,7 +1385,7 @@ Public Class frmIncome
                             Dim contractNumber As Integer = Convert.ToInt32(row.Cells("PaymentContractNumber").Value)
 
                             Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@paymentType, @contractNumber, @paymentAmount, @ind_date, @mId, @accId, @incId)"
-                            Using cmdDetails As New OleDbCommand(queryDetails, Conn)
+                            Using cmdDetails As New OleDbCommand(queryDetails, conn)
                                 cmdDetails.Parameters.AddWithValue("@paymentType", paymentType)
                                 cmdDetails.Parameters.AddWithValue("@contractNumber", contractNumber)
                                 cmdDetails.Parameters.AddWithValue("@paymentAmount", paymentAmount)
@@ -1304,7 +1415,7 @@ Public Class frmIncome
                             Next
 
                             Dim queryDetails As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@incomeType, @contractNumber, @incomeAmount, @ind_date, @mId, @accId, @incId)"
-                            Using cmdDetails As New OleDbCommand(queryDetails, Conn)
+                            Using cmdDetails As New OleDbCommand(queryDetails, conn)
                                 cmdDetails.Parameters.AddWithValue("@incomeType", incomeType)
                                 cmdDetails.Parameters.AddWithValue("@contractNumber", contractNumber)
                                 cmdDetails.Parameters.AddWithValue("@incomeAmount", incomeAmount)
@@ -1324,7 +1435,7 @@ Public Class frmIncome
                             End If
 
                             Dim queryExcess As String = "INSERT INTO Income_Details (ind_accname, con_id, ind_amount, ind_date, m_id, acc_id, inc_id) VALUES (@accName, @contractNumber, @excessAmount, @indDate, @mId, @accId, @incId)"
-                            Using cmdExcess As New OleDbCommand(queryExcess, Conn)
+                            Using cmdExcess As New OleDbCommand(queryExcess, conn)
                                 cmdExcess.Parameters.AddWithValue("@accName", "เงินต้น")
                                 cmdExcess.Parameters.AddWithValue("@contractNumber", contractNumber)
                                 cmdExcess.Parameters.AddWithValue("@excessAmount", balanceAmount)

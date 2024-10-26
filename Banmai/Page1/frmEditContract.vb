@@ -1,11 +1,54 @@
 ﻿Imports System.Data.OleDb
 Imports Guna.UI2.WinForms
+Imports System.IO
 
 Public Class frmEditContract
-    Dim conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Dim conn As New OleDbConnection()
     Private contractID As String = "" ' เก็บค่า con_id ของสัญญาที่ถูกเลือก
 
+
+    ' ฟังก์ชันสำหรับดึงค่า path ของฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        If Not File.Exists(iniPath) Then
+            Throw New Exception("ไม่พบไฟล์ config.ini ที่ตำแหน่ง: " & iniPath)
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มี Path
+        Dim dbPathLine = lines.FirstOrDefault(Function(line) line.StartsWith("Path="))
+        If String.IsNullOrEmpty(dbPathLine) Then
+            Throw New Exception("ไม่พบ 'Path' ในไฟล์ config.ini")
+        End If
+
+        ' ดึง path จากบรรทัดนั้นและตัดส่วน 'Path=' ออก
+        Dim dbPath = dbPathLine.Replace("Path=", "").Trim()
+
+        ' แปลง path เป็น path แบบเต็ม (Absolute Path)
+        If dbPath.StartsWith(".\") Then
+            dbPath = Path.Combine(Application.StartupPath, dbPath.Substring(2))
+        End If
+
+        If Not File.Exists(dbPath) Then
+            Throw New Exception($"ไม่พบไฟล์ฐานข้อมูลที่ตำแหน่ง: {dbPath}")
+        End If
+
+        Return dbPath
+    End Function
     Private Sub frmEditContract_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
         SetupAutoComplete() ' ตั้งค่า Autocomplete สำหรับฟิลด์ค้นหา
         LoadAccounts() ' โหลดข้อมูลบัญชีใน ComboBox แต่ไม่เลือกค่าใดๆ
         LoadGuarantorList() ' โหลดข้อมูลผู้ค้ำประกันใน ComboBox
@@ -137,36 +180,51 @@ Public Class frmEditContract
 
     Private Sub SearchContracts()
         Try
-            If conn.State = ConnectionState.Closed Then conn.Open()
+            ' ตรวจสอบและเปิดการเชื่อมต่อใหม่จาก config.ini
+            If conn.State = ConnectionState.Closed Then
+                Dim dbPath As String = GetDatabasePath() ' ดึง path ของฐานข้อมูลจาก config.ini
+                Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+                conn.ConnectionString = connStr
+                conn.Open()
+            End If
 
+            ' สร้างคำสั่ง SQL สำหรับค้นหาสัญญา
             Dim searchQuery As String = "SELECT c.con_id, c.m_id, c.con_details, c.con_amount, c.con_interest, " &
                                     "c.con_permonth, c.con_date, a.acc_name " &
                                     "FROM (Contract c " &
                                     "LEFT JOIN Account a ON c.acc_id = a.acc_id) " &
                                     "WHERE c.con_id LIKE @searchTerm"
-            Dim cmd As New OleDbCommand(searchQuery, conn)
-            cmd.Parameters.AddWithValue("@searchTerm", "%" & txtSearch.Text.Trim() & "%")
 
-            Dim adapter As New OleDbDataAdapter(cmd)
-            Dim table As New DataTable()
-            adapter.Fill(table)
+            Using cmd As New OleDbCommand(searchQuery, conn)
+                cmd.Parameters.AddWithValue("@searchTerm", "%" & txtSearch.Text.Trim() & "%")
 
-            table.Columns.Add("GuarantorNames", GetType(String))
+                Dim adapter As New OleDbDataAdapter(cmd)
+                Dim table As New DataTable()
+                adapter.Fill(table)
 
-            For Each row As DataRow In table.Rows
-                Dim conId As String = row("con_id").ToString()
-                Dim guarantorNames As String = GetGuarantorNames(conId)
-                row("GuarantorNames") = guarantorNames
-            Next
+                ' เพิ่มคอลัมน์สำหรับชื่อผู้ค้ำประกัน
+                table.Columns.Add("GuarantorNames", GetType(String))
 
-            dgvContracts.DataSource = table
+                ' วนลูปเพื่อดึงชื่อผู้ค้ำประกันสำหรับแต่ละสัญญา
+                For Each row As DataRow In table.Rows
+                    Dim conId As String = row("con_id").ToString()
+                    Dim guarantorNames As String = GetGuarantorNames(conId)
+                    row("GuarantorNames") = guarantorNames
+                Next
+
+                ' ตั้งค่า DataSource ของ DataGridView
+                dgvContracts.DataSource = table
+            End Using
 
         Catch ex As Exception
-            MessageBox.Show("Error searching contracts: " & ex.Message)
+            ' แสดงข้อความข้อผิดพลาดหากมีปัญหาในการค้นหา
+            MessageBox.Show("Error searching contracts: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            conn.Close()
+            ' ปิดการเชื่อมต่อหลังใช้งานเสร็จ
+            If conn.State = ConnectionState.Open Then conn.Close()
         End Try
     End Sub
+
 
     Private Function GetGuarantorNames(conId As String) As String
         Dim guarantorNames As New List(Of String)

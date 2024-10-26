@@ -430,12 +430,6 @@
     <Compile Include="selectedTable.vb">
       <DependentUpon>selectedTable.xsd</DependentUpon>
     </Compile>
-    <Compile Include="TestGetData.Designer.vb">
-      <DependentUpon>TestGetData.vb</DependentUpon>
-    </Compile>
-    <Compile Include="TestGetData.vb">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
@@ -527,9 +521,6 @@
     <EmbeddedResource Include="report\SajjaReport.rdlc" />
     <EmbeddedResource Include="report\shareReport.rdlc" />
     <EmbeddedResource Include="report\StatementReport.rdlc" />
-    <EmbeddedResource Include="TestGetData.resx">
-      <DependentUpon>TestGetData.vb</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="db_banmai1DataSet.xsc">
@@ -622,11 +613,6 @@
     </None>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="Database\db_banmai1.accdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

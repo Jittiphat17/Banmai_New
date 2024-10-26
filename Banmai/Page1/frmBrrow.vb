@@ -2,14 +2,39 @@
 Imports System.Globalization
 Imports Guna.UI2.WinForms
 Imports Microsoft.Reporting.WinForms
+Imports System.IO
 
 Public Class frmBrrow
     ' ประกาศ Conn ไว้ที่เดียวสำหรับใช้ในฟอร์มนี้
-    Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Private Conn As New OleDbConnection
     Private cmd As OleDbCommand
     Private strSQL As String
 
+    ' ฟังก์ชันดึง path ฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        Dim dbPath As String = File.ReadAllLines(iniPath).FirstOrDefault(Function(line) line.StartsWith("Path="))
+
+        If Not String.IsNullOrEmpty(dbPath) Then
+            Return dbPath.Replace("Path=", "").Trim()
+        Else
+            Throw New Exception("ไม่พบ Path ของฐานข้อมูลใน config.ini")
+        End If
+    End Function
+
     Private Sub frmBrrow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            Conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
         SetupEventHandlers()
         Auto_id()
         ClearAllData()
@@ -599,10 +624,12 @@ Public Class frmBrrow
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            ' การใช้ Using เพื่อให้แน่ใจว่าทรัพยากรจะถูกปิดอย่างเหมาะสมหลังจากใช้งานเสร็จ
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                ' เปิดการเชื่อมต่อฐานข้อมูล
-                conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open() ' เปิดการเชื่อมต่อฐานข้อมูล
 
                 ' วนลูปเพื่อบันทึกข้อมูลจาก DataGridView
                 For Each row As DataGridViewRow In guna2DataGridView1.Rows

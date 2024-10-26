@@ -1,14 +1,39 @@
 ﻿Imports System.Data.OleDb
 Imports System.Drawing.Printing
+Imports System.IO
 
 Public Class frmExpense
     ' เชื่อมต่อกับฐานข้อมูล Access
-    Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Private Conn As New OleDbConnection
 
     ' กำหนด PrintDocument สำหรับการพิมพ์ใบเสร็จ
     Private WithEvents printDoc As New PrintDocument
+    ' ฟังก์ชันดึง path ฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        Dim dbPath As String = File.ReadAllLines(iniPath).FirstOrDefault(Function(line) line.StartsWith("Path="))
+
+        If Not String.IsNullOrEmpty(dbPath) Then
+            Return dbPath.Replace("Path=", "").Trim()
+        Else
+            Throw New Exception("ไม่พบ Path ของฐานข้อมูลใน config.ini")
+        End If
+    End Function
 
     Private Sub frmExpense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            Conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
+
         SetupDataGridView()
         LoadExpenseTypes()
         LoadMemberData()
@@ -233,10 +258,13 @@ Public Class frmExpense
                 MessageBox.Show("ไม่พบข้อมูลสมาชิก จะบันทึกข้อมูลโดยไม่ระบุสมาชิก", "ข้อสังเกต", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 memberId = 0 ' หรือใช้ DBNull.Value ในกรณีที่ฐานข้อมูลรองรับ
             End If
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
 
             ' ดำเนินการบันทึกข้อมูลรายจ่าย
-            Using Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-                Conn.Open()
+            Using conn As New OleDbConnection(connStr)
+                conn.Open() ' เปิดการเชื่อมต่อฐานข้อมูล
 
                 ' บันทึกข้อมูลลงในตาราง Expense
                 Dim queryExpense As String = "INSERT INTO Expense (ex_id, ex_name, ex_detail, ex_description, ex_date, ex_amount, acc_id) VALUES (@ex_id, @ex_name, @ex_detail, @ex_description, @ex_date, @ex_amount, @acc_id)"

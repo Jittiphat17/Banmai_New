@@ -3,9 +3,26 @@ Imports System.Globalization
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports Microsoft.Reporting
 Imports System.IO
+
 Public Class frmMain
-    ' เชื่อมต่อกับฐานข้อมูล
+    ' ประกาศตัวแปรเชื่อมต่อฐานข้อมูล
     Dim Conn As OleDbConnection
+
+    ' ฟังก์ชันดึง Path ของฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+
+        ' อ่านไฟล์ config.ini และหาบรรทัดที่เริ่มต้นด้วย "Path="
+        Dim dbPath As String = File.ReadAllLines(iniPath).
+                                FirstOrDefault(Function(line) line.StartsWith("Path="))
+
+        If Not String.IsNullOrEmpty(dbPath) Then
+            Return dbPath.Replace("Path=", "").Trim() ' ตัดคำว่า "Path=" ออก
+        Else
+            Throw New Exception("ไม่พบ Path ของฐานข้อมูลใน config.ini")
+        End If
+    End Function
+
     Public Sub Loadinfo()
         ' ตรวจสอบประเภทของผู้ใช้
         If User_type = "Admin" Or User_type = "ประธาน" Then
@@ -14,30 +31,12 @@ Public Class frmMain
             tsm_inc.Enabled = True
             tsm_report.Enabled = True
             tsm_other.Enabled = True
-
-        ElseIf User_type = "เหรัญญิก" Then
-            ' เปิดการใช้งานเมนูสำหรับเหรัญญิก
-            tsm_exp.Enabled = True
-            tsm_inc.Enabled = True
-            tsm_report.Enabled = True
-            tsm_other.Enabled = True
-            แกไขสญญาToolStripMenuItem.Visible = False ' ปิดการใช้งานสำหรับเหรัญญิก
-            แกไขรายรบToolStripMenuItem.Visible = False
-            จดการสมาชกToolStripMenuItem.Visible = False
-            จดการสทธToolStripMenuItem.Visible = False
-
-
         Else
-            ' ปิดการใช้งานเมนูสำหรับผู้ใช้ที่ไม่ใช่ Admin หรือ ประธาน หรือ เหรัญญิก
-            สมาชกลาออกToolStripMenuItem.Visible = False
-            จดการสมาชกToolStripMenuItem.Visible = False
-            อานบตรToolStripMenuItem.Visible = False
-            ขอมลToolStripMenuItem.Visible = False
-            จดการสทธToolStripMenuItem.Visible = False
-            จดการกองทนToolStripMenuItem.Visible = False
-            การปดงบToolStripMenuItem.Visible = False
-            tsm_exp.Visible = False
-            tsm_inc.Visible = False
+            ' ปิดการใช้งานเมนูสำหรับผู้ใช้ที่ไม่ใช่ Admin หรือ ประธาน
+            tsm_exp.Enabled = False
+            tsm_inc.Enabled = False
+            tsm_report.Enabled = False
+            tsm_other.Enabled = False
         End If
     End Sub
 
@@ -58,28 +57,19 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ' ใช้ Relative Path เพื่อเชื่อมต่อกับฐานข้อมูลในโฟลเดอร์ Database
-        Dim dbPath As String = Path.Combine(Application.StartupPath, "Database", "db_banmai1.accdb")
-        Dim ConnStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
-
-        ' สร้างการเชื่อมต่อกับฐานข้อมูล
-        Conn = New OleDbConnection(ConnStr)
-
         Try
-            Conn.Open()
-            MessageBox.Show("เชื่อมต่อฐานข้อมูลสำเร็จ", "สถานะ", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            Conn = New OleDbConnection(connStr)
+
         Catch ex As Exception
-            MessageBox.Show($"ไม่สามารถเชื่อมต่อฐานข้อมูลได้: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Application.Exit()
-        Finally
-            Conn.Close()
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
         End Try
 
-
-
         Loadinfo()
-
-
 
         ' อัปเดตข้อมูลสมาชิกและสัญญา
         UpdateMemberCount()
@@ -88,6 +78,7 @@ Public Class frmMain
         ' อัปเดตยอดเงินในบัญชี
         UpdateAccountBalances()
 
+
         ' อัปเดตข้อมูลผู้ใช้และเวลา
         UpdateUserInfo()
         UpdateDateTime()
@@ -95,8 +86,6 @@ Public Class frmMain
         ' เริ่มการทำงานของ Timer
         Timer1.Start()
     End Sub
-
-
 
     ' ฟังก์ชันดึงข้อมูลจำนวนสมาชิก
     Private Sub UpdateMemberCount()
@@ -387,11 +376,6 @@ Public Class frmMain
         Dim frm As New frmReceipts
         AddHandler frm.FormClosed, AddressOf RefreshMainForm
         frm.ShowDialog()
-    End Sub
-
-    Private Sub AutoDockControl(ByVal control As Control)
-        ' ตั้งค่าให้คอนโทรลขยายเต็มพื้นที่
-        control.Dock = DockStyle.Fill
     End Sub
 
 

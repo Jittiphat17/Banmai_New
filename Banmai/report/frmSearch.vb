@@ -1,26 +1,112 @@
 ﻿Imports System.Data.OleDb
 Imports System.Text
 Imports Microsoft.Reporting.WinForms
+Imports System.IO
 
 Public Class frmSearch
-    Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Private Conn As New OleDbConnection
+
+
+    ' ฟังก์ชันสำหรับดึงค่า path ของฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        If Not File.Exists(iniPath) Then
+            Throw New Exception("ไม่พบไฟล์ config.ini ที่ตำแหน่ง: " & iniPath)
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มี Path
+        Dim dbPathLine = lines.FirstOrDefault(Function(line) line.StartsWith("Path="))
+        If String.IsNullOrEmpty(dbPathLine) Then
+            Throw New Exception("ไม่พบ 'Path' ในไฟล์ config.ini")
+        End If
+
+        ' ดึง path จากบรรทัดนั้นและตัดส่วน 'Path=' ออก
+        Dim dbPath = dbPathLine.Replace("Path=", "").Trim()
+
+        ' แปลง path เป็น path แบบเต็ม (Absolute Path)
+        If dbPath.StartsWith(".\") Then
+            dbPath = Path.Combine(Application.StartupPath, dbPath.Substring(2))
+        End If
+
+        If Not File.Exists(dbPath) Then
+            Throw New Exception($"ไม่พบไฟล์ฐานข้อมูลที่ตำแหน่ง: {dbPath}")
+        End If
+
+        Return dbPath
+    End Function
+    Private Function GetReportPath(reportName As String) As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        If Not File.Exists(iniPath) Then
+            Throw New Exception("ไม่พบไฟล์ config.ini ที่: " & iniPath)
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มีชื่อรายงานตรงกับ key ที่ส่งมา
+        Dim reportPathLine = lines.FirstOrDefault(Function(line) line.StartsWith(reportName & "="))
+        If String.IsNullOrEmpty(reportPathLine) Then
+            Throw New Exception($"ไม่พบรายงาน '{reportName}' ใน config.ini")
+        End If
+
+        ' ดึง path ของรายงานและแปลงเป็น Absolute Path ถ้าจำเป็น
+        Dim reportPath = reportPathLine.Replace(reportName & "=", "").Trim()
+        reportPath = Path.Combine(Application.StartupPath, reportPath)
+
+        ' ตรวจสอบว่าไฟล์รายงานมีอยู่จริง
+        If Not File.Exists(reportPath) Then
+            Throw New Exception($"ไม่พบไฟล์รายงานที่: {reportPath}")
+        End If
+
+        Return reportPath
+    End Function
 
     Private Sub frmSearch_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' เรียกฟังก์ชัน LoadAllContracts ทันทีเมื่อเปิดฟอร์มเพื่อแสดงข้อมูล
+        Try
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+            Conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่สามารถเชื่อมต่อกับฐานข้อมูลได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
+
+        ' โหลดข้อมูลทั้งหมดทันทีเมื่อเปิดฟอร์ม
         LoadAllContracts()
         LoadDirectors()
 
-        ' กำหนดค่าของ ReportViewer1 สำหรับรายงานสัญญากู้ยืม
-        Me.ReportViewer1.LocalReport.ReportPath = "D:\Project-2022\Banmai\Banmai\report\LoanReport1.rdlc"
-        Me.ReportViewer1.RefreshReport()
+        Try
+            ' ดึง path ของรายงานสัญญากู้ยืมจาก config.ini
+            Dim loanReportPath As String = GetReportPath("Loan")
+            Me.ReportViewer1.LocalReport.ReportPath = loanReportPath
 
-        ' กำหนดค่าของ ReportViewer2 สำหรับรายงานผู้ค้ำประกัน
-        Me.ReportViewer2.LocalReport.ReportPath = "D:\Project-2022\Banmai\Banmai\report\GuarantorReport.rdlc"
-        Me.ReportViewer2.RefreshReport()
+            ' ดึง path ของรายงานผู้ค้ำประกันจาก config.ini
+            Dim guarantorReportPath As String = GetReportPath("Guarantor")
+            Me.ReportViewer2.LocalReport.ReportPath = guarantorReportPath
+
+            ' รีเฟรชรายงาน
+            Me.ReportViewer1.RefreshReport()
+            Me.ReportViewer2.RefreshReport()
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดหากไม่พบไฟล์รายงาน
+            MessageBox.Show($"เกิดข้อผิดพลาดในการโหลดรายงาน: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
+
     Private Sub LoadDirectors()
         Try
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
                 conn.Open()
 
                 ' ดึงข้อมูลกรรมการพร้อมชื่อและคำนำหน้าจากตาราง Member โดย JOIN กับ Director
@@ -123,7 +209,11 @@ Public Class frmSearch
 
     Private Sub LoadAllContracts()
         Try
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
                 conn.Open()
                 Dim query As String = "SELECT con_id, m_id, con_details, con_amount, con_interest, con_permonth, con_date, acc_id, con_GuaranteeType FROM Contract"
                 Dim cmd As New OleDbCommand(query, conn)
@@ -166,7 +256,11 @@ Public Class frmSearch
 
     Private Sub SearchContracts(keyword As String)
         Try
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
                 conn.Open()
                 Dim query As String = "SELECT con_id, m_id, con_details, con_amount, con_interest, con_permonth, con_date, acc_id, con_GuaranteeType FROM Contract WHERE con_id LIKE @keyword OR m_id IN (SELECT m_id FROM Member WHERE m_name LIKE @keyword)"
                 Dim cmd As New OleDbCommand(query, conn)
@@ -305,7 +399,11 @@ Public Class frmSearch
         Dim selectedAccId As String = dgvResults.SelectedRows(0).Cells("acc_id").Value.ToString()
 
         Try
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
                 conn.Open()
 
                 ' ดึงข้อมูลสำหรับ DataSet1 จากตาราง Contract

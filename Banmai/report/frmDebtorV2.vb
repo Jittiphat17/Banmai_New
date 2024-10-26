@@ -5,12 +5,81 @@ Imports System.Windows.Controls
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports Banmai.individualDSTableAdapters
 Imports Microsoft.Reporting.WinForms
+Imports System.IO
 
 Public Class frmDebtorV2
 
-    Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Private Conn As New OleDbConnection
+    ' ฟังก์ชันสำหรับดึงค่า path ของฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        If Not File.Exists(iniPath) Then
+            Throw New Exception("ไม่พบไฟล์ config.ini ที่ตำแหน่ง: " & iniPath)
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มี Path
+        Dim dbPathLine = lines.FirstOrDefault(Function(line) line.StartsWith("Path="))
+        If String.IsNullOrEmpty(dbPathLine) Then
+            Throw New Exception("ไม่พบ 'Path' ในไฟล์ config.ini")
+        End If
+
+        ' ดึง path จากบรรทัดนั้นและตัดส่วน 'Path=' ออก
+        Dim dbPath = dbPathLine.Replace("Path=", "").Trim()
+
+        ' แปลง path เป็น path แบบเต็ม (Absolute Path)
+        If dbPath.StartsWith(".\") Then
+            dbPath = Path.Combine(Application.StartupPath, dbPath.Substring(2))
+        End If
+
+        If Not File.Exists(dbPath) Then
+            Throw New Exception($"ไม่พบไฟล์ฐานข้อมูลที่ตำแหน่ง: {dbPath}")
+        End If
+
+        Return dbPath
+    End Function
+    Private Function GetReportPath(reportName As String) As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        If Not File.Exists(iniPath) Then
+            Throw New Exception("ไม่พบไฟล์ config.ini ที่: " & iniPath)
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มีชื่อรายงานตรงกับ key ที่ส่งมา
+        Dim reportPathLine = lines.FirstOrDefault(Function(line) line.StartsWith(reportName & "="))
+        If String.IsNullOrEmpty(reportPathLine) Then
+            Throw New Exception($"ไม่พบรายงาน '{reportName}' ใน config.ini")
+        End If
+
+        ' ดึง path ของรายงานและแปลงเป็น Absolute Path ถ้าจำเป็น
+        Dim reportPath = reportPathLine.Replace(reportName & "=", "").Trim()
+        reportPath = Path.Combine(Application.StartupPath, reportPath)
+
+        ' ตรวจสอบว่าไฟล์รายงานมีอยู่จริง
+        If Not File.Exists(reportPath) Then
+            Throw New Exception($"ไม่พบไฟล์รายงานที่: {reportPath}")
+        End If
+
+        Return reportPath
+    End Function
+
 
     Private Sub frmDebtorV2_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            Conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
         LoadAccountNames()
         SettingCbxMonth()
         SettingCbxYear()
@@ -81,8 +150,11 @@ Public Class frmDebtorV2
 
             ' เปิดการเชื่อมต่อฐานข้อมูล
             Conn.Open()
+            ' ดึง path ของรายงานจาก config.ini โดยใช้ key "Debtor"
+            Dim reportPath As String = GetReportPath("Debtor")
+
             ' กำหนดไฟล์ RDLC ที่จะใช้ โดยใช้เส้นทางแบบสัมบูรณ์
-            Me.ReportViewer1.LocalReport.ReportPath = "D:\Project-2022\Banmai\Banmai\report\IndividualdebtorV2.rdlc"
+            Me.ReportViewer1.LocalReport.ReportPath = reportPath
 
             Dim para_accid As String = CType(cmbAccountName.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim para_mt As String = (drpMonth.SelectedIndex) + 1

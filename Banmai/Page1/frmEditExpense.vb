@@ -2,12 +2,45 @@
 Imports System.Drawing.Printing
 Imports System.Windows.Controls
 Imports Guna.UI2.WinForms
+Imports System.IO
+
 
 Public Class frmEditExpense
-    Dim conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Dim conn As New OleDbConnection
     Private expenseID As String = "" ' เก็บค่า ex_id ของรายจ่ายที่ถูกเลือก
     Private printDocument As New PrintDocument()
     Private printPreviewDialog As New PrintPreviewDialog()
+
+    ' ฟังก์ชันสำหรับดึงค่า path ของฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        If Not File.Exists(iniPath) Then
+            Throw New Exception("ไม่พบไฟล์ config.ini ที่ตำแหน่ง: " & iniPath)
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มี Path
+        Dim dbPathLine = lines.FirstOrDefault(Function(line) line.StartsWith("Path="))
+        If String.IsNullOrEmpty(dbPathLine) Then
+            Throw New Exception("ไม่พบ 'Path' ในไฟล์ config.ini")
+        End If
+
+        ' ดึง path จากบรรทัดนั้นและตัดส่วน 'Path=' ออก
+        Dim dbPath = dbPathLine.Replace("Path=", "").Trim()
+
+        ' แปลง path เป็น path แบบเต็ม (Absolute Path)
+        If dbPath.StartsWith(".\") Then
+            dbPath = Path.Combine(Application.StartupPath, dbPath.Substring(2))
+        End If
+
+        If Not File.Exists(dbPath) Then
+            Throw New Exception($"ไม่พบไฟล์ฐานข้อมูลที่ตำแหน่ง: {dbPath}")
+        End If
+
+        Return dbPath
+    End Function
 
     Public Sub Loadinfo()
         ' ตรวจสอบประเภทของผู้ใช้
@@ -29,6 +62,19 @@ Public Class frmEditExpense
 
 
     Private Sub frmEditExpense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
+
         LoadAccounts() ' โหลดข้อมูลบัญชี
         LoadExpenses() ' โหลดรายการรายจ่าย
         Loadinfo()
@@ -69,7 +115,13 @@ Public Class frmEditExpense
 
     Private Sub LoadExpenses(Optional searchFilter As String = "")
         Try
-            If conn.State = ConnectionState.Closed Then conn.Open()
+            ' ตรวจสอบและเปิดการเชื่อมต่อใหม่จาก config.ini
+            If conn.State = ConnectionState.Closed Then
+                Dim dbPath As String = GetDatabasePath() ' ดึง path ของฐานข้อมูลจาก config.ini
+                Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+                conn.ConnectionString = connStr
+                conn.Open()
+            End If
 
             ' คิวรีที่สามารถกรองตามเงื่อนไขการค้นหา
             Dim query As String = "SELECT Expense.*, Account.acc_name FROM Expense INNER JOIN Account ON Expense.acc_id = Account.acc_id"
@@ -143,7 +195,13 @@ Public Class frmEditExpense
 
     Private Sub LoadExpenseDetails()
         Try
-            If conn.State = ConnectionState.Closed Then conn.Open()
+            ' ตรวจสอบและเปิดการเชื่อมต่อใหม่จาก config.ini
+            If conn.State = ConnectionState.Closed Then
+                Dim dbPath As String = GetDatabasePath() ' ดึง path ของฐานข้อมูลจาก config.ini
+                Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+                conn.ConnectionString = connStr
+                conn.Open()
+            End If
 
             ' เข้าร่วมตาราง Expense_Details กับ Account เพื่อดึงชื่อบัญชี
             Dim query As String = "SELECT Expense_Details.*, Account.acc_name FROM Expense_Details INNER JOIN Account ON Expense_Details.acc_id = Account.acc_id WHERE Expense_Details.ex_id = @ex_id"
@@ -263,13 +321,20 @@ Public Class frmEditExpense
         End If
 
         Try
-            If conn.State = ConnectionState.Closed Then conn.Open()
+            ' ตรวจสอบและเปิดการเชื่อมต่อใหม่จาก config.ini
+            If conn.State = ConnectionState.Closed Then
+                Dim dbPath As String = GetDatabasePath() ' ดึง path ของฐานข้อมูลจาก config.ini
+                Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+                conn.ConnectionString = connStr
+                conn.Open()
+            End If
 
             ' อัปเดตฟิลด์ที่สามารถแก้ไขได้ในตาราง Expense
-            Dim updateExpenseQuery As String = "UPDATE Expense SET ex_name = @name, ex_date = @date, ex_amount = @amount, acc_id = @acc_id WHERE ex_id = @ex_id"
+            Dim updateExpenseQuery As String = "UPDATE Expense SET ex_name = @name, ex_date = @date, ex_description = @dascrip, ex_amount = @amount, acc_id = @acc_id WHERE ex_id = @ex_id"
             Dim cmd As New OleDbCommand(updateExpenseQuery, conn)
             cmd.Parameters.AddWithValue("@name", txtExpenseName.Text)
             cmd.Parameters.AddWithValue("@date", dtpExpenseDate.Value)
+            cmd.Parameters.AddWithValue("@dascrip", txtExpenseDescription.Text)
             cmd.Parameters.AddWithValue("@amount", mainExpenseAmount)
             cmd.Parameters.AddWithValue("@acc_id", cmbAccount.SelectedValue.ToString())
             cmd.Parameters.AddWithValue("@ex_id", expenseID)
@@ -295,7 +360,13 @@ Public Class frmEditExpense
 
     Private Sub UpdateExpenseDetails()
         Try
-            If conn.State = ConnectionState.Closed Then conn.Open()
+            ' ตรวจสอบและเปิดการเชื่อมต่อใหม่จาก config.ini
+            If conn.State = ConnectionState.Closed Then
+                Dim dbPath As String = GetDatabasePath() ' ดึง path ของฐานข้อมูลจาก config.ini
+                Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+                conn.ConnectionString = connStr
+                conn.Open()
+            End If
 
             ' ใช้ Transaction เพื่อความปลอดภัย
             Dim transaction As OleDbTransaction = conn.BeginTransaction()
