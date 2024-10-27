@@ -1,11 +1,54 @@
 ﻿Imports System.Data.OleDb
 Imports Guna.UI2.WinForms
+Imports System.IO
 
 Public Class frmFundManagement
     ' เชื่อมต่อกับฐานข้อมูล Access
-    Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Private Conn As New OleDbConnection
+    ' ฟังก์ชันสำหรับดึงค่า path ของฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        If Not File.Exists(iniPath) Then
+            Throw New Exception("ไม่พบไฟล์ config.ini ที่ตำแหน่ง: " & iniPath)
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มี Path
+        Dim dbPathLine = lines.FirstOrDefault(Function(line) line.StartsWith("Path="))
+        If String.IsNullOrEmpty(dbPathLine) Then
+            Throw New Exception("ไม่พบ 'Path' ในไฟล์ config.ini")
+        End If
+
+        ' ดึง path จากบรรทัดนั้นและตัดส่วน 'Path=' ออก
+        Dim dbPath = dbPathLine.Replace("Path=", "").Trim()
+
+        ' แปลง path เป็น path แบบเต็ม (Absolute Path)
+        If dbPath.StartsWith(".\") Then
+            dbPath = Path.Combine(Application.StartupPath, dbPath.Substring(2))
+        End If
+
+        If Not File.Exists(dbPath) Then
+            Throw New Exception($"ไม่พบไฟล์ฐานข้อมูลที่ตำแหน่ง: {dbPath}")
+        End If
+
+        Return dbPath
+    End Function
 
     Private Sub frmFundManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            Conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
+
         InitializeDataGridView()
         SetupDataGridView()
         LoadFundData()
@@ -235,36 +278,38 @@ Public Class frmFundManagement
     ' ฟังก์ชันสำหรับการค้นหาสมาชิก
     Private Sub SearchMember(searchText As String)
         Try
-            Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
 
-            ' คำสั่ง SQL สำหรับค้นหาสมาชิกตามชื่อที่พิมพ์ลงใน TextBox
-            Dim query As String = "SELECT m_id, m_name FROM Member WHERE m_name LIKE @searchText"
-            Dim cmd As New OleDbCommand(query, Conn)
-            cmd.Parameters.AddWithValue("@searchText", "%" & searchText & "%")
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
 
-            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                ' คำสั่ง SQL สำหรับค้นหาสมาชิกตามชื่อ
+                Dim query As String = "SELECT m_id, m_name FROM Member WHERE m_name LIKE @searchText"
+                Dim cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("@searchText", "%" & searchText & "%")
 
-            ' เคลียร์รายการที่แสดงใน CheckedListBox
-            chkListDirectors.Items.Clear()
+                Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
-            ' เพิ่มสมาชิกที่ค้นหาได้ลงใน CheckedListBox
-            While reader.Read()
-                Dim memberItem As New MemberItem With {
-                .m_id = reader("m_id"),
-                .m_name = reader("m_name").ToString()
-            }
-                chkListDirectors.Items.Add(memberItem, False)
-            End While
+                ' เคลียร์รายการที่แสดงใน CheckedListBox
+                chkListDirectors.Items.Clear()
 
-            Conn.Close()
+                ' เพิ่มสมาชิกที่ค้นหาได้ลงใน CheckedListBox
+                While reader.Read()
+                    Dim memberItem As New MemberItem With {
+                    .m_id = reader("m_id"),
+                    .m_name = reader("m_name").ToString()
+                }
+                    chkListDirectors.Items.Add(memberItem, False)
+                End While
+
+            End Using
         Catch ex As Exception
             MessageBox.Show("Error searching member: " & ex.Message)
-        Finally
-            If Conn.State = ConnectionState.Open Then
-                Conn.Close()
-            End If
         End Try
     End Sub
+
 
     Private Sub btnUpdateFund_Click(sender As Object, e As EventArgs) Handles btnUpdateFund.Click
         If Not ValidateInputs() Then

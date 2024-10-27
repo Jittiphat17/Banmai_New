@@ -3,43 +3,55 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Public Class frmImport
     Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
-        Dim RestoreLocation As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb"
+        Dim OFD As New OpenFileDialog With {
+        .Filter = "Access Files|*.accdb",
+        .Title = "เลือกไฟล์ฐานข้อมูล"
+    }
 
-        Dim OFD As New OpenFileDialog
-        OFD.Filter = "Access Files|*.accdb"
+        If OFD.ShowDialog() = DialogResult.OK Then
+            Dim PickedFile As String = OFD.FileName
 
-        ' ตรวจสอบว่าผู้ใช้เลือกไฟล์หรือไม่
-        If OFD.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            Try
-                Dim PickedFile As String = OFD.FileName
+            ' ให้ผู้ใช้เลือกตำแหน่งปลายทาง
+            Dim SFD As New SaveFileDialog With {
+            .Filter = "Access Files|*.accdb",
+            .Title = "เลือกตำแหน่งที่จะบันทึกฐานข้อมูล",
+            .FileName = "db_banmai1.accdb"
+        }
 
-                ' ตรวจสอบว่าปลายทางไม่ถูกใช้งาน
-                If IsFileInUse(RestoreLocation) Then
-                    MessageBox.Show("ไฟล์ฐานข้อมูลปลายทางกำลังถูกใช้งานอยู่ กรุณาปิดไฟล์แล้วลองใหม่อีกครั้ง")
-                    Return
-                End If
+            If SFD.ShowDialog() = DialogResult.OK Then
+                Dim RestoreLocation As String = SFD.FileName
 
-                ' สำรองไฟล์ปลายทางถ้ามีอยู่แล้ว
-                If File.Exists(RestoreLocation) Then
-                    File.Copy(RestoreLocation, RestoreLocation & ".bak", True)
-                End If
+                Try
+                    ' ตรวจสอบว่าปลายทางไม่ถูกใช้งาน
+                    If IsFileInUse(RestoreLocation) Then
+                        MessageBox.Show("ไฟล์ฐานข้อมูลปลายทางกำลังถูกใช้งานอยู่ กรุณาปิดไฟล์แล้วลองใหม่อีกครั้ง")
+                        Return
+                    End If
 
-                ' เริ่มต้น progress bar
-                ProgressBar1.Value = 0
-                ProgressBar1.Maximum = 100
-                ProgressBar1.Visible = True
+                    ' สำรองไฟล์เดิม (ถ้ามี)
+                    If File.Exists(RestoreLocation) Then
+                        File.Copy(RestoreLocation, RestoreLocation & ".bak", True)
+                    End If
 
-                ' คัดลอกไฟล์ที่เลือกไปยังปลายทางพร้อมอัปเดต progress
-                CopyFileWithProgress(PickedFile, RestoreLocation)
+                    ' เริ่มต้น ProgressBar
+                    ProgressBar1.Value = 0
+                    ProgressBar1.Maximum = 100
+                    ProgressBar1.Visible = True
 
-                MessageBox.Show("เรียกคืนข้อมูลเรียบร้อยแล้ว!")
-                ProgressBar1.Visible = False ' ซ่อน progress bar หลังจากทำเสร็จ
-            Catch ex As Exception
-                MessageBox.Show("เกิดข้อผิดพลาดในการเรียกคืนข้อมูล: " & ex.Message)
-                ProgressBar1.Visible = False ' ซ่อน progress bar ถ้าเกิดข้อผิดพลาด
-            End Try
+                    ' คัดลอกไฟล์พร้อมอัปเดต ProgressBar
+                    CopyFileWithProgress(PickedFile, RestoreLocation)
+
+                    MessageBox.Show("เรียกคืนข้อมูลเรียบร้อยแล้ว!")
+                Catch ex As Exception
+                    MessageBox.Show("เกิดข้อผิดพลาดในการเรียกคืนข้อมูล: " & ex.Message)
+                Finally
+                    ProgressBar1.Visible = False ' ซ่อน ProgressBar หลังจากทำเสร็จ
+                End Try
+            End If
         End If
     End Sub
+
+
 
     ' ฟังก์ชันตรวจสอบว่าไฟล์กำลังถูกใช้งานอยู่หรือไม่
     Private Function IsFileInUse(filePath As String) As Boolean

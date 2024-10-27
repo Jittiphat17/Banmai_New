@@ -5,6 +5,7 @@ Imports System.IO
 Public Class frmIncome
     ' เชื่อมต่อกับฐานข้อมูล Access
     Private Conn As New OleDbConnection
+
     ' ฟังก์ชันสำหรับดึงค่า path ของฐานข้อมูลจาก config.ini
     Private Function GetDatabasePath() As String
         Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")

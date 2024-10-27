@@ -9,10 +9,53 @@ Public Class frmCard
     Dim bgWorker As New BackgroundWorker
 
     ' ประกาศ connectionString ที่ระดับคลาส เพื่อให้สามารถใช้งานได้ในทุกฟังก์ชัน
-    Private connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb"
+    Private Conn As OleDbConnection
+    ' ฟังก์ชันสำหรับดึงเส้นทางฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+
+        ' ตรวจสอบว่าไฟล์ config.ini มีอยู่หรือไม่
+        If Not File.Exists(iniPath) Then
+            Throw New Exception($"ไม่พบไฟล์ config.ini ที่: {iniPath}")
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มี Path=
+        Dim dbPathLine = lines.FirstOrDefault(Function(line) line.StartsWith("Path="))
+        If String.IsNullOrEmpty(dbPathLine) Then
+            Throw New Exception("ไม่พบ 'Path' ของฐานข้อมูลใน config.ini")
+        End If
+
+        ' แปลง path ให้เป็น Absolute Path
+        Dim dbPath = dbPathLine.Replace("Path=", "").Trim()
+        If dbPath.StartsWith(".\") Then
+            dbPath = Path.Combine(Application.StartupPath, dbPath.Substring(2))
+        End If
+
+        ' ตรวจสอบว่าไฟล์ฐานข้อมูลมีอยู่จริง
+        If Not File.Exists(dbPath) Then
+            Throw New Exception($"ไม่พบไฟล์ฐานข้อมูลที่: {dbPath}")
+        End If
+
+        Return dbPath
+    End Function
+
 
     ' ฟังก์ชันที่รันเมื่อเปิดฟอร์ม
     Private Sub frmSmartCard_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            Conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
         LoadMemberStatus()
 
         AddHandler txtFirstNameThai.KeyPress, AddressOf ThaiOnlyTextBox_KeyPress
@@ -331,9 +374,12 @@ Public Class frmCard
             Dim selectedStatus As KeyValuePair(Of Integer, String) = DirectCast(cbStaus.SelectedItem, KeyValuePair(Of Integer, String))
             Dim statusID As Integer = selectedStatus.Key ' ดึงค่า s_id จาก ComboBox
 
-            ' ใช้ connectionString ที่ประกาศไว้ด้านบน
-            Using connection As New OleDbConnection(connectionString)
-                connection.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
 
                 ' รวมข้อมูลที่อยู่จากหลายฟิลด์
                 Dim fullAddress As String = $" {txtHouseNo.Text}  {txtVillageNo.Text} ตรอก/ซอย {txtLane.Text} ถนน {txtRoad.Text}  {txtTambol.Text}  {txtAmphur.Text}  {txtProvince.Text}"
@@ -342,7 +388,7 @@ Public Class frmCard
                 Dim query As String = "INSERT INTO Member (m_gender, m_name, m_nick, m_job, m_tel, m_post, m_birth, m_national, m_thaiid, m_address, m_age, s_id) " &
               "VALUES (@Gender, @Name, @Nick, @Jobs, @Tel, @Post, @Birth, @National, @ThaiID, @Address, @Age, @StatusID)"
 
-                Using command As New OleDbCommand(query, connection)
+                Using command As New OleDbCommand(query, conn)
                     ' เพิ่มพารามิเตอร์ข้อมูล
                     command.Parameters.AddWithValue("@Gender", txtPreFixThai.Text)
                     command.Parameters.AddWithValue("@Name", $"{txtFirstNameThai.Text} {txtLastNameThai.Text}")
@@ -433,11 +479,14 @@ Public Class frmCard
 
     ' ฟังก์ชันตรวจสอบเลขบัตรประชาชน
     Private Function IsThaiIDExist(thaiID As String) As Boolean
-        ' ใช้ connectionString ที่ประกาศไว้ด้านบน
-        Using connection As New OleDbConnection(connectionString)
-            connection.Open()
+        ' ดึง path ของฐานข้อมูลจาก config.ini
+        Dim dbPath As String = GetDatabasePath()
+        Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+        Using conn As New OleDbConnection(connStr)
+            conn.Open()
             Dim query As String = "SELECT COUNT(*) FROM Member WHERE m_thaiid = @ThaiID"
-            Using command As New OleDbCommand(query, connection)
+            Using command As New OleDbCommand(query, conn)
                 command.Parameters.AddWithValue("@ThaiID", thaiID)
                 Dim count As Integer = CInt(command.ExecuteScalar())
                 Return count > 0
@@ -447,13 +496,16 @@ Public Class frmCard
 
     Private Sub LoadMemberStatus()
         Try
-            ' ใช้ connectionString ที่ประกาศไว้
-            Using connection As New OleDbConnection(connectionString)
-                connection.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
 
                 ' ดึงข้อมูลจากตาราง Memberstatus
                 Dim query As String = "SELECT s_id, s_namestatus FROM Memberstatus"
-                Using command As New OleDbCommand(query, connection)
+                Using command As New OleDbCommand(query, conn)
                     Using reader As OleDbDataReader = command.ExecuteReader()
                         ' เคลียร์ข้อมูลเดิมใน ComboBox
                         cbStaus.Items.Clear()
@@ -491,7 +543,4 @@ Public Class frmCard
         End If
     End Sub
 
-    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-
-    End Sub
 End Class

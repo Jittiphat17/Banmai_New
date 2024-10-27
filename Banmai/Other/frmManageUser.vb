@@ -1,16 +1,56 @@
 ﻿Imports System.Data.OleDb
 Imports System.Windows.Controls
-
+Imports System.IO
 Public Class frmManageUser
     ' ประกาศ Database connection string เพียงครั้งเดียวที่ระดับคลาส
-    Private Conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Private Conn As New OleDbConnection
     Dim cmd As OleDbCommand
     Dim da As OleDbDataAdapter
     Dim dt As DataTable
     Dim SQL As String
 
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+        If Not File.Exists(iniPath) Then
+            Throw New Exception("ไม่พบไฟล์ config.ini ที่ตำแหน่ง: " & iniPath)
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มี Path
+        Dim dbPathLine = lines.FirstOrDefault(Function(line) line.StartsWith("Path="))
+        If String.IsNullOrEmpty(dbPathLine) Then
+            Throw New Exception("ไม่พบ 'Path' ในไฟล์ config.ini")
+        End If
+
+        ' ดึง path จากบรรทัดนั้นและตัดส่วน 'Path=' ออก
+        Dim dbPath = dbPathLine.Replace("Path=", "").Trim()
+
+        ' แปลง path เป็น path แบบเต็ม (Absolute Path)
+        If dbPath.StartsWith(".\") Then
+            dbPath = Path.Combine(Application.StartupPath, dbPath.Substring(2))
+        End If
+
+        If Not File.Exists(dbPath) Then
+            Throw New Exception($"ไม่พบไฟล์ฐานข้อมูลที่ตำแหน่ง: {dbPath}")
+        End If
+
+        Return dbPath
+    End Function
     ' Form load event to initialize any necessary data
     Private Sub frmManage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            Conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
         LoadUserTypes()
         LoadUsers()
         CustomizeDataGridView() ' เรียกฟังก์ชันปรับแต่ง DataGridView
@@ -37,28 +77,29 @@ Public Class frmManageUser
     ' Method to load users into the Guna2DataGridView
     Private Sub LoadUsers()
         Try
-            ' ใช้ Conn ที่ประกาศไว้ระดับคลาส ไม่ต้องประกาศใหม่
             If Conn.State = ConnectionState.Closed Then Conn.Open()
             SQL = "SELECT user_id, user_name, user_pass, user_type, user_fname, user_tel FROM Users"
-            da = New OleDbDataAdapter(SQL, Conn)
-            dt = New DataTable()
-            da.Fill(dt)
 
-            ' ตั้งค่าชื่อหัวคอลัมน์เป็นภาษาไทย
-            gunaDataGridView1.DataSource = dt
+            Using da As New OleDbDataAdapter(SQL, Conn)
+                dt = New DataTable()
+                da.Fill(dt)
+                gunaDataGridView1.DataSource = dt
+            End Using
+
+            ' Set column headers
             gunaDataGridView1.Columns(0).HeaderText = "รหัสผู้ใช้"
             gunaDataGridView1.Columns(1).HeaderText = "ชื่อผู้ใช้"
             gunaDataGridView1.Columns(2).HeaderText = "รหัสผ่าน"
             gunaDataGridView1.Columns(3).HeaderText = "ประเภทผู้ใช้"
             gunaDataGridView1.Columns(4).HeaderText = "ชื่อ-นามสกุล"
-            gunaDataGridView1.Columns(5).HeaderText = "เบอร์โทรศัพท์" ' ตรวจสอบให้แสดงเพียงคอลัมน์เดียว
+            gunaDataGridView1.Columns(5).HeaderText = "เบอร์โทรศัพท์"
         Catch ex As Exception
             MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            ' ปิดการเชื่อมต่อหลังจากใช้งานเสร็จ
             If Conn.State = ConnectionState.Open Then Conn.Close()
         End Try
     End Sub
+
 
 
     Private Sub gunaDataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles gunaDataGridView1.CellClick
@@ -80,45 +121,39 @@ Public Class frmManageUser
     End Sub
 
 
-    ' Button click event for saving user data (Guna2Button)
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        ' ตรวจสอบว่าทุกฟิลด์ได้รับการกรอกข้อมูลครบถ้วน
-        If String.IsNullOrEmpty(txtUsername.Text) Or String.IsNullOrEmpty(txtPassword.Text) Or String.IsNullOrEmpty(txtFname.Text) Or String.IsNullOrEmpty(txtTel.Text) Then
+    Private Async Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If String.IsNullOrEmpty(txtUsername.Text) OrElse String.IsNullOrEmpty(txtPassword.Text) OrElse
+       String.IsNullOrEmpty(txtFname.Text) OrElse String.IsNullOrEmpty(txtTel.Text) Then
             MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         End If
 
-        ' บันทึกข้อมูลใหม่
         Try
             If Conn.State = ConnectionState.Closed Then Conn.Open()
 
-            ' ตรวจสอบว่าชื่อผู้ใช้งานซ้ำหรือไม่
             SQL = "SELECT COUNT(*) FROM Users WHERE user_name = @Username"
-            cmd = New OleDbCommand(SQL, Conn)
-            cmd.Parameters.AddWithValue("@Username", txtUsername.Text)
-            Dim userCount As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+            Using cmd As New OleDbCommand(SQL, Conn)
+                cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = txtUsername.Text
+                Dim userCount As Integer = Convert.ToInt32(Await cmd.ExecuteScalarAsync())
 
-            If userCount > 0 Then
-                MessageBox.Show("Username already exists. Please choose a different username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return
-            End If
+                If userCount > 0 Then
+                    MessageBox.Show("Username already exists. Please choose a different username.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+            End Using
 
-            ' เพิ่มผู้ใช้ใหม่
             SQL = "INSERT INTO Users (user_name, user_pass, user_type, user_fname, user_tel) VALUES (@Username, @Password, @UserType, @FullName, @PhoneNumber)"
-            cmd = New OleDbCommand(SQL, Conn)
-            cmd.Parameters.AddWithValue("@Username", txtUsername.Text)
-            cmd.Parameters.AddWithValue("@Password", txtPassword.Text)
-            cmd.Parameters.AddWithValue("@UserType", cmbUsertype.SelectedItem.ToString())
-            cmd.Parameters.AddWithValue("@FullName", txtFname.Text)
-            cmd.Parameters.AddWithValue("@PhoneNumber", txtTel.Text)
-            cmd.ExecuteNonQuery()
+            Using cmd As New OleDbCommand(SQL, Conn)
+                cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = txtUsername.Text
+                cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = txtPassword.Text
+                cmd.Parameters.Add("@UserType", OleDbType.VarChar).Value = cmbUsertype.SelectedItem.ToString()
+                cmd.Parameters.Add("@FullName", OleDbType.VarChar).Value = txtFname.Text
+                cmd.Parameters.Add("@PhoneNumber", OleDbType.VarChar).Value = txtTel.Text
+                Await cmd.ExecuteNonQueryAsync()
+            End Using
 
             MessageBox.Show("User added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-            ' ล้างข้อมูลในฟิลด์
             ClearFields()
-
-            ' โหลดข้อมูลผู้ใช้ใหม่
             LoadUsers()
         Catch ex As Exception
             MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -126,6 +161,7 @@ Public Class frmManageUser
             If Conn.State = ConnectionState.Open Then Conn.Close()
         End Try
     End Sub
+
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         ' ตรวจสอบว่าทุกฟิลด์ได้รับการกรอกข้อมูลครบถ้วน
@@ -220,26 +256,32 @@ Public Class frmManageUser
     ' ฟังก์ชันค้นหาเมื่อมีการพิมพ์ใน TextBox
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
         Try
-            If Conn.State = ConnectionState.Closed Then Conn.Open()
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
 
             ' รับค่าจาก TextBox สำหรับการค้นหา
             Dim searchText As String = txtSearch.Text.Trim()
 
-            ' SQL Query สำหรับค้นหาข้อมูลในตาราง Users โดยใช้ LIKE
-            SQL = "SELECT user_id, user_name, user_pass, user_type, user_fname, user_tel FROM Users " &
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
+
+                ' SQL Query สำหรับค้นหาข้อมูลในตาราง Users โดยใช้ LIKE
+                SQL = "SELECT user_id, user_name, user_pass, user_type, user_fname, user_tel FROM Users " &
                   "WHERE user_name LIKE @search OR user_type LIKE @search OR user_fname LIKE @search OR user_tel LIKE @search"
 
-            ' ใช้ @search สำหรับค่าที่จะค้นหา
-            cmd = New OleDbCommand(SQL, Conn)
-            cmd.Parameters.AddWithValue("@search", "%" & searchText & "%")
+                ' ใช้ @search สำหรับค่าที่จะค้นหา
+                cmd = New OleDbCommand(SQL, Conn)
+                cmd.Parameters.AddWithValue("@search", "%" & searchText & "%")
 
-            ' ดึงข้อมูลและแสดงใน DataGridView
-            da = New OleDbDataAdapter(cmd)
-            dt = New DataTable()
-            da.Fill(dt)
+                ' ดึงข้อมูลและแสดงใน DataGridView
+                da = New OleDbDataAdapter(cmd)
+                dt = New DataTable()
+                da.Fill(dt)
 
-            ' อัปเดตข้อมูลใน DataGridView
-            gunaDataGridView1.DataSource = dt
+                ' อัปเดตข้อมูลใน DataGridView
+                gunaDataGridView1.DataSource = dt
+            End Using
 
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการค้นหา: " & ex.Message)

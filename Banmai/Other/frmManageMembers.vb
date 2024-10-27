@@ -1,14 +1,48 @@
 ﻿Imports System.Data.OleDb
 Imports System.Globalization
+Imports System.IO
 
 Public Class frmManageMembers
-    Dim conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+    Dim conn As New OleDbConnection
     Dim cmd As OleDbCommand
     Dim dr As OleDbDataReader
     Dim strSQL As String ' SQL Query String
     Dim isEditing As Boolean = False ' State for add/edit mode
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+
+        If Not File.Exists(iniPath) Then
+            Throw New Exception($"ไม่พบไฟล์ config.ini ที่: {iniPath}")
+        End If
+
+        Dim lines = File.ReadAllLines(iniPath)
+        Dim dbPathLine = lines.FirstOrDefault(Function(line) line.StartsWith("Path="))
+        If String.IsNullOrEmpty(dbPathLine) Then
+            Throw New Exception("ไม่พบ 'Path' ใน config.ini")
+        End If
+
+        Dim dbPath = dbPathLine.Replace("Path=", "").Trim()
+        If dbPath.StartsWith(".\") Then dbPath = Path.Combine(Application.StartupPath, dbPath.Substring(2))
+
+        If Not File.Exists(dbPath) Then
+            Throw New Exception($"ไม่พบไฟล์ฐานข้อมูลที่: {dbPath}")
+        End If
+
+        Return dbPath
+    End Function
 
     Private Sub frmManageMembers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
         ConfigureDataGridView() ' เรียกฟังก์ชันเพื่อกำหนดคอลัมน์ก่อน
         ClearAllData()
         Loadinfo() ' โหลดข้อมูลหลังจากกำหนดคอลัมน์
@@ -31,32 +65,34 @@ Public Class frmManageMembers
         ' Define a query that will search the Member table by name, ID, or phone number
         strSQL = "SELECT * FROM Member WHERE m_name LIKE @search OR m_id LIKE @search OR m_tel LIKE @search"
 
-        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+        ' ดึงค่า path ฐานข้อมูลจาก config.ini
+        Dim dbPath As String = GetDatabasePath()
+        Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+
+        Using conn As New OleDbConnection(connStr)
             Using cmd As New OleDbCommand(strSQL, conn)
                 cmd.Parameters.AddWithValue("@search", "%" & searchTerm & "%")
 
                 Try
                     conn.Open()
-                    dr = cmd.ExecuteReader
+                    Dim dr As OleDbDataReader = cmd.ExecuteReader()
                     dgvMembers.Rows.Clear()
 
                     If Not dr.HasRows Then
                         MessageBox.Show("ไม่พบข้อมูลที่ค้นหา", "Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End If
 
-                    While dr.Read
+                    While dr.Read()
                         Dim birthDate As String = DateTime.Parse(dr("m_birth").ToString()).ToString("dd/MM/yyyy")
-                        Dim age As Integer = dr("m_age")
+                        Dim age As Integer = CInt(dr("m_age"))
+                        Dim memberStatus As String = If(CInt(dr("s_id")) = 0, "สมาชิกลาออก", "สมาชิกคงอยู่")
 
-                        ' แปลงค่า s_id เป็นสถานะสมาชิก
-                        Dim memberStatus As String = If(dr("s_id") = 0, "สมาชิกลาออก", "สมาชิกคงอยู่")
-
-                        dgvMembers.Rows.Add(dr("m_id").ToString, dr("m_gender").ToString, dr("m_name").ToString,
-                                        dr("m_nick").ToString, birthDate, age, dr("m_thaiid").ToString, dr("m_job").ToString,
-                                        dr("m_address").ToString, dr("m_post").ToString, dr("m_tel").ToString,
-                                        dr("m_accountName").ToString, dr("m_accountNum").ToString,
-                                        dr("m_beginning").ToString, dr("m_outstanding").ToString, dr("m_national").ToString,
-                                        memberStatus)
+                        dgvMembers.Rows.Add(dr("m_id").ToString(), dr("m_gender").ToString(), dr("m_name").ToString(),
+                        dr("m_nick").ToString(), birthDate, age, dr("m_thaiid").ToString(), dr("m_job").ToString(),
+                        dr("m_address").ToString(), dr("m_post").ToString(), dr("m_tel").ToString(),
+                        dr("m_accountName").ToString(), dr("m_accountNum").ToString(),
+                        dr("m_beginning").ToString(), dr("m_outstanding").ToString(), dr("m_national").ToString(),
+                        memberStatus)
                     End While
                 Catch ex As Exception
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -93,28 +129,33 @@ Public Class frmManageMembers
 
 
     Sub Loadinfo()
+        ' คำสั่ง SQL สำหรับดึงข้อมูลสมาชิกทั้งหมด
         strSQL = "SELECT * FROM Member"
 
-        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+        ' ดึงค่า path ฐานข้อมูลจาก config.ini
+        Dim dbPath As String = GetDatabasePath()
+        Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+
+        Using conn As New OleDbConnection(connStr)
             Using cmd As New OleDbCommand(strSQL, conn)
                 Try
                     conn.Open()
-                    dr = cmd.ExecuteReader
+                    Dim dr As OleDbDataReader = cmd.ExecuteReader()
                     dgvMembers.Rows.Clear()
 
-                    While dr.Read
+                    While dr.Read()
                         Dim birthDate As String = DateTime.Parse(dr("m_birth").ToString()).ToString("dd/MM/yyyy")
-                        Dim age As Integer = dr("m_age") ' ดึงข้อมูลอายุจากฐานข้อมูล
+                        Dim age As Integer = CInt(dr("m_age")) ' ดึงข้อมูลอายุจากฐานข้อมูล
 
                         ' แปลงค่า s_id เป็นสถานะสมาชิก
-                        Dim memberStatus As String = If(dr("s_id") = 0, "สมาชิกลาออก", "สมาชิกคงอยู่")
+                        Dim memberStatus As String = If(CInt(dr("s_id")) = 0, "สมาชิกลาออก", "สมาชิกคงอยู่")
 
-                        ' เพิ่มข้อมูลลงใน DataGridView โดยไม่ดึง m_beginning และ m_outstanding
-                        dgvMembers.Rows.Add(dr("m_id").ToString, dr("m_gender").ToString, dr("m_name").ToString,
-                                        dr("m_nick").ToString, birthDate, age, dr("m_thaiid").ToString, dr("m_job").ToString,
-                                        dr("m_address").ToString, dr("m_post").ToString, dr("m_tel").ToString,
-                                        dr("m_accountName").ToString, dr("m_accountNum").ToString,
-                                        dr("m_national").ToString, memberStatus) ' แสดงสถานะสมาชิกแทนค่า s_id
+                        ' เพิ่มข้อมูลลงใน DataGridView
+                        dgvMembers.Rows.Add(dr("m_id").ToString(), dr("m_gender").ToString(), dr("m_name").ToString(),
+                        dr("m_nick").ToString(), birthDate, age, dr("m_thaiid").ToString(), dr("m_job").ToString(),
+                        dr("m_address").ToString(), dr("m_post").ToString(), dr("m_tel").ToString(),
+                        dr("m_accountName").ToString(), dr("m_accountNum").ToString(),
+                        dr("m_national").ToString(), memberStatus) ' แสดงสถานะสมาชิกแทนค่า s_id
                     End While
                 Catch ex As Exception
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -122,6 +163,7 @@ Public Class frmManageMembers
             End Using
         End Using
     End Sub
+
 
 
     Sub ClearAllData()
@@ -166,17 +208,26 @@ Public Class frmManageMembers
     Sub Auto_id()
         Dim m_id As Integer
         Try
+            ' คำสั่ง SQL สำหรับดึง m_id ลำดับล่าสุด
             strSQL = "SELECT m_id FROM Member ORDER BY m_id DESC"
 
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+            ' ดึง path ของฐานข้อมูลจากไฟล์ config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+
+            Using conn As New OleDbConnection(connStr)
                 Using cmd As New OleDbCommand(strSQL, conn)
                     conn.Open()
                     dr = cmd.ExecuteReader(CommandBehavior.CloseConnection)
-                    If dr.Read = True Then
+
+                    ' ตรวจสอบว่ามีข้อมูลหรือไม่ ถ้ามีให้เพิ่มลำดับ ID
+                    If dr.Read() Then
                         m_id = Val(dr(0)) + 1
                     Else
                         m_id = 1
                     End If
+
+                    ' กำหนดค่า ID ในรูปแบบ "0000"
                     txtID.Text = m_id.ToString("0000")
                 End Using
             End Using
@@ -185,6 +236,7 @@ Public Class frmManageMembers
         End Try
     End Sub
 
+
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If Not AllFieldsFilled() Then
             MessageBox.Show("โปรดกรอกข้อมูลให้ครบถ้วน", "Incomplete Data", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -192,9 +244,13 @@ Public Class frmManageMembers
         End If
 
         Try
-            Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+            ' ดึง connection string จาก config.ini
+            Dim connStr As String = GetDatabasePath()
+
+            Using conn As New OleDbConnection(connStr)
                 conn.Open()
 
+                ' สร้าง SQL Query สำหรับบันทึกหรือแก้ไขข้อมูล
                 If isEditing Then
                     strSQL = "UPDATE Member SET m_gender = @m_gender, m_name = @m_name, m_nick = @m_nick, m_birth = @m_birth, m_national = @m_national, " &
                          "m_thaiid = @m_thaiid, m_job = @m_job, m_address = @m_address, m_post = @m_post, m_tel = @m_tel, " &
@@ -206,6 +262,7 @@ Public Class frmManageMembers
                 End If
 
                 Using cmd As New OleDbCommand(strSQL, conn)
+                    ' เพิ่มพารามิเตอร์ลงใน SQL Command
                     cmd.Parameters.AddWithValue("@m_id", txtID.Text.Trim())
                     cmd.Parameters.AddWithValue("@m_gender", cmbGender.SelectedItem.ToString())
                     cmd.Parameters.AddWithValue("@m_name", txtName.Text.Trim())
@@ -219,9 +276,10 @@ Public Class frmManageMembers
                     cmd.Parameters.AddWithValue("@m_tel", txtTel.Text.Trim())
                     cmd.Parameters.AddWithValue("@m_accountName", txtAccountname.Text.Trim())
                     cmd.Parameters.AddWithValue("@m_accountNum", txtAccountnum.Text.Trim())
-                    cmd.Parameters.AddWithValue("@m_age", CalculateAge(dtpBirth.Value.ToString("dd/MM/yyyy")))
+                    cmd.Parameters.AddWithValue("@m_age", CalculateAge(dtpBirth.Value))
                     cmd.Parameters.AddWithValue("@s_id", If(cmbStatus.SelectedItem.ToString() = "สมาชิกคงอยู่", 1, 0))
 
+                    ' บันทึกข้อมูลลงฐานข้อมูล
                     Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
                     If rowsAffected > 0 Then
                         MessageBox.Show("บันทึกข้อมูลสำเร็จ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -239,6 +297,7 @@ Public Class frmManageMembers
             MessageBox.Show("เกิดข้อผิดพลาด: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
 
 
     Private Function AllFieldsFilled() As Boolean
@@ -326,31 +385,41 @@ Public Class frmManageMembers
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If String.IsNullOrEmpty(txtID.Text) Then
-            MessageBox.Show("Please select a member to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("โปรดเลือกสมาชิกที่ต้องการลบ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to delete this member?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        Dim result As DialogResult = MessageBox.Show("คุณแน่ใจว่าต้องการลบสมาชิกนี้หรือไม่?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
         If result = DialogResult.Yes Then
             Try
-                Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+                ' ดึง connection string จาก config.ini
+                Dim connStr As String = GetDatabasePath()
+
+                Using conn As New OleDbConnection(connStr)
                     conn.Open()
 
+                    ' SQL Query สำหรับลบข้อมูลสมาชิก
                     Dim deleteQuery As String = "DELETE FROM Member WHERE m_id = @m_id"
                     Using cmdDelete As New OleDbCommand(deleteQuery, conn)
                         cmdDelete.Parameters.AddWithValue("@m_id", txtID.Text)
-                        cmdDelete.ExecuteNonQuery()
+                        Dim rowsAffected As Integer = cmdDelete.ExecuteNonQuery()
+
+                        ' ตรวจสอบว่ามีการลบข้อมูลสำเร็จหรือไม่
+                        If rowsAffected > 0 Then
+                            MessageBox.Show("ลบสมาชิกสำเร็จ!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            ClearAllData() ' ล้างข้อมูลในฟอร์ม
+                            Loadinfo() ' โหลดข้อมูลใหม่ใน DataGridView
+                        Else
+                            MessageBox.Show("ไม่พบสมาชิกที่ต้องการลบ", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
                     End Using
                 End Using
-
-                MessageBox.Show("Member deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                ClearAllData()
-                Loadinfo()
             Catch ex As Exception
-                MessageBox.Show("Error deleting member: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("เกิดข้อผิดพลาดในการลบสมาชิก: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
+
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If String.IsNullOrWhiteSpace(txtID.Text) Then

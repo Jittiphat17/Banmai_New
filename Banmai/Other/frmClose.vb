@@ -1,10 +1,55 @@
 ﻿Imports System.Data.OleDb
 Imports System.Drawing ' ใช้สำหรับการตั้งค่าฟอนต์
+Imports System.IO
 
 Public Class frmClose
     Private formLoaded As Boolean = False
+    ' สร้างการเชื่อมต่อฐานข้อมูล
+    Private Conn As OleDbConnection
+    ' ฟังก์ชันดึงเส้นทางฐานข้อมูลจาก config.ini
+    Private Function GetDatabasePath() As String
+        Dim iniPath As String = Path.Combine(Application.StartupPath, "config.ini")
+
+        ' ตรวจสอบว่าไฟล์ config.ini มีอยู่หรือไม่
+        If Not File.Exists(iniPath) Then
+            Throw New Exception($"ไม่พบไฟล์ config.ini ที่: {iniPath}")
+        End If
+
+        ' อ่านบรรทัดทั้งหมดใน config.ini
+        Dim lines = File.ReadAllLines(iniPath)
+
+        ' ค้นหาบรรทัดที่มี Path=
+        Dim dbPathLine = lines.FirstOrDefault(Function(line) line.StartsWith("Path="))
+        If String.IsNullOrEmpty(dbPathLine) Then
+            Throw New Exception("ไม่พบ 'Path' ของฐานข้อมูลใน config.ini")
+        End If
+
+        ' แปลง path เป็น Absolute Path ถ้าจำเป็น
+        Dim dbPath = dbPathLine.Replace("Path=", "").Trim()
+        If dbPath.StartsWith(".\") Then
+            dbPath = Path.Combine(Application.StartupPath, dbPath.Substring(2))
+        End If
+
+        ' ตรวจสอบว่าไฟล์ฐานข้อมูลมีอยู่จริง
+        If Not File.Exists(dbPath) Then
+            Throw New Exception($"ไม่พบไฟล์ฐานข้อมูลที่: {dbPath}")
+        End If
+
+        Return dbPath
+    End Function
 
     Private Sub frmClose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            ' ดึงค่า path จาก config.ini และสร้างการเชื่อมต่อฐานข้อมูล
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
+            Conn = New OleDbConnection(connStr)
+
+        Catch ex As Exception
+            ' แสดงข้อความข้อผิดพลาดเมื่อไม่พบหรือเชื่อมต่อกับฐานข้อมูลไม่ได้
+            MessageBox.Show($"เกิดข้อผิดพลาด: {ex.Message}", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit() ' ปิดโปรแกรมหากไม่สามารถเชื่อมต่อได้
+        End Try
 
         ' โหลดข้อมูลบัญชีทั้งหมดลงใน ComboBox
         LoadAccounts()
@@ -31,22 +76,30 @@ Public Class frmClose
     Private Sub LoadAccounts()
         Dim dtAccounts As New DataTable
 
-        ' Connect to database and retrieve account names and ids
-        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-            Try
+        Try
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+
+            ' เชื่อมต่อฐานข้อมูล
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
+
+                ' ดึงข้อมูลชื่อและรหัสบัญชี
                 Dim query As String = "SELECT acc_id, acc_name FROM Account"
                 Dim cmd As New OleDbCommand(query, conn)
                 Dim adapter As New OleDbDataAdapter(cmd)
                 adapter.Fill(dtAccounts)
+            End Using
 
-                ' Bind account names to ComboBox
-                ComboBox1.DataSource = dtAccounts
-                ComboBox1.DisplayMember = "acc_name"
-                ComboBox1.ValueMember = "acc_id" ' ใช้ acc_id เป็นค่าที่จะใช้ในการกรอง
-            Catch ex As Exception
-                MessageBox.Show("Error loading accounts: " & ex.Message)
-            End Try
-        End Using
+            ' ผูกข้อมูลกับ ComboBox
+            ComboBox1.DataSource = dtAccounts
+            ComboBox1.DisplayMember = "acc_name"
+            ComboBox1.ValueMember = "acc_id" ' ใช้ acc_id เป็นค่าที่จะใช้ในการกรอง
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading accounts: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     ' Method to load income data into Guna2DataGridView1 พร้อมกรองวันที่เฉพาะ
@@ -54,9 +107,15 @@ Public Class frmClose
         Dim dtIncome As New DataTable
         Dim formattedDate As String = selectedDate.ToString("yyyy-MM-dd")
 
-        ' Connect to database and retrieve income data filtered by acc_id and dates up to the selected date
-        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-            Try
+        Try
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+
+            ' เชื่อมต่อกับฐานข้อมูล
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
+
                 ' Filter by acc_id and date <= selectedDate
                 Dim query As String = "SELECT ind_accname, SUM(ind_amount) AS TotalIncome " &
                                   "FROM Income_Details " &
@@ -68,14 +127,16 @@ Public Class frmClose
                 cmd.Parameters.AddWithValue("@selectedDate", formattedDate)
                 Dim adapter As New OleDbDataAdapter(cmd)
                 adapter.Fill(dtIncome)
-            Catch ex As Exception
-                MessageBox.Show("Error loading income data: " & ex.Message)
-            End Try
-        End Using
+            End Using
 
-        ' Bind the data to the DataGridView
+        Catch ex As Exception
+            MessageBox.Show("Error loading income data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+        ' ผูกข้อมูลกับ DataGridView
         Me.Guna2DataGridView1.DataSource = dtIncome
     End Sub
+
 
 
     ' Method to load expense data into Guna2DataGridView2 พร้อมกรองวันที่เฉพาะ
@@ -83,28 +144,38 @@ Public Class frmClose
         Dim dtExpense As New DataTable
         Dim formattedDate As String = selectedDate.ToString("yyyy-MM-dd")
 
-        ' Connect to database and retrieve expense data filtered by acc_id and dates up to the selected date
-        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
-            Try
+        Try
+            ' ดึง path ของฐานข้อมูลจาก config.ini
+            Dim dbPath As String = GetDatabasePath()
+            Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+
+            ' เชื่อมต่อกับฐานข้อมูล
+            Using conn As New OleDbConnection(connStr)
+                conn.Open()
+
                 ' Filter by acc_id and date <= selectedDate
                 Dim query As String = "SELECT exd_nameacc, SUM(exd_amount) AS TotalExpense " &
                                   "FROM Expense_Details " &
                                   "WHERE acc_id = @accId AND FORMAT(exd_date, 'yyyy-MM-dd') <= @selectedDate " &
                                   "AND exd_nameacc IN ('ค่าเช่าสำนักงาน', 'เงินสมทบ', 'เงินประกันความเสี่ยง', 'ค่าตอบแทน', 'ค่าจ้าง', 'ดอกเบี้ยสัจจะ', 'ดอกเบี้ยจ่าย', 'อื่นๆ') " &
                                   "GROUP BY exd_nameacc"
+
                 Dim cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@accId", accId.ToString()) ' Ensure acc_id is treated as string
                 cmd.Parameters.AddWithValue("@selectedDate", formattedDate)
+
                 Dim adapter As New OleDbDataAdapter(cmd)
                 adapter.Fill(dtExpense)
-            Catch ex As Exception
-                MessageBox.Show("Error loading expense data: " & ex.Message)
-            End Try
-        End Using
+            End Using
 
-        ' Bind the data to the DataGridView
+        Catch ex As Exception
+            MessageBox.Show("Error loading expense data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+        ' ผูกข้อมูลกับ DataGridView
         Me.Guna2DataGridView2.DataSource = dtExpense
     End Sub
+
 
 
     ' Method to customize the DataGridView
@@ -318,8 +389,12 @@ Public Class frmClose
 
 
     Private Sub SaveData()
+        ' ดึง path ของฐานข้อมูลจาก config.ini
+        Dim dbPath As String = GetDatabasePath()
+        Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath};Persist Security Info=False;"
+
         ' เชื่อมต่อกับฐานข้อมูล
-        Using conn As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Project-2022\Banmai\Banmai\db_banmai1.accdb")
+        Using conn As New OleDbConnection(connStr)
             Dim transaction As OleDbTransaction = Nothing ' ประกาศตัวแปร transaction ไว้ภายนอก Try...Catch
 
             Try
