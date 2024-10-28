@@ -1,6 +1,7 @@
 ﻿Imports System.Data.OleDb
 Imports System.Drawing ' ใช้สำหรับการตั้งค่าฟอนต์
 Imports System.IO
+Imports Guna.UI2.WinForms
 
 Public Class frmClose
     Private formLoaded As Boolean = False
@@ -360,27 +361,40 @@ Public Class frmClose
         AddExpenseData() ' เรียกใช้ฟังก์ชันเพิ่มข้อมูลรายจ่าย
     End Sub
 
-    ' ฟังก์ชันสำหรับจัดรูปแบบจำนวนเงินพร้อมจุลภาคใน TextBox
-    Private Sub txtIncomeAmount_TextChanged(sender As Object, e As EventArgs) Handles txtIncomeAmount.TextChanged
-        If Not String.IsNullOrWhiteSpace(txtIncomeAmount.Text) Then
+    ' ฟังก์ชันหลักสำหรับจัดรูปแบบจำนวนเงินใน Guna2TextBox
+    Private Sub FormatCurrencyInput(textBox As Guna.UI2.WinForms.Guna2TextBox)
+        ' ตรวจสอบว่า TextBox ไม่ว่างเปล่า
+        If Not String.IsNullOrWhiteSpace(textBox.Text) Then
+            Dim cursorPosition As Integer = textBox.SelectionStart ' เก็บตำแหน่งเคอร์เซอร์เดิม
             Dim value As Decimal
-            If Decimal.TryParse(txtIncomeAmount.Text.Replace(",", ""), value) Then
-                txtIncomeAmount.Text = String.Format("{0:N2}", value)
-                txtIncomeAmount.SelectionStart = txtIncomeAmount.Text.Length ' เลื่อนเคอร์เซอร์ไปที่ท้าย
+
+            ' ลองแปลงค่าเป็น Decimal (ข้ามกรณีที่เป็น string ว่างหรือ error)
+            If Decimal.TryParse(textBox.Text.Replace(",", ""), value) Then
+                ' ปรับฟอร์แมตใหม่ แต่ไม่กระพริบเคอร์เซอร์
+                textBox.Text = String.Format("{0:N2}", value)
+
+                ' ตรวจสอบไม่ให้เคอร์เซอร์เลื่อนเกินความยาว Text ใหม่
+                If cursorPosition > textBox.Text.Length Then
+                    cursorPosition = textBox.Text.Length
+                End If
+
+                ' คืนค่าเคอร์เซอร์ไปตำแหน่งเดิมอย่างราบรื่น
+                textBox.SelectionStart = cursorPosition
+                textBox.SelectionLength = 0 ' ป้องกันการเลือกข้อความโดยไม่ได้ตั้งใจ
             End If
         End If
     End Sub
 
-    ' ฟังก์ชันสำหรับจัดรูปแบบจำนวนเงินพร้อมจุลภาคใน TextBox รายจ่าย
-    Private Sub txtExpenseAmount_TextChanged(sender As Object, e As EventArgs) Handles txtExpenseAmount.TextChanged
-        If Not String.IsNullOrWhiteSpace(txtExpenseAmount.Text) Then
-            Dim value As Decimal
-            If Decimal.TryParse(txtExpenseAmount.Text.Replace(",", ""), value) Then
-                txtExpenseAmount.Text = String.Format("{0:N2}", value)
-                txtExpenseAmount.SelectionStart = txtExpenseAmount.Text.Length ' เลื่อนเคอร์เซอร์ไปที่ท้าย
-            End If
-        End If
+    ' เรียกใช้ฟังก์ชันจัดรูปแบบเมื่อมีการเปลี่ยนแปลงใน TextBox
+    Private Sub txtIncomeAmount_TextChanged(sender As Object, e As EventArgs) Handles txtIncomeAmount.TextChanged
+        FormatCurrencyInput(txtIncomeAmount)
     End Sub
+
+    Private Sub txtExpenseAmount_TextChanged(sender As Object, e As EventArgs) Handles txtExpenseAmount.TextChanged
+        FormatCurrencyInput(txtExpenseAmount)
+    End Sub
+
+
 
     ' ปุ่มบันทึกข้อมูล
     Private Sub btnSaveData_Click(sender As Object, e As EventArgs) Handles btnSaveData.Click
