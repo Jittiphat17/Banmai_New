@@ -35,6 +35,7 @@ Partial Class frmExpense
         Me.dgvExpenseDetails = New Guna.UI2.WinForms.Guna2DataGridView()
         Me.Guna2GroupBox1 = New Guna.UI2.WinForms.Guna2GroupBox()
         Me.Guna2HtmlLabel7 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel9 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel6 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel5 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel4 = New Guna.UI2.WinForms.Guna2HtmlLabel()
@@ -52,7 +53,6 @@ Partial Class frmExpense
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
         Me.Guna2ControlBox1 = New Guna.UI2.WinForms.Guna2ControlBox()
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2HtmlLabel9 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvExpenseDetails, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2GroupBox1.SuspendLayout()
@@ -228,6 +228,18 @@ Partial Class frmExpense
         Me.Guna2HtmlLabel7.Size = New System.Drawing.Size(47, 34)
         Me.Guna2HtmlLabel7.TabIndex = 2
         Me.Guna2HtmlLabel7.Text = "วันที่"
+        '
+        'Guna2HtmlLabel9
+        '
+        Me.Guna2HtmlLabel9.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel9.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel9.ForeColor = System.Drawing.Color.Black
+        Me.Guna2HtmlLabel9.Location = New System.Drawing.Point(590, 503)
+        Me.Guna2HtmlLabel9.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.Guna2HtmlLabel9.Name = "Guna2HtmlLabel9"
+        Me.Guna2HtmlLabel9.Size = New System.Drawing.Size(44, 34)
+        Me.Guna2HtmlLabel9.TabIndex = 2
+        Me.Guna2HtmlLabel9.Text = "บาท"
         '
         'Guna2HtmlLabel6
         '
@@ -494,18 +506,6 @@ Partial Class frmExpense
         Me.Guna2Panel1.Name = "Guna2Panel1"
         Me.Guna2Panel1.Size = New System.Drawing.Size(1900, 33)
         Me.Guna2Panel1.TabIndex = 40
-        '
-        'Guna2HtmlLabel9
-        '
-        Me.Guna2HtmlLabel9.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel9.Font = New System.Drawing.Font("FC Minimal", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel9.ForeColor = System.Drawing.Color.Black
-        Me.Guna2HtmlLabel9.Location = New System.Drawing.Point(590, 503)
-        Me.Guna2HtmlLabel9.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.Guna2HtmlLabel9.Name = "Guna2HtmlLabel9"
-        Me.Guna2HtmlLabel9.Size = New System.Drawing.Size(44, 34)
-        Me.Guna2HtmlLabel9.TabIndex = 2
-        Me.Guna2HtmlLabel9.Text = "บาท"
         '
         'frmExpense
         '

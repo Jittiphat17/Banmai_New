@@ -252,25 +252,25 @@ Public Class frmExpense
                 Return
             End If
 
-            ' ตรวจสอบข้อมูลสมาชิก หากไม่พบ ให้ใช้ memberId เป็น 0
+            ' ดึง m_id ของสมาชิกจากชื่อ
             Dim memberId As Integer = GetMemberIdByName(txtMemberID.Text)
             If memberId = 0 Then
-                MessageBox.Show("ไม่พบข้อมูลสมาชิก จะบันทึกข้อมูลโดยไม่ระบุสมาชิก", "ข้อสังเกต", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                memberId = 0 ' หรือใช้ DBNull.Value ในกรณีที่ฐานข้อมูลรองรับ
+                MessageBox.Show("ไม่พบข้อมูลสมาชิก", "ข้อสังเกต", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
             End If
-            ' ดึง path ของฐานข้อมูลจาก config.ini
+
             Dim dbPath As String = GetDatabasePath()
             Dim connStr As String = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={dbPath}"
 
-            ' ดำเนินการบันทึกข้อมูลรายจ่าย
             Using conn As New OleDbConnection(connStr)
-                conn.Open() ' เปิดการเชื่อมต่อฐานข้อมูล
+                conn.Open()
 
-                ' บันทึกข้อมูลลงในตาราง Expense
-                Dim queryExpense As String = "INSERT INTO Expense (ex_id, ex_name, ex_detail, ex_description, ex_date, ex_amount, acc_id) VALUES (@ex_id, @ex_name, @ex_detail, @ex_description, @ex_date, @ex_amount, @acc_id)"
-                Using cmdExpense As New OleDbCommand(queryExpense, Conn)
+                ' บันทึกข้อมูลลงตาราง Expense
+                Dim queryExpense As String = "INSERT INTO Expense (ex_id, ex_name, ex_detail, ex_description, ex_date, ex_amount, acc_id) " &
+                                      "VALUES (@ex_id, @ex_name, @ex_detail, @ex_description, @ex_date, @ex_amount, @acc_id)"
+                Using cmdExpense As New OleDbCommand(queryExpense, conn)
                     cmdExpense.Parameters.AddWithValue("@ex_id", Convert.ToInt32(txtExpId.Text))
-                    cmdExpense.Parameters.AddWithValue("@ex_name", txtMemberID.Text) ' ชื่อผู้รับใน txtMemberID
+                    cmdExpense.Parameters.AddWithValue("@ex_name", txtMemberID.Text)
                     cmdExpense.Parameters.AddWithValue("@ex_detail", txtDetails.Text)
                     cmdExpense.Parameters.AddWithValue("@ex_description", txtDescrip.Text)
                     cmdExpense.Parameters.AddWithValue("@ex_date", dtpBirth.Value)
@@ -278,7 +278,6 @@ Public Class frmExpense
                     cmdExpense.Parameters.AddWithValue("@acc_id", cboDepositType.SelectedValue)
 
                     cmdExpense.ExecuteNonQuery()
-
                     ' ดึง ex_id ล่าสุดที่ถูกเพิ่มลงในตาราง Expense
                     Dim exId As Integer = Convert.ToInt32(txtExpId.Text)
 
@@ -297,7 +296,7 @@ Public Class frmExpense
                             If Not String.IsNullOrEmpty(expenseType) Then
                                 ' Insert into the Expense_Details table
                                 Dim queryDetails As String = "INSERT INTO Expense_Details (exd_nameacc, exd_amount, exd_date, ex_id, m_id, acc_id) VALUES (@exd_nameacc, @exd_amount, @exd_date, @ex_id, @m_id, @acc_id)"
-                                Using cmdDetails As New OleDbCommand(queryDetails, Conn)
+                                Using cmdDetails As New OleDbCommand(queryDetails, conn)
                                     cmdDetails.Parameters.AddWithValue("@exd_nameacc", expenseType)
                                     cmdDetails.Parameters.AddWithValue("@exd_amount", amount)
                                     cmdDetails.Parameters.AddWithValue("@exd_date", expenseDate)
@@ -311,17 +310,39 @@ Public Class frmExpense
                         End If
                     Next
                 End Using
+
+
+                ' ตรวจสอบและหักเงินเฉพาะสมาชิกที่ลาออก
+                For Each row As DataGridViewRow In dgvExpenseDetails.Rows
+                    If Not row.IsNewRow Then
+                        Dim expenseType As String = row.Cells("ExpenseType").Value?.ToString()
+                        Dim amount As Decimal = Decimal.Parse(row.Cells("Amount").Value?.ToString())
+
+                        If expenseType = "สมาชิกลาออก" Then
+                            ' หักเงินจาก "เงินฝากสัจจะ" ในตาราง Income_Details
+                            Dim queryUpdateBalance As String = "UPDATE Income_Details " &
+                                                           "SET ind_amount = ind_amount - @amount " &
+                                                           "WHERE ind_accname = 'เงินฝากสัจจะ' AND m_id = @m_id"
+                            Using cmdUpdate As New OleDbCommand(queryUpdateBalance, conn)
+                                cmdUpdate.Parameters.AddWithValue("@amount", amount)
+                                cmdUpdate.Parameters.AddWithValue("@m_id", memberId)
+                                cmdUpdate.ExecuteNonQuery()
+                            End Using
+                        End If
+                    End If
+                Next
             End Using
 
             MessageBox.Show("บันทึกข้อมูลสำเร็จ", "สำเร็จ", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-            ' รีเซ็ตฟอร์มเพื่อเตรียมทำรายการใหม่
             ClearAll()
 
         Catch ex As Exception
             MessageBox.Show("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " & ex.Message, "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+
+
 
 
 
@@ -503,7 +524,7 @@ Public Class frmExpense
         offset += 40
 
         ' รายละเอียดการจ่าย (Details Section)
-        Dim detailsTitle As String = "รายละเอียด:"
+        Dim detailsTitle As String = "รายละเอียด:" & txtDescrip.Text
         startX = (pageWidth - e.Graphics.MeasureString(detailsTitle, boldFont).Width) / 2 ' Center the details title
         e.Graphics.DrawString(detailsTitle, boldFont, Brushes.Black, startX, startY + offset)
         offset += 20
@@ -557,11 +578,4 @@ Public Class frmExpense
         e.Graphics.DrawString("..........................................", font, Brushes.Black, startX + 100, startY + offset)
     End Sub
 
-    Private Sub Guna2GroupBox1_Click(sender As Object, e As EventArgs) Handles Guna2GroupBox1.Click
-
-    End Sub
-
-    Private Sub txtDescrip_TextChanged(sender As Object, e As EventArgs) Handles txtDescrip.TextChanged
-
-    End Sub
 End Class
